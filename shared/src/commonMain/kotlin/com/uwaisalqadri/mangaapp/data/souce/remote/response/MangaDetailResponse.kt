@@ -3,6 +3,6 @@ package com.uwaisalqadri.mangaapp.data.souce.remote.response
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class MangaResponse(
-    val data: List<Manga>
+data class MangaDetailResponse(
+    val data: Manga?
 )

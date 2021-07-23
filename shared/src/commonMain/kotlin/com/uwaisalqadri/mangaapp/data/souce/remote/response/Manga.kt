@@ -3,7 +3,7 @@ package com.uwaisalqadri.mangaapp.data.souce.remote.response
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Data(
+data class Manga(
     val attributes: Attributes,
     val id: String,
     val links: Links,
