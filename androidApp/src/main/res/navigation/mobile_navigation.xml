@@ -2,18 +2,18 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/browseFragment">
+    app:startDestination="@id/navigation_browse">
 
     <fragment
-        android:id="@+id/browseFragment"
+        android:id="@+id/navigation_browse"
         android:name="com.uwaisalqadri.mangaapp.android.ui.browse.BrowseFragment"
         android:label="BrowseFragment" />
     <fragment
-        android:id="@+id/savedFragment"
+        android:id="@+id/navigation_saved"
         android:name="com.uwaisalqadri.mangaapp.android.ui.saved.SavedFragment"
         android:label="SavedFragment" />
     <fragment
-        android:id="@+id/myMangaFragment"
+        android:id="@+id/navigation_mymanga"
         android:name="com.uwaisalqadri.mangaapp.android.ui.mymanga.MyMangaFragment"
         android:label="MyMangaFragment" />
 </navigation>
