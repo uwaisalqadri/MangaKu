@@ -4,8 +4,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Titles(
-    val en: String,
-    val en_jp: String,
-    val en_us: String,
-    val ja_jp: String
+    var en: String = "",
+    var en_jp: String = "",
+    var en_us: String = "",
+    var ja_jp: String = ""
 )

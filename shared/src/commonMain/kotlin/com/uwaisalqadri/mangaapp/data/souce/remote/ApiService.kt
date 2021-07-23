@@ -5,6 +5,7 @@ import com.uwaisalqadri.mangaapp.data.souce.remote.response.MangaResponse
 import com.uwaisalqadri.mangaapp.utils.Constants
 import io.ktor.client.*
 import io.ktor.client.request.*
+import io.ktor.http.*
 import org.koin.core.component.KoinComponent
 
 class ApiService(
@@ -13,11 +14,25 @@ class ApiService(
 ): KoinComponent {
 
     suspend fun fetchMangas() =
-        client.get<MangaResponse>("$baseUrl/manga")
+        client.get<MangaResponse>("$baseUrl/manga") {
+            addHeader()
+        }
 
     suspend fun fetchSearchMangas(query: String) =
-        client.get<MangaResponse>("$baseUrl/manga?filter[text]=$query")
+        client.get<MangaResponse>("$baseUrl/manga?filter[text]=$query") {
+            addHeader()
+        }
 
     suspend fun fetchDetailManga(id: String) =
-        client.get<MangaDetailResponse>("$baseUrl/manga/$id")
+        client.get<MangaDetailResponse>("$baseUrl/manga/$id") {
+            addHeader()
+        }
+
+
+    private fun HttpRequestBuilder.addHeader() {
+        headers {
+            append(HttpHeaders.Accept, "application/vnd.api+json")
+            append(HttpHeaders.ContentType, "application/vnd.api+json")
+        }
+    }
 }

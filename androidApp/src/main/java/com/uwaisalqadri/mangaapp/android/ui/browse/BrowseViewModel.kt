@@ -16,7 +16,6 @@ class BrowseViewModel(
 ): ViewModel() {
 
     private val _listData = MutableLiveData<Resource<List<Manga>>>()
-    val listData = _listData
 
     fun getListManga() = viewModelScope.launch {
         _listData.postValue(Resource.Loading)
