@@ -24,8 +24,8 @@ kotlin {
     iosTarget("ios") {}
 
     cocoapods {
-        summary = "Some description for the Shared Module"
-        homepage = "Link to the Shared Module homepage"
+        summary = "MangaApp"
+        homepage = "https://github.com/uwais123/MangaApp"
         ios.deploymentTarget = "14.1"
         frameworkName = "KotlinCore"
         podfile = project.file("../iosApp/Podfile")
@@ -46,11 +46,11 @@ kotlin {
 
                 with(Kotlinx) {
                     implementation(serialization)
-                    implementation(coroutine) {
-                        version {
-                            strictly(coroutineVersion)
-                        }
-                    }
+//                    implementation(coroutine) {
+//                        version {
+//                            strictly(coroutineVersion)
+//                        }
+//                    }
                 }
             }
         }
@@ -86,7 +86,7 @@ android {
     compileSdkVersion(30)
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
-        minSdkVersion(16)
+        minSdkVersion(27)
         targetSdkVersion(30)
     }
 }

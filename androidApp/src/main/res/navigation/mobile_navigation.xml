@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/browseFragment">
+
+    <fragment
+        android:id="@+id/browseFragment"
+        android:name="com.uwaisalqadri.mangaapp.android.ui.browse.BrowseFragment"
+        android:label="BrowseFragment" />
+    <fragment
+        android:id="@+id/savedFragment"
+        android:name="com.uwaisalqadri.mangaapp.android.ui.saved.SavedFragment"
+        android:label="SavedFragment" />
+    <fragment
+        android:id="@+id/myMangaFragment"
+        android:name="com.uwaisalqadri.mangaapp.android.ui.mymanga.MyMangaFragment"
+        android:label="MyMangaFragment" />
+</navigation>
