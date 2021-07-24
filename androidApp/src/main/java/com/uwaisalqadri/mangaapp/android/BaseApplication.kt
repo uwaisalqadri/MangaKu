@@ -1,11 +1,13 @@
 package com.uwaisalqadri.mangaapp.android
 
 import android.app.Application
+import co.touchlab.kermit.Kermit
 import com.uwaisalqadri.mangaapp.android.di.appModule
 import com.uwaisalqadri.mangaapp.di.initKoin
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import org.koin.core.context.startKoin
 
 /**

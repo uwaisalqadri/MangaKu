@@ -7,8 +7,6 @@ import android.view.ViewGroup
 import androidx.compose.material.Text
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class BrowseFragment: Fragment() {
@@ -22,13 +20,13 @@ class BrowseFragment: Fragment() {
     ): View {
         return ComposeView(requireContext()).apply {
             setContent {
-                Text(text = "Hello Browse")
+                Text(text = viewModel.mangas.value.toString())
             }
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-        viewModel.getListManga()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val text = viewModel.mangas.value
     }
 }

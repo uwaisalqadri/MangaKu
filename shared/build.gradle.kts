@@ -52,6 +52,10 @@ kotlin {
 //                        }
 //                    }
                 }
+
+                with(Log) {
+                    api(kermit)
+                }
             }
         }
         val androidMain by getting {

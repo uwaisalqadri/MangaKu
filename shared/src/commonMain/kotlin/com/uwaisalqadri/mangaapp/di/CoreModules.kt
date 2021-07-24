@@ -1,5 +1,6 @@
 package com.uwaisalqadri.mangaapp.di
 
+import co.touchlab.kermit.Kermit
 import com.uwaisalqadri.mangaapp.data.repository.MangaRepositoryImpl
 import com.uwaisalqadri.mangaapp.data.souce.remote.ApiService
 import com.uwaisalqadri.mangaapp.domain.repository.MangaRepository
@@ -18,7 +19,7 @@ import org.koin.core.context.startKoin
 import org.koin.dsl.KoinAppDeclaration
 import org.koin.dsl.module
 
-fun initKoin(enableNetworkLogs: Boolean = false, appDeclaration: KoinAppDeclaration = {}) =
+fun initKoin(appDeclaration: KoinAppDeclaration = {}) =
     startKoin {
         appDeclaration()
         modules(networkModule, repositoryModule, useCaseModule)
@@ -47,20 +48,18 @@ val repositoryModule = module {
 val networkModule = module {
     single { ApiService(get()) }
     single { createJson() }
-    single { createHttpClient(get(), true) }
+    single { createHttpClient(get()) }
 }
 
 fun createJson() = Json { isLenient = true; ignoreUnknownKeys = true }
 
-fun createHttpClient(json: Json, enableNetworkLogs: Boolean) = HttpClient {
+fun createHttpClient(json: Json) = HttpClient {
     install(JsonFeature) {
         serializer = KotlinxSerializer(json)
     }
 
-    if (enableNetworkLogs) {
-        install(Logging) {
-            logger = Logger.DEFAULT
-            level = LogLevel.INFO
-        }
+    install(Logging) {
+        logger = Logger.DEFAULT
+        level = LogLevel.INFO
     }
 }

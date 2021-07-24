@@ -1,6 +1,8 @@
 package com.uwaisalqadri.mangaapp.android.ui.browse
 
-import androidx.lifecycle.MutableLiveData
+import android.util.Log
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.uwaisalqadri.mangaapp.data.souce.remote.response.Manga
@@ -15,12 +17,31 @@ class BrowseViewModel(
     private val listUseCase: GetMangaListUseCase
 ): ViewModel() {
 
-    private val _listData = MutableLiveData<Resource<List<Manga>>>()
+    val mangas: MutableState<List<Manga>> = mutableStateOf(ArrayList())
+    val loading = mutableStateOf(false)
 
-    fun getListManga() = viewModelScope.launch {
-        _listData.postValue(Resource.Loading)
+    init {
+        fetchMangas()
+    }
+
+    fun fetchMangas() = viewModelScope.launch {
         listUseCase.execute().collect {
-            _listData.value = it
+            when(it) {
+                is Resource.Success -> {
+                    loading.value = false
+                    mangas.value = it.data
+                    Log.d("viewModel", it.data.toString())
+                }
+                is Resource.Loading -> {
+                    loading.value = true
+                }
+                is Resource.Empty -> {
+                    loading.value = false
+                }
+                is Resource.Error -> {
+                    loading.value = false
+                }
+            }
         }
     }
 }
