@@ -11,6 +11,12 @@
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
 		5246F3A826AB9C5200CCDA56 /* AppAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5246F3A726AB9C5200CCDA56 /* AppAssembler.swift */; };
 		5246F3B026AB9D0600CCDA56 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5246F3AF26AB9D0600CCDA56 /* Assets.xcassets */; };
+		52B7691826ABCE6F00227903 /* BrowseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B7691726ABCE6E00227903 /* BrowseView.swift */; };
+		52B7691B26ABCE8100227903 /* SavedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B7691A26ABCE8100227903 /* SavedView.swift */; };
+		52B7691E26ABCE9D00227903 /* MyMangaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B7691D26ABCE9D00227903 /* MyMangaView.swift */; };
+		52B7692126ABCEAC00227903 /* BrowseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B7692026ABCEAC00227903 /* BrowseViewModel.swift */; };
+		52B7692526ABCECD00227903 /* MyMangaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B7692426ABCECD00227903 /* MyMangaViewModel.swift */; };
+		52B7692826ABCEE200227903 /* SavedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B7692726ABCEE200227903 /* SavedViewModel.swift */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
 /* End PBXBuildFile section */
 
@@ -20,6 +26,12 @@
 		50D9A0967CCE2583336DF877 /* Pods-iosApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.release.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.release.xcconfig"; sourceTree = "<group>"; };
 		5246F3A726AB9C5200CCDA56 /* AppAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAssembler.swift; sourceTree = "<group>"; };
 		5246F3AF26AB9D0600CCDA56 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		52B7691726ABCE6E00227903 /* BrowseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseView.swift; sourceTree = "<group>"; };
+		52B7691A26ABCE8100227903 /* SavedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedView.swift; sourceTree = "<group>"; };
+		52B7691D26ABCE9D00227903 /* MyMangaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMangaView.swift; sourceTree = "<group>"; };
+		52B7692026ABCEAC00227903 /* BrowseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseViewModel.swift; sourceTree = "<group>"; };
+		52B7692426ABCECD00227903 /* MyMangaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMangaViewModel.swift; sourceTree = "<group>"; };
+		52B7692726ABCEE200227903 /* SavedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedViewModel.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -55,14 +67,35 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		5224F40526AC23CE00D0D6E8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		5224F40626AC23D400D0D6E8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		5224F40726AC23D900D0D6E8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		5246F3A326AB9BD200CCDA56 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				5246F3AC26AB9C9700CCDA56 /* Main */,
+				5246F3A626AB9C3100CCDA56 /* Features */,
 				5246F3AE26AB9CB700CCDA56 /* Utils */,
 				5246F3AD26AB9C9E00CCDA56 /* Resources */,
-				5246F3AC26AB9C9700CCDA56 /* Main */,
 				5246F3AB26AB9C8D00CCDA56 /* Extension */,
-				5246F3A626AB9C3100CCDA56 /* Features */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -89,7 +122,6 @@
 				5246F3B326AB9D4C00CCDA56 /* Browse */,
 				5246F3B426AB9D5200CCDA56 /* MyManga */,
 				5246F3B526AB9D5900CCDA56 /* Saved */,
-				7555FF82242A565900829871 /* ContentView.swift */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -105,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				2152FB032600AC8F00CF470E /* iOSApp.swift */,
+				7555FF82242A565900829871 /* ContentView.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -136,6 +169,9 @@
 		5246F3B326AB9D4C00CCDA56 /* Browse */ = {
 			isa = PBXGroup;
 			children = (
+				5224F40526AC23CE00D0D6E8 /* Views */,
+				52B7691726ABCE6E00227903 /* BrowseView.swift */,
+				52B7692026ABCEAC00227903 /* BrowseViewModel.swift */,
 			);
 			path = Browse;
 			sourceTree = "<group>";
@@ -143,6 +179,9 @@
 		5246F3B426AB9D5200CCDA56 /* MyManga */ = {
 			isa = PBXGroup;
 			children = (
+				5224F40626AC23D400D0D6E8 /* Views */,
+				52B7691D26ABCE9D00227903 /* MyMangaView.swift */,
+				52B7692426ABCECD00227903 /* MyMangaViewModel.swift */,
 			);
 			path = MyManga;
 			sourceTree = "<group>";
@@ -150,6 +189,9 @@
 		5246F3B526AB9D5900CCDA56 /* Saved */ = {
 			isa = PBXGroup;
 			children = (
+				5224F40726AC23D900D0D6E8 /* Views */,
+				52B7691A26ABCE8100227903 /* SavedView.swift */,
+				52B7692726ABCEE200227903 /* SavedViewModel.swift */,
 			);
 			path = Saved;
 			sourceTree = "<group>";
@@ -192,6 +234,7 @@
 				7555FF77242A565900829871 /* Sources */,
 				7555FF79242A565900829871 /* Resources */,
 				3C26FE6BA0859E52A35A7815 /* Frameworks */,
+				46EADB2F85747FAF38F214EB /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -269,6 +312,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		46EADB2F85747FAF38F214EB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iosApp/Pods-iosApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iosApp/Pods-iosApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iosApp/Pods-iosApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -276,9 +336,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52B7692126ABCEAC00227903 /* BrowseViewModel.swift in Sources */,
+				52B7692826ABCEE200227903 /* SavedViewModel.swift in Sources */,
+				52B7691826ABCE6F00227903 /* BrowseView.swift in Sources */,
+				52B7691B26ABCE8100227903 /* SavedView.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 				5246F3A826AB9C5200CCDA56 /* AppAssembler.swift in Sources */,
+				52B7691E26ABCE9D00227903 /* MyMangaView.swift in Sources */,
+				52B7692526ABCECD00227903 /* MyMangaViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

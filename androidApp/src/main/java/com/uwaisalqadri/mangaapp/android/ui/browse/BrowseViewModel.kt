@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class BrowseViewModel(
-    private val searcUseCase: GetMangaSearchUseCase,
+    private val searchUseCase: GetMangaSearchUseCase,
     private val listUseCase: GetMangaListUseCase
 ): ViewModel() {
 
@@ -24,7 +24,7 @@ class BrowseViewModel(
         fetchMangas()
     }
 
-    fun fetchMangas() = viewModelScope.launch {
+    private fun fetchMangas() = viewModelScope.launch {
         listUseCase.execute().collect {
             when(it) {
                 is Resource.Success -> {

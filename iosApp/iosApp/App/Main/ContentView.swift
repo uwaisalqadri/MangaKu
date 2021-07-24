@@ -11,21 +11,21 @@ import KotlinCore
 
 struct ContentView: View {
 
-  @State var selectedIndex = 0
+  @State var selectedIndex = 1
 
   var body: some View {
     ZStack {
       if selectedIndex == 0 {
-        Text("Saved")
+        SavedView()
       } else if selectedIndex == 1 {
-        Text("Browse")
+        BrowseView()
       } else if selectedIndex == 2 {
-        Text("My Mangas")
+        MyMangaView()
       }
 
       VStack {
         Spacer()
-        tabView.padding(.bottom, 20)
+        tabView.padding(.bottom, 30)
       }
     }
   }
@@ -36,47 +36,38 @@ struct ContentView: View {
         selectedIndex = 0
       }, label: {
         VStack {
-          Image(systemName: "rectangle.3.offgrid")
+          Image("icSaved")
             .resizable()
-            .foregroundColor(.green)
-            .frame(width: 25, height: 25, alignment: .center)
+            .frame(width: 25, height: 30, alignment: .center)
         }
-      }).padding(.leading, 40)
+      }).padding(.horizontal, 30)
 
       Button(action: {
         selectedIndex = 1
       }, label: {
         VStack {
-          Image(systemName: "rectangle.stack")
+          Image("icBrowse")
             .resizable()
-            .foregroundColor(.yellow)
             .frame(width: 25, height: 25, alignment: .center)
         }
-      }).padding(.leading, 40)
+      }).padding(.horizontal, 20)
 
       Button(action: {
         selectedIndex = 2
       }, label: {
         VStack {
-          Image(systemName: "person")
+          Image("icMyMangas")
             .resizable()
-            .foregroundColor(.purple)
-            .frame(width: 25, height: 25, alignment: .center)
+            .frame(width: 25, height: 30, alignment: .center)
         }
-      }).padding(.horizontal, 40)
+      }).padding(.horizontal, 30)
     }
     .frame(maxWidth: .infinity, minHeight: 80)
     .background(
       Color.white
         .cornerRadius(12)
-        .shadow(radius: 10)
+        .shadow(radius: 20)
     )
-    .padding(.horizontal, 70)
-  }
-}
-
-struct ContentView_Previews: PreviewProvider {
-  static var previews: some View {
-    ContentView()
+    .padding(.horizontal, 40)
   }
 }

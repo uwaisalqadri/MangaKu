@@ -1,14 +1,14 @@
 {
   "name": "shared",
   "version": "1.0",
-  "homepage": "Link to the Shared Module homepage",
+  "homepage": "https://github.com/uwais123/MangaApp",
   "source": {
     "git": "Not Published",
     "tag": "Cocoapods/shared/1.0"
   },
   "authors": "",
   "license": "",
-  "summary": "Some description for the Shared Module",
+  "summary": "MangaApp",
   "static_framework": true,
   "vendored_frameworks": "build/cocoapods/framework/KotlinCore.framework",
   "libraries": "c++",

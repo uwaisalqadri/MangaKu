@@ -1,6 +1,5 @@
 package com.uwaisalqadri.mangaapp.di
 
-import co.touchlab.kermit.Kermit
 import com.uwaisalqadri.mangaapp.data.repository.MangaRepositoryImpl
 import com.uwaisalqadri.mangaapp.data.souce.remote.ApiService
 import com.uwaisalqadri.mangaapp.domain.repository.MangaRepository
@@ -24,6 +23,8 @@ fun initKoin(appDeclaration: KoinAppDeclaration = {}) =
         appDeclaration()
         modules(networkModule, repositoryModule, useCaseModule)
     }
+
+fun initKoin() = initKoin {}
 
 val useCaseModule = module {
     single<GetMangaListUseCase> {

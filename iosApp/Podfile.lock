@@ -1,16 +1,27 @@
 PODS:
+  - KMPNativeCoroutinesCombine (0.4.2):
+    - KMPNativeCoroutinesCore
+  - KMPNativeCoroutinesCore (0.4.2)
   - shared (1.0)
 
 DEPENDENCIES:
+  - KMPNativeCoroutinesCombine
   - shared (from `../shared`)
+
+SPEC REPOS:
+  trunk:
+    - KMPNativeCoroutinesCombine
+    - KMPNativeCoroutinesCore
 
 EXTERNAL SOURCES:
   shared:
     :path: "../shared"
 
 SPEC CHECKSUMS:
-  shared: d779c0f613270d29f78b1e5429dd7db9b6e0b1c7
+  KMPNativeCoroutinesCombine: 198531c0cd794024df3bfcb6c5a8e0829dd2d2bb
+  KMPNativeCoroutinesCore: 04c0d951af2a8dc6099f8219b3662fab7939f932
+  shared: aa7a3364ca8737655203b94604938458166d8baf
 
-PODFILE CHECKSUM: f282da88f39e69507b0a255187c8a6b644477756
+PODFILE CHECKSUM: 05c5d688a3977d682eb2fd7d8a512494034ad297
 
 COCOAPODS: 1.10.1
