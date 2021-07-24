@@ -9,13 +9,21 @@
 import SwiftUI
 
 struct BrowseView: View {
+
+  @ObservedObject var viewModel: BrowseViewModel
+
   var body: some View {
-    Text("Hello, Browsez!")
+    ForEach(viewModel.mangas, id: \.id) { manga in
+      Text(manga.attributes.titles.en)
+    }.onAppear {
+      viewModel.fetchMangas()
+    }
   }
 }
 
 struct BrowseView_Previews: PreviewProvider {
+  static let assembler = AppAssembler()
   static var previews: some View {
-    BrowseView()
+    BrowseView(viewModel: assembler.resolve())
   }
 }

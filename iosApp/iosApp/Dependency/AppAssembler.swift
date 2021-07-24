@@ -7,3 +7,9 @@
 //
 
 import Foundation
+
+protocol Assembler: BrowseAssembler,
+                    MyMangaAssembler,
+                    SavedAssembler {}
+
+class AppAssembler: Assembler {}

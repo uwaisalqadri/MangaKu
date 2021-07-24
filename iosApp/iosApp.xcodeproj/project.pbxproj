@@ -3,12 +3,15 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		198A80C49D5FEE4DF4DB3606 /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E018CB6D4E97B91ADD8417C /* Pods_iosApp.framework */; };
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
+		5224F40F26AC38CF00D0D6E8 /* BrowseAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5224F40E26AC38CF00D0D6E8 /* BrowseAssembler.swift */; };
+		5224F41226AC38DB00D0D6E8 /* MyMangaAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5224F41126AC38DB00D0D6E8 /* MyMangaAssembler.swift */; };
+		5224F41526AC38E600D0D6E8 /* SavedAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5224F41426AC38E600D0D6E8 /* SavedAssembler.swift */; };
 		5246F3A826AB9C5200CCDA56 /* AppAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5246F3A726AB9C5200CCDA56 /* AppAssembler.swift */; };
 		5246F3B026AB9D0600CCDA56 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5246F3AF26AB9D0600CCDA56 /* Assets.xcassets */; };
 		52B7691826ABCE6F00227903 /* BrowseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B7691726ABCE6E00227903 /* BrowseView.swift */; };
@@ -24,6 +27,9 @@
 		2152FB032600AC8F00CF470E /* iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
 		3E018CB6D4E97B91ADD8417C /* Pods_iosApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iosApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		50D9A0967CCE2583336DF877 /* Pods-iosApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.release.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.release.xcconfig"; sourceTree = "<group>"; };
+		5224F40E26AC38CF00D0D6E8 /* BrowseAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseAssembler.swift; sourceTree = "<group>"; };
+		5224F41126AC38DB00D0D6E8 /* MyMangaAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMangaAssembler.swift; sourceTree = "<group>"; };
+		5224F41426AC38E600D0D6E8 /* SavedAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedAssembler.swift; sourceTree = "<group>"; };
 		5246F3A726AB9C5200CCDA56 /* AppAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAssembler.swift; sourceTree = "<group>"; };
 		5246F3AF26AB9D0600CCDA56 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		52B7691726ABCE6E00227903 /* BrowseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseView.swift; sourceTree = "<group>"; };
@@ -112,6 +118,9 @@
 		5246F3A526AB9C2900CCDA56 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				5224F40E26AC38CF00D0D6E8 /* BrowseAssembler.swift */,
+				5224F41126AC38DB00D0D6E8 /* MyMangaAssembler.swift */,
+				5224F41426AC38E600D0D6E8 /* SavedAssembler.swift */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -336,14 +345,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5224F40F26AC38CF00D0D6E8 /* BrowseAssembler.swift in Sources */,
 				52B7692126ABCEAC00227903 /* BrowseViewModel.swift in Sources */,
 				52B7692826ABCEE200227903 /* SavedViewModel.swift in Sources */,
 				52B7691826ABCE6F00227903 /* BrowseView.swift in Sources */,
+				5224F41526AC38E600D0D6E8 /* SavedAssembler.swift in Sources */,
 				52B7691B26ABCE8100227903 /* SavedView.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 				5246F3A826AB9C5200CCDA56 /* AppAssembler.swift in Sources */,
 				52B7691E26ABCE9D00227903 /* MyMangaView.swift in Sources */,
+				5224F41226AC38DB00D0D6E8 /* MyMangaAssembler.swift in Sources */,
 				52B7692526ABCECD00227903 /* MyMangaViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

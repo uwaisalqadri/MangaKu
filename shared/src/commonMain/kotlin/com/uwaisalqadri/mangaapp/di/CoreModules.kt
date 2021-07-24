@@ -28,15 +28,15 @@ fun initKoin() = initKoin {}
 
 val useCaseModule = module {
     single<GetMangaListUseCase> {
-        GetMangaListInteractor(get())
+        GetMangaListInteractor()
     }
 
     single<GetMangaSearchUseCase> {
-        GetMangaSearchInteractor(get())
+        GetMangaSearchInteractor()
     }
 
     single<GetMangaDetailUseCase> {
-        GetMangaDetailInteractor(get())
+        GetMangaDetailInteractor()
     }
 }
 

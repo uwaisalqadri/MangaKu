@@ -12,13 +12,14 @@ import KotlinCore
 struct ContentView: View {
 
   @State var selectedIndex = 1
+  private let assembler = AppAssembler()
 
   var body: some View {
     ZStack {
       if selectedIndex == 0 {
         SavedView()
       } else if selectedIndex == 1 {
-        BrowseView()
+        BrowseView(viewModel: assembler.resolve())
       } else if selectedIndex == 2 {
         MyMangaView()
       }
