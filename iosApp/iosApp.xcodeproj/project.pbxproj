@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		198A80C49D5FEE4DF4DB3606 /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E018CB6D4E97B91ADD8417C /* Pods_iosApp.framework */; };
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
+		5246F3A826AB9C5200CCDA56 /* AppAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5246F3A726AB9C5200CCDA56 /* AppAssembler.swift */; };
+		5246F3B026AB9D0600CCDA56 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5246F3AF26AB9D0600CCDA56 /* Assets.xcassets */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
 /* End PBXBuildFile section */
 
@@ -16,6 +18,8 @@
 		2152FB032600AC8F00CF470E /* iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
 		3E018CB6D4E97B91ADD8417C /* Pods_iosApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iosApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		50D9A0967CCE2583336DF877 /* Pods-iosApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.release.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.release.xcconfig"; sourceTree = "<group>"; };
+		5246F3A726AB9C5200CCDA56 /* AppAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAssembler.swift; sourceTree = "<group>"; };
+		5246F3AF26AB9D0600CCDA56 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -48,8 +52,106 @@
 				D991336E515F966B88C63CCD /* Pods-iosApp.debug.xcconfig */,
 				50D9A0967CCE2583336DF877 /* Pods-iosApp.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		5246F3A326AB9BD200CCDA56 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				5246F3AE26AB9CB700CCDA56 /* Utils */,
+				5246F3AD26AB9C9E00CCDA56 /* Resources */,
+				5246F3AC26AB9C9700CCDA56 /* Main */,
+				5246F3AB26AB9C8D00CCDA56 /* Extension */,
+				5246F3A626AB9C3100CCDA56 /* Features */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		5246F3A426AB9C1700CCDA56 /* Dependency */ = {
+			isa = PBXGroup;
+			children = (
+				5246F3A526AB9C2900CCDA56 /* Features */,
+				5246F3A726AB9C5200CCDA56 /* AppAssembler.swift */,
+			);
+			path = Dependency;
+			sourceTree = "<group>";
+		};
+		5246F3A526AB9C2900CCDA56 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		5246F3A626AB9C3100CCDA56 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				5246F3B326AB9D4C00CCDA56 /* Browse */,
+				5246F3B426AB9D5200CCDA56 /* MyManga */,
+				5246F3B526AB9D5900CCDA56 /* Saved */,
+				7555FF82242A565900829871 /* ContentView.swift */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		5246F3AB26AB9C8D00CCDA56 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		5246F3AC26AB9C9700CCDA56 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				2152FB032600AC8F00CF470E /* iOSApp.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		5246F3AD26AB9C9E00CCDA56 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7555FF8C242A565B00829871 /* Info.plist */,
+				5246F3AF26AB9D0600CCDA56 /* Assets.xcassets */,
+				5246F3B226AB9D1900CCDA56 /* Fonts */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		5246F3AE26AB9CB700CCDA56 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		5246F3B226AB9D1900CCDA56 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		5246F3B326AB9D4C00CCDA56 /* Browse */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Browse;
+			sourceTree = "<group>";
+		};
+		5246F3B426AB9D5200CCDA56 /* MyManga */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = MyManga;
+			sourceTree = "<group>";
+		};
+		5246F3B526AB9D5900CCDA56 /* Saved */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Saved;
 			sourceTree = "<group>";
 		};
 		7555FF72242A565900829871 = {
@@ -73,9 +175,8 @@
 		7555FF7D242A565900829871 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
-				7555FF82242A565900829871 /* ContentView.swift */,
-				7555FF8C242A565B00829871 /* Info.plist */,
-				2152FB032600AC8F00CF470E /* iOSApp.swift */,
+				5246F3A426AB9C1700CCDA56 /* Dependency */,
+				5246F3A326AB9BD200CCDA56 /* App */,
 			);
 			path = iosApp;
 			sourceTree = "<group>";
@@ -139,6 +240,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5246F3B026AB9D0600CCDA56 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,6 +278,7 @@
 			files = (
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
+				5246F3A826AB9C5200CCDA56 /* AppAssembler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -305,7 +408,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = iosApp/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/iosApp/App/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -324,7 +427,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = iosApp/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/iosApp/App/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
