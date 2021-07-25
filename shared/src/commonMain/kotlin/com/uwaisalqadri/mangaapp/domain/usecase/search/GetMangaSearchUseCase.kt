@@ -1,4 +1,4 @@
-package com.uwaisalqadri.mangaapp.domain.usecase.manga_search
+package com.uwaisalqadri.mangaapp.domain.usecase.search
 
 import com.uwaisalqadri.mangaapp.data.souce.remote.response.Manga
 import com.uwaisalqadri.mangaapp.domain.repository.MangaRepository
@@ -11,8 +11,9 @@ interface GetMangaSearchUseCase {
     suspend fun execute(query: String): Flow<Resource<List<Manga>>>
 }
 
-class GetMangaSearchInteractor: KoinComponent, GetMangaSearchUseCase {
-    private val repository: MangaRepository by inject()
+class GetMangaSearchInteractor(
+    private val repository: MangaRepository
+): GetMangaSearchUseCase {
 
     override suspend fun execute(query: String): Flow<Resource<List<Manga>>> {
         return repository.fetchSearchMangas(query)

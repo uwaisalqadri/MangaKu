@@ -1,4 +1,4 @@
-package com.uwaisalqadri.mangaapp.domain.usecase.manga_list
+package com.uwaisalqadri.mangaapp.domain.usecase.list
 
 import com.uwaisalqadri.mangaapp.data.souce.remote.response.Manga
 import com.uwaisalqadri.mangaapp.domain.repository.MangaRepository
@@ -11,8 +11,9 @@ interface GetMangaListUseCase {
     suspend fun execute(): Flow<Resource<List<Manga>>>
 }
 
-class GetMangaListInteractor: KoinComponent, GetMangaListUseCase {
-    private val repository: MangaRepository by inject()
+class GetMangaListInteractor(
+    private val repository: MangaRepository
+): GetMangaListUseCase {
 
     override suspend fun execute(): Flow<Resource<List<Manga>>> {
         return repository.fetchMangas()

@@ -6,8 +6,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.uwaisalqadri.mangaapp.data.souce.remote.response.Manga
-import com.uwaisalqadri.mangaapp.domain.usecase.manga_list.GetMangaListUseCase
-import com.uwaisalqadri.mangaapp.domain.usecase.manga_search.GetMangaSearchUseCase
+import com.uwaisalqadri.mangaapp.domain.usecase.list.GetMangaListUseCase
+import com.uwaisalqadri.mangaapp.domain.usecase.search.GetMangaSearchUseCase
 import com.uwaisalqadri.mangaapp.utils.Resource
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch

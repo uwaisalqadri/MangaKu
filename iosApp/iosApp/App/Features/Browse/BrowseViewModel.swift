@@ -14,10 +14,10 @@ import KMPNativeCoroutinesCombine
 class BrowseViewModel: ObservableObject {
 
   @Published var loading = false
-  @Published var mangas = [Manga]()
+  @Published var mangas: [Manga] = []
 
-  private var cancellables: Set<AnyCancellable> = []
   private let listUseCase: GetMangaListUseCase
+  private var cancellables = Set<AnyCancellable>()
 
   init(listUseCase: GetMangaListUseCase) {
     self.listUseCase = listUseCase
@@ -25,11 +25,16 @@ class BrowseViewModel: ObservableObject {
 
   func fetchMangas() {
     createPublisher(for: listUseCase.executeNative())
-      .receive(on: RunLoop.main)
-      .sink(receiveCompletion: { completion in
-        print("Received completion: \(completion)")
-      }, receiveValue: { value in
-        print("Received value: \(value)")
-      }).store(in: &cancellables)
+      .receive(on: DispatchQueue.main) // thread
+      .sink { completion in
+        switch completion {
+        case .failure:
+          print("fail \(completion)")
+        case .finished:
+          print("finished")
+        }
+      } receiveValue: { value in
+        print("receive value \(value)")
+      }.store(in: &cancellables)
   }
 }

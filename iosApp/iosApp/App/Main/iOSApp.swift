@@ -15,7 +15,7 @@ struct iOSApp: App {
     WindowGroup {
       ContentView()
         .onAppear {
-          CoreModulesKt.doInitKoin()
+          CoreKt.doInitKoin()
         }
     }
   }

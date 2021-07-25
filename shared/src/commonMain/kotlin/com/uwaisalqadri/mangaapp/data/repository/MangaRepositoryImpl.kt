@@ -2,16 +2,17 @@ package com.uwaisalqadri.mangaapp.data.repository
 
 import com.uwaisalqadri.mangaapp.data.souce.remote.ApiService
 import com.uwaisalqadri.mangaapp.data.souce.remote.response.Manga
-import com.uwaisalqadri.mangaapp.data.souce.remote.response.MangaResponse
 import com.uwaisalqadri.mangaapp.domain.repository.MangaRepository
 import com.uwaisalqadri.mangaapp.utils.Resource
 import io.ktor.client.features.*
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-class MangaRepositoryImpl(private val apiService: ApiService): MangaRepository {
+class MangaRepositoryImpl(
+    private val apiService: ApiService
+): MangaRepository {
 
     override suspend fun fetchMangas(): Flow<Resource<List<Manga>>> {
         return flow {

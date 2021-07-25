@@ -46,15 +46,12 @@ kotlin {
 
                 with(Kotlinx) {
                     implementation(serialization)
-//                    implementation(coroutine) {
-//                        version {
-//                            strictly(coroutineVersion)
-//                        }
-//                    }
+                    implementation(coroutine)
                 }
 
                 with(Log) {
                     api(kermit)
+                    implementation(kotlin("stdlib-common"))
                 }
             }
         }
