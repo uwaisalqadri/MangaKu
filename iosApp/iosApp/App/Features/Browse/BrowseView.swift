@@ -13,11 +13,13 @@ struct BrowseView: View {
   @ObservedObject var viewModel: BrowseViewModel
 
   var body: some View {
-    Text(String(viewModel.mangas.count))
-      .onAppear {
-        viewModel.fetchMangas()
-        print("onAppear")
+    ScrollView {
+      ForEach(viewModel.mangas, id: \.id) { manga in
+        Text(manga.attributes.titles.ja_jp)
       }
+    }.onAppear {
+      viewModel.fetchMangas()
+    }
   }
 }
 

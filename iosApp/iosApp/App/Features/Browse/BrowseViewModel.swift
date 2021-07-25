@@ -25,16 +25,12 @@ class BrowseViewModel: ObservableObject {
 
   func fetchMangas() {
     createPublisher(for: listUseCase.executeNative())
-      .receive(on: DispatchQueue.main) // thread
+      .receive(on: DispatchQueue.main)
       .sink { completion in
-        switch completion {
-        case .failure:
-          print("fail \(completion)")
-        case .finished:
-          print("finished")
-        }
+        print("receive completion \(completion)")
       } receiveValue: { value in
-        print("receive value \(value)")
+        self.mangas = value
+        print(self.mangas)
       }.store(in: &cancellables)
   }
 }

@@ -8,7 +8,6 @@ import androidx.lifecycle.viewModelScope
 import com.uwaisalqadri.mangaapp.data.souce.remote.response.Manga
 import com.uwaisalqadri.mangaapp.domain.usecase.list.GetMangaListUseCase
 import com.uwaisalqadri.mangaapp.domain.usecase.search.GetMangaSearchUseCase
-import com.uwaisalqadri.mangaapp.utils.Resource
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -25,22 +24,11 @@ class BrowseViewModel(
     }
 
     private fun fetchMangas() = viewModelScope.launch {
-        listUseCase.execute().collect {
-            when(it) {
-                is Resource.Success -> {
-                    loading.value = false
-                    mangas.value = it.data
-                    Log.d("viewModel", it.data.toString())
-                }
-                is Resource.Loading -> {
-                    loading.value = true
-                }
-                is Resource.Empty -> {
-                    loading.value = false
-                }
-                is Resource.Error -> {
-                    loading.value = false
-                }
+        listUseCase.execute().collect { result ->
+            if (!result.isNullOrEmpty()) {
+                mangas.value = result
+            } else {
+                Log.d("fetchMangas", "empty")
             }
         }
     }

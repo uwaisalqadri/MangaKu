@@ -7,11 +7,10 @@ import android.view.ViewGroup
 import androidx.compose.material.Text
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
+import com.uwaisalqadri.mangaapp.android.ui.browse.composables.MangaListScreen
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class BrowseFragment: Fragment() {
-
-    private val viewModel: BrowseViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -20,7 +19,7 @@ class BrowseFragment: Fragment() {
     ): View {
         return ComposeView(requireContext()).apply {
             setContent {
-                Text(text = viewModel.mangas.value.toString())
+                MangaListScreen()
             }
         }
     }
