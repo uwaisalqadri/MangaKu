@@ -29,7 +29,7 @@ struct MangaItemView: View {
           .padding(.top, 5)
 
         HStack {
-          Text(manga.attributes.updatedAt.toDate()?.dateToString() ?? "00")
+          Text(manga.attributes.updatedAt.toDate()?.toString() ?? "00")
             .font(.custom(.mbold, size: 12))
             .foregroundColor(.secondary)
 
@@ -40,7 +40,7 @@ struct MangaItemView: View {
         Spacer(minLength: 30)
 
         Button(action: {
-          print(manga.attributes.updatedAt)
+          print(manga.attributes.updatedAt.toDate() ?? "not working shit")
         }, label: {
           Text("Read Now")
             .foregroundColor(.white)
@@ -51,8 +51,10 @@ struct MangaItemView: View {
         .background(Color.black)
         .cornerRadius(9)
         .padding(.bottom, 10)
-      }.padding(.horizontal, 20)
-      
+      }.padding(.leading, 15)
+
+      Spacer()
+
     }.padding(.bottom, 30)
   }
 }

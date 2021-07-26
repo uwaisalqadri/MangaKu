@@ -119,7 +119,7 @@
 		5246F3A326AB9BD200CCDA56 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				5246F3AB26AB9C8D00CCDA56 /* Extension */,
+				5246F3AB26AB9C8D00CCDA56 /* Extensions */,
 				5246F3A626AB9C3100CCDA56 /* Features */,
 				5246F3AC26AB9C9700CCDA56 /* Main */,
 				5246F3AD26AB9C9E00CCDA56 /* Resources */,
@@ -157,13 +157,13 @@
 			path = Features;
 			sourceTree = "<group>";
 		};
-		5246F3AB26AB9C8D00CCDA56 /* Extension */ = {
+		5246F3AB26AB9C8D00CCDA56 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				52FFF17026AEA1B2006A3621 /* Date.swift */,
 				52FFF17426AEA221006A3621 /* String.swift */,
 			);
-			path = Extension;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		5246F3AC26AB9C9700CCDA56 /* Main */ = {

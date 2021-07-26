@@ -18,24 +18,27 @@ struct BrowseView: View {
         VStack(alignment: .leading) {
           Text("Genre")
             .font(.custom(.msemibold, size: 15))
-            .padding(.horizontal, 15)
+            .padding(.horizontal, 17)
 
           ScrollView(.horizontal, showsIndicators: false) {
             HStack {
               ForEach(0..<5) { _ in
                 GenreView()
               }
-            }.padding(.leading, 10)
+            }.padding(.leading, 13)
           }
 
           Text("Last Update")
             .font(.custom(.msemibold, size: 15))
-            .padding([.horizontal, .top], 30)
+            .padding(.leading, 17)
+            .padding(.top, 30)
+
           VStack {
             ForEach(viewModel.mangas, id: \.id) { manga in
               MangaItemView(manga: manga)
             }
-          }.padding(.horizontal, 30)
+          }.padding(.leading, 17)
+          .padding(.trailing, 30)
         }.padding(.top, 30)
       }
       .navigationBarTitle("Browse")
