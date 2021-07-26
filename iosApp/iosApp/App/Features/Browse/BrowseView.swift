@@ -13,12 +13,30 @@ struct BrowseView: View {
   @ObservedObject var viewModel: BrowseViewModel
 
   var body: some View {
-    ScrollView {
-      ForEach(viewModel.mangas, id: \.id) { manga in
-        Text(manga.attributes.titles.ja_jp)
-      }
-    }.onAppear {
-      viewModel.fetchMangas()
+    ScrollView(.vertical, showsIndicators: false) {
+      VStack(alignment: .leading) {
+        Text("Genre")
+          .font(.system(size: 15, weight: .regular))
+
+        ScrollView(.horizontal, showsIndicators: false) {
+          HStack {
+            ForEach(0..<5) { _ in
+              GenreView()
+            }
+          }
+        }
+
+        Text("Last Update")
+          .font(.system(size: 15, weight: .regular))
+        VStack {
+          ForEach(viewModel.mangas, id: \.id) { manga in
+            MangaItemView()
+          }
+        }
+      }.padding(.horizontal, 7)
+      .onAppear {
+        viewModel.fetchMangas()
+    }
     }
   }
 }
