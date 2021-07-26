@@ -30,9 +30,9 @@ struct GenreView: View {
         )
 
       Text("Shonen")
-        .font(.system(size: 25, weight: .bold))
+        .font(.custom(.sedgwickave, size: 30))
         .foregroundColor(.black)
-        .padding(.top, 17)
+        .padding(.top, 20)
         .padding(.bottom, 5)
     }
   }

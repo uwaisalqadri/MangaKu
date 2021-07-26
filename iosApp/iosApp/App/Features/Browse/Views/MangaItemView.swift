@@ -7,11 +7,16 @@
 //
 
 import SwiftUI
+import KotlinCore
+import SDWebImageSwiftUI
 
 struct MangaItemView: View {
+
+  let manga: Manga
+
   var body: some View {
     HStack {
-      Image("imgSample")
+      WebImage(url: URL(string: manga.attributes.posterImage.original))
         .resizable()
         .frame(width: 124, height: 200)
         .cornerRadius(12)
@@ -19,35 +24,36 @@ struct MangaItemView: View {
       VStack(alignment: .leading) {
         StarsView()
 
-        Text("Boku No Hero Academia")
-          .font(.system(size: 20, weight: .bold))
+        Text(manga.attributes.titles.en_jp)
+          .font(.custom(.mbold, size: 18))
           .padding(.top, 5)
 
         HStack {
-          Text("04-05-2019")
-            .font(.system(size: 12, weight: .bold))
+          Text(manga.attributes.updatedAt.toDate()?.dateToString() ?? "00")
+            .font(.custom(.mbold, size: 12))
             .foregroundColor(.secondary)
 
-          Text("Vol.25")
-            .font(.system(size: 18, weight: .bold))
+          Text("Vol.\(manga.attributes.volumeCount)")
+            .font(.custom(.mbold, size: 15))
         }.padding(.top, 5)
 
-        Spacer(minLength: 60)
+        Spacer(minLength: 30)
 
         Button(action: {
-          print("Read Now")
+          print(manga.attributes.updatedAt)
         }, label: {
           Text("Read Now")
             .foregroundColor(.white)
-            .font(.system(size: 15, weight: .bold))
+            .font(.custom(.mbold, size: 15))
             .padding(.horizontal, 19)
             .padding(.vertical, 8)
         })
         .background(Color.black)
         .cornerRadius(9)
+        .padding(.bottom, 10)
       }.padding(.horizontal, 20)
-      .padding(.vertical, 15)
-    }
+      
+    }.padding(.bottom, 30)
   }
 }
 

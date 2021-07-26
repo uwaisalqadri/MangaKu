@@ -22,6 +22,14 @@
 		52B7692826ABCEE200227903 /* SavedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B7692726ABCEE200227903 /* SavedViewModel.swift */; };
 		52EBD6D526AE5A5900E1C28F /* MangaItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBD6D426AE5A5900E1C28F /* MangaItemView.swift */; };
 		52EBD6D826AE645E00E1C28F /* GenreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBD6D726AE645E00E1C28F /* GenreView.swift */; };
+		52EBD6DC26AE823700E1C28F /* montserrat-bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 52EBD6DB26AE823600E1C28F /* montserrat-bold.ttf */; };
+		52EBD6DF26AE824700E1C28F /* montserrat-semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 52EBD6DE26AE824700E1C28F /* montserrat-semibold.ttf */; };
+		52EBD6E226AE829600E1C28F /* sedgwickavedisplay-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 52EBD6E126AE829600E1C28F /* sedgwickavedisplay-regular.ttf */; };
+		52EBD6E526AE82E000E1C28F /* mashanzheng-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 52EBD6E426AE82E000E1C28F /* mashanzheng-regular.ttf */; };
+		52EBD6E826AE831400E1C28F /* montserrat-medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 52EBD6E726AE831400E1C28F /* montserrat-medium.ttf */; };
+		52EBD6EB26AE845D00E1C28F /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBD6EA26AE845D00E1C28F /* Fonts.swift */; };
+		52FFF17126AEA1B2006A3621 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FFF17026AEA1B2006A3621 /* Date.swift */; };
+		52FFF17526AEA221006A3621 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FFF17426AEA221006A3621 /* String.swift */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +50,14 @@
 		52B7692726ABCEE200227903 /* SavedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedViewModel.swift; sourceTree = "<group>"; };
 		52EBD6D426AE5A5900E1C28F /* MangaItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangaItemView.swift; sourceTree = "<group>"; };
 		52EBD6D726AE645E00E1C28F /* GenreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreView.swift; sourceTree = "<group>"; };
+		52EBD6DB26AE823600E1C28F /* montserrat-bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "montserrat-bold.ttf"; path = "../../../../../../FrezzFarm/app/src/main/res/font/montserrat-bold.ttf"; sourceTree = "<group>"; };
+		52EBD6DE26AE824700E1C28F /* montserrat-semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "montserrat-semibold.ttf"; path = "../../../../../../FrezzFarm/app/src/main/res/font/montserrat-semibold.ttf"; sourceTree = "<group>"; };
+		52EBD6E126AE829600E1C28F /* sedgwickavedisplay-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "sedgwickavedisplay-regular.ttf"; path = "../../../../../../../Downloads/Sedgwick_Ave_Display/sedgwickavedisplay-regular.ttf"; sourceTree = "<group>"; };
+		52EBD6E426AE82E000E1C28F /* mashanzheng-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "mashanzheng-regular.ttf"; path = "../../../../../../../Downloads/Ma_Shan_Zheng/mashanzheng-regular.ttf"; sourceTree = "<group>"; };
+		52EBD6E726AE831400E1C28F /* montserrat-medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "montserrat-medium.ttf"; path = "../../../../../../../Downloads/GithubUserSecond/app/src/main/res/font/montserrat-medium.ttf"; sourceTree = "<group>"; };
+		52EBD6EA26AE845D00E1C28F /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		52FFF17026AEA1B2006A3621 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		52FFF17426AEA221006A3621 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -103,11 +119,11 @@
 		5246F3A326AB9BD200CCDA56 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				5246F3AC26AB9C9700CCDA56 /* Main */,
-				5246F3A626AB9C3100CCDA56 /* Features */,
-				5246F3AE26AB9CB700CCDA56 /* Utils */,
-				5246F3AD26AB9C9E00CCDA56 /* Resources */,
 				5246F3AB26AB9C8D00CCDA56 /* Extension */,
+				5246F3A626AB9C3100CCDA56 /* Features */,
+				5246F3AC26AB9C9700CCDA56 /* Main */,
+				5246F3AD26AB9C9E00CCDA56 /* Resources */,
+				5246F3AE26AB9CB700CCDA56 /* Utils */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -144,6 +160,8 @@
 		5246F3AB26AB9C8D00CCDA56 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				52FFF17026AEA1B2006A3621 /* Date.swift */,
+				52FFF17426AEA221006A3621 /* String.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -160,6 +178,7 @@
 		5246F3AD26AB9C9E00CCDA56 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				52EBD6EA26AE845D00E1C28F /* Fonts.swift */,
 				7555FF8C242A565B00829871 /* Info.plist */,
 				5246F3AF26AB9D0600CCDA56 /* Assets.xcassets */,
 				5246F3B226AB9D1900CCDA56 /* Fonts */,
@@ -177,6 +196,11 @@
 		5246F3B226AB9D1900CCDA56 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				52EBD6E726AE831400E1C28F /* montserrat-medium.ttf */,
+				52EBD6E426AE82E000E1C28F /* mashanzheng-regular.ttf */,
+				52EBD6E126AE829600E1C28F /* sedgwickavedisplay-regular.ttf */,
+				52EBD6DE26AE824700E1C28F /* montserrat-semibold.ttf */,
+				52EBD6DB26AE823600E1C28F /* montserrat-bold.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -298,7 +322,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52EBD6E226AE829600E1C28F /* sedgwickavedisplay-regular.ttf in Resources */,
+				52EBD6DC26AE823700E1C28F /* montserrat-bold.ttf in Resources */,
+				52EBD6DF26AE824700E1C28F /* montserrat-semibold.ttf in Resources */,
+				52EBD6E526AE82E000E1C28F /* mashanzheng-regular.ttf in Resources */,
 				5246F3B026AB9D0600CCDA56 /* Assets.xcassets in Resources */,
+				52EBD6E826AE831400E1C28F /* montserrat-medium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,7 +381,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				5224F40F26AC38CF00D0D6E8 /* BrowseAssembler.swift in Sources */,
+				52EBD6EB26AE845D00E1C28F /* Fonts.swift in Sources */,
 				52B7692126ABCEAC00227903 /* BrowseViewModel.swift in Sources */,
+				52FFF17126AEA1B2006A3621 /* Date.swift in Sources */,
 				52EBD6D826AE645E00E1C28F /* GenreView.swift in Sources */,
 				52B7692826ABCEE200227903 /* SavedViewModel.swift in Sources */,
 				52B7691826ABCE6F00227903 /* BrowseView.swift in Sources */,
@@ -363,6 +394,7 @@
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 				5246F3A826AB9C5200CCDA56 /* AppAssembler.swift in Sources */,
 				52B7691E26ABCE9D00227903 /* MyMangaView.swift in Sources */,
+				52FFF17526AEA221006A3621 /* String.swift in Sources */,
 				5224F41226AC38DB00D0D6E8 /* MyMangaAssembler.swift in Sources */,
 				52B7692526ABCECD00227903 /* MyMangaViewModel.swift in Sources */,
 			);
