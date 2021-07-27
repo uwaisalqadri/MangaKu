@@ -30,6 +30,7 @@
 		52EBD6EB26AE845D00E1C28F /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBD6EA26AE845D00E1C28F /* Fonts.swift */; };
 		52FFF17126AEA1B2006A3621 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FFF17026AEA1B2006A3621 /* Date.swift */; };
 		52FFF17526AEA221006A3621 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FFF17426AEA221006A3621 /* String.swift */; };
+		52FFF17926AF8B2B006A3621 /* MyMangaCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FFF17826AF8B2A006A3621 /* MyMangaCardView.swift */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
 /* End PBXBuildFile section */
 
@@ -58,6 +59,7 @@
 		52EBD6EA26AE845D00E1C28F /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		52FFF17026AEA1B2006A3621 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		52FFF17426AEA221006A3621 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		52FFF17826AF8B2A006A3621 /* MyMangaCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMangaCardView.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 		5224F40626AC23D400D0D6E8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				52FFF17826AF8B2A006A3621 /* MyMangaCardView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -381,6 +384,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5224F40F26AC38CF00D0D6E8 /* BrowseAssembler.swift in Sources */,
+				52FFF17926AF8B2B006A3621 /* MyMangaCardView.swift in Sources */,
 				52EBD6EB26AE845D00E1C28F /* Fonts.swift in Sources */,
 				52B7692126ABCEAC00227903 /* BrowseViewModel.swift in Sources */,
 				52FFF17126AEA1B2006A3621 /* Date.swift in Sources */,

@@ -8,12 +8,6 @@
 
 import SwiftUI
 
-struct Genre {
-  let name: String
-  let image: String
-  let query: String
-}
-
 struct GenreView: View {
   var body: some View {
     ZStack {
@@ -36,4 +30,12 @@ struct GenreView: View {
         .padding(.bottom, 5)
     }
   }
+}
+
+
+struct Genre {
+  let name: String
+  let image: UIImage
+  let query: String
+  let font: String
 }

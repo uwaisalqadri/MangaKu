@@ -10,11 +10,10 @@ import Foundation
 
 extension String {
 
-  func toDate(withFormat format: String = "yyyy-MM-dd'T'HH:mm:ss.sss'Z'")-> Date? {
+  func toDate(withFormat format: String = "yyyy-MM-dd'T'HH:mm:ss.fff'Z'")-> Date? {
     let dateFormatter = DateFormatter()
     dateFormatter.calendar = Calendar(identifier: .gregorian)
     dateFormatter.dateFormat = format
-    dateFormatter.locale = Locale.init(identifier: "id_ID")
     let date = dateFormatter.date(from: self)
     return date
   }
