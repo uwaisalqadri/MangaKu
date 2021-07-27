@@ -8,7 +8,29 @@
 
 import Foundation
 import KotlinCore
+import Combine
+import KMPNativeCoroutinesCombine
 
-class MyMangaViewModel {
-  
+class MyMangaViewModel: ObservableObject {
+
+  @Published var loading = false
+  @Published var mangas: [Manga] = []
+
+  private let listUseCase: GetMangaListUseCase
+  private var cancellables = Set<AnyCancellable>()
+
+  init(listUseCase: GetMangaListUseCase) {
+    self.listUseCase = listUseCase
+  }
+
+  func fetchMangas() {
+    createPublisher(for: listUseCase.executeNative())
+      .receive(on: DispatchQueue.main)
+      .sink { completion in
+        print("receive completion \(completion)")
+      } receiveValue: { value in
+        self.mangas = value
+        print(self.mangas)
+      }.store(in: &cancellables)
+  }
 }

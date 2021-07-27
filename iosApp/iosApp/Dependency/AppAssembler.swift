@@ -8,8 +8,7 @@
 
 import Foundation
 
-protocol Assembler: BrowseAssembler,
-                    MyMangaAssembler,
-                    SavedAssembler {}
+protocol Assembler: FeatureAssembler,
+                    KotlinCoreAssembler {}
 
 class AppAssembler: Assembler {}
