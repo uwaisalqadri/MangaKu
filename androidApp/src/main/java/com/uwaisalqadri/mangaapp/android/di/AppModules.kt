@@ -9,6 +9,8 @@ import com.uwaisalqadri.mangaapp.domain.usecase.detail.GetMangaDetailInteractor
 import com.uwaisalqadri.mangaapp.domain.usecase.detail.GetMangaDetailUseCase
 import com.uwaisalqadri.mangaapp.domain.usecase.list.GetMangaListInteractor
 import com.uwaisalqadri.mangaapp.domain.usecase.list.GetMangaListUseCase
+import com.uwaisalqadri.mangaapp.domain.usecase.list.GetMangaTrendingInteractor
+import com.uwaisalqadri.mangaapp.domain.usecase.list.GetMangaTrendingUseCase
 import com.uwaisalqadri.mangaapp.domain.usecase.search.GetMangaSearchInteractor
 import com.uwaisalqadri.mangaapp.domain.usecase.search.GetMangaSearchUseCase
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -18,24 +20,4 @@ val viewModelModule = module {
     viewModel { BrowseViewModel(get(), get()) }
     viewModel { MyMangaViewModel(get()) }
     viewModel { SavedViewModel(get()) }
-}
-
-val useCaseModule = module {
-    single<GetMangaListUseCase> {
-        GetMangaListInteractor(get())
-    }
-
-    single<GetMangaSearchUseCase> {
-        GetMangaSearchInteractor(get())
-    }
-
-    single<GetMangaDetailUseCase> {
-        GetMangaDetailInteractor(get())
-    }
-}
-
-val repositoryModule = module {
-    single<MangaRepository> {
-        MangaRepositoryImpl(get())
-    }
 }

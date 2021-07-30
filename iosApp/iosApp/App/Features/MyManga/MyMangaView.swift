@@ -8,34 +8,20 @@
 
 import SwiftUI
 import KotlinCore
-import SDImageSwiftUI
+import SDWebImageSwiftUI
 
 struct MyMangaView: View {
 
-  @Observed var viewModel: MyMangaViewModel
+  @ObservedObject var viewModel: MyMangaViewModel
+  var views = [AnyView]()
 
   var body: some View {
-    CarouselView(itemHeight: 361, views: [
-      AnyView(
-        Image("imgSample")
-          .resizable()
-          .scaledToFill()
-      ),
-      AnyView(
-        Text("imgSample")
-      ),
-      AnyView(
-        Image("imgSample")
-          .resizable()
-          .scaledToFill()
-      )
-    ])
+    CarouselView(itemHeight: 361, views: views)
   }
 
 
-  func getViews() -> [AnyView] {
-    let views = [AnyView]()
-    for manga in viewModel.mangas {
+  func getViews() {
+    viewModel.mangas.forEach { manga in
       AnyView(
         WebImage(url: URL(string: manga.attributes.posterImage.original))
           .resizable()
@@ -46,7 +32,8 @@ struct MyMangaView: View {
 }
 
 struct MyMangaView_Previews: PreviewProvider {
+  static let assembler = AppAssembler()
   static var previews: some View {
-    MyMangaView()
+    MyMangaView(viewModel: assembler.resolve())
   }
 }

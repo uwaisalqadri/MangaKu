@@ -24,6 +24,7 @@ class BrowseViewModel: ObservableObject {
   }
 
   func fetchMangas() {
+    // create publisher for kotlin flow
     createPublisher(for: listUseCase.executeNative())
       .receive(on: DispatchQueue.main)
       .sink { completion in

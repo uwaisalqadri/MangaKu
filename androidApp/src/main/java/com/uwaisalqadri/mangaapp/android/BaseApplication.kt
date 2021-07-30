@@ -23,9 +23,7 @@ class BaseApplication: Application(), KoinComponent {
 			androidLogger()
 			androidContext(this@BaseApplication)
 			modules(
-				viewModelModule,
-				useCaseModule,
-				repositoryModule
+				viewModelModule
 			)
 		}
 
