@@ -16,15 +16,12 @@ struct ContentView: View {
 
   var body: some View {
     ZStack {
-      switch selectedIndex {
-      case 0:
+      if selectedIndex == 0 {
         SavedView()
-      case 1:
+      } else if selectedIndex == 1 {
         BrowseView(viewModel: assembler.resolve())
-      case 2:
+      } else if selectedIndex == 2 {
         MyMangaView(viewModel: assembler.resolve())
-      default:
-        BrowseView(viewModel: assembler.resolve())
       }
 
       VStack {

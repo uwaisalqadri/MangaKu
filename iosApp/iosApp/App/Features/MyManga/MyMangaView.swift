@@ -13,27 +13,25 @@ import SDWebImageSwiftUI
 struct MyMangaView: View {
 
   @ObservedObject var viewModel: MyMangaViewModel
-  var views = [AnyView]()
 
   var body: some View {
-    CarouselView(itemHeight: 361, views: views)
-  }
-
-
-  func getViews() {
-    viewModel.mangas.forEach { manga in
+    CarouselView(itemHeight: 361, views: [
       AnyView(
-        WebImage(url: URL(string: manga.attributes.posterImage.original))
+        Image("imgSample")
           .resizable()
-          .scaledToFill()
+      ),
+      AnyView(
+        Image("imgSample")
+          .resizable()
+      ),
+      AnyView(
+        Image("imgSample")
+          .resizable()
+      ),
+      AnyView(
+        Image("imgSample")
+          .resizable()
       )
-    }
-  }
-}
-
-struct MyMangaView_Previews: PreviewProvider {
-  static let assembler = AppAssembler()
-  static var previews: some View {
-    MyMangaView(viewModel: assembler.resolve())
+    ])
   }
 }
