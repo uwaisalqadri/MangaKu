@@ -12,6 +12,7 @@
 		5224F40F26AC38CF00D0D6E8 /* FeatureAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5224F40E26AC38CF00D0D6E8 /* FeatureAssembler.swift */; };
 		5246F3A826AB9C5200CCDA56 /* AppAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5246F3A726AB9C5200CCDA56 /* AppAssembler.swift */; };
 		5246F3B026AB9D0600CCDA56 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5246F3AF26AB9D0600CCDA56 /* Assets.xcassets */; };
+		5278F04C26B5279400B4249D /* Weakifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5278F04B26B5279400B4249D /* Weakifiable.swift */; };
 		52B7691826ABCE6F00227903 /* BrowseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B7691726ABCE6E00227903 /* BrowseView.swift */; };
 		52B7691B26ABCE8100227903 /* SavedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B7691A26ABCE8100227903 /* SavedView.swift */; };
 		52B7691E26ABCE9D00227903 /* MyMangaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B7691D26ABCE9D00227903 /* MyMangaView.swift */; };
@@ -28,7 +29,7 @@
 		52EBD6EB26AE845D00E1C28F /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBD6EA26AE845D00E1C28F /* Fonts.swift */; };
 		52FFF17126AEA1B2006A3621 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FFF17026AEA1B2006A3621 /* Date.swift */; };
 		52FFF17526AEA221006A3621 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FFF17426AEA221006A3621 /* String.swift */; };
-		52FFF18026AFAA07006A3621 /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FFF17F26AFAA07006A3621 /* CarouselView.swift */; };
+		52FFF18026AFAA07006A3621 /* MangaCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FFF17F26AFAA07006A3621 /* MangaCarouselView.swift */; };
 		52FFF18426AFAEE9006A3621 /* KotlinCoreAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FFF18326AFAEE9006A3621 /* KotlinCoreAssembler.swift */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
 /* End PBXBuildFile section */
@@ -40,6 +41,7 @@
 		5224F40E26AC38CF00D0D6E8 /* FeatureAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureAssembler.swift; sourceTree = "<group>"; };
 		5246F3A726AB9C5200CCDA56 /* AppAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAssembler.swift; sourceTree = "<group>"; };
 		5246F3AF26AB9D0600CCDA56 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5278F04B26B5279400B4249D /* Weakifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weakifiable.swift; sourceTree = "<group>"; };
 		52B7691726ABCE6E00227903 /* BrowseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseView.swift; sourceTree = "<group>"; };
 		52B7691A26ABCE8100227903 /* SavedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedView.swift; sourceTree = "<group>"; };
 		52B7691D26ABCE9D00227903 /* MyMangaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMangaView.swift; sourceTree = "<group>"; };
@@ -56,7 +58,7 @@
 		52EBD6EA26AE845D00E1C28F /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		52FFF17026AEA1B2006A3621 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		52FFF17426AEA221006A3621 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
-		52FFF17F26AFAA07006A3621 /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
+		52FFF17F26AFAA07006A3621 /* MangaCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangaCarouselView.swift; sourceTree = "<group>"; };
 		52FFF18326AFAEE9006A3621 /* KotlinCoreAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KotlinCoreAssembler.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -105,7 +107,7 @@
 		5224F40626AC23D400D0D6E8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				52FFF17F26AFAA07006A3621 /* CarouselView.swift */,
+				52FFF17F26AFAA07006A3621 /* MangaCarouselView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -120,7 +122,6 @@
 		5246F3A326AB9BD200CCDA56 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				5246F3AB26AB9C8D00CCDA56 /* Extensions */,
 				5246F3A626AB9C3100CCDA56 /* Features */,
 				5246F3AC26AB9C9700CCDA56 /* Main */,
 				5246F3AD26AB9C9E00CCDA56 /* Resources */,
@@ -189,6 +190,8 @@
 		5246F3AE26AB9CB700CCDA56 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				5246F3AB26AB9C8D00CCDA56 /* Extensions */,
+				5278F04B26B5279400B4249D /* Weakifiable.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -391,7 +394,8 @@
 				52B7691B26ABCE8100227903 /* SavedView.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
-				52FFF18026AFAA07006A3621 /* CarouselView.swift in Sources */,
+				52FFF18026AFAA07006A3621 /* MangaCarouselView.swift in Sources */,
+				5278F04C26B5279400B4249D /* Weakifiable.swift in Sources */,
 				5246F3A826AB9C5200CCDA56 /* AppAssembler.swift in Sources */,
 				52FFF18426AFAEE9006A3621 /* KotlinCoreAssembler.swift in Sources */,
 				52B7691E26ABCE9D00227903 /* MyMangaView.swift in Sources */,

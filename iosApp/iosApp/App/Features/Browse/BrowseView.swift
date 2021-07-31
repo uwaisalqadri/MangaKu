@@ -34,7 +34,7 @@ struct BrowseView: View {
             }.padding(.leading, 13)
           }
 
-          Text("Last Update")
+          Text("Trending Now")
             .font(.custom(.msemibold, size: 15))
             .padding(.leading, 17)
             .padding(.top, 30)
@@ -61,6 +61,7 @@ struct BrowseView: View {
     }.onAppear {
       viewModel.fetchManga()
       viewModel.fetchTrendingManga()
+      print("browse \(viewModel.trendingManga)")
     }
   }
 }

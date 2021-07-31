@@ -13,8 +13,9 @@ import KMPNativeCoroutinesCombine
 
 class MyMangaViewModel: ObservableObject {
 
-  @Published var loading = false
   @Published var mangas = [Manga]()
+  @Published var loading = false
+  @Published var errorMessage = ""
 
   private let listUseCase: GetMangaListUseCase
   private var cancellables = Set<AnyCancellable>()
@@ -24,13 +25,19 @@ class MyMangaViewModel: ObservableObject {
   }
 
   func fetchMangas() {
+    self.loading = true
     createPublisher(for: listUseCase.executeNative())
       .receive(on: DispatchQueue.main)
       .sink { completion in
-        print("receive completion \(completion)")
+        switch completion {
+        case .finished:
+          self.loading = false
+          print("my manga viewModel finished")
+        case .failure(let error):
+          self.errorMessage = error.localizedDescription
+        }
       } receiveValue: { value in
         self.mangas = value
-        print(self.mangas)
       }.store(in: &cancellables)
   }
 }

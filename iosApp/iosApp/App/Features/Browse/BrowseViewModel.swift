@@ -13,9 +13,10 @@ import KMPNativeCoroutinesCombine
 
 class BrowseViewModel: ObservableObject {
 
-  @Published var loading = false
   @Published var mangas = [Manga]()
   @Published var trendingManga = [Manga]()
+  @Published var loading = false
+  @Published var errorMessage = ""
 
   private let listUseCase: GetMangaListUseCase
   private let trendingUseCase: GetMangaTrendingUseCase
@@ -31,6 +32,12 @@ class BrowseViewModel: ObservableObject {
     createPublisher(for: listUseCase.executeNative())
       .receive(on: DispatchQueue.main)
       .sink { completion in
+        switch completion {
+        case .finished:
+          print("finished")
+        case .failure(let error):
+          self.errorMessage = error.localizedDescription
+        }
       } receiveValue: { value in
         self.mangas = value
       }.store(in: &cancellables)
@@ -40,6 +47,12 @@ class BrowseViewModel: ObservableObject {
     createPublisher(for: trendingUseCase.executeNative())
       .receive(on: DispatchQueue.main)
       .sink { completion in
+        switch completion {
+        case .finished:
+          print("finished")
+        case .failure(let error):
+          self.errorMessage = error.localizedDescription
+        }
       } receiveValue: { value in
         self.trendingManga = value
       }.store(in: &cancellables)

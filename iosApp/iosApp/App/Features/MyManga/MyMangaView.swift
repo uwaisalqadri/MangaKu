@@ -25,15 +25,15 @@ struct MyMangaView: View {
         ZStack(alignment: Alignment(horizontal: .center, vertical: .top)) {
           Text("Naruto")
             .font(.custom(.sedgwickave, size: 130))
-            .padding(.top, -50)
+            .padding(.top, -60)
 
-          CarouselView(itemHeight: 361, views: [
+          MangaCarouselView(itemHeight: 361, views: [
             AnyView(
-              Image("imgSample")
+              WebImage(url: URL(string: "https://media.kitsu.io/manga/poster_images/14/original.jpg?1434249426"))
                 .resizable()
             ),
             AnyView(
-              Image("imgSample")
+              WebImage(url: URL(string: "https://media.kitsu.io/manga/poster_images/13/original.jpg?1434249424"))
                 .resizable()
             ),
             AnyView(
@@ -44,8 +44,16 @@ struct MyMangaView: View {
               Image("imgSample")
                 .resizable()
             )
-          ]).padding(.top, -50)
+          ])
+          .padding(.top, -180)
         }
+      }
+    }.onAppear {
+      viewModel.fetchMangas()
+      if viewModel.loading {
+        print("loading..")
+      } else {
+        print(viewModel.mangas[0].attributes.posterImage.original)
       }
     }
   }

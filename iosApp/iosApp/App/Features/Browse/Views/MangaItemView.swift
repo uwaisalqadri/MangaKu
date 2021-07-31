@@ -33,7 +33,7 @@ struct MangaItemView: View {
             .font(.custom(.mbold, size: 12))
             .foregroundColor(.secondary)
 
-          Text("Vol.\(manga.attributes.volumeCount)")
+          Text("Vol.\(manga.attributes.volumeCount == "null" ? "0" : manga.attributes.volumeCount)")
             .font(.custom(.mbold, size: 15))
         }.padding(.top, 5)
 

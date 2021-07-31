@@ -1,5 +1,5 @@
 //
-//  CarouselView.swift
+//  MangaCarouselView.swift
 //  iosApp
 //
 //  Created by Uwais Alqadri on 27/07/21.
@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import KotlinCore
 
 struct MangaCarouselView: View {
 
@@ -16,19 +17,14 @@ struct MangaCarouselView: View {
   var itemHeight: CGFloat
   var views: [AnyView]
 
-
   private func onDragEnded(drag: DragGesture.Value) {
-    print("drag ended")
     let dragThreshold:CGFloat = 200
     if drag.predictedEndTranslation.width > dragThreshold || drag.translation.width > dragThreshold{
       carouselLocation =  carouselLocation - 1
-    } else if (drag.predictedEndTranslation.width) < (-1 * dragThreshold) || (drag.translation.width) < (-1 * dragThreshold)
-    {
-      carouselLocation =  carouselLocation + 1
+    } else if (drag.predictedEndTranslation.width) < (-1 * dragThreshold) || (drag.translation.width) < (-1 * dragThreshold) {
+      carouselLocation = carouselLocation + 1
     }
   }
-
-
 
   var body: some View {
     ZStack {
@@ -37,38 +33,33 @@ struct MangaCarouselView: View {
           ForEach(0..<views.count) { i in
             VStack {
               Spacer()
-              self.views[i]
-                //Text("\(i)")
 
+              self.views[i]
                 .frame(width: 240, height: self.getHeight(i))
                 .animation(.interpolatingSpring(stiffness: 300.0, damping: 30.0, initialVelocity: 10.0))
                 .background(Color.white)
-                .shadow(radius: 3)
-
-
+                .shadow(radius: 8)
                 .opacity(self.getOpacity(i))
                 .animation(.interpolatingSpring(stiffness: 300.0, damping: 30.0, initialVelocity: 10.0))
                 .offset(x: self.getOffset(i))
                 .animation(.interpolatingSpring(stiffness: 300.0, damping: 30.0, initialVelocity: 10.0))
+
               Spacer()
             }
           }
-
         }.gesture(
-
           DragGesture()
             .updating($dragState) { drag, state, transaction in
               state = .dragging(translation: drag.translation)
-            }
-            .onEnded(onDragEnded)
-
+            }.onEnded(onDragEnded)
         )
 
         Spacer()
       }
+
       VStack {
         Spacer()
-        Spacer().frame(height:itemHeight + 50)
+        Spacer().frame(height: itemHeight + 50)
         Spacer()
       }
     }
@@ -78,7 +69,7 @@ struct MangaCarouselView: View {
     return ((views.count * 10000) + carouselLocation) % views.count
   }
 
-  func getHeight(_ i:Int) -> CGFloat{
+  func getHeight(_ i:Int) -> CGFloat {
     if i == relativeLoc(){
       return itemHeight
     } else {
