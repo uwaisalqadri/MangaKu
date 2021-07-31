@@ -8,10 +8,21 @@
 
 import SwiftUI
 
+struct Genre {
+  let id = UUID()
+  let name: String
+  let image: String
+  let query: String
+  let font: String
+}
+
 struct GenreView: View {
+
+  let genre: Genre
+
   var body: some View {
     ZStack {
-      Image("imgGenreSample")
+      Image(genre.image)
         .resizable()
         .frame(width: 137, height: 90)
         .cornerRadius(11)
@@ -23,19 +34,11 @@ struct GenreView: View {
             .opacity(0.5)
         )
 
-      Text("Shonen")
-        .font(.custom(.sedgwickave, size: 30))
+      Text(genre.name)
+        .font(.custom(genre.font, size: 30))
         .foregroundColor(.black)
         .padding(.top, 20)
         .padding(.bottom, 5)
     }
   }
-}
-
-
-struct Genre {
-  let name: String
-  let image: UIImage
-  let query: String
-  let font: String
 }

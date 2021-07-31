@@ -12,6 +12,12 @@ struct BrowseView: View {
 
   @ObservedObject var viewModel: BrowseViewModel
 
+  let genres: [Genre] = [
+    Genre(name: "Shonen", image: "imgShonen", query: "shonen", font: .sedgwickave),
+    Genre(name: "Seinen", image: "imgSeinen", query: "seinen", font: .mashanzheng),
+    Genre(name: "Shojo", image: "imgShojo", query: "shojo", font: .sedgwickave)
+  ]
+
   var body: some View {
     NavigationView {
       ScrollView(.vertical, showsIndicators: false) {
@@ -22,8 +28,8 @@ struct BrowseView: View {
 
           ScrollView(.horizontal, showsIndicators: false) {
             HStack {
-              ForEach(0..<5) { _ in
-                GenreView()
+              ForEach(genres, id: \.id) { genre in
+                GenreView(genre: genre)
               }
             }.padding(.leading, 13)
           }
@@ -34,7 +40,7 @@ struct BrowseView: View {
             .padding(.top, 30)
 
           VStack {
-            ForEach(viewModel.mangas, id: \.id) { manga in
+            ForEach(viewModel.trendingManga, id: \.id) { manga in
               MangaItemView(manga: manga)
             }
           }.padding(.leading, 17)
@@ -53,7 +59,8 @@ struct BrowseView: View {
         }
       )
     }.onAppear {
-      viewModel.fetchMangas()
+      viewModel.fetchManga()
+      viewModel.fetchTrendingManga()
     }
   }
 }

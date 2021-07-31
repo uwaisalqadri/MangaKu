@@ -34,7 +34,7 @@ struct CarouselView: View {
     ZStack{
       VStack{
         ZStack{
-          ForEach(0..<views.count){i in
+          ForEach(0..<views.count) { i in
             VStack{
               Spacer()
               self.views[i]
@@ -43,7 +43,6 @@ struct CarouselView: View {
                 .frame(width: 240, height: self.getHeight(i))
                 .animation(.interpolatingSpring(stiffness: 300.0, damping: 30.0, initialVelocity: 10.0))
                 .background(Color.white)
-                .cornerRadius(10)
                 .shadow(radius: 3)
 
 
@@ -70,7 +69,6 @@ struct CarouselView: View {
       VStack{
         Spacer()
         Spacer().frame(height:itemHeight + 50)
-        Text("\(relativeLoc() + 1)/\(views.count)").padding()
         Spacer()
       }
     }

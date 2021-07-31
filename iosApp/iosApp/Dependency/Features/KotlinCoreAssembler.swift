@@ -12,6 +12,7 @@ import KotlinCore
 protocol KotlinCoreAssembler {
   func resolve() -> GetMangaListUseCase
   func resolve() -> GetMangaSearchUseCase
+  func resolve() -> GetMangaTrendingUseCase
   func resolve() -> GetMangaDetailUseCase
   func resolve() -> MangaRepository
   func resolve() -> ApiService
@@ -25,6 +26,10 @@ extension KotlinCoreAssembler where Self: Assembler {
 
   func resolve() -> GetMangaSearchUseCase {
     return GetMangaSearchInteractor(repository: resolve())
+  }
+
+  func resolve() -> GetMangaTrendingUseCase {
+    return GetMangaTrendingInteractor(repository: resolve())
   }
 
   func resolve() -> GetMangaDetailUseCase {

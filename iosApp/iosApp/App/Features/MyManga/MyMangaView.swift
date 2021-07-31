@@ -15,23 +15,38 @@ struct MyMangaView: View {
   @ObservedObject var viewModel: MyMangaViewModel
 
   var body: some View {
-    CarouselView(itemHeight: 361, views: [
-      AnyView(
-        Image("imgSample")
-          .resizable()
-      ),
-      AnyView(
-        Image("imgSample")
-          .resizable()
-      ),
-      AnyView(
-        Image("imgSample")
-          .resizable()
-      ),
-      AnyView(
-        Image("imgSample")
-          .resizable()
-      )
-    ])
+    NavigationView {
+      VStack {
+        Text("My Manga")
+          .font(.custom(.mbold, size: 23))
+          .padding(.top, -70)
+          .padding(.bottom, 30)
+
+        ZStack(alignment: Alignment(horizontal: .center, vertical: .top)) {
+          Text("Naruto")
+            .font(.custom(.sedgwickave, size: 130))
+            .padding(.top, -50)
+
+          CarouselView(itemHeight: 361, views: [
+            AnyView(
+              Image("imgSample")
+                .resizable()
+            ),
+            AnyView(
+              Image("imgSample")
+                .resizable()
+            ),
+            AnyView(
+              Image("imgSample")
+                .resizable()
+            ),
+            AnyView(
+              Image("imgSample")
+                .resizable()
+            )
+          ]).padding(.top, -50)
+        }
+      }
+    }
   }
 }

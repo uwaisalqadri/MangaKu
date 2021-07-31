@@ -24,7 +24,7 @@ struct MangaItemView: View {
       VStack(alignment: .leading) {
         StarsView()
 
-        Text(manga.attributes.titles.en_jp)
+        Text(getTitle(manga: manga))
           .font(.custom(.mbold, size: 18))
           .padding(.top, 5)
 
@@ -56,6 +56,21 @@ struct MangaItemView: View {
       Spacer()
 
     }.padding(.bottom, 30)
+  }
+
+  private func getTitle(manga: Manga) -> String {
+    let title = manga.attributes.titles
+    var string = ""
+    if !title.en_jp.isEmpty {
+      string = title.en_jp
+    } else if !title.en_us.isEmpty {
+      string = title.en_us
+    } else if !title.en.isEmpty {
+      string = title.en
+    } else if !title.ja_jp.isEmpty {
+      string = title.ja_jp
+    }
+    return string
   }
 }
 

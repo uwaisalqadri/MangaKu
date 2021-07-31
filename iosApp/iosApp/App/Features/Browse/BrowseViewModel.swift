@@ -14,24 +14,34 @@ import KMPNativeCoroutinesCombine
 class BrowseViewModel: ObservableObject {
 
   @Published var loading = false
-  @Published var mangas: [Manga] = []
+  @Published var mangas = [Manga]()
+  @Published var trendingManga = [Manga]()
 
   private let listUseCase: GetMangaListUseCase
+  private let trendingUseCase: GetMangaTrendingUseCase
   private var cancellables = Set<AnyCancellable>()
 
-  init(listUseCase: GetMangaListUseCase) {
+  init(listUseCase: GetMangaListUseCase, trendingUseCase: GetMangaTrendingUseCase) {
     self.listUseCase = listUseCase
+    self.trendingUseCase = trendingUseCase
   }
 
-  func fetchMangas() {
+  func fetchManga() {
     // create publisher for kotlin flow
     createPublisher(for: listUseCase.executeNative())
       .receive(on: DispatchQueue.main)
       .sink { completion in
-        print("receive completion \(completion)")
       } receiveValue: { value in
         self.mangas = value
-        print(self.mangas)
+      }.store(in: &cancellables)
+  }
+
+  func fetchTrendingManga() {
+    createPublisher(for: trendingUseCase.executeNative())
+      .receive(on: DispatchQueue.main)
+      .sink { completion in
+      } receiveValue: { value in
+        self.trendingManga = value
       }.store(in: &cancellables)
   }
 }

@@ -14,7 +14,7 @@ import KMPNativeCoroutinesCombine
 class MyMangaViewModel: ObservableObject {
 
   @Published var loading = false
-  @Published var mangas: [Manga] = []
+  @Published var mangas = [Manga]()
 
   private let listUseCase: GetMangaListUseCase
   private var cancellables = Set<AnyCancellable>()
