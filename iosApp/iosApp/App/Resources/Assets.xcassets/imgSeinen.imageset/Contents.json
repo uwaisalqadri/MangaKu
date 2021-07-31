@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "bx_bxs-book-bookmark.png",
+      "filename" : "Rectangle 3.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "bx_bxs-book-bookmark-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "bx_bxs-book-bookmark-2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
