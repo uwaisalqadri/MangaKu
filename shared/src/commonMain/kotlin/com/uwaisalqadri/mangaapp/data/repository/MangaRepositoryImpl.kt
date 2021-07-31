@@ -17,6 +17,13 @@ class MangaRepositoryImpl(
         }
     }
 
+    override suspend fun fetchTrendingMangas(): Flow<List<Manga>> {
+        return flow {
+            val response = apiService.fetchTrendingMangas()
+            emit(response.data)
+        }
+    }
+
     override suspend fun fetchSearchMangas(query: String): Flow<List<Manga>> {
         return flow {
             val response = apiService.fetchSearchMangas(query)

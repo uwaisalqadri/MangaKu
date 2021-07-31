@@ -20,7 +20,7 @@ data class RatingFrequencies(
     val `4`: String,
     val `5`: String,
     val `6`: String,
-    val `7`: String,
+    val `7`: String? = "",
     val `8`: String,
     val `9`: String
 )

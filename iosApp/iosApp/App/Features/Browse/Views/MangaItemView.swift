@@ -7,11 +7,16 @@
 //
 
 import SwiftUI
+import KotlinCore
+import SDWebImageSwiftUI
 
 struct MangaItemView: View {
+
+  let manga: Manga
+
   var body: some View {
     HStack {
-      Image("imgSample")
+      WebImage(url: URL(string: manga.attributes.posterImage.original))
         .resizable()
         .frame(width: 124, height: 200)
         .cornerRadius(12)
@@ -19,35 +24,53 @@ struct MangaItemView: View {
       VStack(alignment: .leading) {
         StarsView()
 
-        Text("Boku No Hero Academia")
-          .font(.system(size: 20, weight: .bold))
+        Text(getTitle(manga: manga))
+          .font(.custom(.mbold, size: 18))
           .padding(.top, 5)
 
         HStack {
-          Text("04-05-2019")
-            .font(.system(size: 12, weight: .bold))
+          Text(manga.attributes.updatedAt.toDate()?.toString() ?? "00")
+            .font(.custom(.mbold, size: 12))
             .foregroundColor(.secondary)
 
-          Text("Vol.25")
-            .font(.system(size: 18, weight: .bold))
+          Text("Vol.\(manga.attributes.volumeCount == "null" ? "0" : manga.attributes.volumeCount)")
+            .font(.custom(.mbold, size: 15))
         }.padding(.top, 5)
 
-        Spacer(minLength: 60)
+        Spacer(minLength: 30)
 
         Button(action: {
-          print("Read Now")
+          print(manga.attributes.updatedAt.toDate() ?? "not working shit")
         }, label: {
           Text("Read Now")
             .foregroundColor(.white)
-            .font(.system(size: 15, weight: .bold))
+            .font(.custom(.mbold, size: 15))
             .padding(.horizontal, 19)
             .padding(.vertical, 8)
         })
         .background(Color.black)
         .cornerRadius(9)
-      }.padding(.horizontal, 20)
-      .padding(.vertical, 15)
+        .padding(.bottom, 10)
+      }.padding(.leading, 15)
+
+      Spacer()
+
+    }.padding(.bottom, 30)
+  }
+
+  private func getTitle(manga: Manga) -> String {
+    let title = manga.attributes.titles
+    var string = ""
+    if !title.en_jp.isEmpty {
+      string = title.en_jp
+    } else if !title.en_us.isEmpty {
+      string = title.en_us
+    } else if !title.en.isEmpty {
+      string = title.en
+    } else if !title.ja_jp.isEmpty {
+      string = title.ja_jp
     }
+    return string
   }
 }
 

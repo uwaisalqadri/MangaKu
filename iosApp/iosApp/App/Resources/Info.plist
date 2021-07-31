@@ -46,5 +46,13 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>montserrat-medium.ttf</string>
+		<string>montserrat-semibold.ttf</string>
+		<string>montserrat-bold.ttf</string>
+		<string>sedgwickavedisplay-regular.ttf</string>
+		<string>mashanzheng-regular.ttf</string>
+	</array>
 </dict>
 </plist>

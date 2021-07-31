@@ -18,6 +18,11 @@ class ApiService(
             addHeader()
         }
 
+    suspend fun fetchTrendingMangas() =
+        client.get<MangaResponse>("$baseUrl/trending/manga") {
+            addHeader()
+        }
+
     suspend fun fetchSearchMangas(query: String) =
         client.get<MangaResponse>("$baseUrl/manga?filter[text]=$query") {
             addHeader()

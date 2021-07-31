@@ -16,12 +16,13 @@ struct ContentView: View {
 
   var body: some View {
     ZStack {
-      if selectedIndex == 0 {
-        SavedView()
-      } else if selectedIndex == 1 {
+      switch selectedIndex {
+      case 1:
         BrowseView(viewModel: assembler.resolve())
-      } else if selectedIndex == 2 {
-        MyMangaView()
+      case 2:
+        MyMangaView(viewModel: assembler.resolve())
+      default:
+        SavedView()
       }
 
       VStack {
@@ -30,6 +31,9 @@ struct ContentView: View {
       }
     }
   }
+}
+
+extension ContentView {
 
   var tabView: some View {
     HStack {
@@ -37,7 +41,7 @@ struct ContentView: View {
         selectedIndex = 0
       }, label: {
         VStack {
-          Image("icSaved")
+          Image(selectedIndex != 0 ? "icSavedUn" : "icSaved")
             .resizable()
             .frame(width: 25, height: 30, alignment: .center)
         }
@@ -47,7 +51,7 @@ struct ContentView: View {
         selectedIndex = 1
       }, label: {
         VStack {
-          Image("icBrowse")
+          Image(selectedIndex != 1 ? "icBrowseUn" : "icBrowse")
             .resizable()
             .frame(width: 25, height: 25, alignment: .center)
         }
@@ -57,7 +61,7 @@ struct ContentView: View {
         selectedIndex = 2
       }, label: {
         VStack {
-          Image("icMyMangas")
+          Image(selectedIndex != 2 ? "icMyMangasUn" : "icMyMangas")
             .resizable()
             .frame(width: 25, height: 30, alignment: .center)
         }
