@@ -4,12 +4,13 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.google.accompanist.coil.rememberCoilPainter
@@ -43,8 +44,10 @@ fun Manga(
                 .padding(20.dp, 5.dp),
             verticalArrangement = Arrangement.SpaceEvenly
         ) {
+            StarRate(modifier = Modifier.fillMaxWidth())
+
             Text(
-                text = manga.attributes.titles.en_jp,
+                text = getTitle(manga),
                 fontSize = 21.sp,
                 style = MangaTypography.h1
             )
@@ -93,11 +96,29 @@ fun Manga(
 fun StarRate(
     modifier: Modifier
 ) {
-    Row {
-
+    Row(
+        modifier = modifier
+    ) {
+        (1..5).forEach { _ ->
+            Icon(
+                imageVector = Icons.Default.Star,
+                contentDescription = null,
+                tint = Color.Yellow,
+                modifier = Modifier.size(18.dp)
+            )
+        }
     }
 }
 
+private fun getTitle(manga: Manga): String {
+    return when {
+        manga.attributes.titles.en.isNotEmpty() -> manga.attributes.titles.en
+        manga.attributes.titles.en_jp.isNotEmpty() -> manga.attributes.titles.en_jp
+        manga.attributes.titles.en_us.isNotEmpty() -> manga.attributes.titles.en_us
+        manga.attributes.titles.ja_jp.isNotEmpty() -> manga.attributes.titles.ja_jp
+        else -> "No Title"
+    }
+}
 
 
 

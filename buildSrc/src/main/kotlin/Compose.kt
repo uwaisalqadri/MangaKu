@@ -9,6 +9,7 @@ object Compose {
 	const val material = "androidx.compose.material:material:${composeVersion}"
 	const val uiTooling = "androidx.compose.ui:ui-tooling:${composeVersion}"
 	const val foundation = "androidx.compose.foundation:foundation:${composeVersion}"
+	const val foundationLayout = "androidx.compose.foundation:foundation-layout:${composeVersion}"
 	const val compiler = "androidx.compose.compiler:compiler:${composeVersion}"
 
 	private const val constraintLayoutComposeVersion = "1.0.0-alpha07"
