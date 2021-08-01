@@ -7,16 +7,18 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.uwaisalqadri.mangaapp.data.souce.remote.response.Manga
 import com.uwaisalqadri.mangaapp.domain.usecase.list.GetMangaListUseCase
+import com.uwaisalqadri.mangaapp.domain.usecase.list.GetMangaTrendingUseCase
 import com.uwaisalqadri.mangaapp.domain.usecase.search.GetMangaSearchUseCase
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class BrowseViewModel(
-    private val searchUseCase: GetMangaSearchUseCase,
-    private val listUseCase: GetMangaListUseCase
+    private val listUseCase: GetMangaListUseCase,
+    private val trendingUseCase: GetMangaTrendingUseCase
 ): ViewModel() {
 
     val mangas: MutableState<List<Manga>> = mutableStateOf(ArrayList())
+    val trendingMangas: MutableState<List<Manga>> = mutableStateOf(ArrayList())
     val loading = mutableStateOf(false)
 
     init {
@@ -24,9 +26,9 @@ class BrowseViewModel(
     }
 
     private fun fetchMangas() = viewModelScope.launch {
-        listUseCase.execute().collect { result ->
+        trendingUseCase.execute().collect { result ->
             if (!result.isNullOrEmpty()) {
-                mangas.value = result
+                trendingMangas.value = result
             } else {
                 Log.d("fetchMangas", "empty")
             }

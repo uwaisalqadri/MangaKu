@@ -12,8 +12,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
 import com.uwaisalqadri.mangaapp.android.ui.browse.composables.Manga
+import com.uwaisalqadri.mangaapp.android.ui.browse.composables.MangaTrending
+import com.uwaisalqadri.mangaapp.android.ui.theme.MangaTheme
+import com.uwaisalqadri.mangaapp.android.ui.theme.MangaTypography
 import org.koin.androidx.compose.getViewModel
 
 class BrowseFragment: Fragment() {
@@ -35,24 +39,28 @@ class BrowseFragment: Fragment() {
         paddingValue: PaddingValues = PaddingValues(),
         viewModel: BrowseViewModel = getViewModel()
     ) {
-        LazyColumn(
-            contentPadding = paddingValue,
-            modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight()
-                .padding(20.dp, 10.dp)
-        ) {
-            items(
-                items = viewModel.mangas.value
-            ) { manga ->
-                Manga(
-                    manga = manga,
-                    modifier = Modifier
-                        .height(197.dp)
-                        .fillMaxWidth()
-                        .padding(0.dp, 10.dp)
-                )
-            }
+        Column {
+            Text(
+                text = "Trending Now",
+                style = MangaTypography.h2,
+                fontSize = 15.sp,
+                modifier = Modifier.padding(start = 20.dp)
+            )
+
+            MangaTrending(
+                paddingValues = paddingValue,
+                viewModel = viewModel,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight()
+                    .padding(20.dp, 10.dp)
+            )
         }
     }
 }
+
+
+
+
+
+

@@ -13,6 +13,7 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.google.accompanist.coil.rememberCoilPainter
+import com.uwaisalqadri.mangaapp.android.ui.theme.MangaTypography
 import com.uwaisalqadri.mangaapp.data.souce.remote.response.Manga
 
 @Composable
@@ -44,7 +45,8 @@ fun Manga(
         ) {
             Text(
                 text = manga.attributes.titles.en_jp,
-                fontSize = 21.sp
+                fontSize = 21.sp,
+                style = MangaTypography.h1
             )
 
             Row(
@@ -55,12 +57,15 @@ fun Manga(
             ) {
                 Text(
                     text = "04-05-2019",
-                    fontSize = 12.sp
+                    fontSize = 12.sp,
+                    color = Color.Gray,
+                    style = MangaTypography.h1
                 )
 
                 Text(
                     text = "Vol.${manga.attributes.volumeCount}",
                     fontSize = 15.sp,
+                    style = MangaTypography.h1,
                     modifier = Modifier
                         .padding(start = 7.dp)
                 )
@@ -72,9 +77,24 @@ fun Manga(
                 onClick = { /*TODO*/ },
                 colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black)
             ) {
-                Text(text = "Read More", color = Color.White)
+                Text(
+                    text = "Read More",
+                    color = Color.White,
+                    style = MangaTypography.h1,
+                    fontSize = 15.sp
+                )
             }
         }
+    }
+}
+
+
+@Composable
+fun StarRate(
+    modifier: Modifier
+) {
+    Row {
+
     }
 }
 
