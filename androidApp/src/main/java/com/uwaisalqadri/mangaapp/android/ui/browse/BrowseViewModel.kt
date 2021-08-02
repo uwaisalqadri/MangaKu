@@ -19,7 +19,7 @@ class BrowseViewModel(
 
     val mangas: MutableState<List<Manga>> = mutableStateOf(ArrayList())
     val trendingMangas: MutableState<List<Manga>> = mutableStateOf(ArrayList())
-    val loading = mutableStateOf(false)
+    val loading = mutableStateOf(true)
 
     init {
         fetchMangas()
@@ -29,7 +29,9 @@ class BrowseViewModel(
         trendingUseCase.execute().collect { result ->
             if (!result.isNullOrEmpty()) {
                 trendingMangas.value = result
+                loading.value = false
             } else {
+                loading.value = false
                 Log.d("fetchMangas", "empty")
             }
         }

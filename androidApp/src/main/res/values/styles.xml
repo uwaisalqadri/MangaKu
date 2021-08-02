@@ -4,6 +4,7 @@
         <item name="colorPrimary">#FFFFFF</item>
         <item name="colorPrimaryDark">#FFFFFF</item>
         <item name="colorAccent">#000000</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
 </resources>

@@ -1,4 +1,4 @@
-package com.uwaisalqadri.mangaapp.android.ui.browse.composables
+package com.uwaisalqadri.mangaapp.android.ui.browse.views
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -11,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.google.accompanist.coil.rememberCoilPainter
@@ -20,7 +21,8 @@ import com.uwaisalqadri.mangaapp.data.souce.remote.response.Manga
 @Composable
 fun Manga(
     manga: Manga,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onReadMore: ((Manga) -> Unit)? = null
 ) {
     Row(
         modifier = modifier
@@ -49,7 +51,9 @@ fun Manga(
             Text(
                 text = getTitle(manga),
                 fontSize = 21.sp,
-                style = MangaTypography.h1
+                style = MangaTypography.h1,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis
             )
 
             Row(
@@ -59,7 +63,7 @@ fun Manga(
                     .fillMaxWidth()
             ) {
                 Text(
-                    text = "04-05-2019",
+                    text = "04-05-2019", // TODO: Need Date Formatter
                     fontSize = 12.sp,
                     color = Color.Gray,
                     style = MangaTypography.h1
@@ -74,11 +78,14 @@ fun Manga(
                 )
             }
 
-            Spacer(modifier = Modifier.height(30.dp))
+            Spacer(modifier = Modifier.height(25.dp))
 
             Button(
-                onClick = { /*TODO*/ },
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black)
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black),
+                modifier = Modifier.height(40.dp),
+                onClick = {
+                    if (onReadMore != null) onReadMore(manga)
+                }
             ) {
                 Text(
                     text = "Read More",

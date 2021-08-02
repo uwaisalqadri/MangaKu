@@ -5,16 +5,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
-import com.uwaisalqadri.mangaapp.android.ui.browse.composables.Genre
-import com.uwaisalqadri.mangaapp.android.ui.browse.composables.Genres
-import com.uwaisalqadri.mangaapp.android.ui.browse.composables.MangaTrending
+import com.uwaisalqadri.mangaapp.android.R
+import com.uwaisalqadri.mangaapp.android.ui.browse.views.Genres
+import com.uwaisalqadri.mangaapp.android.ui.browse.views.MangaTrending
+import com.uwaisalqadri.mangaapp.android.ui.browse.views.TopBar
 import com.uwaisalqadri.mangaapp.android.ui.theme.MangaTypography
 import org.koin.androidx.compose.getViewModel
 
@@ -34,10 +40,19 @@ class BrowseFragment: Fragment() {
 
     @Composable
     fun BrowseScreen(
-        paddingValue: PaddingValues = PaddingValues(),
         viewModel: BrowseViewModel = getViewModel()
     ) {
-        Column {
+        Column(
+            modifier = Modifier.verticalScroll(rememberScrollState())
+        ) {
+
+            TopBar(
+                name = "Browse",
+                icon = R.drawable.ic_search
+            )
+
+            Spacer(modifier = Modifier.height(35.dp))
+
             Text(
                 text = "Genre",
                 style = MangaTypography.h2,
@@ -60,12 +75,11 @@ class BrowseFragment: Fragment() {
             )
 
             MangaTrending(
-                paddingValues = paddingValue,
                 viewModel = viewModel,
                 modifier = Modifier
                     .fillMaxWidth()
                     .fillMaxHeight()
-                    .padding(20.dp, 10.dp)
+                    .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 120.dp)
             )
         }
     }

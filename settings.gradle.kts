@@ -8,4 +8,4 @@ pluginManagement {
 
 rootProject.name = "MangaApp"
 include(":androidApp")
-include(":shared")
+include(":core")
