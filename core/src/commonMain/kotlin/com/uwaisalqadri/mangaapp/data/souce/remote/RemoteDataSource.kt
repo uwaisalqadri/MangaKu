@@ -8,7 +8,7 @@ import io.ktor.client.request.*
 import io.ktor.http.*
 import org.koin.core.component.KoinComponent
 
-class ApiService(
+class RemoteDataSource(
     private val client: HttpClient,
     private val baseUrl: String = Constants.BASE_URL
 ) {

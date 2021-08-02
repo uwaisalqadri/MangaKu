@@ -10,17 +10,13 @@ import com.uwaisalqadri.mangaapp.android.ui.browse.BrowseViewModel
 
 @Composable
 fun MangaTrending(
-    paddingValues: PaddingValues,
     viewModel: BrowseViewModel,
     modifier: Modifier
 ) {
-    LazyColumn(
-        contentPadding = paddingValues,
+    Column(
         modifier = modifier
     ) {
-        items(
-            items = viewModel.trendingMangas.value
-        ) { manga ->
+        viewModel.trendingMangas.value.forEach { manga ->
             Manga(
                 manga = manga,
                 modifier = Modifier
@@ -30,4 +26,14 @@ fun MangaTrending(
             )
         }
     }
+//    LazyColumn(
+//        contentPadding = paddingValues,
+//        modifier = modifier
+//    ) {
+//        items(
+//            items = viewModel.trendingMangas.value
+//        ) { manga ->
+//
+//        }
+//    }
 }

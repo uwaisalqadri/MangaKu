@@ -1,5 +1,5 @@
 Pod::Spec.new do |spec|
-    spec.name                     = 'shared'
+    spec.name                     = 'core'
     spec.version                  = '1.0'
     spec.homepage                 = 'https://github.com/uwais123/MangaApp'
     spec.source                   = { :git => "Not Published", :tag => "Cocoapods/#{spec.name}/#{spec.version}" }
@@ -28,13 +28,13 @@ Pod::Spec.new do |spec|
 
     spec.script_phases = [
         {
-            :name => 'Build shared',
+            :name => 'Build core',
             :execution_position => :before_compile,
             :shell_path => '/bin/sh',
             :script => <<-SCRIPT
                 set -ev
                 REPO_ROOT="$PODS_TARGET_SRCROOT"
-                "$REPO_ROOT/../gradlew" -p "$REPO_ROOT" :shared:syncFramework \
+                "$REPO_ROOT/../gradlew" -p "$REPO_ROOT" :core:syncFramework \
                     -Pkotlin.native.cocoapods.target=$KOTLIN_TARGET \
                     -Pkotlin.native.cocoapods.configuration=$CONFIGURATION \
                     -Pkotlin.native.cocoapods.cflags="$OTHER_CFLAGS" \

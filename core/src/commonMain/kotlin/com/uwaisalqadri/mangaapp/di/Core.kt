@@ -3,7 +3,7 @@ package com.uwaisalqadri.mangaapp.di
 import co.touchlab.kermit.CommonLogger
 import co.touchlab.kermit.Kermit
 import com.uwaisalqadri.mangaapp.data.repository.MangaRepositoryImpl
-import com.uwaisalqadri.mangaapp.data.souce.remote.ApiService
+import com.uwaisalqadri.mangaapp.data.souce.remote.RemoteDataSource
 import com.uwaisalqadri.mangaapp.domain.repository.MangaRepository
 import com.uwaisalqadri.mangaapp.domain.usecase.detail.GetMangaDetailInteractor
 import com.uwaisalqadri.mangaapp.domain.usecase.detail.GetMangaDetailUseCase
@@ -56,7 +56,7 @@ val repositoryModule = module {
 }
 
 val networkModule = module {
-    single { ApiService(get()) }
+    single { RemoteDataSource(get()) }
     single { createJson() }
     single { createHttpClient(get()) }
     single { Kermit(CommonLogger()) }

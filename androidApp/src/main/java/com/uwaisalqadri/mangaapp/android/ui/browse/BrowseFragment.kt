@@ -4,7 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -12,7 +16,6 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
-import com.uwaisalqadri.mangaapp.android.ui.browse.composables.Genre
 import com.uwaisalqadri.mangaapp.android.ui.browse.composables.Genres
 import com.uwaisalqadri.mangaapp.android.ui.browse.composables.MangaTrending
 import com.uwaisalqadri.mangaapp.android.ui.theme.MangaTypography
@@ -34,10 +37,11 @@ class BrowseFragment: Fragment() {
 
     @Composable
     fun BrowseScreen(
-        paddingValue: PaddingValues = PaddingValues(),
         viewModel: BrowseViewModel = getViewModel()
     ) {
-        Column {
+        Column(
+            modifier = Modifier.verticalScroll(rememberScrollState())
+        ) {
             Text(
                 text = "Genre",
                 style = MangaTypography.h2,
@@ -60,7 +64,6 @@ class BrowseFragment: Fragment() {
             )
 
             MangaTrending(
-                paddingValues = paddingValue,
                 viewModel = viewModel,
                 modifier = Modifier
                     .fillMaxWidth()

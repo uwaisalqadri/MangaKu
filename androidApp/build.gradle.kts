@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    compileSdkVersion(30)
+    compileSdk = 30
     defaultConfig {
         applicationId = "com.uwaisalqadri.mangaapp.android"
-        minSdkVersion(27)
-        targetSdkVersion(30)
+        minSdk = 27
+        targetSdk = 30
         versionCode = 1
         versionName = "1.0"
     }
@@ -35,13 +35,12 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerVersion = "1.5.10"
         kotlinCompilerExtensionVersion = Compose.composeVersion
     }
 }
 
 dependencies {
-    implementation(project(":shared"))
+    implementation(project(":core"))
     implementation("com.google.android.material:material:1.4.0")
     implementation("androidx.appcompat:appcompat:1.3.1")
     implementation("androidx.constraintlayout:constraintlayout:2.1.0")
