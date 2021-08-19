@@ -24,14 +24,4 @@ fun MangaTrending(
             )
         }
     }
-//    LazyColumn(
-//        contentPadding = paddingValues,
-//        modifier = modifier
-//    ) {
-//        items(
-//            items = viewModel.trendingMangas.value
-//        ) { manga ->
-//
-//        }
-//    }
 }

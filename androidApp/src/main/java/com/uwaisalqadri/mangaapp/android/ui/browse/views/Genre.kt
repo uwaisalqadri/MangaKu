@@ -5,6 +5,8 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -29,6 +31,7 @@ fun Genres(
             Genre(
                 genre = genre,
                 modifier = Modifier
+                    .padding(horizontal = 10.dp)
                     .width(138.dp)
                     .fillMaxHeight()
             )
@@ -41,31 +44,28 @@ fun Genre(
     genre: Genre,
     modifier: Modifier
 ) {
-    Box(
-        modifier = modifier,
-        contentAlignment = Alignment.Center
+    Card(
+        shape = RoundedCornerShape(10.dp),
+        elevation = 8.dp,
+        modifier = modifier
     ) {
-        Image(
-            painter = painterResource(id = genre.image),
-            contentDescription = null,
-            modifier = Modifier.fillMaxSize(),
-        )
+        Box(
+            contentAlignment = Alignment.Center
+        ) {
+            Image(
+                painter = painterResource(id = genre.image),
+                contentDescription = null,
+                modifier = Modifier.fillMaxSize(),
+            )
 
-//        Card(
-//            modifier = Modifier.fillMaxSize(),
-//            elevation = 0.dp,
-//            contentColor = Color.White.copy(alpha = 0.5f)
-//        ) {
-//
-//        }
-
-        Text(
-            text = genre.name,
-            style = MangaTypography.h1,
-            fontSize = 20.sp,
-            modifier = Modifier
-                .padding(top = 20.dp)
-        )
+            Text(
+                text = genre.name,
+                style = MangaTypography.h1,
+                fontSize = 20.sp,
+                modifier = Modifier
+                    .padding(top = 20.dp)
+            )
+        }
     }
 }
 

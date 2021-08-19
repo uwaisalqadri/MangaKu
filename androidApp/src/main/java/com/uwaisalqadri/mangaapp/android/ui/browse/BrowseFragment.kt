@@ -64,7 +64,7 @@ class BrowseFragment: Fragment() {
                 modifier = Modifier
                     .height(130.dp)
                     .fillMaxWidth()
-                    .padding(top = 15.dp, bottom = 25.dp, start = 20.dp)
+                    .padding(top = 15.dp, bottom = 25.dp)
             )
 
             Text(
