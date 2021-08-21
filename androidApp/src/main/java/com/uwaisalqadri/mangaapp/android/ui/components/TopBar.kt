@@ -1,4 +1,4 @@
-package com.uwaisalqadri.mangaapp.android.ui.browse.views
+package com.uwaisalqadri.mangaapp.android.ui.components
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.clickable

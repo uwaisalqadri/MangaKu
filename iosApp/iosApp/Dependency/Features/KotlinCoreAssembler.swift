@@ -15,7 +15,7 @@ protocol KotlinCoreAssembler {
   func resolve() -> GetMangaTrendingUseCase
   func resolve() -> GetMangaDetailUseCase
   func resolve() -> MangaRepository
-  func resolve() -> ApiService
+  func resolve() -> RemoteDataSource
 }
 
 extension KotlinCoreAssembler where Self: Assembler {
@@ -37,12 +37,12 @@ extension KotlinCoreAssembler where Self: Assembler {
   }
 
   func resolve() -> MangaRepository {
-    return MangaRepositoryImpl(apiService: resolve())
+    return MangaRepositoryImpl(remoteDataSource: resolve())
   }
 
-  func resolve() -> ApiService {
+  func resolve() -> RemoteDataSource {
     let baseUrl = Constants.init().BASE_URL
     let json = CoreKt.createJson()
-    return ApiService(client: CoreKt.createHttpClient(json: json), baseUrl: baseUrl)
+    return RemoteDataSource(client: CoreKt.createHttpClient(json: json), baseUrl: baseUrl)
   }
 }

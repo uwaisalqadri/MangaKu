@@ -7,20 +7,17 @@ import android.view.ViewGroup
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
 import com.uwaisalqadri.mangaapp.android.R
 import com.uwaisalqadri.mangaapp.android.ui.browse.views.Genres
 import com.uwaisalqadri.mangaapp.android.ui.browse.views.MangaTrending
-import com.uwaisalqadri.mangaapp.android.ui.browse.views.TopBar
+import com.uwaisalqadri.mangaapp.android.ui.components.TopBar
 import com.uwaisalqadri.mangaapp.android.ui.theme.MangaTypography
 import org.koin.androidx.compose.getViewModel
 

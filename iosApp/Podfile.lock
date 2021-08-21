@@ -1,18 +1,18 @@
 PODS:
-  - KMPNativeCoroutinesCombine (0.4.2):
+  - core (1.0)
+  - KMPNativeCoroutinesCombine (0.5.0):
     - KMPNativeCoroutinesCore
-  - KMPNativeCoroutinesCore (0.4.2)
+  - KMPNativeCoroutinesCore (0.5.0)
   - SDWebImage (5.11.1):
     - SDWebImage/Core (= 5.11.1)
   - SDWebImage/Core (5.11.1)
   - SDWebImageSwiftUI (2.0.2):
     - SDWebImage (~> 5.10)
-  - shared (1.0)
 
 DEPENDENCIES:
+  - core (from `../core`)
   - KMPNativeCoroutinesCombine
   - SDWebImageSwiftUI
-  - shared (from `../shared`)
 
 SPEC REPOS:
   trunk:
@@ -22,16 +22,16 @@ SPEC REPOS:
     - SDWebImageSwiftUI
 
 EXTERNAL SOURCES:
-  shared:
-    :path: "../shared"
+  core:
+    :path: "../core"
 
 SPEC CHECKSUMS:
-  KMPNativeCoroutinesCombine: 198531c0cd794024df3bfcb6c5a8e0829dd2d2bb
-  KMPNativeCoroutinesCore: 04c0d951af2a8dc6099f8219b3662fab7939f932
+  core: 951e288239e87d33cc9cd8c003043f7e128dbc95
+  KMPNativeCoroutinesCombine: c17e07579f12551998830bb02ee78a441839227f
+  KMPNativeCoroutinesCore: 916c68ae1d7396b0a07ece46962ecd4bc799319b
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   SDWebImageSwiftUI: 8a3923c95108312b03a599ec1498754af55a6819
-  shared: aa7a3364ca8737655203b94604938458166d8baf
 
-PODFILE CHECKSUM: a2e5fa4ff57b7f8978d9b7c6f1b704d8b3847232
+PODFILE CHECKSUM: f3b4e41a444d1abca7a4f29d48b95305c4c893aa
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.10.2
