@@ -39,12 +39,24 @@ struct BrowseView: View {
             .padding(.leading, 17)
             .padding(.top, 30)
 
-          VStack {
-            ForEach(viewModel.trendingManga, id: \.id) { manga in
-              MangaItemView(manga: manga)
-            }
-          }.padding(.leading, 17)
-          .padding(.trailing, 30)
+
+          if viewModel.loading {
+            VStack {
+              ForEach(0..<10) { _ in
+                ShimmerItemView()
+              }
+            }.padding(.leading, 17)
+            .padding(.trailing, 30)
+            .padding(.bottom, 100)
+          } else {
+            VStack {
+              ForEach(viewModel.trendingManga, id: \.id) { manga in
+                MangaItemView(manga: manga)
+              }
+            }.padding(.leading, 17)
+            .padding(.trailing, 30)
+            .padding(.bottom, 100)
+          }
         }.padding(.top, 30)
       }
       .navigationBarTitle("Browse")

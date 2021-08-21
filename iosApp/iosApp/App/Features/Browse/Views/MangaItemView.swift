@@ -18,6 +18,7 @@ struct MangaItemView: View {
     HStack {
       WebImage(url: URL(string: manga.attributes.posterImage.original))
         .resizable()
+        .indicator(.activity)
         .frame(width: 124, height: 200)
         .cornerRadius(12)
 
@@ -26,6 +27,7 @@ struct MangaItemView: View {
 
         Text(getTitle(manga: manga))
           .font(.custom(.mbold, size: 18))
+          .lineLimit(2)
           .padding(.top, 5)
 
         HStack {

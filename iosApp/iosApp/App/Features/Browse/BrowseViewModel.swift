@@ -29,12 +29,13 @@ class BrowseViewModel: ObservableObject {
 
   func fetchManga() {
     // create publisher for kotlin flow
+    loading = true
     createPublisher(for: listUseCase.executeNative())
       .receive(on: DispatchQueue.main)
       .sink { completion in
         switch completion {
         case .finished:
-          print("finished")
+          self.loading = false
         case .failure(let error):
           self.errorMessage = error.localizedDescription
         }
@@ -44,12 +45,13 @@ class BrowseViewModel: ObservableObject {
   }
 
   func fetchTrendingManga() {
+    loading = true
     createPublisher(for: trendingUseCase.executeNative())
       .receive(on: DispatchQueue.main)
       .sink { completion in
         switch completion {
         case .finished:
-          print("finished")
+          self.loading = false
         case .failure(let error):
           self.errorMessage = error.localizedDescription
         }

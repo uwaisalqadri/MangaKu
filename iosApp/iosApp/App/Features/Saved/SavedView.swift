@@ -10,7 +10,11 @@ import SwiftUI
 
 struct SavedView: View {
   var body: some View {
-    Text("Hello, Saved!")
+    VStack {
+      List(0..<10) { _ in
+        ShimmerItemView()
+      }
+    }.padding(30)
   }
 }
 
