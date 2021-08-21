@@ -106,7 +106,7 @@ fun StarRate(
     Row(
         modifier = modifier
     ) {
-        (1..5).forEach { _ ->
+        repeat(5) {
             Icon(
                 imageVector = Icons.Default.Star,
                 contentDescription = null,
