@@ -30,7 +30,7 @@ class BrowseViewModel: ObservableObject {
   func fetchManga() {
     // create publisher for kotlin flow
     loading = true
-    createPublisher(for: listUseCase.executeNative())
+    createPublisher(for: listUseCase.invokeNative())
       .receive(on: DispatchQueue.main)
       .sink { completion in
         switch completion {
@@ -46,7 +46,7 @@ class BrowseViewModel: ObservableObject {
 
   func fetchTrendingManga() {
     loading = true
-    createPublisher(for: trendingUseCase.executeNative())
+    createPublisher(for: trendingUseCase.invokeNative())
       .receive(on: DispatchQueue.main)
       .sink { completion in
         switch completion {

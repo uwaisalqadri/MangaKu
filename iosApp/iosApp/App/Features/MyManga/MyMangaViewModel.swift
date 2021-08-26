@@ -26,7 +26,7 @@ class MyMangaViewModel: ObservableObject {
 
   func fetchMangas() {
     self.loading = true
-    createPublisher(for: listUseCase.executeNative())
+    createPublisher(for: listUseCase.invokeNative())
       .receive(on: DispatchQueue.main)
       .sink { completion in
         switch completion {

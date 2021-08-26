@@ -26,7 +26,7 @@ class BrowseViewModel(
     }
 
     private fun fetchMangas() = viewModelScope.launch {
-        trendingUseCase.execute().collect { result ->
+        trendingUseCase().collect { result ->
             if (!result.isNullOrEmpty()) {
                 trendingMangas.value = result
                 loading.value = false

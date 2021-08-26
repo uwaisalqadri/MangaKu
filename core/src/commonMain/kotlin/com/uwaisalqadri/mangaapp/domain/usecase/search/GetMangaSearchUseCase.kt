@@ -5,14 +5,14 @@ import com.uwaisalqadri.mangaapp.domain.repository.MangaRepository
 import kotlinx.coroutines.flow.Flow
 
 interface GetMangaSearchUseCase {
-    suspend fun execute(query: String): Flow<List<Manga>>
+    suspend operator fun invoke(query: String): Flow<List<Manga>>
 }
 
 class GetMangaSearchInteractor(
     private val repository: MangaRepository
 ): GetMangaSearchUseCase {
 
-    override suspend fun execute(query: String): Flow<List<Manga>> {
+    override suspend fun invoke(query: String): Flow<List<Manga>> {
         return repository.fetchSearchMangas(query)
     }
 }

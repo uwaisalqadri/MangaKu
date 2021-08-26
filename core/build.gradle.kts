@@ -6,7 +6,7 @@ plugins {
     kotlin(KotlinPlugins.serialization) version "1.5.0"
     id(Plugins.androidLibrary)
     id(Plugins.realm) version Realm.version
-    id(Plugins.kmpNativeCoroutine) version "0.4.2"
+    id(Plugins.kmpNativeCoroutine) version "0.5.0"
     id(Plugins.koin)
 }
 
@@ -84,10 +84,10 @@ kotlin {
 }
 
 android {
-    compileSdkVersion(30)
+    compileSdk = 30
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
-        minSdkVersion(27)
-        targetSdkVersion(30)
+        minSdk = 27
+        targetSdk = 30
     }
 }
