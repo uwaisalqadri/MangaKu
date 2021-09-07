@@ -7,10 +7,10 @@ import com.uwaisalqadri.mangaku.domain.model.Titles
 class TitlesMapper: BaseMapper<TitlesItem, Titles> {
     override fun mapToDomain(model: TitlesItem): Titles {
         return Titles(
-            model.en,
-            model.en_jp,
-            model.en_us,
-            model.ja_jp
+            model.en ?: "",
+            model.en_jp ?: "",
+            model.en_us ?: "",
+            model.ja_jp ?: ""
         )
     }
 

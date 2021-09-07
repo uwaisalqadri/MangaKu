@@ -7,11 +7,11 @@ import com.uwaisalqadri.mangaku.domain.model.PosterImage
 class PosterImageMapper: BaseMapper<PosterImageItem, PosterImage> {
     override fun mapToDomain(model: PosterImageItem): PosterImage {
         return PosterImage(
-            model.large,
-            model.medium,
-            model.original,
-            model.small,
-            model.tiny
+            model.large ?: "",
+            model.medium ?: "",
+            model.original ?: "",
+            model.small ?: "",
+            model.tiny ?: ""
         )
     }
 

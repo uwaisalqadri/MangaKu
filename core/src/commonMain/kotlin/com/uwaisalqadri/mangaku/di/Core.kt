@@ -71,7 +71,7 @@ val useCaseModule = module {
 
 val repositoryModule = module {
     single<MangaRepository> {
-        MangaRepositoryImpl(get(), get(), get(), get())
+        MangaRepositoryImpl(get(), get())
     }
 }
 

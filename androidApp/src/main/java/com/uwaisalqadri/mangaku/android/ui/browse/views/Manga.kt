@@ -31,7 +31,7 @@ fun Manga(
             shape = RoundedCornerShape(12.dp)
         ) {
             Image(
-                painter = rememberCoilPainter(request = manga.attributes.posterImage?.original),
+                painter = rememberCoilPainter(request = manga.attributes?.posterImage?.original),
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
@@ -70,7 +70,7 @@ fun Manga(
                 )
 
                 Text(
-                    text = "Vol.${manga.attributes.volumeCount}",
+                    text = "Vol.${manga.attributes?.volumeCount}",
                     fontSize = 15.sp,
                     style = MangaTypography.h1,
                     modifier = Modifier
@@ -119,10 +119,10 @@ fun StarRate(
 
 private fun getTitle(manga: Manga): String {
     return when {
-        manga.attributes.titles?.en?.isNotEmpty() == true -> manga.attributes.titles?.en ?: ""
-        manga.attributes.titles?.en_jp?.isNotEmpty() == true -> manga.attributes.titles?.en_jp ?: ""
-        manga.attributes.titles?.en_us?.isNotEmpty() == true -> manga.attributes.titles?.en_us ?: ""
-        manga.attributes.titles?.ja_jp?.isNotEmpty() == true -> manga.attributes.titles?.ja_jp ?: ""
+        manga.attributes?.titles?.en?.isNotEmpty() == true -> manga.attributes?.titles?.en ?: ""
+        manga.attributes?.titles?.en_jp?.isNotEmpty() == true -> manga.attributes?.titles?.en_jp ?: ""
+        manga.attributes?.titles?.en_us?.isNotEmpty() == true -> manga.attributes?.titles?.en_us ?: ""
+        manga.attributes?.titles?.ja_jp?.isNotEmpty() == true -> manga.attributes?.titles?.ja_jp ?: ""
         else -> "No Title"
     }
 }

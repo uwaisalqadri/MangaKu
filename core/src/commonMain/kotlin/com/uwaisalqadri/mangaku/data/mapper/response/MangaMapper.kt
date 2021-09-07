@@ -9,7 +9,7 @@ class MangaMapper(
 ): BaseMapper<MangaItem, Manga> {
     override fun mapToDomain(model: MangaItem): Manga {
         return Manga(
-            attributesMapper.mapToDomain(model.attributes),
+            model.attributes?.let { attributesMapper.mapToDomain(it) },
             model.id,
             model.type
         )
@@ -17,7 +17,7 @@ class MangaMapper(
 
     override fun mapToModel(domain: Manga): MangaItem {
         return MangaItem(
-            attributesMapper.mapToModel(domain.attributes),
+            domain.attributes?.let { attributesMapper.mapToModel(it) },
             domain.id,
             domain.type
         )

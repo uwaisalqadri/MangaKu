@@ -4,9 +4,9 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class CoverImageItem(
-    val large: String? = null,
-    val medium: String? = null,
-    val original: String? = null,
-    val small: String? = null,
-    val tiny: String? = null
+    val large: String? = "",
+    val medium: String? = "",
+    val original: String? = "",
+    val small: String? = "",
+    val tiny: String? = ""
 )

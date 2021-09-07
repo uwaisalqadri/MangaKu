@@ -4,7 +4,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class MangaItem(
-    val attributes: AttributesItem,
+    val attributes: AttributesItem? = null,
     val id: String,
     val type: String
 )

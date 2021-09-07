@@ -12,9 +12,9 @@ import kotlinx.coroutines.flow.map
 
 class MangaRepositoryImpl(
     private val remoteDataSource: RemoteDataSource,
-    private val localDataSource: LocalDataSource,
-    private val mangaResponseMapper: MangaMapper,
-    private val mangaObjectMapper: MangaObjectMapper
+//    private val localDataSource: LocalDataSource,
+    private val mangaResponseMapper: MangaMapper
+//    private val mangaObjectMapper: MangaObjectMapper
 ): MangaRepository {
 
     override suspend fun fetchMangas(): Flow<List<Manga>> {
@@ -46,19 +46,19 @@ class MangaRepositoryImpl(
         }
     }
 
-    override suspend fun getFavoriteManga(): Flow<List<Manga>> {
-        return localDataSource.getAllMangaAsFlowable().map {
-            mangaObjectMapper.mapToListDomain(it)
-        }
-    }
+//    override suspend fun getFavoriteManga(): Flow<List<Manga>> {
+//        return localDataSource.getAllMangaAsFlowable().map {
+//            mangaObjectMapper.mapToListDomain(it)
+//        }
+//    }
 
     override fun addMangaFavorite(manga: Manga) {
-        val mapper = mangaObjectMapper.mapToModel(manga)
-        localDataSource.addManga(mapper)
+//        val mapper = mangaObjectMapper.mapToModel(manga)
+//        localDataSource.addManga(mapper)
     }
 
     override fun removeMangaFavorite(mangaId: Int) {
-        localDataSource.deleteManga(mangaId)
+//        localDataSource.deleteManga(mangaId)
     }
 
 }

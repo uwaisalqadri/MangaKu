@@ -53,7 +53,7 @@ struct MyMangaView: View {
       if viewModel.loading {
         print("loading..")
       } else {
-        print(viewModel.mangas[0].attributes.posterImage.original)
+        print(viewModel.mangas[0].attributes?.posterImage?.original ?? "")
       }
     }
   }
