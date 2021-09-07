@@ -6,14 +6,14 @@
 
     <fragment
         android:id="@+id/navigation_browse"
-        android:name="com.uwaisalqadri.mangaapp.android.ui.browse.BrowseFragment"
+        android:name="com.uwaisalqadri.mangaku.android.ui.browse.BrowseFragment"
         android:label="BrowseFragment" />
     <fragment
         android:id="@+id/navigation_saved"
-        android:name="com.uwaisalqadri.mangaapp.android.ui.saved.SavedFragment"
+        android:name="com.uwaisalqadri.mangaku.android.ui.saved.SavedFragment"
         android:label="SavedFragment" />
     <fragment
         android:id="@+id/navigation_mymanga"
-        android:name="com.uwaisalqadri.mangaapp.android.ui.mymanga.MyMangaFragment"
+        android:name="com.uwaisalqadri.mangaku.android.ui.mymanga.MyMangaFragment"
         android:label="MyMangaFragment" />
 </navigation>
