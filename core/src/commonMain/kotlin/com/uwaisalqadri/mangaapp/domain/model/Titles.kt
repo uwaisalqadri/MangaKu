@@ -1,8 +1,5 @@
-package com.uwaisalqadri.mangaapp.data.souce.remote.response
+package com.uwaisalqadri.mangaapp.domain.model
 
-import kotlinx.serialization.Serializable
-
-@Serializable
 data class Titles(
     var en: String = "",
     var en_jp: String = "",

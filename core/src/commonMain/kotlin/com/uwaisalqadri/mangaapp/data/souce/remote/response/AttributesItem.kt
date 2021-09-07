@@ -3,14 +3,13 @@ package com.uwaisalqadri.mangaapp.data.souce.remote.response
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Attributes(
+data class AttributesItem(
     val ageRating: String,
     val ageRatingGuide: String,
     val averageRating: String,
     val canonicalTitle: String,
     val chapterCount: String,
-    val coverImage: CoverImage? = null,
-    val coverImageTopOffset: String,
+    val coverImage: CoverImageItem? = null,
     val createdAt: String,
     val description: String,
     val endDate: String,
@@ -18,8 +17,7 @@ data class Attributes(
     val mangaType: String,
     val nextRelease: String,
     val popularityRank: String,
-    val posterImage: PosterImage,
-    val ratingFrequencies: RatingFrequencies,
+    val posterImage: PosterImageItem? = null,
     val ratingRank: String,
     val serialization: String,
     val slug: String,
@@ -28,7 +26,7 @@ data class Attributes(
     val subtype: String,
     val synopsis: String,
     val tba: String,
-    val titles: Titles,
+    val titles: TitlesItem? = null,
     val updatedAt: String,
     val userCount: String,
     val volumeCount: String

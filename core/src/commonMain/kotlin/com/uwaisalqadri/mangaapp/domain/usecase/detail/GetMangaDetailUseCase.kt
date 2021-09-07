@@ -1,6 +1,6 @@
 package com.uwaisalqadri.mangaapp.domain.usecase.detail
 
-import com.uwaisalqadri.mangaapp.data.souce.remote.response.Manga
+import com.uwaisalqadri.mangaapp.domain.model.Manga
 import com.uwaisalqadri.mangaapp.domain.repository.MangaRepository
 import kotlinx.coroutines.flow.Flow
 

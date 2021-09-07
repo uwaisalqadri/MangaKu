@@ -4,5 +4,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class MangaResponse(
-    val data: List<Manga>
+    val data: List<MangaItem>
 )

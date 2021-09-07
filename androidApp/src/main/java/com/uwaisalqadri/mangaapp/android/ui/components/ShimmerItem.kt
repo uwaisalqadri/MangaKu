@@ -22,7 +22,6 @@ fun ShimmerItem(
     colors: List<Color>,
     xShimmer: Float,
     yShimmer: Float,
-    padding: Dp,
     gradientWidth: Float
 ) {
 

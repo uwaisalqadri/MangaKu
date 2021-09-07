@@ -43,6 +43,11 @@ class BrowseFragment: Fragment() {
             modifier = Modifier.verticalScroll(rememberScrollState())
         ) {
 
+            if (viewModel.loading.value) {
+                Text(text = "Loading...")
+                return
+            }
+
             TopBar(
                 name = "Browse",
                 icon = R.drawable.ic_search

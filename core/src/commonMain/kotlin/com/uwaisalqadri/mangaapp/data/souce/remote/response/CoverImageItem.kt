@@ -3,7 +3,7 @@ package com.uwaisalqadri.mangaapp.data.souce.remote.response
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class CoverImage(
+data class CoverImageItem(
     val large: String? = null,
     val medium: String? = null,
     val original: String? = null,

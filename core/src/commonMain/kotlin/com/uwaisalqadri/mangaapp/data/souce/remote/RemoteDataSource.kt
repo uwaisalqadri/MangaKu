@@ -6,7 +6,6 @@ import com.uwaisalqadri.mangaapp.utils.Constants
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.http.*
-import org.koin.core.component.KoinComponent
 
 class RemoteDataSource(
     private val client: HttpClient,
@@ -15,26 +14,27 @@ class RemoteDataSource(
 
     suspend fun fetchMangas() =
         client.get<MangaResponse>("$baseUrl/manga") {
-            addHeader()
+            createHeader()
         }
 
     suspend fun fetchTrendingMangas() =
         client.get<MangaResponse>("$baseUrl/trending/manga") {
-            addHeader()
+            createHeader()
         }
 
     suspend fun fetchSearchMangas(query: String) =
-        client.get<MangaResponse>("$baseUrl/manga?filter[text]=$query") {
-            addHeader()
+        client.get<MangaResponse>("$baseUrl/manga") {
+            createHeader()
+            parameter("filter[text]", query)
         }
 
     suspend fun fetchDetailManga(id: String) =
         client.get<MangaDetailResponse>("$baseUrl/manga/$id") {
-            addHeader()
+            createHeader()
         }
 
 
-    private fun HttpRequestBuilder.addHeader() {
+    private fun HttpRequestBuilder.createHeader() {
         headers {
             append(HttpHeaders.Accept, "application/vnd.api+json")
             append(HttpHeaders.ContentType, "application/vnd.api+json")
