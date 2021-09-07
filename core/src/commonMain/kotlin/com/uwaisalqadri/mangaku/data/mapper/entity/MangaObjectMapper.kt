@@ -18,7 +18,7 @@ class MangaObjectMapper(
 
     override fun mapToModel(domain: Manga): MangaObject {
         val mangaObject = MangaObject()
-        domain.attributes?.let { attributesObjectMapper.mapToModel(it) }
+        mangaObject.attributes = domain.attributes?.let { attributesObjectMapper.mapToModel(it) }
         mangaObject.mangaId = domain.id
         mangaObject.type = domain.type
         return mangaObject

@@ -9,7 +9,7 @@ interface MangaRepository {
     suspend fun fetchSearchMangas(query: String): Flow<List<Manga>>
     suspend fun fetchDetailManga(id: String): Flow<Manga?>
 
-//    suspend fun getFavoriteManga(): Flow<List<Manga>>
+    suspend fun getFavoriteManga(): Flow<List<Manga>>
     fun addMangaFavorite(manga: Manga)
     fun removeMangaFavorite(mangaId: Int)
 }

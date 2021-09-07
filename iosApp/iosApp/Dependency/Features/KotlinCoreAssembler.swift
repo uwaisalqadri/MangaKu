@@ -50,7 +50,7 @@ extension KotlinCoreAssembler where Self: Assembler {
   }
 
   func resolve() -> MangaRepository {
-    return MangaRepositoryImpl(remoteDataSource: resolve(), mangaResponseMapper: resolve())
+    return MangaRepositoryImpl(remoteDataSource: resolve(), localDataSource: resolve(), mangaResponseMapper: resolve(), mangaObjectMapper: resolve())
   }
 
   func resolve() -> MangaMapper {

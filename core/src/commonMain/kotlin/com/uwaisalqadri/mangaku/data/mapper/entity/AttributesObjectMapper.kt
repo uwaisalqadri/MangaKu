@@ -42,7 +42,33 @@ class AttributesObjectMapper(
     }
 
     override fun mapToModel(domain: Attributes): AttributesObject {
-        val attributesObject = AttributesObject()
-        return attributesObject
+        val attributes = AttributesObject()
+        attributes.ageRating = domain.ageRating
+        attributes.ageRatingGuide = domain.ageRatingGuide
+        attributes.averageRating = domain.averageRating
+        attributes.canonicalTitle = domain.canonicalTitle
+        attributes.chapterCount = domain.chapterCount
+        attributes.coverImage = domain.coverImage?.let { coverImageMapper.mapToModel(it) }
+        attributes.createdAt = domain.createdAt
+        attributes.description = domain.description
+        attributes.endDate = domain.endDate
+        attributes.favoritesCount = domain.favoritesCount
+        attributes.mangaType = domain.mangaType
+        attributes.nextRelease = domain.nextRelease
+        attributes.popularityRank = domain.popularityRank
+        attributes.posterImage = domain.posterImage?.let { posterImageMapper.mapToModel(it) }
+        attributes.ratingRank = domain.ratingRank
+        attributes.serialization = domain.serialization
+        attributes.slug = domain.slug
+        attributes.startDate = domain.startDate
+        attributes.status = domain.status
+        attributes.subtype = domain.subtype
+        attributes.synopsis = domain.synopsis
+        attributes.tba = domain.tba
+        attributes.titles = domain.titles?.let { titlesMapper.mapToModel(it) }
+        attributes.updatedAt = domain.updatedAt
+        attributes.userCount = domain.userCount
+        attributes.volumeCount = domain.volumeCount
+        return attributes
     }
 }
