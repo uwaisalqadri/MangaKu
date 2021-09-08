@@ -26,7 +26,7 @@ struct MangaItemView: View {
       VStack(alignment: .leading) {
         StarsView()
 
-        Text(getTitle(manga: manga))
+        Text(manga.getTitle())
           .font(.custom(.mbold, size: 18))
           .lineLimit(2)
           .padding(.top, 5)
@@ -59,11 +59,6 @@ struct MangaItemView: View {
       Spacer()
 
     }.padding(.bottom, 30)
-  }
-
-  private func getTitle(manga: Manga) -> String {
-    let title = manga.attributes?.titles
-    return title?.ja_jp ?? title?.en_us ?? title?.en ?? title?.en_jp ?? ""
   }
 }
 

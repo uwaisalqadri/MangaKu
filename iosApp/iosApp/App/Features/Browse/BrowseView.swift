@@ -73,9 +73,7 @@ struct BrowseView: View {
         }
       )
     }.onAppear {
-      viewModel.fetchManga()
-      viewModel.fetchTrendingManga()
-      print("browse \(viewModel.trendingManga)")
+      print("on")
     }
   }
 }

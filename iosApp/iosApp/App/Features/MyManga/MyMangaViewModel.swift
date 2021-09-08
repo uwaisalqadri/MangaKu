@@ -14,17 +14,18 @@ import KMPNativeCoroutinesCombine
 class MyMangaViewModel: ObservableObject {
 
   @Published var mangas = [Manga]()
-  @Published var loading = false
   @Published var errorMessage = ""
+  @Published var loading = false
 
   private let favoriteUseCase: GetMangaFavoriteUseCase
   private var cancellables = Set<AnyCancellable>()
 
   init(favoriteUseCase: GetMangaFavoriteUseCase) {
     self.favoriteUseCase = favoriteUseCase
+    fetchFavoriteManga()
   }
 
-  func fetchFavoriteManga() {
+  private func fetchFavoriteManga() {
     loading = true
     createPublisher(for: favoriteUseCase.invokeNative())
       .receive(on: DispatchQueue.main)

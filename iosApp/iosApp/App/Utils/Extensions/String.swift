@@ -17,4 +17,12 @@ extension String {
     let date = dateFormatter.date(from: self)
     return date
   }
+
+  func ifEmpty(_ fallback: String) -> String {
+    if self.isEmpty{
+      return fallback
+    }
+    return self
+  }
+
 }

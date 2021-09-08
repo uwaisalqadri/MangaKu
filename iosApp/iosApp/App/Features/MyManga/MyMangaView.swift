@@ -13,6 +13,8 @@ import SDWebImageSwiftUI
 struct MyMangaView: View {
 
   @ObservedObject var viewModel: MyMangaViewModel
+  @ObservedObject var itemView = ItemView()
+  @State var position = 0
 
   var body: some View {
     NavigationView {
@@ -22,34 +24,42 @@ struct MyMangaView: View {
           .padding(.top, -70)
           .padding(.bottom, 30)
 
-        ZStack(alignment: Alignment(horizontal: .center, vertical: .top)) {
-          Text("Naruto")
-            .font(.custom(.sedgwickave, size: 130))
-            .padding(.top, -60)
+        if !viewModel.loading, !viewModel.mangas.isEmpty {
+          ZStack(alignment: Alignment(horizontal: .center, vertical: .top)) {
+            Text(viewModel.mangas[position].getTitle())
+              .font(.custom(.sedgwickave, size: 70))
+              .lineLimit(2)
+              .multilineTextAlignment(.center)
+              .padding(.top, -60)
+              .onAppear {
+                print("POSITION", position)
+              }
 
-//          MangaCarouselView(itemHeight: 361, views: [
-//            AnyView(
-//              WebImage(url: URL(string: viewModel.mangas[0].attributes?.posterImage?.original ?? ""))
-//                .resizable()
-//            ),
-//            AnyView(
-//              WebImage(url: URL(string: viewModel.mangas[1].attributes?.posterImage?.original ?? ""))
-//                .resizable()
-//            ),
-//            AnyView(
-//              WebImage(url: URL(string: viewModel.mangas[2].attributes?.posterImage?.original ?? ""))
-//                .resizable()
-//            )
-//          ]).padding(.top, -180)
+            MangaCarouselView(itemHeight: 361, views: itemView.views).padding(.top, -180)
+
+          }.onAppear {
+            if !viewModel.loading {
+              print("view before", itemView.views)
+              viewModel.mangas.enumerated().forEach { index, manga in
+                position = index
+                print("POSITION", index)
+                itemView.strings.insert(manga.getTitle(), at: index)
+                itemView.views.insert(AnyView(
+                    WebImage(url: URL(string: manga.attributes?.posterImage?.original ?? ""))
+                      .resizable()
+                ), at: index)
+
+                print("view after", itemView.views)
+              }
+            }
+          }
         }
       }
-    }.onAppear {
-      viewModel.fetchFavoriteManga()
-      show()
     }
   }
+}
 
-  func show() {
-    viewModel.loading ? print("loading") : print("view", viewModel.mangas)
-  }
+class ItemView: ObservableObject {
+  @Published var views = [AnyView]()
+  @Published var strings = [String]()
 }

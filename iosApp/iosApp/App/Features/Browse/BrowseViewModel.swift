@@ -27,6 +27,8 @@ class BrowseViewModel: ObservableObject {
     self.listUseCase = listUseCase
     self.trendingUseCase = trendingUseCase
     self.favoriteUseCase = favoriteUseCase
+    fetchManga()
+    fetchTrendingManga()
   }
 
   func addFavoriteManga(manga: Manga) {
@@ -37,8 +39,7 @@ class BrowseViewModel: ObservableObject {
     favoriteUseCase.delete(mangaId: mangaId)
   }
 
-  func fetchManga() {
-    // create publisher for kotlin flow
+  private func fetchManga() {
     loading = true
     createPublisher(for: listUseCase.invokeNative())
       .receive(on: DispatchQueue.main)
@@ -54,7 +55,7 @@ class BrowseViewModel: ObservableObject {
       }.store(in: &cancellables)
   }
 
-  func fetchTrendingManga() {
+  private func fetchTrendingManga() {
     loading = true
     createPublisher(for: trendingUseCase.invokeNative())
       .receive(on: DispatchQueue.main)

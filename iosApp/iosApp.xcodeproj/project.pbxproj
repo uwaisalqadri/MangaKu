@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		198A80C49D5FEE4DF4DB3606 /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E018CB6D4E97B91ADD8417C /* Pods_iosApp.framework */; };
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
+		521864F926E8E1850045150A /* Manga.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521864F826E8E1850045150A /* Manga.swift */; };
 		5224F40F26AC38CF00D0D6E8 /* FeatureAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5224F40E26AC38CF00D0D6E8 /* FeatureAssembler.swift */; };
 		5246F3A826AB9C5200CCDA56 /* AppAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5246F3A726AB9C5200CCDA56 /* AppAssembler.swift */; };
 		5246F3B026AB9D0600CCDA56 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5246F3AF26AB9D0600CCDA56 /* Assets.xcassets */; };
@@ -40,6 +41,7 @@
 		2152FB032600AC8F00CF470E /* iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
 		3E018CB6D4E97B91ADD8417C /* Pods_iosApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iosApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		50D9A0967CCE2583336DF877 /* Pods-iosApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.release.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.release.xcconfig"; sourceTree = "<group>"; };
+		521864F826E8E1850045150A /* Manga.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manga.swift; sourceTree = "<group>"; };
 		5224F40E26AC38CF00D0D6E8 /* FeatureAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureAssembler.swift; sourceTree = "<group>"; };
 		5246F3A726AB9C5200CCDA56 /* AppAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAssembler.swift; sourceTree = "<group>"; };
 		5246F3AF26AB9D0600CCDA56 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 			children = (
 				52FFF17026AEA1B2006A3621 /* Date.swift */,
 				52FFF17426AEA221006A3621 /* String.swift */,
+				521864F826E8E1850045150A /* Manga.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -409,6 +412,7 @@
 				525295E426D0EFF800E36429 /* ShimmerView.swift in Sources */,
 				52EBD6D526AE5A5900E1C28F /* MangaItemView.swift in Sources */,
 				52B7691B26ABCE8100227903 /* SavedView.swift in Sources */,
+				521864F926E8E1850045150A /* Manga.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 				52FFF18026AFAA07006A3621 /* MangaCarouselView.swift in Sources */,

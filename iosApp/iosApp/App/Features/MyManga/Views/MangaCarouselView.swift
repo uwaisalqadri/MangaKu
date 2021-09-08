@@ -7,7 +7,6 @@
 //
 
 import SwiftUI
-import KotlinCore
 
 struct MangaCarouselView: View {
 
