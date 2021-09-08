@@ -17,22 +17,21 @@ class MyMangaViewModel: ObservableObject {
   @Published var loading = false
   @Published var errorMessage = ""
 
-  private let listUseCase: GetMangaListUseCase
+  private let favoriteUseCase: GetMangaFavoriteUseCase
   private var cancellables = Set<AnyCancellable>()
 
-  init(listUseCase: GetMangaListUseCase) {
-    self.listUseCase = listUseCase
+  init(favoriteUseCase: GetMangaFavoriteUseCase) {
+    self.favoriteUseCase = favoriteUseCase
   }
 
-  func fetchMangas() {
-    self.loading = true
-    createPublisher(for: listUseCase.invokeNative())
+  func fetchFavoriteManga() {
+    loading = true
+    createPublisher(for: favoriteUseCase.invokeNative())
       .receive(on: DispatchQueue.main)
       .sink { completion in
         switch completion {
         case .finished:
           self.loading = false
-          print("my manga viewModel finished")
         case .failure(let error):
           self.errorMessage = error.localizedDescription
         }

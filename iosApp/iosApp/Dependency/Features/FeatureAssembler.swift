@@ -21,6 +21,6 @@ extension FeatureAssembler where Self: Assembler {
   }
 
   func resolve() -> MyMangaViewModel {
-    return MyMangaViewModel(listUseCase: resolve())
+    return MyMangaViewModel(favoriteUseCase: resolve())
   }
 }

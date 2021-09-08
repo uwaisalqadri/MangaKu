@@ -47,8 +47,9 @@ class MangaRepositoryImpl(
     }
 
     override suspend fun getFavoriteManga(): Flow<List<Manga>> {
-        return localDataSource.getAllMangaAsFlowable().map {
-            mangaObjectMapper.mapToListDomain(it)
+        return flow {
+            val result = localDataSource.getAllManga().map { mangaObjectMapper.mapToDomain(it) }
+            emit(result)
         }
     }
 

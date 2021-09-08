@@ -99,6 +99,10 @@ fun createRealmDatabase(): Realm {
         PosterImageObject::class,
         TitlesObject::class
     ))
+    val kermit = Kermit(CommonLogger())
+    kermit.d("realm") { configuration.path }
+    kermit.d("realm") { configuration.name }
+    kermit.d("realm") { configuration.log.toString() }
     return Realm(configuration)
 }
 

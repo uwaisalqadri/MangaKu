@@ -27,34 +27,29 @@ struct MyMangaView: View {
             .font(.custom(.sedgwickave, size: 130))
             .padding(.top, -60)
 
-          MangaCarouselView(itemHeight: 361, views: [
-            AnyView(
-              WebImage(url: URL(string: "https://media.kitsu.io/manga/poster_images/14/original.jpg?1434249426"))
-                .resizable()
-            ),
-            AnyView(
-              WebImage(url: URL(string: "https://media.kitsu.io/manga/poster_images/13/original.jpg?1434249424"))
-                .resizable()
-            ),
-            AnyView(
-              Image("imgSample")
-                .resizable()
-            ),
-            AnyView(
-              Image("imgSample")
-                .resizable()
-            )
-          ])
-          .padding(.top, -180)
+//          MangaCarouselView(itemHeight: 361, views: [
+//            AnyView(
+//              WebImage(url: URL(string: viewModel.mangas[0].attributes?.posterImage?.original ?? ""))
+//                .resizable()
+//            ),
+//            AnyView(
+//              WebImage(url: URL(string: viewModel.mangas[1].attributes?.posterImage?.original ?? ""))
+//                .resizable()
+//            ),
+//            AnyView(
+//              WebImage(url: URL(string: viewModel.mangas[2].attributes?.posterImage?.original ?? ""))
+//                .resizable()
+//            )
+//          ]).padding(.top, -180)
         }
       }
     }.onAppear {
-      viewModel.fetchMangas()
-      if viewModel.loading {
-        print("loading..")
-      } else {
-        print(viewModel.mangas[0].attributes?.posterImage?.original ?? "")
-      }
+      viewModel.fetchFavoriteManga()
+      show()
     }
+  }
+
+  func show() {
+    viewModel.loading ? print("loading") : print("view", viewModel.mangas)
   }
 }

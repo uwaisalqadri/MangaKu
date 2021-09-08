@@ -4,6 +4,7 @@ import com.uwaisalqadri.mangaku.data.souce.local.entity.MangaObject
 import io.realm.Realm
 import io.realm.delete
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
 
 class LocalDataSource(
     private val realm: Realm
@@ -11,6 +12,10 @@ class LocalDataSource(
 
     fun getAllMangaAsFlowable(): Flow<List<MangaObject>> {
         return realm.objects<MangaObject>().observe()
+    }
+
+    fun getAllManga(): List<MangaObject> {
+        return realm.objects(MangaObject::class)
     }
 
     fun addManga(manga: MangaObject) {
