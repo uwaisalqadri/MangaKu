@@ -7,7 +7,7 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val viewModelModule = module {
-    viewModel { BrowseViewModel(get(), get()) }
+    viewModel { BrowseViewModel(get(), get(), get()) }
     viewModel { MyMangaViewModel(get()) }
     viewModel { SavedViewModel(get()) }
 }

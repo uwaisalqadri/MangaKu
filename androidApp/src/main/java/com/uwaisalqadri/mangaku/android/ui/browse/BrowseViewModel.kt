@@ -6,14 +6,16 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.uwaisalqadri.mangaku.domain.model.Manga
-import com.uwaisalqadri.mangaku.domain.usecase.list.GetMangaListUseCase
-import com.uwaisalqadri.mangaku.domain.usecase.list.GetMangaTrendingUseCase
+import com.uwaisalqadri.mangaku.domain.usecase.browse.GetMangaListUseCase
+import com.uwaisalqadri.mangaku.domain.usecase.browse.GetMangaTrendingUseCase
+import com.uwaisalqadri.mangaku.domain.usecase.mymanga.CreateMangaFavoriteUseCase
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class BrowseViewModel(
     private val listUseCase: GetMangaListUseCase,
-    private val trendingUseCase: GetMangaTrendingUseCase
+    private val trendingUseCase: GetMangaTrendingUseCase,
+    private val favoriteUseCase: CreateMangaFavoriteUseCase
 ): ViewModel() {
 
     val mangas: MutableState<List<Manga>> = mutableStateOf(ArrayList())
@@ -22,6 +24,14 @@ class BrowseViewModel(
 
     init {
         fetchMangas()
+    }
+
+    fun addFavoriteManga(manga: Manga) {
+        favoriteUseCase.add(manga)
+    }
+
+    fun removeFavoriteManga(mangaId: Int) {
+        favoriteUseCase.delete(mangaId)
     }
 
     private fun fetchMangas() = viewModelScope.launch {

@@ -21,7 +21,9 @@ fun MangaTrending(
                     .height(197.dp)
                     .fillMaxWidth()
                     .padding(0.dp, 10.dp)
-            )
+            ) {
+                viewModel.addFavoriteManga(it)
+            }
         }
     }
 }

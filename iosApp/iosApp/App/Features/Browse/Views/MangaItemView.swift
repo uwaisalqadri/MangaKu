@@ -13,6 +13,7 @@ import SDWebImageSwiftUI
 struct MangaItemView: View {
 
   let manga: Manga
+  var onReadMoreListener: ((Manga) -> Void)?
 
   var body: some View {
     HStack {
@@ -42,7 +43,7 @@ struct MangaItemView: View {
         Spacer(minLength: 30)
 
         Button(action: {
-          print(manga.attributes?.updatedAt.toDate() ?? "not working shit")
+          onReadMoreListener?(manga)
         }, label: {
           Text("Read Now")
             .foregroundColor(.white)

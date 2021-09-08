@@ -51,7 +51,9 @@ struct BrowseView: View {
           } else {
             VStack {
               ForEach(viewModel.trendingManga, id: \.id) { manga in
-                MangaItemView(manga: manga)
+                MangaItemView(manga: manga) { item in
+                  viewModel.addFavoriteManga(manga: item)
+                }
               }
             }.padding(.leading, 17)
             .padding(.trailing, 30)

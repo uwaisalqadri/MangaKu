@@ -10,10 +10,16 @@ import Foundation
 import KotlinCore
 
 protocol KotlinCoreAssembler {
+
+  // usecase
   func resolve() -> GetMangaListUseCase
   func resolve() -> GetMangaSearchUseCase
   func resolve() -> GetMangaTrendingUseCase
   func resolve() -> GetMangaDetailUseCase
+  func resolve() -> GetMangaFavoriteUseCase
+  func resolve() -> CreateMangaFavoriteUseCase
+
+  // data source
   func resolve() -> MangaRepository
   func resolve() -> RemoteDataSource
   func resolve() -> LocalDataSource
@@ -47,6 +53,14 @@ extension KotlinCoreAssembler where Self: Assembler {
 
   func resolve() -> GetMangaDetailUseCase {
     return GetMangaDetailInteractor(repository: resolve())
+  }
+
+  func resolve() -> GetMangaFavoriteUseCase {
+    return GetMangaFavoriteInteractor(repository: resolve())
+  }
+
+  func resolve() -> CreateMangaFavoriteUseCase {
+    return CreateMangaFavoriteInteractor(repository: resolve())
   }
 
   func resolve() -> MangaRepository {

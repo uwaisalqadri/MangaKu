@@ -20,11 +20,21 @@ class BrowseViewModel: ObservableObject {
 
   private let listUseCase: GetMangaListUseCase
   private let trendingUseCase: GetMangaTrendingUseCase
+  private let favoriteUseCase: CreateMangaFavoriteUseCase
   private var cancellables = Set<AnyCancellable>()
 
-  init(listUseCase: GetMangaListUseCase, trendingUseCase: GetMangaTrendingUseCase) {
+  init(listUseCase: GetMangaListUseCase, trendingUseCase: GetMangaTrendingUseCase, favoriteUseCase: CreateMangaFavoriteUseCase) {
     self.listUseCase = listUseCase
     self.trendingUseCase = trendingUseCase
+    self.favoriteUseCase = favoriteUseCase
+  }
+
+  func addFavoriteManga(manga: Manga) {
+    favoriteUseCase.add(manga: manga)
+  }
+
+  func removeFavoriteManga(mangaId: Int32) {
+    favoriteUseCase.delete(mangaId: mangaId)
   }
 
   func fetchManga() {

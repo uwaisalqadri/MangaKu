@@ -1,4 +1,4 @@
-package com.uwaisalqadri.mangaku.domain.usecase.search
+package com.uwaisalqadri.mangaku.domain.usecase.browse
 
 import com.uwaisalqadri.mangaku.domain.model.Manga
 import com.uwaisalqadri.mangaku.domain.repository.MangaRepository

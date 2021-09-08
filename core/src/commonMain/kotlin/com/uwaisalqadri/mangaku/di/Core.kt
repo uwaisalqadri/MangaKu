@@ -12,12 +12,8 @@ import com.uwaisalqadri.mangaku.data.souce.remote.RemoteDataSource
 import com.uwaisalqadri.mangaku.domain.repository.MangaRepository
 import com.uwaisalqadri.mangaku.domain.usecase.detail.GetMangaDetailInteractor
 import com.uwaisalqadri.mangaku.domain.usecase.detail.GetMangaDetailUseCase
-import com.uwaisalqadri.mangaku.domain.usecase.list.GetMangaListInteractor
-import com.uwaisalqadri.mangaku.domain.usecase.list.GetMangaListUseCase
-import com.uwaisalqadri.mangaku.domain.usecase.list.GetMangaTrendingInteractor
-import com.uwaisalqadri.mangaku.domain.usecase.list.GetMangaTrendingUseCase
-import com.uwaisalqadri.mangaku.domain.usecase.search.GetMangaSearchInteractor
-import com.uwaisalqadri.mangaku.domain.usecase.search.GetMangaSearchUseCase
+import com.uwaisalqadri.mangaku.domain.usecase.browse.*
+import com.uwaisalqadri.mangaku.domain.usecase.mymanga.*
 import io.ktor.client.*
 import io.ktor.client.features.json.*
 import io.ktor.client.features.json.serializer.*
@@ -66,6 +62,14 @@ val useCaseModule = module {
 
     single<GetMangaDetailUseCase> {
         GetMangaDetailInteractor(get())
+    }
+
+    single<GetMangaFavoriteUseCase> {
+        GetMangaFavoriteInteractor(get())
+    }
+
+    single<CreateMangaFavoriteUseCase> {
+        CreateMangaFavoriteInteractor(get())
     }
 }
 

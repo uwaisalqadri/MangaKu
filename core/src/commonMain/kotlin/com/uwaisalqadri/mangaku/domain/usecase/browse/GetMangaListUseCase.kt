@@ -1,19 +1,18 @@
-package com.uwaisalqadri.mangaku.domain.usecase.list
+package com.uwaisalqadri.mangaku.domain.usecase.browse
 
 import com.uwaisalqadri.mangaku.domain.model.Manga
 import com.uwaisalqadri.mangaku.domain.repository.MangaRepository
 import kotlinx.coroutines.flow.Flow
 
-interface GetMangaTrendingUseCase {
+interface GetMangaListUseCase {
     suspend operator fun invoke(): Flow<List<Manga>>
 }
 
-class GetMangaTrendingInteractor(
+class GetMangaListInteractor(
     private val repository: MangaRepository
-): GetMangaTrendingUseCase {
+): GetMangaListUseCase {
 
     override suspend fun invoke(): Flow<List<Manga>> {
-        return repository.fetchTrendingMangas()
+        return repository.fetchMangas()
     }
-
 }
