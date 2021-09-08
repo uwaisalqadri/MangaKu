@@ -11,7 +11,7 @@ class MangaObjectMapper(
     override fun mapToDomain(model: MangaObject): Manga {
         return Manga(
             model.attributes?.let { attributesObjectMapper.mapToDomain(it) },
-            model.mangaId,
+            model.id,
             model.type
         )
     }
@@ -19,7 +19,7 @@ class MangaObjectMapper(
     override fun mapToModel(domain: Manga): MangaObject {
         val mangaObject = MangaObject()
         mangaObject.attributes = domain.attributes?.let { attributesObjectMapper.mapToModel(it) }
-        mangaObject.mangaId = domain.id
+        mangaObject.id = domain.id
         mangaObject.type = domain.type
         return mangaObject
     }

@@ -7,7 +7,7 @@ import com.uwaisalqadri.mangaku.data.mapper.response.*
 import com.uwaisalqadri.mangaku.data.mapper.response.CoverImageMapper
 import com.uwaisalqadri.mangaku.data.repository.MangaRepositoryImpl
 import com.uwaisalqadri.mangaku.data.souce.local.LocalDataSource
-import com.uwaisalqadri.mangaku.data.souce.local.entity.MangaObject
+import com.uwaisalqadri.mangaku.data.souce.local.entity.*
 import com.uwaisalqadri.mangaku.data.souce.remote.RemoteDataSource
 import com.uwaisalqadri.mangaku.domain.repository.MangaRepository
 import com.uwaisalqadri.mangaku.domain.usecase.detail.GetMangaDetailInteractor
@@ -88,7 +88,13 @@ val networkModule = module {
 }
 
 fun createRealmDatabase(): Realm {
-    val configuration = RealmConfiguration(schema = setOf(MangaObject::class))
+    val configuration = RealmConfiguration(schema = setOf(
+        MangaObject::class,
+        AttributesObject::class,
+        CoverImageObject::class,
+        PosterImageObject::class,
+        TitlesObject::class
+    ))
     return Realm(configuration)
 }
 
