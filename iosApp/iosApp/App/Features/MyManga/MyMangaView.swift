@@ -9,11 +9,11 @@
 import SwiftUI
 import KotlinCore
 import SDWebImageSwiftUI
+import ACarousel
 
 struct MyMangaView: View {
 
   @ObservedObject var viewModel: MyMangaViewModel
-  @ObservedObject var itemView = ItemView()
   @State var position = 0
 
   var body: some View {
@@ -35,31 +35,24 @@ struct MyMangaView: View {
                 print("POSITION", position)
               }
 
-            MangaCarouselView(itemHeight: 361, views: itemView.views).padding(.top, -180)
-
-          }.onAppear {
-            if !viewModel.loading {
-              print("view before", itemView.views)
-              viewModel.mangas.enumerated().forEach { index, manga in
-                position = index
-                print("POSITION", index)
-                itemView.strings.insert(manga.getTitle(), at: index)
-                itemView.views.insert(AnyView(
-                    WebImage(url: URL(string: manga.attributes?.posterImage?.original ?? ""))
-                      .resizable()
-                ), at: index)
-
-                print("view after", itemView.views)
-              }
-            }
+            ACarousel(
+              Array(viewModel.mangas.enumerated()), id: \.offset,
+              spacing: 20,
+              headspace: 50,
+              isWrap: true) { index, manga in
+              WebImage(url: URL(string: manga.attributes?.posterImage?.original ?? ""))
+                .resizable()
+                .indicator(.activity)
+                .cornerRadius(12)
+                .onAppear {
+                  position = index
+                }
+            }.frame(height: 360)
           }
         }
+
+        Spacer()
       }
     }
   }
-}
-
-class ItemView: ObservableObject {
-  @Published var views = [AnyView]()
-  @Published var strings = [String]()
 }
