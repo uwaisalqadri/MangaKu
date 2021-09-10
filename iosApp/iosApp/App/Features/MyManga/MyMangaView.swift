@@ -14,6 +14,7 @@ import ACarousel
 struct MyMangaView: View {
 
   @ObservedObject var viewModel: MyMangaViewModel
+  @GestureState private var dragState: DragState = .inactive
   @State var position = 0
 
   var body: some View {
@@ -31,9 +32,6 @@ struct MyMangaView: View {
               .lineLimit(2)
               .multilineTextAlignment(.center)
               .padding(.top, -60)
-              .onAppear {
-                print("POSITION", position)
-              }
 
             ACarousel(
               Array(viewModel.mangas.enumerated()), id: \.offset,
@@ -44,10 +42,13 @@ struct MyMangaView: View {
                 .resizable()
                 .indicator(.activity)
                 .cornerRadius(12)
-                .onAppear {
-                  position = index
-                }
             }.frame(height: 360)
+            .gesture(
+              DragGesture()
+                .onEnded { _ in
+                  position += 1
+                }
+            )
           }
         }
 

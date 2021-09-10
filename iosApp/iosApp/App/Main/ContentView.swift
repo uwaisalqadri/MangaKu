@@ -19,6 +19,7 @@ struct ContentView: View {
       switch selectedIndex {
       case 1:
         BrowseView(viewModel: assembler.resolve())
+          .animation(.none)
       case 2:
         MyMangaView(viewModel: assembler.resolve())
       default:
