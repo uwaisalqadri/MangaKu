@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		198A80C49D5FEE4DF4DB3606 /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E018CB6D4E97B91ADD8417C /* Pods_iosApp.framework */; };
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
 		521864F926E8E1850045150A /* Manga.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521864F826E8E1850045150A /* Manga.swift */; };
 		5224F40F26AC38CF00D0D6E8 /* FeatureAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5224F40E26AC38CF00D0D6E8 /* FeatureAssembler.swift */; };
@@ -22,7 +21,7 @@
 		52B7691E26ABCE9D00227903 /* MyMangaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B7691D26ABCE9D00227903 /* MyMangaView.swift */; };
 		52B7692126ABCEAC00227903 /* BrowseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B7692026ABCEAC00227903 /* BrowseViewModel.swift */; };
 		52B7692826ABCEE200227903 /* SavedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B7692726ABCEE200227903 /* SavedViewModel.swift */; };
-		52D975A126EA117A00895B17 /* ACarousel in Frameworks */ = {isa = PBXBuildFile; productRef = 52D975A026EA117A00895B17 /* ACarousel */; };
+		52D35BFF26ECF9F1007B1D81 /* ACarousel in Frameworks */ = {isa = PBXBuildFile; productRef = 52D35BFE26ECF9F1007B1D81 /* ACarousel */; };
 		52EBD6D526AE5A5900E1C28F /* MangaItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBD6D426AE5A5900E1C28F /* MangaItemView.swift */; };
 		52EBD6D826AE645E00E1C28F /* GenreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBD6D726AE645E00E1C28F /* GenreView.swift */; };
 		52EBD6DC26AE823700E1C28F /* montserrat-bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 52EBD6DB26AE823600E1C28F /* montserrat-bold.ttf */; };
@@ -40,7 +39,6 @@
 
 /* Begin PBXFileReference section */
 		2152FB032600AC8F00CF470E /* iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
-		3E018CB6D4E97B91ADD8417C /* Pods_iosApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iosApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		50D9A0967CCE2583336DF877 /* Pods-iosApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.release.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.release.xcconfig"; sourceTree = "<group>"; };
 		521864F826E8E1850045150A /* Manga.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manga.swift; sourceTree = "<group>"; };
 		5224F40E26AC38CF00D0D6E8 /* FeatureAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureAssembler.swift; sourceTree = "<group>"; };
@@ -55,6 +53,7 @@
 		52B7692026ABCEAC00227903 /* BrowseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseViewModel.swift; sourceTree = "<group>"; };
 		52B7692426ABCECD00227903 /* MyMangaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMangaViewModel.swift; sourceTree = "<group>"; };
 		52B7692726ABCEE200227903 /* SavedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedViewModel.swift; sourceTree = "<group>"; };
+		52D35B8D26ECF6F5007B1D81 /* ACarousel */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ACarousel; sourceTree = "<group>"; };
 		52EBD6D426AE5A5900E1C28F /* MangaItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangaItemView.swift; sourceTree = "<group>"; };
 		52EBD6D726AE645E00E1C28F /* GenreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreView.swift; sourceTree = "<group>"; };
 		52EBD6DB26AE823600E1C28F /* montserrat-bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "montserrat-bold.ttf"; path = "../../../../../../FrezzFarm/app/src/main/res/font/montserrat-bold.ttf"; sourceTree = "<group>"; };
@@ -78,8 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52D975A126EA117A00895B17 /* ACarousel in Frameworks */,
-				198A80C49D5FEE4DF4DB3606 /* Pods_iosApp.framework in Frameworks */,
+				52D35BFF26ECF9F1007B1D81 /* ACarousel in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,7 +87,7 @@
 		08AFFB27B32CEE89929A2E6F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3E018CB6D4E97B91ADD8417C /* Pods_iosApp.framework */,
+				52D35B8D26ECF6F5007B1D81 /* ACarousel */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -303,7 +301,7 @@
 			);
 			name = iosApp;
 			packageProductDependencies = (
-				52D975A026EA117A00895B17 /* ACarousel */,
+				52D35BFE26ECF9F1007B1D81 /* ACarousel */,
 			);
 			productName = iosApp;
 			productReference = 7555FF7B242A565900829871 /* iosApp.app */;
@@ -334,7 +332,6 @@
 			);
 			mainGroup = 7555FF72242A565900829871;
 			packageReferences = (
-				52D9759F26EA117A00895B17 /* XCRemoteSwiftPackageReference "ACarousel" */,
 			);
 			productRefGroup = 7555FF7C242A565900829871 /* Products */;
 			projectDirPath = "";
@@ -612,21 +609,9 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		52D9759F26EA117A00895B17 /* XCRemoteSwiftPackageReference "ACarousel" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/JWAutumn/ACarousel.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.2.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
 /* Begin XCSwiftPackageProductDependency section */
-		52D975A026EA117A00895B17 /* ACarousel */ = {
+		52D35BFE26ECF9F1007B1D81 /* ACarousel */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 52D9759F26EA117A00895B17 /* XCRemoteSwiftPackageReference "ACarousel" */;
 			productName = ACarousel;
 		};
 /* End XCSwiftPackageProductDependency section */
