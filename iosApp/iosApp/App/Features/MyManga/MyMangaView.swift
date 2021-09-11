@@ -14,7 +14,6 @@ import ACarousel
 struct MyMangaView: View {
 
   @ObservedObject var viewModel: MyMangaViewModel
-  @GestureState private var dragState: DragState = .inactive
   @State var position = 0
 
   var body: some View {
@@ -34,26 +33,48 @@ struct MyMangaView: View {
               .padding(.top, -60)
 
             ACarousel(
-              Array(viewModel.mangas.enumerated()), id: \.offset,
+              viewModel.mangas,
+              id: \.self,
               spacing: 20,
               headspace: 50,
-              isWrap: true) { index, manga in
+              isWrap: true) { manga in
+
               WebImage(url: URL(string: manga.attributes?.posterImage?.original ?? ""))
                 .resizable()
                 .indicator(.activity)
                 .cornerRadius(12)
-            }.frame(height: 360)
-            .gesture(
-              DragGesture()
-                .onEnded { _ in
-                  position += 1
-                }
-            )
+
+            }.frame(height: 400)
+            .padding(.top, 70)
+//            .simultaneousGesture(
+//              DragGesture().onEnded(onDragEnded)
+//            )
           }
         }
 
         Spacer()
       }
+    }
+  }
+
+  private func onDragEnded(drag: DragGesture.Value) {
+    let dragThreshold: CGFloat = 200
+    if drag.predictedEndTranslation.width > dragThreshold || drag.translation.width > dragThreshold {
+
+      if position != viewModel.mangas.startIndex {
+        position = position - 1
+      } else {
+        position = viewModel.mangas.count - 1
+      }
+
+    } else if (drag.predictedEndTranslation.width) < (-1 * dragThreshold) || (drag.translation.width) < (-1 * dragThreshold) {
+
+      if position != viewModel.mangas.count - 1 {
+        position = position + 1
+      } else {
+        position = 0
+      }
+
     }
   }
 }
