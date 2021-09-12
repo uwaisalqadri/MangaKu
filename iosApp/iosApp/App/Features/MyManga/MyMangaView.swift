@@ -14,6 +14,7 @@ import ACarousel
 struct MyMangaView: View {
 
   @ObservedObject var viewModel: MyMangaViewModel
+  @ObservedObject var browseViewModel: BrowseViewModel
   @State var position: Int = 0
 
   var body: some View {
@@ -62,11 +63,11 @@ struct MyMangaView: View {
 
             HStack {
               VStack {
-                Text("Volume 72")
+                Text("Volume \(viewModel.mangas[position].attributes?.volumeCount ?? "0")")
                   .font(.custom(.mbold, size: 18))
                   .padding(.leading, 70)
 
-                Text("04-08-2021")
+                Text("04-05-2021")
                   .font(.custom(.mmedium, size: 16))
                   .padding(.leading, 70)
               }
@@ -74,7 +75,7 @@ struct MyMangaView: View {
               Spacer()
 
               Button(action: {
-                print("remove")
+                browseViewModel.removeFavoriteManga(mangaId: viewModel.mangas[position].id)
               }) {
                 Text("Remove Favorite")
                   .foregroundColor(.white)

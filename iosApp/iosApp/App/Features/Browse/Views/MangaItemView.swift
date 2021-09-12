@@ -32,11 +32,11 @@ struct MangaItemView: View {
           .padding(.top, 5)
 
         HStack {
-          Text(manga.attributes?.updatedAt.toDate()?.toString() ?? "00")
+          Text("04-05-2021")
             .font(.custom(.mbold, size: 12))
             .foregroundColor(.secondary)
 
-          Text("Vol.\(manga.attributes?.volumeCount == "null" ? "0" : manga.attributes?.volumeCount ?? "")")
+          Text("Vol.\(manga.attributes?.volumeCount ?? "0")")
             .font(.custom(.mbold, size: 15))
         }.padding(.top, 5)
 

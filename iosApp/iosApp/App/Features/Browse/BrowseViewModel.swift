@@ -32,11 +32,18 @@ class BrowseViewModel: ObservableObject {
   }
 
   func addFavoriteManga(manga: Manga) {
-    favoriteUseCase.add(manga: manga)
+    var ids = [String]()
+    trendingManga.forEach { item in
+      ids.append(item.id)
+    }
+
+    if !ids.contains(manga.id) {
+      favoriteUseCase.add(manga: manga)
+    }
   }
 
-  func removeFavoriteManga(mangaId: Int32) {
-    favoriteUseCase.delete(mangaId: mangaId)
+  func removeFavoriteManga(mangaId: String) {
+    favoriteUseCase.delete(mangaId: Int32(mangaId) ?? 0)
   }
 
   private func fetchManga() {

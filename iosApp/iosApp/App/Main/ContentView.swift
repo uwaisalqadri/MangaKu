@@ -21,7 +21,7 @@ struct ContentView: View {
         BrowseView(viewModel: assembler.resolve())
           .animation(.none)
       case 2:
-        MyMangaView(viewModel: assembler.resolve())
+        MyMangaView(viewModel: assembler.resolve(), browseViewModel: assembler.resolve())
       default:
         SavedView()
       }
