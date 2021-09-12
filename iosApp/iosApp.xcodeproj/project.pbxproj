@@ -30,9 +30,7 @@
 		52EBD6E526AE82E000E1C28F /* mashanzheng-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 52EBD6E426AE82E000E1C28F /* mashanzheng-regular.ttf */; };
 		52EBD6E826AE831400E1C28F /* montserrat-medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 52EBD6E726AE831400E1C28F /* montserrat-medium.ttf */; };
 		52EBD6EB26AE845D00E1C28F /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBD6EA26AE845D00E1C28F /* Fonts.swift */; };
-		52FFF17126AEA1B2006A3621 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FFF17026AEA1B2006A3621 /* Date.swift */; };
 		52FFF17526AEA221006A3621 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FFF17426AEA221006A3621 /* String.swift */; };
-		52FFF18026AFAA07006A3621 /* MangaCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FFF17F26AFAA07006A3621 /* MangaCarouselView.swift */; };
 		52FFF18426AFAEE9006A3621 /* KotlinCoreAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FFF18326AFAEE9006A3621 /* KotlinCoreAssembler.swift */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
 /* End PBXBuildFile section */
@@ -62,9 +60,7 @@
 		52EBD6E426AE82E000E1C28F /* mashanzheng-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "mashanzheng-regular.ttf"; path = "../../../../../../../Downloads/Ma_Shan_Zheng/mashanzheng-regular.ttf"; sourceTree = "<group>"; };
 		52EBD6E726AE831400E1C28F /* montserrat-medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "montserrat-medium.ttf"; path = "../../../../../../../Downloads/GithubUserSecond/app/src/main/res/font/montserrat-medium.ttf"; sourceTree = "<group>"; };
 		52EBD6EA26AE845D00E1C28F /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
-		52FFF17026AEA1B2006A3621 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		52FFF17426AEA221006A3621 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
-		52FFF17F26AFAA07006A3621 /* MangaCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangaCarouselView.swift; sourceTree = "<group>"; };
 		52FFF18326AFAEE9006A3621 /* KotlinCoreAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KotlinCoreAssembler.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -106,14 +102,6 @@
 			children = (
 				52EBD6D426AE5A5900E1C28F /* MangaItemView.swift */,
 				52EBD6D726AE645E00E1C28F /* GenreView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		5224F40626AC23D400D0D6E8 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				52FFF17F26AFAA07006A3621 /* MangaCarouselView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -168,7 +156,6 @@
 		5246F3AB26AB9C8D00CCDA56 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				52FFF17026AEA1B2006A3621 /* Date.swift */,
 				52FFF17426AEA221006A3621 /* String.swift */,
 				521864F826E8E1850045150A /* Manga.swift */,
 			);
@@ -229,7 +216,6 @@
 		5246F3B426AB9D5200CCDA56 /* MyManga */ = {
 			isa = PBXGroup;
 			children = (
-				5224F40626AC23D400D0D6E8 /* Views */,
 				52B7691D26ABCE9D00227903 /* MyMangaView.swift */,
 				52B7692426ABCECD00227903 /* MyMangaViewModel.swift */,
 			);
@@ -410,7 +396,6 @@
 				5224F40F26AC38CF00D0D6E8 /* FeatureAssembler.swift in Sources */,
 				52EBD6EB26AE845D00E1C28F /* Fonts.swift in Sources */,
 				52B7692126ABCEAC00227903 /* BrowseViewModel.swift in Sources */,
-				52FFF17126AEA1B2006A3621 /* Date.swift in Sources */,
 				52EBD6D826AE645E00E1C28F /* GenreView.swift in Sources */,
 				52B7692826ABCEE200227903 /* SavedViewModel.swift in Sources */,
 				52B7691826ABCE6F00227903 /* BrowseView.swift in Sources */,
@@ -420,7 +405,6 @@
 				521864F926E8E1850045150A /* Manga.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
-				52FFF18026AFAA07006A3621 /* MangaCarouselView.swift in Sources */,
 				5278F04C26B5279400B4249D /* Weakifiable.swift in Sources */,
 				5246F3A826AB9C5200CCDA56 /* AppAssembler.swift in Sources */,
 				52FFF18426AFAEE9006A3621 /* KotlinCoreAssembler.swift in Sources */,
