@@ -17,8 +17,6 @@ struct MyMangaView: View {
   @ObservedObject var browseViewModel: BrowseViewModel
   @State var position: Int = 0
 
-  private let extensions = Extensions()
-
   var body: some View {
     GeometryReader { view in
       NavigationView {
@@ -50,9 +48,9 @@ struct MyMangaView: View {
 
               }.frame(height: view.size.height / 2)
               .padding(.top, 50)
-              //.simultaneousGesture(
-              //  DragGesture().onEnded(onDragEnded)
-              //)
+              .simultaneousGesture(
+                DragGesture().onEnded(onDragEnded)
+              )
             }
 
             HStack {
@@ -69,7 +67,7 @@ struct MyMangaView: View {
                   .font(.custom(.mbold, size: 18))
                   .padding(.leading, 70)
 
-                Text(extensions.fromKotlinDate(date: viewModel.mangas[position].attributes?.updatedAt ?? ""))
+                Text(viewModel.mangas[position].attributes?.startDate ?? "")
                   .font(.custom(.mmedium, size: 16))
                   .padding(.leading, 70)
               }
