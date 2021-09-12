@@ -36,7 +36,7 @@ struct MangaItemView: View {
             .font(.custom(.mbold, size: 12))
             .foregroundColor(.secondary)
 
-          Text("Vol.\(manga.attributes?.volumeCount ?? "0")")
+          Text("Ch.\(manga.attributes?.chapterCount.ifEmpty(manga.attributes?.volumeCount.ifEmpty("0") ?? "0") ?? "0")")
             .font(.custom(.mbold, size: 15))
         }.padding(.top, 5)
 
