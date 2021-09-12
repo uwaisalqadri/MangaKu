@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import KotlinCore
 import Combine
+import KotlinCore
 import KMPNativeCoroutinesCombine
 
 class MyMangaViewModel: ObservableObject {

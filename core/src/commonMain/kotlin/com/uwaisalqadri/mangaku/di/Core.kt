@@ -81,7 +81,7 @@ val repositoryModule = module {
 
 val realmModule = module {
     single { LocalDataSource(get()) }
-    single { createRealmDatabase() }
+    single { createRealmDatabase(get()) }
 }
 
 val networkModule = module {
@@ -91,7 +91,7 @@ val networkModule = module {
     single { Kermit(CommonLogger()) }
 }
 
-fun createRealmDatabase(): Realm {
+fun createRealmDatabase(kermit: Kermit): Realm {
     val configuration = RealmConfiguration(schema = setOf(
         MangaObject::class,
         AttributesObject::class,
@@ -99,7 +99,6 @@ fun createRealmDatabase(): Realm {
         PosterImageObject::class,
         TitlesObject::class
     ))
-    val kermit = Kermit(CommonLogger())
     kermit.d("realm") { configuration.path }
     kermit.d("realm") { configuration.name }
     kermit.d("realm") { configuration.log.toString() }

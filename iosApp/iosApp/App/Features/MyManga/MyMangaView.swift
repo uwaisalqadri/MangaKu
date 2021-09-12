@@ -67,7 +67,7 @@ struct MyMangaView: View {
                   .font(.custom(.mbold, size: 18))
                   .padding(.leading, 70)
 
-                Text("04-05-2021")
+                Text(viewModel.mangas[position].attributes?.volumeCount.toLocalDate())
                   .font(.custom(.mmedium, size: 16))
                   .padding(.leading, 70)
               }

@@ -47,6 +47,7 @@ kotlin {
                 with(Kotlinx) {
                     implementation(serialization)
                     implementation(coroutine)
+                    implementation(datetime)
                 }
 
                 with(Log) {
