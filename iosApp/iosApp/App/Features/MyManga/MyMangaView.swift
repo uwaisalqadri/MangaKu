@@ -15,12 +15,7 @@ struct MyMangaView: View {
 
   @ObservedObject var viewModel: MyMangaViewModel
   @State var itemWidth: CGFloat = 0.0
-  @State var position = 0
-
-  var dragGesture: some Gesture {
-    DragGesture()
-      .onEnded(onDragEnded)
-  }
+  @State var position: Int = 0
 
   var body: some View {
     GeometryReader { view in
@@ -44,8 +39,7 @@ struct MyMangaView: View {
                 id: \.self,
                 spacing: 20,
                 headspace: 50,
-                isWrap: true,
-                dragGesture: dragGesture as! DragGesture) { manga in
+                isWrap: true) { manga in
 
                 WebImage(url: URL(string: manga.attributes?.posterImage?.original ?? ""))
                   .resizable()
@@ -54,8 +48,46 @@ struct MyMangaView: View {
 
               }.frame(height: 400)
               .padding(.top, 70)
+//              .simultaneousGesture(
+//                DragGesture().onEnded(onDragEnded)
+//              )
             }
           }
+
+          HStack {
+            StarsView()
+              .padding(.leading, 70)
+
+            Spacer()
+            
+          }.padding(.top, 10)
+
+          HStack {
+            VStack {
+              Text("Volume 72")
+                .font(.system(size: 18, weight: .bold))
+                .padding(.leading, 70)
+
+              Text("04-08-2021")
+                .font(.system(size: 16))
+                .padding(.leading, 70)
+            }
+
+            Spacer()
+
+            Button(action: {
+              print("remove")
+            }) {
+              Text("Remove Favorite")
+                .foregroundColor(.white)
+                .font(.system(size: 15, weight: .bold))
+                .padding(20)
+            }.background(Color.black)
+            .frame(height: 40)
+            .cornerRadius(10)
+            .padding(.trailing, 70)
+
+          }.padding(.top, 5)
 
           Spacer()
         }
@@ -65,8 +97,8 @@ struct MyMangaView: View {
     }
   }
 
-  private func onDragEnded(drag: DragGesture.Value) {
-    let dragThreshold: CGFloat = itemWidth / 2
+  private func onDragEnded(_ drag: DragGesture.Value) {
+    let dragThreshold: CGFloat = 200
 
     if drag.predictedEndTranslation.width > dragThreshold || drag.translation.width > dragThreshold {
 
@@ -83,7 +115,7 @@ struct MyMangaView: View {
       } else {
         position = 0
       }
-
     }
+
   }
 }
