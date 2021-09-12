@@ -1,8 +1,8 @@
 PODS:
   - core (1.0)
-  - KMPNativeCoroutinesCombine (0.5.0):
+  - KMPNativeCoroutinesCombine (0.6.0):
     - KMPNativeCoroutinesCore
-  - KMPNativeCoroutinesCore (0.5.0)
+  - KMPNativeCoroutinesCore (0.6.0)
   - SDWebImage (5.11.1):
     - SDWebImage/Core (= 5.11.1)
   - SDWebImage/Core (5.11.1)
@@ -27,8 +27,8 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   core: 951e288239e87d33cc9cd8c003043f7e128dbc95
-  KMPNativeCoroutinesCombine: c17e07579f12551998830bb02ee78a441839227f
-  KMPNativeCoroutinesCore: 916c68ae1d7396b0a07ece46962ecd4bc799319b
+  KMPNativeCoroutinesCombine: af5ce48fc2f42374c8497475ed49063d7433a790
+  KMPNativeCoroutinesCore: 9e575c725afddd5396eb5be642b768ce3f073c64
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   SDWebImageSwiftUI: 8a3923c95108312b03a599ec1498754af55a6819
 

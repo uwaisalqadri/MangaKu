@@ -17,6 +17,8 @@ struct MyMangaView: View {
   @ObservedObject var browseViewModel: BrowseViewModel
   @State var position: Int = 0
 
+  private let extensions = Extensions()
+
   var body: some View {
     GeometryReader { view in
       NavigationView {
@@ -67,7 +69,7 @@ struct MyMangaView: View {
                   .font(.custom(.mbold, size: 18))
                   .padding(.leading, 70)
 
-                Text(viewModel.mangas[position].attributes?.volumeCount.toLocalDate())
+                Text(extensions.fromKotlinDate(date: viewModel.mangas[position].attributes?.updatedAt ?? ""))
                   .font(.custom(.mmedium, size: 16))
                   .padding(.leading, 70)
               }

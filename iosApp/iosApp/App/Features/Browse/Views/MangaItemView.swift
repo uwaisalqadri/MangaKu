@@ -15,6 +15,8 @@ struct MangaItemView: View {
   let manga: Manga
   var onReadMoreListener: ((Manga) -> Void)?
 
+  private let extensions = Extensions()
+
   var body: some View {
     HStack {
       WebImage(url: URL(string: manga.attributes?.posterImage?.original ?? ""))
@@ -32,7 +34,7 @@ struct MangaItemView: View {
           .padding(.top, 5)
 
         HStack {
-          Text("04-05-2021")
+          Text(extensions.fromKotlinDate(date: manga.attributes?.updatedAt ?? ""))
             .font(.custom(.mbold, size: 12))
             .foregroundColor(.secondary)
 
