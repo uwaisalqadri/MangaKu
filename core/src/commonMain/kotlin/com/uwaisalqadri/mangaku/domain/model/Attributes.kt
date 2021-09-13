@@ -3,19 +3,18 @@ package com.uwaisalqadri.mangaku.domain.model
 data class Attributes(
     val ageRating: String,
     val ageRatingGuide: String,
-    val averageRating: String,
+    val averageRating: Double,
     val canonicalTitle: String,
-    val chapterCount: String,
+    val chapterCount: Int,
     val coverImage: CoverImage? = null,
-    val createdAt: String,
     val description: String,
     val endDate: String,
-    val favoritesCount: String,
+    val favoritesCount: Int,
     val mangaType: String,
     val nextRelease: String,
     val popularityRank: String,
     val posterImage: PosterImage? = null,
-    val ratingRank: String,
+    val ratingRank: Int,
     val serialization: String,
     val slug: String,
     val startDate: String,
@@ -24,7 +23,6 @@ data class Attributes(
     val synopsis: String,
     val tba: String,
     val titles: Titles? = null,
-    val updatedAt: String,
-    val userCount: String,
-    val volumeCount: String
+    val userCount: Int,
+    val volumeCount: Int
 )

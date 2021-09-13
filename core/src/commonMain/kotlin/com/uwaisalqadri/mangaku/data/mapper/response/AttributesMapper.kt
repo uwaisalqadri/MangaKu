@@ -14,19 +14,18 @@ class AttributesMapper(
         return Attributes(
             model.ageRating ?: "",
             model.ageRatingGuide ?: "",
-            model.averageRating ?: "",
+            model.averageRating ?: 0.0,
             model.canonicalTitle ?: "",
-            model.chapterCount ?: "",
+            model.chapterCount ?: 0,
             model.coverImage?.let { coverImageMapper.mapToDomain(it) },
-            model.createdAt ?: "",
             model.description ?: "",
             model.endDate ?: "",
-            model.favoritesCount ?: "",
+            model.favoritesCount ?: 0,
             model.mangaType ?: "",
             model.nextRelease ?: "",
             model.popularityRank ?: "",
             model.posterImage?.let { posterImageMapper.mapToDomain(it) },
-            model.ratingRank ?: "",
+            model.ratingRank ?: 0,
             model.serialization ?: "",
             model.slug ?: "",
             model.startDate ?: "",
@@ -35,9 +34,8 @@ class AttributesMapper(
             model.synopsis ?: "",
             model.tba ?: "",
             model.titles?.let { titlesMapper.mapToDomain(it) },
-            model.updatedAt ?: "",
-            model.userCount ?: "",
-            model.volumeCount ?: ""
+            model.userCount ?: 0,
+            model.volumeCount ?: 0
         )
     }
 
@@ -49,7 +47,6 @@ class AttributesMapper(
             domain.canonicalTitle,
             domain.chapterCount,
             domain.coverImage?.let { coverImageMapper.mapToModel(it) },
-            domain.createdAt,
             domain.description,
             domain.endDate,
             domain.favoritesCount,
@@ -66,7 +63,6 @@ class AttributesMapper(
             domain.synopsis,
             domain.tba,
             domain.titles?.let { titlesMapper.mapToModel(it) },
-            domain.updatedAt,
             domain.userCount,
             domain.volumeCount
         )

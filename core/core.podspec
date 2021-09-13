@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
     spec.name                     = 'core'
     spec.version                  = '1.0'
-    spec.homepage                 = 'https://github.com/uwais123/MangaApp'
+    spec.homepage                 = 'https://github.com/uwaisalqadri/MangaKu'
     spec.source                   = { :git => "Not Published", :tag => "Cocoapods/#{spec.name}/#{spec.version}" }
     spec.authors                  = ''
     spec.license                  = ''

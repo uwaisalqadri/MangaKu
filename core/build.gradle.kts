@@ -10,11 +10,19 @@ plugins {
     id(Plugins.koin)
 }
 
+// CocoaPods requires the podspec to have a version.
 version = "1.0"
 
-kotlin {
-    android()
+android {
+    compileSdk = 30
+    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
+    defaultConfig {
+        minSdk = 27
+        targetSdk = 30
+    }
+}
 
+kotlin {
     val iosTarget: (String, KotlinNativeTarget.() -> Unit) -> KotlinNativeTarget =
         if (System.getenv("SDK_NAME")?.startsWith("iphoneos") == true)
             ::iosArm64
@@ -22,10 +30,11 @@ kotlin {
             ::iosX64
 
     iosTarget("ios") {}
+    android()
 
     cocoapods {
         summary = "MangaApp"
-        homepage = "https://github.com/uwais123/MangaApp"
+        homepage = "https://github.com/uwaisalqadri/MangaKu"
         ios.deploymentTarget = "14.1"
         frameworkName = "KotlinCore"
         podfile = project.file("../iosApp/Podfile")
@@ -50,7 +59,7 @@ kotlin {
                     implementation(datetime)
                 }
 
-                with(Log) {
+                with(Kermit) {
                     api(kermit)
                     implementation(kotlin("stdlib-common"))
                 }
@@ -81,14 +90,5 @@ kotlin {
             }
         }
         val iosTest by getting
-    }
-}
-
-android {
-    compileSdk = 30
-    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
-    defaultConfig {
-        minSdk = 27
-        targetSdk = 30
     }
 }

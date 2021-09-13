@@ -2,7 +2,7 @@
  * Created by Uwais Alqadri on July 23, 2021
  */
 object Compose {
-	const val composeVersion = "1.0.1"
+	const val composeVersion = "1.0.2"
 	const val runtime = "androidx.compose.runtime:runtime:${composeVersion}"
 	const val runtimeLiveData = "androidx.compose.runtime:runtime-livedata:${composeVersion}"
 	const val ui = "androidx.compose.ui:ui:${composeVersion}"

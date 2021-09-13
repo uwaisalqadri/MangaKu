@@ -10,10 +10,6 @@ class LocalDataSource(
     private val realm: Realm
 ) {
 
-    fun getAllMangaAsFlowable(): Flow<List<MangaObject>> {
-        return realm.objects<MangaObject>().observe()
-    }
-
     fun getAllManga(): List<MangaObject> {
         return realm.objects(MangaObject::class)
     }

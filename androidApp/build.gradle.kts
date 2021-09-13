@@ -5,6 +5,7 @@ plugins {
 
 android {
     compileSdk = 30
+
     defaultConfig {
         applicationId = "com.uwaisalqadri.mangaapp.android"
         minSdk = 27
@@ -15,8 +16,12 @@ android {
 
     buildTypes {
         getByName("release") {
-            multiDexEnabled = false
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
 
@@ -36,6 +41,12 @@ android {
 
     composeOptions {
         kotlinCompilerExtensionVersion = Compose.composeVersion
+    }
+
+    packagingOptions {
+        resources.excludes.add("META-INF/licenses/**")
+        resources.excludes.add("META-INF/AL2.0")
+        resources.excludes.add("META-INF/LGPL2.1")
     }
 }
 

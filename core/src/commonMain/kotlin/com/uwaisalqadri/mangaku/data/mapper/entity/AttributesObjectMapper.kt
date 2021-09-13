@@ -18,7 +18,6 @@ class AttributesObjectMapper(
             model.canonicalTitle,
             model.chapterCount,
             model.coverImage?.let { coverImageMapper.mapToDomain(it) },
-            model.createdAt,
             model.description,
             model.endDate,
             model.favoritesCount,
@@ -35,7 +34,6 @@ class AttributesObjectMapper(
             model.synopsis,
             model.tba,
             model.titles?.let { titlesMapper.mapToDomain(it) },
-            model.updatedAt,
             model.userCount,
             model.volumeCount
         )
@@ -49,7 +47,6 @@ class AttributesObjectMapper(
         attributes.canonicalTitle = domain.canonicalTitle
         attributes.chapterCount = domain.chapterCount
         attributes.coverImage = domain.coverImage?.let { coverImageMapper.mapToModel(it) }
-        attributes.createdAt = domain.createdAt
         attributes.description = domain.description
         attributes.endDate = domain.endDate
         attributes.favoritesCount = domain.favoritesCount
@@ -66,7 +63,6 @@ class AttributesObjectMapper(
         attributes.synopsis = domain.synopsis
         attributes.tba = domain.tba
         attributes.titles = domain.titles?.let { titlesMapper.mapToModel(it) }
-        attributes.updatedAt = domain.updatedAt
         attributes.userCount = domain.userCount
         attributes.volumeCount = domain.volumeCount
         return attributes
