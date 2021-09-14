@@ -10,7 +10,7 @@
         android:label="BrowseFragment" />
     <fragment
         android:id="@+id/navigation_saved"
-        android:name="com.uwaisalqadri.mangaku.android.ui.saved.SavedFragment"
+        android:name="com.uwaisalqadri.mangaku.android.ui.search.SearchFragment"
         android:label="SavedFragment" />
     <fragment
         android:id="@+id/navigation_mymanga"

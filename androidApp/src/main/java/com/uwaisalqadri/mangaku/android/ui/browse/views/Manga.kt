@@ -8,6 +8,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.materialIcon
+import androidx.compose.material.icons.outlined.Grade
+import androidx.compose.material.icons.outlined.Star
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -18,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.google.accompanist.coil.rememberCoilPainter
 import com.uwaisalqadri.mangaku.android.ui.theme.MangaTypography
+import com.uwaisalqadri.mangaku.android.utils.getTitle
 import com.uwaisalqadri.mangaku.domain.model.Manga
 import com.uwaisalqadri.mangaku.utils.Extensions
 import kotlin.math.roundToInt
@@ -58,7 +61,7 @@ fun Manga(
             )
 
             Text(
-                text = getTitle(manga),
+                text = manga.getTitle(),
                 fontSize = 21.sp,
                 style = MangaTypography.h1,
                 maxLines = 2,
@@ -118,22 +121,18 @@ fun StarRate(
     Row(
         modifier = modifier
     ) {
+        val avgToFive = extensions.toFiveStars(averageRating)
         repeat(5) { index ->
             Icon(
                 imageVector =
-                if (extensions.toFiveStars(averageRating) <= index) Icons.Default.Star
-                else Icons.Default.Email, // TODO: change to not-filled star
+                if (avgToFive <= index - 1) Icons.Outlined.Grade
+                else Icons.Default.Star,
                 contentDescription = null,
                 tint = Color.Yellow,
                 modifier = Modifier.size(18.dp)
             )
         }
     }
-}
-
-private fun getTitle(manga: Manga): String {
-    val title = manga.attributes?.titles
-    return title?.ja_jp ?: title?.en_jp ?: title?.en_us ?: title?.en ?: ""
 }
 
 

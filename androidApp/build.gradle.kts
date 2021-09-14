@@ -73,6 +73,7 @@ dependencies {
         implementation(composeGraphics)
         implementation(composeActivity)
         implementation(composeNavigation)
+        implementation(composeMaterialIcon)
 
         implementation(ktorAndroid)
         implementation(koinAndroid)

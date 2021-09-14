@@ -1,4 +1,4 @@
-package com.uwaisalqadri.mangaku.android.ui.saved
+package com.uwaisalqadri.mangaku.android.ui.search
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +10,7 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import com.uwaisalqadri.mangaku.android.ui.components.TopBar
 
-class SavedFragment: Fragment() {
+class SearchFragment: Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,

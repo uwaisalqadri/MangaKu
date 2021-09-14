@@ -17,6 +17,7 @@ object Dependencies {
     const val composeGraphics = "androidx.compose.ui:ui-graphics:${Versions.compose}"
     const val composeFoundation = "androidx.compose.foundation:foundation:${Versions.compose}"
     const val composeFoundationLayout = "androidx.compose.foundation:foundation-layout:${Versions.compose}"
+    const val composeMaterialIcon = "androidx.compose.material:material-icons-extended:${Versions.compose}"
 
     const val composeActivity = "androidx.activity:activity-compose:${Versions.activityCompose}"
     const val composeNavigation = "androidx.navigation:navigation-compose:${Versions.navCompose}"

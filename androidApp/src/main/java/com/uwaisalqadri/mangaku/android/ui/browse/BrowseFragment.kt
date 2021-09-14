@@ -50,9 +50,7 @@ class BrowseFragment: Fragment() {
 
             Spacer(modifier = Modifier.height(35.dp))
 
-            if (viewModel.loading.value) {
-                Text(text = "Loading...")
-            } else {
+            if (viewModel.isLoaded.value) {
                 Text(
                     text = "Genre",
                     style = MangaTypography.h2,
@@ -81,6 +79,8 @@ class BrowseFragment: Fragment() {
                         .fillMaxHeight()
                         .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 120.dp)
                 )
+            } else {
+                Text(text = "Loading...")
             }
         }
     }
