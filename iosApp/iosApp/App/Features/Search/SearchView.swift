@@ -11,8 +11,6 @@ import SwiftUI
 struct SearchView: View {
 
   @ObservedObject var viewModel: SearchViewModel
-  @State var query: String = ""
-
   private let assembler = AppAssembler()
 
   var body: some View {
@@ -27,16 +25,7 @@ struct SearchView: View {
             .frame(width: 20, height: 20)
             .padding(.leading, 30)
 
-          TextField(
-            "Search Manga...",
-            text: $query,
-            onEditingChanged: { state in
-              if !state { viewModel.fetchSearchManga(query: query) }
-            },
-            onCommit: {
-              viewModel.fetchSearchManga(query: query)
-              print(query)
-            })
+          TextField("Search Manga...", text: $viewModel.searchQuery)
             .foregroundColor(.init(.darkGray))
             .font(.custom(.mmedium, size: 16))
             .frame(height: 40)

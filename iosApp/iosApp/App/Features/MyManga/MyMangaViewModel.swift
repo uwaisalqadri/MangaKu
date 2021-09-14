@@ -38,6 +38,7 @@ class MyMangaViewModel: ObservableObject {
         }
       } receiveValue: { value in
         self.mangas = value
+        print("REALM", value)
       }.store(in: &cancellables)
   }
 }

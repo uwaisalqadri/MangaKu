@@ -16,15 +16,34 @@ class SearchViewModel: ObservableObject {
   @Published var mangas = [Manga]()
   @Published var errorMessage = ""
   @Published var loading = false
+  @Published var searchQuery: String = ""
 
   private let searcUseCase: GetMangaSearchUseCase
   private var cancellables = Set<AnyCancellable>()
 
   init(searcUseCase: GetMangaSearchUseCase) {
     self.searcUseCase = searcUseCase
+
+    $searchQuery
+      .debounce(for: .milliseconds(800), scheduler: RunLoop.main)
+      .removeDuplicates()
+      .map { string in
+        if string.count < 1 {
+          self.mangas = []
+          return nil
+        }
+        return string
+      }
+      .compactMap { $0 }
+      .sink { (_) in
+
+      } receiveValue: { searchField in
+        self.fetchSearchManga(query: searchField)
+
+      }.store(in: &cancellables)
   }
 
-  func fetchSearchManga(query: String) {
+  private func fetchSearchManga(query: String) {
     loading = true
     createPublisher(for: searcUseCase.invokeNative(query: query))
       .receive(on: DispatchQueue.main)
