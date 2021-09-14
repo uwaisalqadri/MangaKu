@@ -12,6 +12,8 @@ import KotlinCore
 protocol FeatureAssembler {
   func resolve() -> BrowseViewModel
   func resolve() -> MyMangaViewModel
+  func resolve() -> SearchViewModel
+  func resolve() -> DetailViewModel
 }
 
 extension FeatureAssembler where Self: Assembler {
@@ -22,5 +24,13 @@ extension FeatureAssembler where Self: Assembler {
 
   func resolve() -> MyMangaViewModel {
     return MyMangaViewModel(favoriteUseCase: resolve())
+  }
+
+  func resolve() -> SearchViewModel {
+    return SearchViewModel(searcUseCase: resolve())
+  }
+
+  func resolve() -> DetailViewModel {
+    return DetailViewModel(detailUseCase: resolve())
   }
 }

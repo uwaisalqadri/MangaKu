@@ -26,7 +26,7 @@ import kotlin.math.roundToInt
 fun Manga(
     manga: Manga,
     modifier: Modifier = Modifier,
-    onReadMore: ((Manga) -> Unit)? = null
+    onReadMore: ((Manga) -> Unit)? = null,
 ) {
     Row(
         modifier = modifier
@@ -72,7 +72,7 @@ fun Manga(
                     .fillMaxWidth()
             ) {
                 Text(
-                    text = "04-05-2019", // TODO: Need Date Formatter
+                    text = manga.attributes?.startDate ?: "",
                     fontSize = 12.sp,
                     color = Color.Gray,
                     style = MangaTypography.h1
@@ -122,7 +122,7 @@ fun StarRate(
             Icon(
                 imageVector =
                 if (extensions.toFiveStars(averageRating) <= index) Icons.Default.Star
-                else Icons.Default.Email,
+                else Icons.Default.Email, // TODO: change to not-filled star
                 contentDescription = null,
                 tint = Color.Yellow,
                 modifier = Modifier.size(18.dp)
@@ -132,13 +132,8 @@ fun StarRate(
 }
 
 private fun getTitle(manga: Manga): String {
-    return when {
-        manga.attributes?.titles?.en?.isNotEmpty() == true -> manga.attributes?.titles?.en ?: ""
-        manga.attributes?.titles?.en_jp?.isNotEmpty() == true -> manga.attributes?.titles?.en_jp ?: ""
-        manga.attributes?.titles?.en_us?.isNotEmpty() == true -> manga.attributes?.titles?.en_us ?: ""
-        manga.attributes?.titles?.ja_jp?.isNotEmpty() == true -> manga.attributes?.titles?.ja_jp ?: ""
-        else -> "No Title"
-    }
+    val title = manga.attributes?.titles
+    return title?.ja_jp ?: title?.en_jp ?: title?.en_us ?: title?.en ?: ""
 }
 
 

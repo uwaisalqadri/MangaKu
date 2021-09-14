@@ -61,7 +61,7 @@ class BrowseViewModel: ObservableObject {
         self.mangas = value
       }.store(in: &cancellables)
   }
-
+  
   private func fetchTrendingManga() {
     loading = true
     createPublisher(for: trendingUseCase.invokeNative())
