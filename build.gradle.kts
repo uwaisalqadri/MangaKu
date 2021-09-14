@@ -8,7 +8,7 @@ buildscript {
     dependencies {
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.21")
         classpath("com.android.tools.build:gradle:7.0.2")
-        classpath("io.insert-koin:koin-gradle-plugin:${Koin.version}")
+        classpath("io.insert-koin:koin-gradle-plugin:${Versions.koin}")
     }
 
 }

@@ -1,24 +1,30 @@
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
-    kotlin(KotlinPlugins.multiplatform)
-    kotlin(KotlinPlugins.cocoapods)
-    kotlin(KotlinPlugins.serialization) version "1.5.0"
-    id(Plugins.androidLibrary)
-    id(Plugins.realm) version Realm.version
-    id(Plugins.kmpNativeCoroutine) version "0.5.0"
-    id(Plugins.koin)
+    kotlin("multiplatform")
+    kotlin("native.cocoapods")
+    kotlin("plugin.serialization") version "1.5.0"
+    id("com.android.library")
+    id("io.realm.kotlin") version Versions.realm
+    id("com.rickclephas.kmp.nativecoroutines") version "0.5.0"
+    id("koin")
 }
 
 // CocoaPods requires the podspec to have a version.
 version = "1.0"
 
 android {
-    compileSdk = 30
+    compileSdk = AndroidConfigs.compileSdkVersion
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
+
     defaultConfig {
-        minSdk = 27
-        targetSdk = 30
+        minSdk = AndroidConfigs.minSdkVersion
+        targetSdk = AndroidConfigs.targetSdkVersion
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
 }
 
@@ -43,37 +49,34 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+                with(Dependencies) {
+                    implementation(realmKotlin)
+                    implementation(koinCore)
 
-                implementation(Realm.realm)
-                implementation(Koin.core)
+                    implementation(ktorCore)
+                    implementation(ktorClientSerialization)
+                    implementation(ktorLogging)
 
-                with(Ktor) {
-                    implementation(core)
-                    implementation(clientSerialization)
-                    implementation(logging)
-                }
+                    implementation(ktxSerialization)
+                    implementation(ktxCoroutine)
+                    implementation(ktxDateTime)
 
-                with(Kotlinx) {
-                    implementation(serialization)
-                    implementation(coroutine)
-                    implementation(datetime)
-                }
-
-                with(Kermit) {
-                    api(kermit)
+                    api(kermitLogger)
                     implementation(kotlin("stdlib-common"))
                 }
             }
         }
         val androidMain by getting {
             dependencies {
-                implementation(Ktor.android)
-                implementation(Koin.android)
+                with(Dependencies) {
+                    implementation(ktorAndroid)
+                    implementation(koinAndroid)
+                }
             }
         }
         val iosMain by getting {
             dependencies {
-                implementation(Ktor.ios)
+                implementation(Dependencies.ktorIos)
             }
         }
 

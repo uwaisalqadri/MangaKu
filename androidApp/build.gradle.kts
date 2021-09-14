@@ -4,20 +4,20 @@ plugins {
 }
 
 android {
-    compileSdk = 30
+    compileSdk = AndroidConfigs.compileSdkVersion
 
     defaultConfig {
-        applicationId = "com.uwaisalqadri.mangaapp.android"
-        minSdk = 27
-        targetSdk = 30
+        applicationId = AndroidConfigs.applicationId
+        minSdk = AndroidConfigs.minSdkVersion
+        targetSdk = AndroidConfigs.targetSdkVersion
         versionCode = 1
         versionName = "1.0"
+        multiDexEnabled = true
     }
 
     buildTypes {
         getByName("release") {
-            isMinifyEnabled = true
-            isShrinkResources = true
+            isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -37,40 +37,46 @@ android {
 
     kotlinOptions {
         jvmTarget = "1.8"
+        useIR = true
+        freeCompilerArgs = freeCompilerArgs + "-Xopt-in=kotlin.RequiresOptIn"
+
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = Compose.composeVersion
+        kotlinCompilerExtensionVersion = AndroidConfigs.kotlinCompilerExtensionVersion
     }
 
     packagingOptions {
-        resources.excludes.add("META-INF/licenses/**")
-        resources.excludes.add("META-INF/AL2.0")
-        resources.excludes.add("META-INF/LGPL2.1")
+        resources.excludes.apply {
+            add("META-INF/AL2.0")
+            add("META-INF/LGPL2.1")
+        }
     }
 }
 
 dependencies {
     implementation(project(":core"))
-    implementation("com.google.android.material:material:1.4.0")
-    implementation("androidx.appcompat:appcompat:1.3.1")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.0")
-    implementation ("androidx.navigation:navigation-fragment-ktx:2.3.5")
-    implementation ("androidx.navigation:navigation-ui-ktx:2.3.5")
-    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.3.1")
-    implementation(Compose.runtime)
-    implementation(Compose.runtimeLiveData)
-    implementation(Compose.ui)
-    implementation(Compose.material)
-    implementation(Compose.uiTooling)
-    implementation(Compose.foundation)
-    implementation(Compose.foundationLayout)
-    implementation(Compose.compiler)
-    implementation(Compose.constraintLayout)
-    implementation(Compose.activity)
-    implementation(Compose.navigation)
-    implementation(Ktor.android)
-    implementation(Koin.android)
-    implementation(Koin.compose)
-    implementation(Accompanist.coil)
+
+    with(Dependencies) {
+        implementation(androidMaterial)
+        implementation(androidAppCompat)
+        implementation(constraintLayout)
+        implementation(fragmentNavigation)
+        implementation(androidNavigation)
+        implementation(liveDataKtx)
+
+        implementation(composeUi)
+        implementation(composeMaterial)
+        implementation(composeTooling)
+        implementation(composeFoundation)
+        implementation(composeFoundationLayout)
+        implementation(composeGraphics)
+        implementation(composeActivity)
+        implementation(composeNavigation)
+
+        implementation(ktorAndroid)
+        implementation(koinAndroid)
+        implementation(koinCompose)
+        implementation(accompanistCoil)
+    }
 }
