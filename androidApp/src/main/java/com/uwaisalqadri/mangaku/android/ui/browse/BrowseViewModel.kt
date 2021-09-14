@@ -30,7 +30,7 @@ class BrowseViewModel(
         favoriteUseCase.add(manga)
     }
 
-    fun removeFavoriteManga(mangaId: Int) {
+    fun removeFavoriteManga(mangaId: String) {
         favoriteUseCase.delete(mangaId)
     }
 

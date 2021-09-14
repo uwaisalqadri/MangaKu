@@ -11,5 +11,5 @@ interface MangaRepository {
 
     suspend fun getFavoriteManga(): Flow<List<Manga>>
     fun addMangaFavorite(manga: Manga)
-    fun removeMangaFavorite(mangaId: Int)
+    fun removeMangaFavorite(mangaId: String)
 }

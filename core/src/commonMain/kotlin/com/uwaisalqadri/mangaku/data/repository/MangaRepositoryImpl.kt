@@ -58,7 +58,7 @@ class MangaRepositoryImpl(
         localDataSource.addManga(mapper)
     }
 
-    override fun removeMangaFavorite(mangaId: Int) {
+    override fun removeMangaFavorite(mangaId: String) {
         localDataSource.deleteManga(mangaId)
     }
 

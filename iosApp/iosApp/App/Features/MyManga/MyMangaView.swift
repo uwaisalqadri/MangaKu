@@ -14,7 +14,6 @@ import ACarousel
 struct MyMangaView: View {
 
   @ObservedObject var viewModel: MyMangaViewModel
-  @ObservedObject var browseViewModel: BrowseViewModel
   @State var position: Int = 0
 
   var body: some View {
@@ -75,7 +74,7 @@ struct MyMangaView: View {
               Spacer()
 
               Button(action: {
-                browseViewModel.removeFavoriteManga(mangaId: viewModel.mangas[position].id)
+                viewModel.removeFavoriteManga(mangaId: viewModel.mangas[position].id)
               }) {
                 Text("Remove Favorite")
                   .foregroundColor(.white)

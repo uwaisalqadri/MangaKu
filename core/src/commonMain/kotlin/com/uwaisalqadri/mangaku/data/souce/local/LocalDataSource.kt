@@ -20,7 +20,7 @@ class LocalDataSource(
         }
     }
 
-    fun deleteManga(mangaId: Int) {
+    fun deleteManga(mangaId: String) {
         realm.writeBlocking {
             objects(MangaObject::class).query("id = $0", mangaId).first().delete()
         }

@@ -5,7 +5,7 @@ import com.uwaisalqadri.mangaku.domain.repository.MangaRepository
 
 interface CreateMangaFavoriteUseCase {
     fun add(manga: Manga)
-    fun delete(mangaId: Int)
+    fun delete(mangaId: String)
 }
 
 class CreateMangaFavoriteInteractor(
@@ -16,7 +16,7 @@ class CreateMangaFavoriteInteractor(
         repository.addMangaFavorite(manga)
     }
 
-    override fun delete(mangaId: Int) {
+    override fun delete(mangaId: String) {
         repository.removeMangaFavorite(mangaId)
     }
 

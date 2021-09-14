@@ -109,7 +109,7 @@ extension KotlinCoreAssembler where Self: Assembler {
 
   func resolve() -> RemoteDataSource {
     let json = CoreKt.createJson()
-    return RemoteDataSource(client: CoreKt.createHttpClient(json: json))
+    return RemoteDataSource(ktor: CoreKt.createHttpClient(json: json))
   }
 
   func resolve() -> LocalDataSource {

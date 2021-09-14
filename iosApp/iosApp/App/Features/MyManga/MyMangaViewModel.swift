@@ -18,11 +18,30 @@ class MyMangaViewModel: ObservableObject {
   @Published var loading = false
 
   private let favoriteUseCase: GetMangaFavoriteUseCase
+  private let createFavoriteUseCase: CreateMangaFavoriteUseCase
   private var cancellables = Set<AnyCancellable>()
 
-  init(favoriteUseCase: GetMangaFavoriteUseCase) {
+  init(favoriteUseCase: GetMangaFavoriteUseCase, createFavoriteUseCase: CreateMangaFavoriteUseCase) {
     self.favoriteUseCase = favoriteUseCase
+    self.createFavoriteUseCase = createFavoriteUseCase
     fetchFavoriteManga()
+  }
+
+  func addFavoriteManga(manga: Manga) {
+    var ids = [String]()
+    mangas.forEach { item in
+      ids.append(item.id)
+    }
+
+    if !ids.contains(manga.id) {
+      createFavoriteUseCase.add(manga: manga)
+    }
+
+    fetchFavoriteManga()
+  }
+
+  func removeFavoriteManga(mangaId: String) {
+    createFavoriteUseCase.delete(mangaId: mangaId)
   }
 
   private func fetchFavoriteManga() {
@@ -38,7 +57,6 @@ class MyMangaViewModel: ObservableObject {
         }
       } receiveValue: { value in
         self.mangas = value
-        print("REALM", value)
       }.store(in: &cancellables)
   }
 }

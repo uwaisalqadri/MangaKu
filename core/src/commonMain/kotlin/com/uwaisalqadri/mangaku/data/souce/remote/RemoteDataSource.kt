@@ -7,26 +7,28 @@ import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.http.*
 
-class RemoteDataSource(private val client: HttpClient) {
+class RemoteDataSource(
+    private val ktor: HttpClient
+) {
 
     suspend fun fetchMangas() =
-        client.get<MangaResponse>("${Constants.BASE_URL}/manga") {
+        ktor.get<MangaResponse>("${Constants.BASE_URL}/manga") {
             createHeader()
         }
 
     suspend fun fetchTrendingMangas() =
-        client.get<MangaResponse>("${Constants.BASE_URL}/trending/manga") {
+        ktor.get<MangaResponse>("${Constants.BASE_URL}/trending/manga") {
             createHeader()
         }
 
     suspend fun fetchSearchMangas(query: String) =
-        client.get<MangaResponse>("${Constants.BASE_URL}/manga") {
+        ktor.get<MangaResponse>("${Constants.BASE_URL}/manga") {
             createHeader()
             parameter("filter[text]", query)
         }
 
     suspend fun fetchDetailManga(id: String) =
-        client.get<MangaDetailResponse>("${Constants.BASE_URL}/manga/$id") {
+        ktor.get<MangaDetailResponse>("${Constants.BASE_URL}/manga/$id") {
             createHeader()
         }
 
