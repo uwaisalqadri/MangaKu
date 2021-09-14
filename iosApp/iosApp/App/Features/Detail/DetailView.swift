@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct DetailView: View {
 
@@ -15,60 +16,66 @@ struct DetailView: View {
 
   var body: some View {
     NavigationView {
-      ScrollView(showsIndicators: false) {
-        VStack(alignment: .leading) {
+      VStack(alignment: .leading) {
+        ScrollView(showsIndicators: false) {
 
-          Image("imgSample")
+          WebImage(url: URL(string: viewModel.manga?.attributes?.coverImage?.original ?? ""))
             .resizable()
+            .indicator(.activity)
+            .clipped()
             .frame(height: 200)
-            .padding(.horizontal, 24)
             .cornerRadius(10)
+            .padding(.horizontal, 24)
 
-          VStack(alignment: .leading) {
-            Text("My Hero Academia")
-              .foregroundColor(.black)
-              .font(.custom(.mbold, size: 25))
+          if !viewModel.loading {
+            VStack(alignment: .leading) {
+              Text(viewModel.manga?.getTitle() ?? "")
+                .foregroundColor(.black)
+                .font(.custom(.mbold, size: 25))
+                .padding(.top, 15)
 
-            Text("Action, Adventure")
-              .foregroundColor(.black)
-              .font(.custom(.mmedium, size: 15))
-
-            HStack {
-
-              Text("Sep 17, 2013")
-                .foregroundColor(.white)
-                .font(.custom(.mbold, size: 13))
-                .padding(10)
-                .background(Color.black)
-                .cornerRadius(5)
+              Text("Action, Adventure")
+                .foregroundColor(.black)
+                .font(.custom(.mmedium, size: 15))
 
               HStack {
-                Image(systemName: "star.fill")
-                  .foregroundColor(.yellow)
-                  .frame(width: 15, height: 15)
 
-                Text("4.48")
-                  .foregroundColor(.black)
-                  .font(.custom(.msemibold, size: 14))
-                  .padding(.leading, 5)
-              }
+                Text(viewModel.manga?.attributes?.startDate ?? "")
+                  .foregroundColor(.white)
+                  .font(.custom(.mbold, size: 13))
+                  .padding(10)
+                  .background(Color.black)
+                  .cornerRadius(5)
 
-            }.padding(.top, 10)
+                HStack {
+                  Image(systemName: "star.fill")
+                    .foregroundColor(.yellow)
+                    .frame(width: 15, height: 15)
 
-            Text("Description")
-              .foregroundColor(.black)
-              .font(.custom(.mbold, size: 21))
-              .padding(.top, 50)
+                  Text("\(viewModel.manga?.attributes?.averageRating ?? 0.0)")
+                    .foregroundColor(.black)
+                    .font(.custom(.msemibold, size: 14))
+                }.padding(.leading, 5)
 
-            Text("Rockstar Games went bigger, since their previous installment of the series. You get the complicated and realistic world-building from Liberty City of GTA4 in the setting of lively and diverse Los Santos, from an old fan favorite GTA San Andreas. 561 different vehicles (including every transport you can operate) and the amount is rising with...  Read More")
-              .foregroundColor(.black)
-              .font(.custom(.mmedium, size: 15))
-              .padding(.top, 15)
+              }.padding(.top, 10)
 
-          }.padding(.horizontal, 30)
+              Text("Description")
+                .foregroundColor(.black)
+                .font(.custom(.mbold, size: 21))
+                .padding(.top, 50)
 
+              Text(viewModel.manga?.attributes?.synopsis ?? "")
+                .foregroundColor(.black)
+                .font(.custom(.mmedium, size: 15))
+                .padding(.top, 15)
+
+              Spacer(minLength: 400)
+
+            }.padding(.horizontal, 30)
+          }
         }
       }
+
     }.navigationBarTitle("Detail")
     .onAppear {
       viewModel.fetchManga(mangaId: mangaId)

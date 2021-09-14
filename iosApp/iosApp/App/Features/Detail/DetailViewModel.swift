@@ -13,7 +13,7 @@ import Combine
 
 class DetailViewModel: ObservableObject {
 
-  //  @Published var mangas = Manga(
+  @Published var manga: Manga?
   @Published var loading = false
   @Published var errorMessage = ""
 
@@ -36,8 +36,7 @@ class DetailViewModel: ObservableObject {
           self.errorMessage = error.localizedDescription
         }
       } receiveValue: { value in
-        guard let detail = value else { return }
-        print("DETAIL", detail)
+        self.manga = value
       }.store(in: &cancellables)
   }
 

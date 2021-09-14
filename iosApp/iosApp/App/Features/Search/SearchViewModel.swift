@@ -24,9 +24,9 @@ class SearchViewModel: ObservableObject {
     self.searcUseCase = searcUseCase
   }
 
-  func fetchFavoriteManga() {
+  func fetchSearchManga(query: String) {
     loading = true
-    createPublisher(for: searcUseCase.invokeNative(query: "naruto"))
+    createPublisher(for: searcUseCase.invokeNative(query: query))
       .receive(on: DispatchQueue.main)
       .sink { completion in
         switch completion {

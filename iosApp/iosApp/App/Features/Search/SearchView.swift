@@ -18,47 +18,52 @@ struct SearchView: View {
       VStack {
         ScrollView(showsIndicators: false) {
 
-          SearchField(query: query)
+          // MARK: Search Bar
+          HStack {
+            Image(systemName: "magnifyingglass")
+              .resizable()
+              .foregroundColor(.init(.darkGray))
+              .frame(width: 20, height: 20)
+              .padding(.leading, 30)
+
+            TextField(
+              "Search Manga...",
+              text: $query,
+              onEditingChanged: { state in
+                if !state { viewModel.fetchSearchManga(query: query) }
+              },
+              onCommit: {
+                viewModel.fetchSearchManga(query: query)
+                print(query)
+              })
+              .foregroundColor(.init(.darkGray))
+              .font(.custom(.mmedium, size: 16))
+              .frame(height: 40)
+              .padding(.leading, 13)
+              .padding(.trailing, 30)
+
+          }
             .background(Color.init(.systemGray6))
             .cornerRadius(20)
-            .padding(.top, -65)
             .padding(.horizontal, 30)
 
           LazyVGrid(columns: [
             GridItem(.adaptive(minimum: 90), spacing: 25, alignment: .center)
           ], alignment: .leading, spacing: 10) {
-            ForEach(0..<10) { index in
-              SearchItemView()
+
+            withAnimation(.interactiveSpring()) {
+              ForEach(viewModel.mangas, id: \.id) { manga in
+                SearchItemView(manga: manga)
+              }
             }
+
           }.padding(.horizontal, 30)
           .padding(.top, 20)
+
+          Spacer(minLength: 250)
 
         }
       }
     }.navigationBarTitle("Search")
-  }
-}
-
-struct SearchField: View {
-
-  @State var query: String
-
-  var body: some View {
-
-    HStack {
-      Image(systemName: "magnifyingglass")
-        .resizable()
-        .foregroundColor(.init(.darkGray))
-        .frame(width: 20, height: 20)
-        .padding(.leading, 30)
-
-      TextField("Search Manga...", text: $query)
-        .foregroundColor(.init(.darkGray))
-        .font(.custom(.mmedium, size: 16))
-        .frame(height: 40)
-        .padding(.leading, 13)
-        .padding(.trailing, 30)
-
-    }
   }
 }
