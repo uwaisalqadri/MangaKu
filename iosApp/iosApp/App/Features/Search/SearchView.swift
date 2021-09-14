@@ -13,57 +13,60 @@ struct SearchView: View {
   @ObservedObject var viewModel: SearchViewModel
   @State var query: String = ""
 
+  private let assembler = AppAssembler()
+
   var body: some View {
-    NavigationView {
-      VStack {
-        ScrollView(showsIndicators: false) {
+    VStack {
+      ScrollView(showsIndicators: false) {
 
-          // MARK: Search Bar
-          HStack {
-            Image(systemName: "magnifyingglass")
-              .resizable()
-              .foregroundColor(.init(.darkGray))
-              .frame(width: 20, height: 20)
-              .padding(.leading, 30)
+        // MARK: Search Bar
+        HStack {
+          Image(systemName: "magnifyingglass")
+            .resizable()
+            .foregroundColor(.init(.darkGray))
+            .frame(width: 20, height: 20)
+            .padding(.leading, 30)
 
-            TextField(
-              "Search Manga...",
-              text: $query,
-              onEditingChanged: { state in
-                if !state { viewModel.fetchSearchManga(query: query) }
-              },
-              onCommit: {
-                viewModel.fetchSearchManga(query: query)
-                print(query)
-              })
-              .foregroundColor(.init(.darkGray))
-              .font(.custom(.mmedium, size: 16))
-              .frame(height: 40)
-              .padding(.leading, 13)
-              .padding(.trailing, 30)
+          TextField(
+            "Search Manga...",
+            text: $query,
+            onEditingChanged: { state in
+              if !state { viewModel.fetchSearchManga(query: query) }
+            },
+            onCommit: {
+              viewModel.fetchSearchManga(query: query)
+              print(query)
+            })
+            .foregroundColor(.init(.darkGray))
+            .font(.custom(.mmedium, size: 16))
+            .frame(height: 40)
+            .autocapitalization(.none)
+            .disableAutocorrection(.none)
+            .padding(.leading, 13)
+            .padding(.trailing, 30)
 
-          }
-            .background(Color.init(.systemGray6))
-            .cornerRadius(20)
-            .padding(.horizontal, 30)
+        }.background(Color.init(.systemGray6))
+        .cornerRadius(20)
+        .padding([.horizontal, .top], 30)
 
-          LazyVGrid(columns: [
-            GridItem(.adaptive(minimum: 90), spacing: 25, alignment: .center)
-          ], alignment: .leading, spacing: 10) {
+        LazyVGrid(columns: [
+          GridItem(.adaptive(minimum: 90), spacing: 25, alignment: .center)
+        ], alignment: .leading, spacing: 10) {
 
-            withAnimation(.interactiveSpring()) {
-              ForEach(viewModel.mangas, id: \.id) { manga in
+          withAnimation(.interactiveSpring()) {
+            ForEach(viewModel.mangas, id: \.id) { manga in
+              NavigationLink(destination: DetailView(viewModel: assembler.resolve(), mangaId: manga.id)) {
                 SearchItemView(manga: manga)
-              }
+              }.buttonStyle(PlainButtonStyle())
             }
+          }
 
-          }.padding(.horizontal, 30)
-          .padding(.top, 20)
+        }.padding(.horizontal, 30)
+        .padding(.top, 20)
 
-          Spacer(minLength: 250)
+        Spacer(minLength: 250)
 
-        }
       }
-    }.navigationBarTitle("Search")
+    }.navigationTitle("Search")
   }
 }

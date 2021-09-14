@@ -15,68 +15,67 @@ struct DetailView: View {
   let mangaId: String
 
   var body: some View {
-    NavigationView {
-      VStack(alignment: .leading) {
-        ScrollView(showsIndicators: false) {
+    VStack(alignment: .leading) {
 
-          WebImage(url: URL(string: viewModel.manga?.attributes?.coverImage?.original ?? ""))
-            .resizable()
-            .indicator(.activity)
-            .clipped()
-            .frame(height: 200)
-            .cornerRadius(10)
-            .padding(.horizontal, 24)
+      ScrollView(showsIndicators: false) {
 
-          if !viewModel.loading {
-            VStack(alignment: .leading) {
-              Text(viewModel.manga?.getTitle() ?? "")
-                .foregroundColor(.black)
-                .font(.custom(.mbold, size: 25))
-                .padding(.top, 15)
+        WebImage(url: URL(string: viewModel.manga?.attributes?.coverImage?.original ?? ""))
+          .resizable()
+          .indicator(.activity)
+          .clipped()
+          .frame(height: 200)
+          .cornerRadius(10)
+          .padding(.horizontal, 24)
 
-              Text("Action, Adventure")
-                .foregroundColor(.black)
-                .font(.custom(.mmedium, size: 15))
+        if !viewModel.loading {
+          VStack(alignment: .leading) {
+            Text(viewModel.manga?.getTitle() ?? "")
+              .foregroundColor(.black)
+              .font(.custom(.mbold, size: 25))
+              .padding(.top, 15)
+
+            Text("Action, Adventure")
+              .foregroundColor(.black)
+              .font(.custom(.mmedium, size: 15))
+
+            HStack {
+
+              Text(viewModel.manga?.attributes?.startDate ?? "")
+                .foregroundColor(.white)
+                .font(.custom(.mbold, size: 13))
+                .padding(10)
+                .background(Color.black)
+                .cornerRadius(5)
 
               HStack {
+                Image(systemName: "star.fill")
+                  .foregroundColor(.yellow)
+                  .frame(width: 15, height: 15)
 
-                Text(viewModel.manga?.attributes?.startDate ?? "")
-                  .foregroundColor(.white)
-                  .font(.custom(.mbold, size: 13))
-                  .padding(10)
-                  .background(Color.black)
-                  .cornerRadius(5)
+                Text("\(viewModel.manga?.attributes?.averageRating ?? 0.0)")
+                  .foregroundColor(.black)
+                  .font(.custom(.msemibold, size: 14))
+              }.padding(.leading, 5)
 
-                HStack {
-                  Image(systemName: "star.fill")
-                    .foregroundColor(.yellow)
-                    .frame(width: 15, height: 15)
+            }.padding(.top, 10)
 
-                  Text("\(viewModel.manga?.attributes?.averageRating ?? 0.0)")
-                    .foregroundColor(.black)
-                    .font(.custom(.msemibold, size: 14))
-                }.padding(.leading, 5)
+            Text("Description")
+              .foregroundColor(.black)
+              .font(.custom(.mbold, size: 21))
+              .padding(.top, 50)
 
-              }.padding(.top, 10)
+            Text(viewModel.manga?.attributes?.synopsis ?? "")
+              .foregroundColor(.black)
+              .font(.custom(.mmedium, size: 15))
+              .padding(.top, 15)
 
-              Text("Description")
-                .foregroundColor(.black)
-                .font(.custom(.mbold, size: 21))
-                .padding(.top, 50)
+            Spacer(minLength: 400)
 
-              Text(viewModel.manga?.attributes?.synopsis ?? "")
-                .foregroundColor(.black)
-                .font(.custom(.mmedium, size: 15))
-                .padding(.top, 15)
-
-              Spacer(minLength: 400)
-
-            }.padding(.horizontal, 30)
-          }
+          }.padding(.horizontal, 30)
         }
-      }
+      }.padding(.top, 30)
 
-    }.navigationBarTitle("Detail")
+    }.navigationTitle("Detail")
     .onAppear {
       viewModel.fetchManga(mangaId: mangaId)
     }
