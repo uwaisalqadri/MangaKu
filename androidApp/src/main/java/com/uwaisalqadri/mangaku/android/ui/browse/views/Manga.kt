@@ -5,7 +5,9 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.materialIcon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -17,6 +19,8 @@ import androidx.compose.ui.unit.sp
 import com.google.accompanist.coil.rememberCoilPainter
 import com.uwaisalqadri.mangaku.android.ui.theme.MangaTypography
 import com.uwaisalqadri.mangaku.domain.model.Manga
+import com.uwaisalqadri.mangaku.utils.Extensions
+import kotlin.math.roundToInt
 
 @Composable
 fun Manga(
@@ -46,7 +50,12 @@ fun Manga(
                 .padding(20.dp, 5.dp),
             verticalArrangement = Arrangement.SpaceEvenly
         ) {
-            StarRate(modifier = Modifier.fillMaxWidth())
+
+            StarRate(
+                manga = manga,
+                modifier = Modifier
+                    .fillMaxWidth()
+            )
 
             Text(
                 text = getTitle(manga),
@@ -101,14 +110,19 @@ fun Manga(
 
 @Composable
 fun StarRate(
-    modifier: Modifier
+    modifier: Modifier,
+    manga: Manga,
+    extensions: Extensions = Extensions,
+    averageRating: Double = (manga.attributes?.averageRating ?: 0.0)
 ) {
     Row(
         modifier = modifier
     ) {
-        repeat(5) {
+        repeat(5) { index ->
             Icon(
-                imageVector = Icons.Default.Star,
+                imageVector =
+                if (extensions.toFiveStars(averageRating) <= index) Icons.Default.Star
+                else Icons.Default.Email,
                 contentDescription = null,
                 tint = Color.Yellow,
                 modifier = Modifier.size(18.dp)

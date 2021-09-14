@@ -66,6 +66,7 @@ kotlin {
                 }
             }
         }
+
         val androidMain by getting {
             dependencies {
                 with(Dependencies) {
@@ -74,6 +75,7 @@ kotlin {
                 }
             }
         }
+
         val iosMain by getting {
             dependencies {
                 implementation(Dependencies.ktorIos)
@@ -92,6 +94,7 @@ kotlin {
                 implementation("junit:junit:4.13.2")
             }
         }
+
         val iosTest by getting
     }
 }

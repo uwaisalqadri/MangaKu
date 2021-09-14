@@ -43,11 +43,6 @@ class BrowseFragment: Fragment() {
             modifier = Modifier.verticalScroll(rememberScrollState())
         ) {
 
-            if (viewModel.loading.value) {
-                Text(text = "Loading...")
-                return
-            }
-
             TopBar(
                 name = "Browse",
                 icon = R.drawable.ic_search
@@ -55,34 +50,38 @@ class BrowseFragment: Fragment() {
 
             Spacer(modifier = Modifier.height(35.dp))
 
-            Text(
-                text = "Genre",
-                style = MangaTypography.h2,
-                fontSize = 15.sp,
-                modifier = Modifier.padding(start = 20.dp)
-            )
+            if (viewModel.loading.value) {
+                Text(text = "Loading...")
+            } else {
+                Text(
+                    text = "Genre",
+                    style = MangaTypography.h2,
+                    fontSize = 15.sp,
+                    modifier = Modifier.padding(start = 20.dp)
+                )
 
-            Genres(
-                modifier = Modifier
-                    .height(130.dp)
-                    .fillMaxWidth()
-                    .padding(top = 15.dp, bottom = 25.dp)
-            )
+                Genres(
+                    modifier = Modifier
+                        .height(130.dp)
+                        .fillMaxWidth()
+                        .padding(top = 15.dp, bottom = 25.dp)
+                )
 
-            Text(
-                text = "Trending Now",
-                style = MangaTypography.h2,
-                fontSize = 15.sp,
-                modifier = Modifier.padding(start = 20.dp)
-            )
+                Text(
+                    text = "Trending Now",
+                    style = MangaTypography.h2,
+                    fontSize = 15.sp,
+                    modifier = Modifier.padding(start = 20.dp)
+                )
 
-            MangaTrending(
-                viewModel = viewModel,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .fillMaxHeight()
-                    .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 120.dp)
-            )
+                MangaTrending(
+                    viewModel = viewModel,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .fillMaxHeight()
+                        .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 120.dp)
+                )
+            }
         }
     }
 }

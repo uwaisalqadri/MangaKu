@@ -54,7 +54,7 @@ struct MyMangaView: View {
             }
 
             HStack {
-              StarsView()
+              StarsView(manga: viewModel.mangas[position])
                 .padding(.leading, 70)
 
               Spacer()
@@ -63,7 +63,7 @@ struct MyMangaView: View {
 
             HStack {
               VStack {
-                Text("Chapter \(viewModel.mangas[position].attributes?.chapterCount.ifEmpty(viewModel.mangas[position].attributes?.volumeCount.ifEmpty("0") ?? "0") ?? "0")")
+                Text("Chapter \(viewModel.mangas[position].attributes?.chapterCount ?? 0)")
                   .font(.custom(.mbold, size: 18))
                   .padding(.leading, 70)
 

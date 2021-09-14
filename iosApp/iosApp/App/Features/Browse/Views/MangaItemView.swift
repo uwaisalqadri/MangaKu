@@ -24,7 +24,7 @@ struct MangaItemView: View {
         .cornerRadius(12)
 
       VStack(alignment: .leading) {
-        StarsView()
+        StarsView(manga: manga)
 
         Text(manga.getTitle())
           .font(.custom(.mbold, size: 18))
@@ -36,7 +36,7 @@ struct MangaItemView: View {
             .font(.custom(.mbold, size: 12))
             .foregroundColor(.secondary)
 
-          Text("Ch.\(manga.attributes?.chapterCount.ifEmpty(manga.attributes?.volumeCount.ifEmpty("0") ?? "0") ?? "0")")
+          Text("Ch.\(manga.attributes?.chapterCount ?? 0)")
             .font(.custom(.mbold, size: 15))
         }.padding(.top, 5)
 
@@ -63,13 +63,21 @@ struct MangaItemView: View {
 }
 
 struct StarsView: View {
+
+  let manga: Manga
+  let extensions = Extensions()
+  @State var averageRating: Int32 = 0
+
   var body: some View {
     HStack {
-      ForEach(0..<5) { item in
-        Image(systemName: "star.fill")
+      ForEach(0..<5) { index in
+        Image(systemName: index <= averageRating ? "star.fill" : "star")
           .resizable()
           .frame(width: 15, height: 15)
           .foregroundColor(.yellow)
+          .onAppear {
+            averageRating = extensions.toFiveStars(avgRating: manga.attributes?.averageRating ?? 0.0)
+          }
       }
     }
   }

@@ -26,7 +26,7 @@ EXTERNAL SOURCES:
     :path: "../core"
 
 SPEC CHECKSUMS:
-  core: 951e288239e87d33cc9cd8c003043f7e128dbc95
+  core: 15f69166caddcb5a0f0819da6853695ce1b61f04
   KMPNativeCoroutinesCombine: af5ce48fc2f42374c8497475ed49063d7433a790
   KMPNativeCoroutinesCore: 9e575c725afddd5396eb5be642b768ce3f073c64
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d

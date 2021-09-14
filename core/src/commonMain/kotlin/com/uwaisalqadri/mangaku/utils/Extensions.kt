@@ -4,8 +4,9 @@ import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toInstant
 import kotlinx.datetime.toLocalDate
 import kotlinx.datetime.toLocalDateTime
+import kotlin.math.roundToInt
 
-// share code for iOS
+// shared extensions
 object Extensions {
 
     // e.g 2010-06-01T22:19:44.475Z, only support ISO 8601 format
@@ -15,7 +16,7 @@ object Extensions {
         return dateString.toString()
     }
 
-    fun toFiveStars(avgRating: Double) {
-        val count = avgRating.toInt()
+    fun toFiveStars(avgRating: Double): Int {
+        return avgRating.roundToInt() / 2 / 10 - 1
     }
 }
