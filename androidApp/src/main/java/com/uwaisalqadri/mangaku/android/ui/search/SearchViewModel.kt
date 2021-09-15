@@ -1,5 +1,7 @@
 package com.uwaisalqadri.mangaku.android.ui.search
 
+import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.uwaisalqadri.mangaku.android.utils.UiState
@@ -15,15 +17,28 @@ class SearchViewModel(
 
     private val _uiState = MutableStateFlow(UiState(loading = true))
     val uiState: StateFlow<UiState> = _uiState
+    val query = mutableStateOf("")
 
-    init {
-        fetchSearchManga("Naruto")
+    fun onQueryChanged(query: String) {
+        this.query.value = query
+        fetchSearchManga(query)
     }
 
-    private fun fetchSearchManga(query: String) = viewModelScope.launch {
+    fun fetchSearchManga(query: String) = viewModelScope.launch {
         searchUseCase(query).collect { result ->
             if (result.isNotEmpty()) _uiState.value = UiState(listManga = result)
         }
     }
-
 }
+
+
+
+
+
+
+
+
+
+
+
+

@@ -5,11 +5,13 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
 import com.uwaisalqadri.mangaku.android.R
 
 private val Montserrat = FontFamily(
     Font(R.font.montserrat_semibold, FontWeight.SemiBold),
-    Font(R.font.montserrat_bold, FontWeight.Bold)
+    Font(R.font.montserrat_bold, FontWeight.Bold),
+    Font(R.font.montserrat_medium, FontWeight.Medium)
 )
 
 private val MaShanZheng = FontFamily(
@@ -28,6 +30,11 @@ val MangaTypography = Typography(
     h2 = TextStyle(
         fontFamily = Montserrat,
         fontWeight = FontWeight.SemiBold
+    ),
+    h3 = TextStyle(
+        fontFamily = Montserrat,
+        fontWeight = FontWeight.Medium,
+        fontSize = 18.sp
     ),
     caption = TextStyle(
         fontFamily = MaShanZheng,
