@@ -69,8 +69,7 @@ fun Genre(
 
             Text(
                 text = genre.name,
-                style = genre.font,
-                fontSize = 30.sp
+                style = genre.font
             )
         }
     }

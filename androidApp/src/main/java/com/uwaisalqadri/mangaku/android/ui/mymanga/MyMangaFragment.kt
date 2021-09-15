@@ -6,12 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
+import co.touchlab.kermit.CommonLogger
+import co.touchlab.kermit.Kermit
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.uwaisalqadri.mangaku.android.ui.composables.TopBar
 import com.uwaisalqadri.mangaku.android.ui.detail.DetailScreen
@@ -21,7 +20,6 @@ import org.koin.androidx.compose.getViewModel
 
 class MyMangaFragment: Fragment() {
 
-    @ExperimentalPagerApi
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -33,25 +31,25 @@ class MyMangaFragment: Fragment() {
             }
         }
     }
-    
-    @ExperimentalPagerApi
+
+    @OptIn(ExperimentalPagerApi::class)
     @Composable
     fun MyMangaScreen(
         viewModel: MyMangaViewModel = getViewModel()
     ) {
         val uiState by viewModel.uiState.collectAsState()
-        var index = 0
+        val currentIndex = remember { mutableStateOf(0) }
 
         Column {
 
-            TopBar(name = uiState.listManga[index].getTitle())
+            TopBar(name = uiState.listManga[currentIndex.value].getTitle())
 
             if (uiState.loading) {
                 Text(text = "Loading...")
             } else {
-                HorizontalPagerWithTransition(
-                    manga = uiState.listManga
-                ) { index = it }
+                HorizontalPagerWithTransition(manga = uiState.listManga) {
+                    currentIndex.value = it
+                }
             }
         }
     }

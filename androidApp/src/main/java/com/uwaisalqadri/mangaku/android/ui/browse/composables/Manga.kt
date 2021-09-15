@@ -59,7 +59,7 @@ fun Manga(
 
             Text(
                 text = manga.getTitle(),
-                fontSize = 21.sp,
+                fontSize = 18.sp,
                 style = MangaTypography.h1,
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis

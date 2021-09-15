@@ -38,11 +38,13 @@ val MangaTypography = Typography(
     ),
     caption = TextStyle(
         fontFamily = MaShanZheng,
-        fontWeight = FontWeight.Medium
+        fontWeight = FontWeight.Medium,
+        fontSize = 40.sp
     ),
     overline = TextStyle(
         fontFamily = SedgwickAve,
-        fontWeight = FontWeight.Medium
+        fontWeight = FontWeight.Medium,
+        fontSize = 30.sp
     )
 )
 

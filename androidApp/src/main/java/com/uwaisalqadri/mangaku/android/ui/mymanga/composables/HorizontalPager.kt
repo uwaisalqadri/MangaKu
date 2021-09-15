@@ -19,7 +19,7 @@ import com.uwaisalqadri.mangaku.domain.model.Manga
 import com.uwaisalqadri.mangaku.utils.getPosterImage
 import kotlin.math.absoluteValue
 
-@ExperimentalPagerApi
+@OptIn(ExperimentalPagerApi::class)
 @Composable
 fun HorizontalPagerWithTransition(
     manga: List<Manga>,
@@ -29,15 +29,15 @@ fun HorizontalPagerWithTransition(
         state = PagerState(
             pageCount = manga.size,
             currentPage = 0,
-            infiniteLoop = true
+            infiniteLoop = true,
         ),
         modifier = Modifier
-            .fillMaxWidth()
-            .height(500.dp)
+            .fillMaxSize(),
     ) { page ->
-        onSlide(page)
         Card(
-            Modifier
+            shape = RoundedCornerShape(0.dp),
+            elevation = 10.dp,
+            modifier = Modifier
                 .graphicsLayer {
                     // Calculate the absolute offset for the current page from the
                     // scroll position. We use the absolute value which allows us to mirror
@@ -62,19 +62,14 @@ fun HorizontalPagerWithTransition(
                     )
                 }
                 .width(240.dp)
-                .aspectRatio(1f)
+                .height(370.dp)
         ) {
-            Card(
-                shape = RoundedCornerShape(0.dp),
-                elevation = 10.dp
-            ) {
-                Image(
-                    painter = rememberCoilPainter(request = manga[page].getPosterImage()),
-                    contentDescription = null,
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier.height(500.dp)
-                )
-            }
+            onSlide(page)
+            Image(
+                painter = rememberCoilPainter(request = manga[page].getPosterImage()),
+                contentDescription = null,
+                contentScale = ContentScale.Crop
+            )
         }
     }
 }
