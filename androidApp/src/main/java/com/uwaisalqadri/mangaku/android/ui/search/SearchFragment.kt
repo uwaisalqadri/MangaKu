@@ -15,6 +15,8 @@ import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import com.uwaisalqadri.mangaku.android.ui.composables.TopBar
 import com.uwaisalqadri.mangaku.android.ui.search.composables.SearchField
+import com.uwaisalqadri.mangaku.android.ui.search.composables.SearchResult
+import com.uwaisalqadri.mangaku.android.ui.search.composables.StaggeredVerticalGrid
 import com.uwaisalqadri.mangaku.android.utils.getTitle
 import org.koin.androidx.compose.getViewModel
 
@@ -57,11 +59,17 @@ class SearchFragment: Fragment() {
             if (uiState.loading) {
                 Text(text = "Loading...")
             } else {
-                uiState.listManga.forEach {
-                    Text(text = (it.getTitle()))
+                StaggeredVerticalGrid(
+                    maxColumnWidth = 150.dp
+                ) {
+                    uiState.listManga.forEach { manga ->
+                        SearchResult(manga = manga)
+                    }
                 }
             }
         }
+
+
     }
 }
 
