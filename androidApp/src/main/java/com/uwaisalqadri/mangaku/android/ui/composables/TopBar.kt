@@ -1,4 +1,4 @@
-package com.uwaisalqadri.mangaku.android.ui.components
+package com.uwaisalqadri.mangaku.android.ui.composables
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.clickable
@@ -30,10 +30,10 @@ fun TopBar(
         Text(
             text = name,
             style = MangaTypography.h1,
-            fontSize = 23.sp
+            fontSize = 25.sp
         )
 
-        Spacer(modifier = Modifier.width(100.dp))
+        Spacer(modifier = if (icon != null) Modifier.width(100.dp) else Modifier.width(200.dp))
 
         if (icon != null) {
             Icon(

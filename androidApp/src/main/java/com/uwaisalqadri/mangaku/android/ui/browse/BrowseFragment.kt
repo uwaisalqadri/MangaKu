@@ -9,15 +9,18 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
 import com.uwaisalqadri.mangaku.android.R
-import com.uwaisalqadri.mangaku.android.ui.browse.views.Genres
-import com.uwaisalqadri.mangaku.android.ui.browse.views.MangaTrending
-import com.uwaisalqadri.mangaku.android.ui.components.TopBar
+import com.uwaisalqadri.mangaku.android.ui.browse.composables.Genres
+import com.uwaisalqadri.mangaku.android.ui.browse.composables.MangaTrending
+import com.uwaisalqadri.mangaku.android.ui.composables.TopBar
+import com.uwaisalqadri.mangaku.android.ui.mymanga.MyMangaViewModel
 import com.uwaisalqadri.mangaku.android.ui.theme.MangaTypography
 import org.koin.androidx.compose.getViewModel
 
@@ -37,8 +40,11 @@ class BrowseFragment: Fragment() {
 
     @Composable
     fun BrowseScreen(
-        viewModel: BrowseViewModel = getViewModel()
+        viewModel: BrowseViewModel = getViewModel(),
+        myMangaViewModel: MyMangaViewModel = getViewModel()
     ) {
+        val uiState by viewModel.uiState.collectAsState()
+
         Column(
             modifier = Modifier.verticalScroll(rememberScrollState())
         ) {
@@ -50,7 +56,9 @@ class BrowseFragment: Fragment() {
 
             Spacer(modifier = Modifier.height(35.dp))
 
-            if (viewModel.isLoaded.value) {
+            if (uiState.loading) {
+                Text(text = "Loading...")
+            } else {
                 Text(
                     text = "Genre",
                     style = MangaTypography.h2,
@@ -62,7 +70,7 @@ class BrowseFragment: Fragment() {
                     modifier = Modifier
                         .height(130.dp)
                         .fillMaxWidth()
-                        .padding(top = 15.dp, bottom = 25.dp)
+                        .padding(top = 15.dp, bottom = 25.dp, start = 10.dp)
                 )
 
                 Text(
@@ -73,14 +81,13 @@ class BrowseFragment: Fragment() {
                 )
 
                 MangaTrending(
-                    viewModel = viewModel,
+                    trendingManga = uiState.listManga,
+                    myMangaViewModel = myMangaViewModel,
                     modifier = Modifier
                         .fillMaxWidth()
                         .fillMaxHeight()
                         .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 120.dp)
                 )
-            } else {
-                Text(text = "Loading...")
             }
         }
     }

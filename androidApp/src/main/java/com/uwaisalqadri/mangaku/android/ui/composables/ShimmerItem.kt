@@ -1,4 +1,4 @@
-package com.uwaisalqadri.mangaku.android.ui.components
+package com.uwaisalqadri.mangaku.android.ui.composables
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*

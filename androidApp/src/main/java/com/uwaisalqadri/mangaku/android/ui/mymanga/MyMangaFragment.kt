@@ -5,12 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
-import com.uwaisalqadri.mangaku.android.ui.components.TopBar
+import com.uwaisalqadri.mangaku.android.ui.composables.TopBar
 import com.uwaisalqadri.mangaku.android.utils.getTitle
 import org.koin.androidx.compose.getViewModel
 
@@ -32,9 +33,16 @@ class MyMangaFragment: Fragment() {
     fun MyMangaScreen(
         viewModel: MyMangaViewModel = getViewModel()
     ) {
+        val uiState by viewModel.uiState.collectAsState()
+
         Column {
-            if (viewModel.isLoaded.value) {
-                viewModel.favoriteManga.value.forEach { manga ->
+
+            TopBar(name = "MyManga")
+
+            if (uiState.loading) {
+                Text(text = "Loading...")
+            } else {
+                uiState.listManga.forEach { manga ->
                     Text(text = manga.getTitle())
                 }
             }

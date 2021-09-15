@@ -1,23 +1,22 @@
-package com.uwaisalqadri.mangaku.android.ui.browse.views
+package com.uwaisalqadri.mangaku.android.ui.browse.composables
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.uwaisalqadri.mangaku.android.ui.browse.BrowseViewModel
 import com.uwaisalqadri.mangaku.android.ui.mymanga.MyMangaViewModel
-import org.koin.androidx.compose.getViewModel
+import com.uwaisalqadri.mangaku.domain.model.Manga
 
 @Composable
 fun MangaTrending(
-    viewModel: BrowseViewModel,
-    myMangaViewModel: MyMangaViewModel = getViewModel(),
+    myMangaViewModel: MyMangaViewModel,
+    trendingManga: List<Manga>,
     modifier: Modifier
 ) {
     Column(
         modifier = modifier
     ) {
-        viewModel.trendingManga.value.forEach { manga ->
+        trendingManga.forEach { manga ->
             Manga(
                 manga = manga,
                 modifier = Modifier
