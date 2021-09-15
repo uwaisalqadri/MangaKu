@@ -53,6 +53,7 @@ class SearchFragment: Fragment() {
 
             SearchField(
                 query = query,
+                placeholder = "Search All Manga..",
                 onQueryChanged = viewModel::onQueryChanged,
                 onExecuteSearch = { viewModel.fetchSearchManga(query) },
                 modifier = Modifier

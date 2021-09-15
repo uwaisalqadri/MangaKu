@@ -27,6 +27,7 @@ import com.uwaisalqadri.mangaku.android.ui.theme.MangaTypography
 @Composable
 fun SearchField(
     query: String,
+    placeholder: String,
     onQueryChanged: (String) -> Unit,
     onExecuteSearch: () -> Unit,
     modifier: Modifier
@@ -36,6 +37,19 @@ fun SearchField(
         elevation = 0.dp,
         modifier = modifier
     ) {
+
+        var text by remember { mutableStateOf(placeholder) }
+
+        Text(
+            text = text,
+            style = MangaTypography.h3,
+            color = Color.DarkGray,
+            modifier = Modifier
+                .padding(start = 60.dp, end = 10.dp, top = 8.dp, bottom = 5.dp)
+                .fillMaxWidth()
+                .height(30.dp)
+                .clickable { text = "" }
+        )
 
         Row(
             modifier = Modifier
@@ -50,12 +64,10 @@ fun SearchField(
                 modifier = Modifier
                     .size(40.dp)
                     .padding(start = 10.dp, top = 5.dp)
-                    .clickable { onExecuteSearch() }
             )
 
             BasicTextField(
                 value = query,
-                onValueChange = { onQueryChanged(it) },
                 textStyle = MangaTypography.h3,
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Text,
@@ -63,11 +75,17 @@ fun SearchField(
                     autoCorrect = false,
                     imeAction = ImeAction.Search
                 ),
+
                 keyboardActions = KeyboardActions(
                     onSearch = {
                         onExecuteSearch()
                     }
                 ),
+
+                onValueChange = {
+                    onQueryChanged(it)
+                    text = ""
+                },
 
                 modifier = Modifier
                     .padding(start = 10.dp, end = 10.dp, top = 8.dp, bottom = 5.dp)
