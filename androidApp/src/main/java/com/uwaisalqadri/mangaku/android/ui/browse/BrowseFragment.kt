@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment
 import com.uwaisalqadri.mangaku.android.R
 import com.uwaisalqadri.mangaku.android.ui.browse.composables.Genres
 import com.uwaisalqadri.mangaku.android.ui.browse.composables.MangaTrending
+import com.uwaisalqadri.mangaku.android.ui.composables.ShimmerBrowseItem
 import com.uwaisalqadri.mangaku.android.ui.composables.TopBar
 import com.uwaisalqadri.mangaku.android.ui.mymanga.MyMangaViewModel
 import com.uwaisalqadri.mangaku.android.ui.theme.MangaTypography
@@ -56,30 +57,32 @@ class BrowseFragment: Fragment() {
 
             Spacer(modifier = Modifier.height(35.dp))
 
+            Text(
+                text = "Genre",
+                style = MangaTypography.h2,
+                fontSize = 15.sp,
+                modifier = Modifier.padding(start = 20.dp)
+            )
+
+            Genres(
+                modifier = Modifier
+                    .height(130.dp)
+                    .fillMaxWidth()
+                    .padding(top = 15.dp, bottom = 25.dp, start = 10.dp)
+            )
+
+            Text(
+                text = "Trending Now",
+                style = MangaTypography.h2,
+                fontSize = 15.sp,
+                modifier = Modifier.padding(start = 20.dp)
+            )
+
             if (uiState.loading) {
-                Text(text = "Loading...")
+                repeat(10) {
+                    ShimmerBrowseItem()
+                }
             } else {
-                Text(
-                    text = "Genre",
-                    style = MangaTypography.h2,
-                    fontSize = 15.sp,
-                    modifier = Modifier.padding(start = 20.dp)
-                )
-
-                Genres(
-                    modifier = Modifier
-                        .height(130.dp)
-                        .fillMaxWidth()
-                        .padding(top = 15.dp, bottom = 25.dp, start = 10.dp)
-                )
-
-                Text(
-                    text = "Trending Now",
-                    style = MangaTypography.h2,
-                    fontSize = 15.sp,
-                    modifier = Modifier.padding(start = 20.dp)
-                )
-
                 MangaTrending(
                     trendingManga = uiState.listManga,
                     myMangaViewModel = myMangaViewModel,

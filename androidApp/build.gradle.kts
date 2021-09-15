@@ -75,6 +75,8 @@ dependencies {
         implementation(composeNavigation)
         implementation(composeMaterialIcon)
         implementation(composeUtil)
+        implementation(composeLottie)
+        implementation(composeShimmer)
 
         implementation(ktorAndroid)
         implementation(koinAndroid)

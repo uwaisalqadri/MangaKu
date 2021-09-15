@@ -23,6 +23,7 @@ object Dependencies {
     const val composeActivity = "androidx.activity:activity-compose:${Versions.activityCompose}"
     const val composeNavigation = "androidx.navigation:navigation-compose:${Versions.navCompose}"
     const val composeLottie = "com.airbnb.android:lottie-compose:${Versions.lottie}"
+    const val composeShimmer = "com.valentinilk.shimmer:compose-shimmer:${Versions.shimmer}"
 
     const val accompanistCoil = "com.google.accompanist:accompanist-coil:${Versions.coilAccompanist}"
     const val accompanistPager = "com.google.accompanist:accompanist-pager:${Versions.pagerAccompanist}"

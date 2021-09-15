@@ -19,6 +19,7 @@ object Versions {
     const val ktor = "1.6.3"
     const val realm = "0.5.0"
     const val lottie = "4.0.0"
+    const val shimmer = "1.0.0"
 }
 
 

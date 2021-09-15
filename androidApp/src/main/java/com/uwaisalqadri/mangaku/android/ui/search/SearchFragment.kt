@@ -4,9 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
@@ -17,6 +15,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
+import com.uwaisalqadri.mangaku.android.ui.composables.Shimmer
+import com.uwaisalqadri.mangaku.android.ui.composables.ShimmerSearchItem
 import com.uwaisalqadri.mangaku.android.ui.composables.TopBar
 import com.uwaisalqadri.mangaku.android.ui.detail.DetailScreen
 import com.uwaisalqadri.mangaku.android.ui.search.composables.SearchField
@@ -61,20 +61,23 @@ class SearchFragment: Fragment() {
                     .padding(horizontal = 20.dp, vertical = 20.dp)
             )
 
-            if (uiState.loading) {
-                Text(text = "Loading...")
-            } else {
-                StaggeredVerticalGrid(
-                    maxColumnWidth = 150.dp
-                ) {
+            StaggeredVerticalGrid(
+                maxColumnWidth = 150.dp
+            ) {
+                if (uiState.loading) {
+                    repeat(10) {
+                        ShimmerSearchItem()
+                    }
+                } else {
                     uiState.listManga.forEach { manga ->
                         SearchResult(manga = manga)
                     }
                 }
             }
+
+            Spacer(modifier = Modifier.height(200.dp))
+
         }
-
-
     }
 }
 

@@ -38,18 +38,15 @@ class MyMangaFragment: Fragment() {
         viewModel: MyMangaViewModel = getViewModel()
     ) {
         val uiState by viewModel.uiState.collectAsState()
-        var currentIndex by remember { mutableStateOf(0) }
 
         Column {
 
-            TopBar(name = uiState.listManga[currentIndex].getTitle())
+            TopBar(name = "My Manga")
 
             if (uiState.loading) {
                 Text(text = "Loading...")
             } else {
-                HorizontalPagerWithTransition(manga = uiState.listManga) {
-                    currentIndex = it
-                }
+                HorizontalPagerWithTransition(manga = uiState.listManga)
             }
         }
     }

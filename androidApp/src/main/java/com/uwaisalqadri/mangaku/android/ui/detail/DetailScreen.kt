@@ -22,6 +22,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.google.accompanist.coil.rememberCoilPainter
+import com.uwaisalqadri.mangaku.android.ui.composables.ShimmerDetail
 import com.uwaisalqadri.mangaku.android.ui.composables.TopBar
 import com.uwaisalqadri.mangaku.android.ui.theme.MangaTypography
 import com.uwaisalqadri.mangaku.utils.getCoverImage
@@ -33,130 +34,134 @@ fun DetailScreen(
     mangaId: String,
     viewModel: DetailViewModel = getViewModel(),
 ) {
-    val manga by viewModel.manga.collectAsState()
+    val uiState by viewModel.uiState.collectAsState()
     viewModel.fetchDetailManga(mangaId)
 
-    Column(
-        modifier = Modifier.verticalScroll(rememberScrollState()),
-        horizontalAlignment = Alignment.Start
-    ) {
-
-        Row(
-            modifier = Modifier.padding(start = 25.dp, top = 25.dp)
+    if (uiState.loading) {
+        ShimmerDetail()
+    } else {
+        Column(
+            modifier = Modifier.verticalScroll(rememberScrollState()),
+            horizontalAlignment = Alignment.Start
         ) {
-            Icon(
-                imageVector = Icons.Default.ArrowBackIos,
-                contentDescription = "Back",
-                tint = Color.Black,
-                modifier = Modifier.size(18.dp)
+
+            Row(
+                modifier = Modifier.padding(start = 25.dp, top = 25.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.ArrowBackIos,
+                    contentDescription = "Back",
+                    tint = Color.Black,
+                    modifier = Modifier.size(18.dp)
+                )
+
+                Text(
+                    text = "Back",
+                    color = Color.Black,
+                    style = MangaTypography.h3,
+                    fontSize = 14.sp
+                )
+            }
+
+            Spacer(modifier = Modifier.padding(top = 20.dp))
+
+            TopBar(name = "Detail")
+
+            Card(
+                shape = RoundedCornerShape(9.dp),
+                elevation = 0.dp,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 25.dp, end = 25.dp, top = 30.dp, bottom = 16.dp)
+                    .height(200.dp)
+            ) {
+                Image(
+                    painter = rememberCoilPainter(request = uiState.manga.getCoverImage()),
+                    contentDescription = "cover image",
+                    contentScale = ContentScale.Crop
+                )
+            }
+
+            Text(
+                text = uiState.manga.getTitle(),
+                color = Color.Black,
+                style = MangaTypography.h1,
+                fontSize = 23.sp,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 30.dp)
             )
 
             Text(
-                text = "Back",
+                text = "Action, Adventure, RPG",
                 color = Color.Black,
                 style = MangaTypography.h3,
-                fontSize = 14.sp
+                fontSize = 15.sp,
+                modifier = Modifier
+                    .padding(start = 30.dp, end = 30.dp, bottom = 10.dp)
             )
-        }
-
-        Spacer(modifier = Modifier.padding(top = 20.dp))
-
-        TopBar(name = "Detail")
-
-        Card(
-            shape = RoundedCornerShape(9.dp),
-            elevation = 0.dp,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(start = 25.dp, end = 25.dp, top = 30.dp, bottom = 16.dp)
-                .height(200.dp)
-        ) {
-            Image(
-                painter = rememberCoilPainter(request = manga.getCoverImage()),
-                contentDescription = "cover image",
-                contentScale = ContentScale.Crop
-            )
-        }
-
-        Text(
-            text = manga.getTitle(),
-            color = Color.Black,
-            style = MangaTypography.h1,
-            fontSize = 23.sp,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 30.dp)
-        )
-
-        Text(
-            text = "Action, Adventure, RPG",
-            color = Color.Black,
-            style = MangaTypography.h3,
-            fontSize = 15.sp,
-            modifier = Modifier
-                .padding(start = 30.dp, end = 30.dp, bottom = 10.dp)
-        )
-
-        Row(
-            horizontalArrangement = Arrangement.End,
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.padding(horizontal = 30.dp, vertical = 5.dp)
-        ) {
-            Card(
-                elevation = 0.dp,
-                shape = RoundedCornerShape(5.dp)
-            ) {
-                Text(
-                    text = manga.attributes?.startDate ?: "",
-                    color = Color.White,
-                    style = MangaTypography.h1,
-                    fontSize = 13.sp,
-                    modifier = Modifier
-                        .background(Color.Black)
-                        .padding(horizontal = 15.dp, vertical = 5.dp)
-                )
-            }
 
             Row(
                 horizontalArrangement = Arrangement.End,
                 verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.padding(start = 10.dp)
+                modifier = Modifier.padding(horizontal = 30.dp, vertical = 5.dp)
             ) {
-                Icon(
-                    imageVector = Icons.Default.Star,
-                    contentDescription = null,
-                    tint = Color.Yellow
-                )
+                Card(
+                    elevation = 0.dp,
+                    shape = RoundedCornerShape(5.dp)
+                ) {
+                    Text(
+                        text = uiState.manga.attributes?.startDate ?: "",
+                        color = Color.White,
+                        style = MangaTypography.h1,
+                        fontSize = 13.sp,
+                        modifier = Modifier
+                            .background(Color.Black)
+                            .padding(horizontal = 15.dp, vertical = 5.dp)
+                    )
+                }
 
-                Text(
-                    text = (manga.attributes?.averageRating ?: 0.0).toString(),
-                    color = Color.Black,
-                    style = MangaTypography.h2,
-                    fontSize = 13.sp
-                )
+                Row(
+                    horizontalArrangement = Arrangement.End,
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.padding(start = 10.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Star,
+                        contentDescription = null,
+                        tint = Color.Yellow
+                    )
+
+                    Text(
+                        text = (uiState.manga.attributes?.averageRating ?: 0.0).toString(),
+                        color = Color.Black,
+                        style = MangaTypography.h2,
+                        fontSize = 13.sp
+                    )
+                }
             }
+
+            Spacer(modifier = Modifier.height(50.dp))
+
+            Text(
+                text = "Description",
+                color = Color.Black,
+                style = MangaTypography.h2,
+                fontSize = 21.sp,
+                modifier = Modifier.padding(horizontal = 30.dp)
+            )
+
+            Text(
+                text = uiState.manga.attributes?.synopsis ?: "",
+                color = Color.Black,
+                style = MangaTypography.h3,
+                fontSize = 15.sp,
+                modifier = Modifier.padding(top = 15.dp, start = 30.dp, end = 30.dp)
+            )
+
+            Spacer(modifier = Modifier.height(200.dp))
+
         }
-
-        Spacer(modifier = Modifier.height(50.dp))
-
-        Text(
-            text = "Description",
-            color = Color.Black,
-            style = MangaTypography.h2,
-            fontSize = 21.sp,
-            modifier = Modifier.padding(horizontal = 30.dp)
-        )
-
-        Text(
-            text = manga.attributes?.synopsis ?: "",
-            color = Color.Black,
-            style = MangaTypography.h3,
-            fontSize = 15.sp,
-            modifier = Modifier.padding(top = 15.dp, start = 30.dp, end = 30.dp)
-        )
-
-        Spacer(modifier = Modifier.height(200.dp))
-
     }
 }
 

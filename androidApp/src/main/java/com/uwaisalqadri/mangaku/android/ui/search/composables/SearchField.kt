@@ -45,7 +45,7 @@ fun SearchField(
             style = MangaTypography.h3,
             color = Color.DarkGray,
             modifier = Modifier
-                .padding(start = 60.dp, end = 10.dp, top = 8.dp, bottom = 5.dp)
+                .padding(start = 60.dp, end = 10.dp, top = 11.dp, bottom = 5.dp)
                 .fillMaxWidth()
                 .height(30.dp)
                 .clickable { text = "" }
@@ -88,7 +88,7 @@ fun SearchField(
                 },
 
                 modifier = Modifier
-                    .padding(start = 10.dp, end = 10.dp, top = 8.dp, bottom = 5.dp)
+                    .padding(start = 10.dp, end = 10.dp, top = 11.dp, bottom = 5.dp)
                     .fillMaxWidth()
                     .height(30.dp)
             )

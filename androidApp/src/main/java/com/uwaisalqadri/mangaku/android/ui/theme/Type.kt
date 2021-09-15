@@ -34,7 +34,7 @@ val MangaTypography = Typography(
     h3 = TextStyle(
         fontFamily = Montserrat,
         fontWeight = FontWeight.Medium,
-        fontSize = 18.sp
+        fontSize = 15.sp
     ),
     caption = TextStyle(
         fontFamily = MaShanZheng,

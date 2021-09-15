@@ -15,7 +15,7 @@ class BrowseViewModel(
     private val trendingUseCase: GetMangaTrendingUseCase
 ): ViewModel() {
 
-    private val _uiState = MutableStateFlow(UiState(loading = true))
+    private val _uiState = MutableStateFlow(UiState(loading = false))
     val uiState: StateFlow<UiState> = _uiState
 
     init {
@@ -23,6 +23,7 @@ class BrowseViewModel(
     }
 
     private fun fetchManga() = viewModelScope.launch {
+        _uiState.value = UiState(loading = true)
         trendingUseCase().collect { result ->
             if (result.isNotEmpty()) _uiState.value = UiState(listManga = result)
         }

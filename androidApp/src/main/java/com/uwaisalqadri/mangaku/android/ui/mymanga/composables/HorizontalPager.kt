@@ -23,7 +23,6 @@ import kotlin.math.absoluteValue
 @Composable
 fun HorizontalPagerWithTransition(
     manga: List<Manga>,
-    onSlide: (Int) -> Unit
 ) {
     HorizontalPager(
         state = PagerState(
@@ -64,7 +63,6 @@ fun HorizontalPagerWithTransition(
                 .width(240.dp)
                 .height(370.dp)
         ) {
-            onSlide(page)
             Image(
                 painter = rememberCoilPainter(request = manga[page].getPosterImage()),
                 contentDescription = null,
