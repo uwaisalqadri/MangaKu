@@ -11,6 +11,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.coil.rememberCoilPainter
 import com.uwaisalqadri.mangaku.domain.model.Manga
+import com.uwaisalqadri.mangaku.utils.getPosterImage
 
 @Composable
 fun SearchResult(
@@ -29,7 +30,7 @@ fun SearchResult(
                 .width(90.dp)
         ) {
             Image(
-                painter = rememberCoilPainter(request = manga.attributes?.posterImage?.original),
+                painter = rememberCoilPainter(request = manga.getPosterImage()),
                 contentDescription = "search image result",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier

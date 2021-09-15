@@ -10,6 +10,7 @@ object Versions {
     const val activityCompose = "1.3.1"
     const val navCompose = "2.4.0-alpha08"
     const val coilAccompanist = "0.13.0"
+    const val pagerAccompanist = "0.18.0"
     const val kermit = "0.1.9"
     const val koin = "3.1.2"
     const val coroutine = "1.5.0-native-mt"

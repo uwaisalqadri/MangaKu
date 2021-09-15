@@ -18,15 +18,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.google.accompanist.coil.rememberCoilPainter
-import com.uwaisalqadri.mangaku.android.R
 import com.uwaisalqadri.mangaku.android.ui.composables.TopBar
 import com.uwaisalqadri.mangaku.android.ui.theme.MangaTypography
-import com.uwaisalqadri.mangaku.android.utils.getTitle
+import com.uwaisalqadri.mangaku.utils.getCoverImage
+import com.uwaisalqadri.mangaku.utils.getTitle
 import org.koin.androidx.compose.getViewModel
 
 @Composable
@@ -60,7 +59,7 @@ fun DetailScreen(
             )
         }
 
-        Spacer(modifier = Modifier.padding(top = 30.dp))
+        Spacer(modifier = Modifier.padding(top = 20.dp))
 
         TopBar(name = "Detail")
 
@@ -73,7 +72,7 @@ fun DetailScreen(
                 .height(200.dp)
         ) {
             Image(
-                painter = rememberCoilPainter(request = manga.attributes?.coverImage?.original),
+                painter = rememberCoilPainter(request = manga.getCoverImage()),
                 contentDescription = "cover image",
                 contentScale = ContentScale.Crop
             )
@@ -95,7 +94,7 @@ fun DetailScreen(
             style = MangaTypography.h3,
             fontSize = 15.sp,
             modifier = Modifier
-                .padding(horizontal = 30.dp, vertical = 8.dp)
+                .padding(start = 30.dp, end = 30.dp, bottom = 10.dp)
         )
 
         Row(

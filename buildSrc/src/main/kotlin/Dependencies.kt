@@ -15,6 +15,7 @@ object Dependencies {
     const val composeMaterial = "androidx.compose.material:material:${Versions.compose}"
     const val composeTooling = "androidx.compose.ui:ui-tooling:${Versions.compose}"
     const val composeGraphics = "androidx.compose.ui:ui-graphics:${Versions.compose}"
+    const val composeUtil = "androidx.compose.ui:ui-util:${Versions.compose}"
     const val composeFoundation = "androidx.compose.foundation:foundation:${Versions.compose}"
     const val composeFoundationLayout = "androidx.compose.foundation:foundation-layout:${Versions.compose}"
     const val composeMaterialIcon = "androidx.compose.material:material-icons-extended:${Versions.compose}"
@@ -24,6 +25,7 @@ object Dependencies {
     const val composeLottie = "com.airbnb.android:lottie-compose:${Versions.lottie}"
 
     const val accompanistCoil = "com.google.accompanist:accompanist-coil:${Versions.coilAccompanist}"
+    const val accompanistPager = "com.google.accompanist:accompanist-pager:${Versions.pagerAccompanist}"
 
     const val koinCore = "io.insert-koin:koin-core:${Versions.koin}"
     const val koinTest = "io.insert-koin:koin-test:${Versions.koin}"

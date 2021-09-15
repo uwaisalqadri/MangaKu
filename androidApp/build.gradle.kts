@@ -74,10 +74,13 @@ dependencies {
         implementation(composeActivity)
         implementation(composeNavigation)
         implementation(composeMaterialIcon)
+        implementation(composeUtil)
 
         implementation(ktorAndroid)
         implementation(koinAndroid)
         implementation(koinCompose)
+
         implementation(accompanistCoil)
+        implementation(accompanistPager)
     }
 }

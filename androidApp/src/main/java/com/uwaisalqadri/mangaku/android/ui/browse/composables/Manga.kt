@@ -17,9 +17,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.google.accompanist.coil.rememberCoilPainter
 import com.uwaisalqadri.mangaku.android.ui.theme.MangaTypography
-import com.uwaisalqadri.mangaku.android.utils.getTitle
 import com.uwaisalqadri.mangaku.domain.model.Manga
-import com.uwaisalqadri.mangaku.utils.Extensions
+import com.uwaisalqadri.mangaku.utils.getPosterImage
+import com.uwaisalqadri.mangaku.utils.getTitle
+import com.uwaisalqadri.mangaku.utils.toFiveStars
 
 @Composable
 fun Manga(
@@ -34,7 +35,7 @@ fun Manga(
             shape = RoundedCornerShape(12.dp)
         ) {
             Image(
-                painter = rememberCoilPainter(request = manga.attributes?.posterImage?.original),
+                painter = rememberCoilPainter(request = manga.getPosterImage()),
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
@@ -111,13 +112,12 @@ fun Manga(
 fun StarRate(
     modifier: Modifier,
     manga: Manga,
-    extensions: Extensions = Extensions,
     averageRating: Double = (manga.attributes?.averageRating ?: 0.0)
 ) {
     Row(
         modifier = modifier
     ) {
-        val avgToFive = extensions.toFiveStars(averageRating)
+        val avgToFive = averageRating.toFiveStars()
         repeat(5) { index ->
             Icon(
                 imageVector =
