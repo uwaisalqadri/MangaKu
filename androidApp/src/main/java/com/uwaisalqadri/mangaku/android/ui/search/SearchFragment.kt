@@ -14,6 +14,7 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import com.uwaisalqadri.mangaku.android.ui.composables.TopBar
+import com.uwaisalqadri.mangaku.android.ui.detail.DetailScreen
 import com.uwaisalqadri.mangaku.android.ui.search.composables.SearchField
 import com.uwaisalqadri.mangaku.android.ui.search.composables.SearchResult
 import com.uwaisalqadri.mangaku.android.ui.search.composables.StaggeredVerticalGrid
@@ -29,7 +30,7 @@ class SearchFragment: Fragment() {
     ): View {
         return ComposeView(requireContext()).apply {
             setContent {
-                SearchScreen()
+                DetailScreen(mangaId = "4")
             }
         }
     }

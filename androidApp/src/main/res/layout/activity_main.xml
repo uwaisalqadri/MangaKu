@@ -22,8 +22,8 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/nav_view_card"
         android:layout_width="0dp"
-        android:layout_height="76dp"
-        android:layout_marginHorizontal="45dp"
+        android:layout_height="66dp"
+        android:layout_marginHorizontal="85dp"
         android:layout_marginBottom="35dp"
         app:cardElevation="5dp"
         app:cardCornerRadius="12dp"
@@ -37,7 +37,7 @@
             android:layout_height="match_parent"
             android:background="@android:color/white"
             app:labelVisibilityMode="unlabeled"
-            app:itemIconSize="30sp"
+            app:itemIconSize="23sp"
             app:itemIconTint="@android:color/black"
             app:menu="@menu/nav_item" />
 
