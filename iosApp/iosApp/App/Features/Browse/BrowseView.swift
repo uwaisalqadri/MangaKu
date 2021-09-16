@@ -45,7 +45,7 @@ struct BrowseView: View {
           if viewModel.loading {
             VStack {
               ForEach(0..<10) { _ in
-                ShimmerItemView()
+                ShimmerBrowseView()
               }
             }.padding(.leading, 17)
             .padding(.trailing, 30)

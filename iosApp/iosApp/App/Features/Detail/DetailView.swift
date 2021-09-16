@@ -8,28 +8,33 @@
 
 import SwiftUI
 import SDWebImageSwiftUI
+import KotlinCore
 
 struct DetailView: View {
 
   @ObservedObject var viewModel: DetailViewModel
   let mangaId: String
 
+  private let extensions = Extensions()
+
   var body: some View {
     VStack(alignment: .leading) {
 
       ScrollView(showsIndicators: false) {
 
-        WebImage(url: URL(string: viewModel.manga?.attributes?.coverImage?.original ?? ""))
-          .resizable()
-          .indicator(.activity)
-          .clipped()
-          .frame(height: 200)
-          .cornerRadius(10)
-          .padding(.horizontal, 24)
+        if viewModel.loading {
+          ShimmerDetailView()
+        } else {
+          WebImage(url: URL(string: viewModel.manga?.attributes?.coverImage?.original ?? ""))
+            .resizable()
+            .indicator(.activity)
+            .clipped()
+            .frame(height: 200)
+            .cornerRadius(10)
+            .padding(.horizontal, 24)
 
-        if !viewModel.loading {
           VStack(alignment: .leading) {
-            Text(viewModel.manga?.getTitle() ?? "")
+            Text(extensions.getTitle(manga: viewModel.manga ?? Manga(attributes: nil, id: "", type: "")))
               .foregroundColor(.black)
               .font(.custom(.mbold, size: 25))
               .padding(.top, 15)
@@ -73,6 +78,7 @@ struct DetailView: View {
 
           }.padding(.horizontal, 30)
         }
+
       }.padding(.top, 30)
 
     }.navigationTitle("Detail")

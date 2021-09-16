@@ -42,7 +42,11 @@ struct SearchView: View {
           GridItem(.adaptive(minimum: 90), spacing: 25, alignment: .center)
         ], alignment: .leading, spacing: 10) {
 
-          withAnimation(.interactiveSpring()) {
+          if viewModel.loading {
+            ForEach(0..<12) { _ in
+              ShimmerSearchView()
+            }
+          } else {
             ForEach(viewModel.mangas, id: \.id) { manga in
               NavigationLink(destination: DetailView(viewModel: assembler.resolve(), mangaId: manga.id)) {
                 SearchItemView(manga: manga)

@@ -16,6 +16,8 @@ struct MyMangaView: View {
   @ObservedObject var viewModel: MyMangaViewModel
   @State var position: Int = 0
 
+  private let extensions = Extensions()
+
   var body: some View {
     GeometryReader { view in
       NavigationView {
@@ -27,7 +29,7 @@ struct MyMangaView: View {
 
           if !viewModel.loading, !viewModel.mangas.isEmpty {
             ZStack(alignment: Alignment(horizontal: .center, vertical: .top)) {
-              Text(viewModel.mangas[position].getTitle())
+              Text(extensions.getTitle(manga: viewModel.mangas[position]))
                 .font(.custom(.sedgwickave, size: view.size.width / 7))
                 .lineLimit(2)
                 .multilineTextAlignment(.center)
