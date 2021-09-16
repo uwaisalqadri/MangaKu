@@ -41,7 +41,7 @@ fun SearchField(
         var text by remember { mutableStateOf(placeholder) }
 
         Text(
-            text = text,
+            text = if (query.isEmpty()) text else "",
             style = MangaTypography.h3,
             color = Color.DarkGray,
             modifier = Modifier

@@ -17,11 +17,7 @@
             app:popExitAnim="@android:anim/slide_out_right" />
         <action
             android:id="@+id/action_navigation_browse_to_searchFragment"
-            app:destination="@id/searchFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out"
-            app:popEnterAnim="@android:anim/fade_in"
-            app:popExitAnim="@android:anim/fade_out" />
+            app:destination="@id/searchFragment" />
     </fragment>
     <fragment
         android:id="@+id/navigation_mymanga"

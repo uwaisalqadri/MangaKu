@@ -23,126 +23,96 @@ import com.valentinilk.shimmer.shimmer
 
 @Composable
 fun ShimmerDetail() {
-    Column {
-        Row(
-            modifier = Modifier.padding(start = 25.dp, top = 25.dp)
+    Column(
+        modifier = Modifier.padding(horizontal = 20.dp)
+    ) {
+        Card(
+            shape = RoundedCornerShape(9.dp),
+            elevation = 0.dp,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 30.dp, bottom = 16.dp)
+                .height(200.dp)
         ) {
-            Icon(
-                imageVector = Icons.Default.ArrowBackIos,
-                contentDescription = "Back",
-                tint = Color.Black,
-                modifier = Modifier.size(18.dp)
-            )
-
-            Text(
-                text = "Back",
-                color = Color.Black,
-                style = MangaTypography.h3,
-                fontSize = 14.sp
-            )
+            Shimmer(modifier = Modifier.fillMaxSize())
         }
 
-        Spacer(modifier = Modifier.padding(top = 20.dp))
-
-        TopBar(name = "Detail")
+        Shimmer(
+            cornerRadius = 8.dp,
+            modifier = Modifier
+                .width(250.dp)
+                .height(25.dp)
+        )
 
         Spacer(modifier = Modifier.height(10.dp))
 
-        Column(
+        Shimmer(
+            cornerRadius = 8.dp,
             modifier = Modifier
-                .verticalScroll(rememberScrollState())
-                .padding(horizontal = 30.dp),
-            horizontalAlignment = Alignment.Start
+                .width(300.dp)
+                .height(15.dp)
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
+
+        Row(
+            horizontalArrangement = Arrangement.End,
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.padding(vertical = 5.dp)
         ) {
-            Card(
-                shape = RoundedCornerShape(9.dp),
-                elevation = 0.dp,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 30.dp, bottom = 16.dp)
-                    .height(200.dp)
-            ) {
-                Shimmer(modifier = Modifier.fillMaxSize())
-            }
 
             Shimmer(
                 cornerRadius = 8.dp,
                 modifier = Modifier
-                    .width(250.dp)
-                    .height(25.dp)
+                    .width(100.dp)
+                    .height(30.dp)
             )
 
-            Spacer(modifier = Modifier.height(10.dp))
-
-            Shimmer(
-                cornerRadius = 8.dp,
-                modifier = Modifier
-                    .width(300.dp)
-                    .height(15.dp)
-            )
-
-            Spacer(modifier = Modifier.height(15.dp))
+            Spacer(modifier = Modifier.width(10.dp))
 
             Row(
                 horizontalArrangement = Arrangement.End,
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.padding(vertical = 5.dp)
+                verticalAlignment = Alignment.CenterVertically
             ) {
+                Icon(
+                    imageVector = Icons.Default.Star,
+                    contentDescription = null,
+                    tint = Color.Yellow
+                )
 
                 Shimmer(
                     cornerRadius = 8.dp,
                     modifier = Modifier
-                        .width(100.dp)
-                        .height(30.dp)
+                        .width(70.dp)
+                        .height(20.dp)
                 )
-
-                Spacer(modifier = Modifier.width(10.dp))
-
-                Row(
-                    horizontalArrangement = Arrangement.End,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Star,
-                        contentDescription = null,
-                        tint = Color.Yellow
-                    )
-
-                    Shimmer(
-                        cornerRadius = 8.dp,
-                        modifier = Modifier
-                            .width(70.dp)
-                            .height(20.dp)
-                    )
-                }
-
             }
 
-            Spacer(modifier = Modifier.height(50.dp))
+        }
 
+        Spacer(modifier = Modifier.height(50.dp))
+
+        Shimmer(
+            cornerRadius = 8.dp,
+            modifier = Modifier
+                .width(200.dp)
+                .height(40.dp)
+        )
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        repeat(5) {
             Shimmer(
                 cornerRadius = 8.dp,
                 modifier = Modifier
-                    .width(200.dp)
-                    .height(40.dp)
+                    .fillMaxWidth()
+                    .height(20.dp)
             )
 
-            Spacer(modifier = Modifier.height(20.dp))
-
-            repeat(5) {
-                Shimmer(
-                    cornerRadius = 8.dp,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(20.dp)
-                )
-
-                Spacer(modifier = Modifier.height(10.dp))
-            }
-
-            Spacer(modifier = Modifier.height(200.dp))
-
+            Spacer(modifier = Modifier.height(10.dp))
         }
+
+        Spacer(modifier = Modifier.height(200.dp))
     }
 }
 

@@ -61,27 +61,28 @@ class DetailFragment: Fragment() {
         mangaId: String,
         viewModel: DetailViewModel = getViewModel(),
     ) {
-        val uiState by viewModel.uiState.collectAsState()
         viewModel.fetchDetailManga(mangaId)
+        val manga by viewModel.detailManga
+        val loading by viewModel.loading
 
-        if (uiState.loading) {
-            ShimmerDetail()
-        } else {
-            Column(
-                modifier = Modifier.verticalScroll(rememberScrollState()),
-                horizontalAlignment = Alignment.Start
+        Column(
+            modifier = Modifier.verticalScroll(rememberScrollState()),
+            horizontalAlignment = Alignment.Start
+        ) {
+
+            BackButton(
+                modifier = Modifier.padding(start = 25.dp, top = 25.dp)
             ) {
+                findNavController().popBackStack()
+            }
 
-                BackButton(
-                    modifier = Modifier.padding(start = 25.dp, top = 25.dp)
-                ) {
-                    findNavController().popBackStack()
-                }
+            Spacer(modifier = Modifier.padding(top = 20.dp))
 
-                Spacer(modifier = Modifier.padding(top = 20.dp))
+            TopBar(name = "Detail")
 
-                TopBar(name = "Detail")
-
+            if (loading) {
+                ShimmerDetail()
+            } else {
                 Card(
                     shape = RoundedCornerShape(9.dp),
                     elevation = 0.dp,
@@ -91,14 +92,14 @@ class DetailFragment: Fragment() {
                         .height(200.dp)
                 ) {
                     Image(
-                        painter = rememberCoilPainter(request = uiState.manga.getCoverImage()),
+                        painter = rememberCoilPainter(request = manga.getCoverImage()),
                         contentDescription = "cover image",
                         contentScale = ContentScale.Crop
                     )
                 }
 
                 Text(
-                    text = uiState.manga.getTitle(),
+                    text = manga.getTitle(),
                     color = Color.Black,
                     style = MangaTypography.h1,
                     fontSize = 23.sp,
@@ -126,7 +127,7 @@ class DetailFragment: Fragment() {
                         shape = RoundedCornerShape(5.dp)
                     ) {
                         Text(
-                            text = uiState.manga.attributes?.startDate ?: "",
+                            text = manga.attributes?.startDate ?: "",
                             color = Color.White,
                             style = MangaTypography.h1,
                             fontSize = 13.sp,
@@ -148,7 +149,7 @@ class DetailFragment: Fragment() {
                         )
 
                         Text(
-                            text = (uiState.manga.attributes?.averageRating ?: 0.0).toString(),
+                            text = (manga.attributes?.averageRating ?: 0.0).toString(),
                             color = Color.Black,
                             style = MangaTypography.h2,
                             fontSize = 13.sp
@@ -167,7 +168,7 @@ class DetailFragment: Fragment() {
                 )
 
                 Text(
-                    text = uiState.manga.attributes?.synopsis ?: "",
+                    text = manga.attributes?.synopsis ?: "",
                     color = Color.Black,
                     style = MangaTypography.h3,
                     fontSize = 15.sp,
@@ -175,7 +176,6 @@ class DetailFragment: Fragment() {
                 )
 
                 Spacer(modifier = Modifier.height(200.dp))
-
             }
         }
     }

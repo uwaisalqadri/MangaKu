@@ -5,11 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.uwaisalqadri.mangaku.android.ui.composables.TopBar
@@ -39,7 +42,7 @@ class MyMangaFragment: Fragment() {
 
         Column {
 
-            TopBar(name = "My Manga")
+            TopBar(name = "My Manga", modifier = Modifier.padding(start = 10.dp))
 
             if (uiState.loading) {
                 Text(text = "Loading...")

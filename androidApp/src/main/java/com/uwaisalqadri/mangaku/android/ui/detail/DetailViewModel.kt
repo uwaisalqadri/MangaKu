@@ -1,8 +1,10 @@
 package com.uwaisalqadri.mangaku.android.ui.detail
 
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.uwaisalqadri.mangaku.android.utils.DetailUiState
+import com.uwaisalqadri.mangaku.domain.model.Manga
 import com.uwaisalqadri.mangaku.domain.usecase.detail.GetMangaDetailUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -13,14 +15,15 @@ class DetailViewModel(
     private val detailUseCase: GetMangaDetailUseCase
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow(DetailUiState(loading = false))
-    val uiState: StateFlow<DetailUiState> = _uiState
+    val detailManga = mutableStateOf(Manga(null, "", ""))
+    val loading = mutableStateOf(true)
 
     fun fetchDetailManga(mangaId: String) = viewModelScope.launch {
-        _uiState.value = DetailUiState(loading = true)
-
         detailUseCase(mangaId).collect { result ->
-            if (result != null) _uiState.value = DetailUiState(manga = result)
+            if (result != null) {
+                detailManga.value = result
+                loading.value = false
+            }
         }
     }
 
