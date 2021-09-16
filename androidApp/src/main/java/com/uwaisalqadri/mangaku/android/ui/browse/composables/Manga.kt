@@ -18,15 +18,14 @@ import androidx.compose.ui.unit.sp
 import com.google.accompanist.coil.rememberCoilPainter
 import com.uwaisalqadri.mangaku.android.ui.theme.MangaTypography
 import com.uwaisalqadri.mangaku.domain.model.Manga
-import com.uwaisalqadri.mangaku.utils.getPosterImage
-import com.uwaisalqadri.mangaku.utils.getTitle
-import com.uwaisalqadri.mangaku.utils.toFiveStars
+import com.uwaisalqadri.mangaku.utils.Extensions
 
 @Composable
 fun Manga(
     manga: Manga,
     modifier: Modifier = Modifier,
-    onReadMore: ((Manga) -> Unit)? = null,
+    extension: Extensions = Extensions,
+    onReadMore: ((Manga) -> Unit)? = null
 ) {
     Row(
         modifier = modifier
@@ -35,7 +34,7 @@ fun Manga(
             shape = RoundedCornerShape(12.dp)
         ) {
             Image(
-                painter = rememberCoilPainter(request = manga.getPosterImage()),
+                painter = rememberCoilPainter(request = extension.getPosterImage(manga)),
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
@@ -53,12 +52,13 @@ fun Manga(
 
             StarRate(
                 manga = manga,
+                extension = extension,
                 modifier = Modifier
                     .fillMaxWidth()
             )
 
             Text(
-                text = manga.getTitle(),
+                text = extension.getTitle(manga),
                 fontSize = 18.sp,
                 style = MangaTypography.h1,
                 maxLines = 2,
@@ -112,12 +112,13 @@ fun Manga(
 fun StarRate(
     modifier: Modifier,
     manga: Manga,
-    averageRating: Double = (manga.attributes?.averageRating ?: 0.0)
+    averageRating: Double = (manga.attributes?.averageRating ?: 0.0),
+    extension: Extensions
 ) {
     Row(
         modifier = modifier
     ) {
-        val avgToFive = averageRating.toFiveStars()
+        val avgToFive = extension.toFiveStars(avgRating = averageRating)
         repeat(5) { index ->
             Icon(
                 imageVector =

@@ -15,6 +15,8 @@ struct MangaItemView: View {
   let manga: Manga
   var onReadMoreListener: ((Manga) -> Void)?
 
+  private let extensions = Extensions()
+
   var body: some View {
     HStack {
       WebImage(url: URL(string: manga.attributes?.posterImage?.original ?? ""))
@@ -26,7 +28,7 @@ struct MangaItemView: View {
       VStack(alignment: .leading) {
         StarsView(manga: manga)
 
-        Text(manga.getTitle())
+        Text(extensions.getTitle(manga: manga))
           .font(.custom(.mbold, size: 18))
           .lineLimit(2)
           .padding(.top, 5)
@@ -65,8 +67,9 @@ struct MangaItemView: View {
 struct StarsView: View {
 
   let manga: Manga
-  let extensions = Extensions()
   @State var averageRating: Int32 = 0
+
+  private let extensions = Extensions()
 
   var body: some View {
     HStack {

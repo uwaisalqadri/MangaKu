@@ -4,17 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.foundation.*
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBackIos
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -26,15 +27,11 @@ import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.accompanist.coil.rememberCoilPainter
-import com.google.android.material.transition.MaterialContainerTransform
-import com.google.android.material.transition.MaterialFadeThrough
-import com.uwaisalqadri.mangaku.android.R
 import com.uwaisalqadri.mangaku.android.ui.composables.BackButton
 import com.uwaisalqadri.mangaku.android.ui.composables.ShimmerDetail
 import com.uwaisalqadri.mangaku.android.ui.composables.TopBar
 import com.uwaisalqadri.mangaku.android.ui.theme.MangaTypography
-import com.uwaisalqadri.mangaku.utils.getCoverImage
-import com.uwaisalqadri.mangaku.utils.getTitle
+import com.uwaisalqadri.mangaku.utils.Extensions
 import org.koin.androidx.compose.getViewModel
 
 class DetailFragment: Fragment() {
@@ -60,6 +57,7 @@ class DetailFragment: Fragment() {
     fun DetailScreen(
         mangaId: String,
         viewModel: DetailViewModel = getViewModel(),
+        extension: Extensions = Extensions
     ) {
         viewModel.fetchDetailManga(mangaId)
         val manga by viewModel.detailManga
@@ -92,14 +90,14 @@ class DetailFragment: Fragment() {
                         .height(200.dp)
                 ) {
                     Image(
-                        painter = rememberCoilPainter(request = manga.getCoverImage()),
+                        painter = rememberCoilPainter(request = extension.getCoverImage(manga)),
                         contentDescription = "cover image",
                         contentScale = ContentScale.Crop
                     )
                 }
 
                 Text(
-                    text = manga.getTitle(),
+                    text = extension.getTitle(manga),
                     color = Color.Black,
                     style = MangaTypography.h1,
                     fontSize = 23.sp,

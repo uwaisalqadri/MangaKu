@@ -12,11 +12,12 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.coil.rememberCoilPainter
 import com.uwaisalqadri.mangaku.domain.model.Manga
-import com.uwaisalqadri.mangaku.utils.getPosterImage
+import com.uwaisalqadri.mangaku.utils.Extensions
 
 @Composable
 fun SearchResult(
     manga: Manga,
+    extension: Extensions = Extensions,
     onClick: (String) -> Unit
 ) {
     Card(
@@ -33,7 +34,7 @@ fun SearchResult(
                 .width(90.dp)
         ) {
             Image(
-                painter = rememberCoilPainter(request = manga.getPosterImage()),
+                painter = rememberCoilPainter(request = extension.getPosterImage(manga)),
                 contentDescription = "search image result",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
