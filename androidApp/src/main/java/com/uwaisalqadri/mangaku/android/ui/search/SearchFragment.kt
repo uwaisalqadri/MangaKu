@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -15,10 +14,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
-import com.uwaisalqadri.mangaku.android.ui.composables.Shimmer
+import androidx.navigation.fragment.findNavController
+import com.uwaisalqadri.mangaku.android.R
+import com.uwaisalqadri.mangaku.android.ui.composables.BackButton
 import com.uwaisalqadri.mangaku.android.ui.composables.ShimmerSearchItem
 import com.uwaisalqadri.mangaku.android.ui.composables.TopBar
-import com.uwaisalqadri.mangaku.android.ui.detail.DetailScreen
+import com.uwaisalqadri.mangaku.android.ui.detail.DetailFragment
 import com.uwaisalqadri.mangaku.android.ui.search.composables.SearchField
 import com.uwaisalqadri.mangaku.android.ui.search.composables.SearchResult
 import com.uwaisalqadri.mangaku.android.ui.search.composables.StaggeredVerticalGrid
@@ -49,6 +50,14 @@ class SearchFragment: Fragment() {
             modifier = Modifier.verticalScroll(rememberScrollState())
         ) {
 
+            BackButton(
+                modifier = Modifier.padding(start = 25.dp, top = 25.dp)
+            ) {
+                findNavController().popBackStack(R.id.navigation_browse, false)
+            }
+
+            Spacer(modifier = Modifier.padding(top = 20.dp))
+
             TopBar(name = "Search")
 
             SearchField(
@@ -70,7 +79,10 @@ class SearchFragment: Fragment() {
                     }
                 } else {
                     uiState.listManga.forEach { manga ->
-                        SearchResult(manga = manga)
+                        SearchResult(manga = manga) {
+                            val bundle = Bundle().apply { putString(DetailFragment.DETAIL, it) }
+                            findNavController().navigate(R.id.action_searchFragment_to_detailFragment, bundle)
+                        }
                     }
                 }
             }

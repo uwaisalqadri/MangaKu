@@ -1,6 +1,7 @@
 package com.uwaisalqadri.mangaku.android.ui.search.composables
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -16,6 +17,7 @@ import com.uwaisalqadri.mangaku.utils.getPosterImage
 @Composable
 fun SearchResult(
     manga: Manga,
+    onClick: (String) -> Unit
 ) {
     Card(
         shape = RoundedCornerShape(8.dp),
@@ -23,6 +25,7 @@ fun SearchResult(
         modifier = Modifier
             .padding(horizontal = 20.dp, vertical = 20.dp)
             .height(130.dp)
+            .clickable { onClick(manga.id) }
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,

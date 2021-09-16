@@ -2,18 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_saved"
-        android:icon="@drawable/ic_saved"
-        android:title="@string/saved" />
-
-    <item
         android:id="@+id/navigation_browse"
         android:icon="@drawable/ic_browse"
         android:title="@string/browse" />
 
     <item
         android:id="@+id/navigation_mymanga"
-        android:icon="@drawable/ic_mymanga"
+        android:icon="@drawable/ic_saved"
         android:title="@string/mymanga" />
 
 

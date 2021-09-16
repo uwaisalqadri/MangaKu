@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -16,11 +17,16 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.findNavController
+import com.google.android.material.transition.Hold
+import com.google.android.material.transition.MaterialFadeThrough
 import com.uwaisalqadri.mangaku.android.R
 import com.uwaisalqadri.mangaku.android.ui.browse.composables.Genres
 import com.uwaisalqadri.mangaku.android.ui.browse.composables.MangaTrending
 import com.uwaisalqadri.mangaku.android.ui.composables.ShimmerBrowseItem
 import com.uwaisalqadri.mangaku.android.ui.composables.TopBar
+import com.uwaisalqadri.mangaku.android.ui.detail.DetailFragment
 import com.uwaisalqadri.mangaku.android.ui.mymanga.MyMangaViewModel
 import com.uwaisalqadri.mangaku.android.ui.theme.MangaTypography
 import org.koin.androidx.compose.getViewModel
@@ -53,7 +59,9 @@ class BrowseFragment: Fragment() {
             TopBar(
                 name = "Browse",
                 icon = R.drawable.ic_search
-            )
+            ) {
+                findNavController().navigate(R.id.action_navigation_browse_to_searchFragment)
+            }
 
             Spacer(modifier = Modifier.height(35.dp))
 
@@ -90,8 +98,12 @@ class BrowseFragment: Fragment() {
                         .fillMaxWidth()
                         .fillMaxHeight()
                         .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 120.dp)
-                )
+                ) { mangaId ->
+                    val bundle = Bundle().apply { putString(DetailFragment.DETAIL, mangaId) }
+                    findNavController().navigate(R.id.action_navigation_browse_to_detailFragment, bundle)
+                }
             }
+
         }
     }
 }

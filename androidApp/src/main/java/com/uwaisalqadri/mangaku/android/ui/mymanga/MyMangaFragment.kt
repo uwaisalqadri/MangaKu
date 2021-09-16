@@ -6,16 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
-import co.touchlab.kermit.CommonLogger
-import co.touchlab.kermit.Kermit
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.uwaisalqadri.mangaku.android.ui.composables.TopBar
-import com.uwaisalqadri.mangaku.android.ui.detail.DetailScreen
 import com.uwaisalqadri.mangaku.android.ui.mymanga.composables.HorizontalPagerWithTransition
-import com.uwaisalqadri.mangaku.utils.getTitle
 import org.koin.androidx.compose.getViewModel
 
 class MyMangaFragment: Fragment() {

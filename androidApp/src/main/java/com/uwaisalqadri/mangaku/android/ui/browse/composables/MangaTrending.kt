@@ -1,5 +1,6 @@
 package com.uwaisalqadri.mangaku.android.ui.browse.composables
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -11,7 +12,8 @@ import com.uwaisalqadri.mangaku.domain.model.Manga
 fun MangaTrending(
     myMangaViewModel: MyMangaViewModel,
     trendingManga: List<Manga>,
-    modifier: Modifier
+    modifier: Modifier,
+    onMangaClick: (String) -> Unit
 ) {
     Column(
         modifier = modifier
@@ -23,6 +25,7 @@ fun MangaTrending(
                     .height(197.dp)
                     .fillMaxWidth()
                     .padding(0.dp, 10.dp)
+                    .clickable { onMangaClick(manga.id) }
             ) {
                 myMangaViewModel.addFavoriteManga(it)
             }
