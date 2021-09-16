@@ -42,7 +42,7 @@ class MyMangaFragment: Fragment() {
 
         Column {
 
-            TopBar(name = "My Manga", modifier = Modifier.padding(start = 10.dp))
+            TopBar(name = "My Manga", modifier = Modifier.padding(start = 20.dp))
 
             if (uiState.loading) {
                 Text(text = "Loading...")
