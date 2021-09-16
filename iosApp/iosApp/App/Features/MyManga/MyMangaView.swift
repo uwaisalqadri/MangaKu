@@ -14,8 +14,6 @@ import ACarousel
 struct MyMangaView: View {
 
   @ObservedObject var viewModel: MyMangaViewModel
-  @State var position: Int = 0
-
   private let extensions = Extensions()
 
   var body: some View {
@@ -25,15 +23,13 @@ struct MyMangaView: View {
           Text("My Manga")
             .font(.custom(.mbold, size: 23))
             .padding(.top, -70)
-            .padding(.bottom, 30)
+            .padding(.bottom, 10)
+
+          LayoutSwitch()
+            .padding(.bottom, 15)
 
           if !viewModel.loading, !viewModel.mangas.isEmpty {
             ZStack(alignment: Alignment(horizontal: .center, vertical: .top)) {
-              Text(extensions.getTitle(manga: viewModel.mangas[position]))
-                .font(.custom(.sedgwickave, size: view.size.width / 7))
-                .lineLimit(2)
-                .multilineTextAlignment(.center)
-                .padding(.top, -60)
 
               ACarousel(
                 viewModel.mangas,
@@ -46,46 +42,12 @@ struct MyMangaView: View {
                   .resizable()
                   .indicator(.activity)
                   .cornerRadius(12)
+                  .overlay(
+                    MyMangaContentView(manga: manga, extensions: extensions)
+                  )
 
               }.frame(height: view.size.height / 2)
               .padding(.top, 50)
-              .simultaneousGesture(
-                DragGesture().onEnded(onDragEnded)
-              )
-            }
-
-            HStack {
-              StarsView(manga: viewModel.mangas[position])
-                .padding(.leading, 70)
-
-              Spacer()
-
-            }.padding(.top, 10)
-
-            HStack {
-              VStack {
-                Text("Chapter \(viewModel.mangas[position].attributes?.chapterCount ?? 0)")
-                  .font(.custom(.mbold, size: 18))
-                  .padding(.leading, 70)
-
-                Text(viewModel.mangas[position].attributes?.startDate ?? "")
-                  .font(.custom(.mmedium, size: 16))
-                  .padding(.leading, 70)
-              }
-
-              Spacer()
-
-              Button(action: {
-                viewModel.removeFavoriteManga(mangaId: viewModel.mangas[position].id)
-              }) {
-                Text("Remove Favorite")
-                  .foregroundColor(.white)
-                  .font(.custom(.mbold, size: 15))
-                  .padding(20)
-              }.background(Color.black)
-              .frame(height: 40)
-              .cornerRadius(10)
-              .padding(.trailing, 70)
 
             }.padding(.top, 5)
           }
@@ -95,26 +57,37 @@ struct MyMangaView: View {
       }
     }
   }
+}
 
-  private func onDragEnded(_ drag: DragGesture.Value) {
-    let dragThreshold: CGFloat = 200
+struct MyMangaContentView: View {
 
-    if drag.predictedEndTranslation.width > dragThreshold || drag.translation.width > dragThreshold {
+  var manga: Manga
+  var extensions: Extensions
 
-      if position != viewModel.mangas.startIndex {
-        position = position - 1
-      } else {
-        position = viewModel.mangas.count - 1
-      }
+  var body: some View {
+    ZStack(alignment: .bottomLeading) {
 
-    } else if (drag.predictedEndTranslation.width) < (-1 * dragThreshold) || (drag.translation.width) < (-1 * dragThreshold) {
+      LinearGradient(gradient: Gradient(colors: [.clear, .black]), startPoint: .top, endPoint: .bottom)
+        .cornerRadius(12)
 
-      if position != viewModel.mangas.count - 1 {
-        position = position + 1
-      } else {
-        position = 0
-      }
+      VStack(alignment: .leading) {
+
+        Text(extensions.getTitle(manga: manga))
+          .foregroundColor(.white)
+          .font(.custom(.sedgwickave, size: 35))
+          .multilineTextAlignment(.leading)
+          .lineLimit(2)
+          .padding(.bottom, 12)
+
+        Text("Volume \(manga.attributes?.volumeCount ?? 0)")
+          .foregroundColor(.white)
+          .font(.custom(.mbold, size: 17))
+          .padding(.bottom, 5)
+
+        StarsView(manga: manga)
+
+      }.padding(.horizontal, 17)
+      .padding(.bottom, 35)
     }
-
   }
 }
