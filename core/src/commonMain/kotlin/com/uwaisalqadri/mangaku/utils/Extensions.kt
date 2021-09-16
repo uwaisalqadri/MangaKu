@@ -31,7 +31,8 @@ object Extensions {
 
     fun getCoverImage(manga: Manga): String {
         val coverImage = manga.attributes?.coverImage
-        return coverImage?.original ?: coverImage?.large ?: coverImage?.medium ?: ""
+        val posterImage = manga.attributes?.posterImage
+        return coverImage?.original ?: coverImage?.large ?: coverImage?.medium ?: posterImage?.original ?: ""
     }
 }
 
