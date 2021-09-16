@@ -1,22 +1,29 @@
 package com.uwaisalqadri.mangaku.android.ui.mymanga.composables
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.util.lerp
 import com.google.accompanist.coil.rememberCoilPainter
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.calculateCurrentOffsetForPage
+import com.uwaisalqadri.mangaku.android.ui.browse.composables.StarRate
+import com.uwaisalqadri.mangaku.android.ui.theme.MangaTypography
 import com.uwaisalqadri.mangaku.domain.model.Manga
 import com.uwaisalqadri.mangaku.utils.Extensions
 import kotlin.math.absoluteValue
@@ -25,7 +32,8 @@ import kotlin.math.absoluteValue
 @Composable
 fun HorizontalPagerWithTransition(
     manga: List<Manga>,
-    extension: Extensions = Extensions
+    extension: Extensions = Extensions,
+    modifier: Modifier
 ) {
     HorizontalPager(
         state = PagerState(
@@ -33,11 +41,10 @@ fun HorizontalPagerWithTransition(
             currentPage = 0,
             infiniteLoop = true,
         ),
-        modifier = Modifier
-            .fillMaxSize(),
+        modifier = modifier,
     ) { page ->
         Card(
-            shape = RoundedCornerShape(0.dp),
+            shape = RoundedCornerShape(5.dp),
             elevation = 10.dp,
             modifier = Modifier
                 .graphicsLayer {
@@ -71,6 +78,47 @@ fun HorizontalPagerWithTransition(
                 contentDescription = null,
                 contentScale = ContentScale.Crop
             )
+
+            Box(
+                modifier = Modifier
+                    .background(brush = Brush.verticalGradient(
+                        colors = listOf(
+                            Color.Transparent,
+                            Color.Black
+                        )
+                    ))
+            )
+
+            Column(
+                horizontalAlignment = Alignment.Start,
+                verticalArrangement = Arrangement.Bottom,
+                modifier = Modifier.padding(start = 15.dp)
+            ) {
+
+                Text(
+                    text = extension.getTitle(manga[page]),
+                    fontSize = 40.sp,
+                    style = MangaTypography.overline,
+                    maxLines = 2,
+                    color = Color.White,
+                    modifier = Modifier.padding(bottom = 10.dp)
+                )
+
+                Text(
+                    text = "Volume ${manga[page].attributes?.volumeCount}",
+                    fontSize = 15.sp,
+                    style = MangaTypography.h1,
+                    color = Color.White
+                )
+
+                StarRate(
+                    manga = manga[page],
+                    extension = extension,
+                    modifier = Modifier
+                        .padding(top = 5.dp, bottom = 30.dp)
+                        .fillMaxWidth()
+                )
+            }
         }
     }
 }
