@@ -7,9 +7,3 @@ data class UiState(
     val loading: Boolean = false,
     val refreshError: Boolean = false
 )
-
-data class DetailUiState(
-    val manga: Manga = Manga(null, "", ""),
-    val loading: Boolean = false,
-    val refreshError: Boolean = false
-)
