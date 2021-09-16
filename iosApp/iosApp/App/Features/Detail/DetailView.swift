@@ -26,7 +26,7 @@ struct DetailView: View {
         if viewModel.loading {
           ShimmerDetailView()
         } else {
-          WebImage(url: URL(string: viewModel.manga?.attributes?.coverImage?.original ?? ""))
+          WebImage(url: URL(string: extensions.getCoverImage(manga: viewModel.manga ?? Manga(attributes: nil, id: "", type: ""))))
             .resizable()
             .indicator(.activity)
             .clipped()

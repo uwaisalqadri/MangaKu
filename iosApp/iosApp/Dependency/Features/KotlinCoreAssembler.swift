@@ -11,7 +11,7 @@ import KotlinCore
 
 protocol KotlinCoreAssembler {
 
-  // usecase
+  // domain
   func resolve() -> GetMangaListUseCase
   func resolve() -> GetMangaSearchUseCase
   func resolve() -> GetMangaTrendingUseCase
@@ -19,7 +19,7 @@ protocol KotlinCoreAssembler {
   func resolve() -> GetMangaFavoriteUseCase
   func resolve() -> CreateMangaFavoriteUseCase
 
-  // data source
+  // data
   func resolve() -> MangaRepository
   func resolve() -> RemoteDataSource
   func resolve() -> LocalDataSource
@@ -39,6 +39,7 @@ protocol KotlinCoreAssembler {
 
 extension KotlinCoreAssembler where Self: Assembler {
 
+  // MARK: domain
   func resolve() -> GetMangaListUseCase {
     return GetMangaListInteractor(repository: resolve())
   }
@@ -63,10 +64,23 @@ extension KotlinCoreAssembler where Self: Assembler {
     return CreateMangaFavoriteInteractor(repository: resolve())
   }
 
+
+  // MARK: data
   func resolve() -> MangaRepository {
     return MangaRepositoryImpl(remoteDataSource: resolve(), localDataSource: resolve(), mangaResponseMapper: resolve(), mangaObjectMapper: resolve())
   }
 
+  func resolve() -> RemoteDataSource {
+    let json = CoreKt.createJson()
+    return RemoteDataSource(ktor: CoreKt.createHttpClient(json: json))
+  }
+
+  func resolve() -> LocalDataSource {
+    return LocalDataSource(realm: CoreKt.createRealmDatabase())
+  }
+
+
+  // MARK: mapper
   func resolve() -> MangaMapper {
     return MangaMapper(attributesMapper: resolve())
   }
@@ -105,14 +119,5 @@ extension KotlinCoreAssembler where Self: Assembler {
 
   func resolve() -> TitlesObjectMapper {
     return TitlesObjectMapper()
-  }
-
-  func resolve() -> RemoteDataSource {
-    let json = CoreKt.createJson()
-    return RemoteDataSource(ktor: CoreKt.createHttpClient(json: json))
-  }
-
-  func resolve() -> LocalDataSource {
-    return LocalDataSource(realm: CoreKt.createRealmDatabase())
   }
 }

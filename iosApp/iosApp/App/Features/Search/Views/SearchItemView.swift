@@ -13,9 +13,10 @@ import SDWebImageSwiftUI
 struct SearchItemView: View {
 
   let manga: Manga
+  private let extensions = Extensions()
 
   var body: some View {
-    WebImage(url: URL(string: manga.attributes?.posterImage?.original ?? ""))
+    WebImage(url: URL(string: extensions.getPosterImage(manga: manga)))
       .resizable()
       .indicator(.activity)
       .frame(height: 140)

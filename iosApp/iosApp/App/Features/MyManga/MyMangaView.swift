@@ -23,7 +23,6 @@ struct MyMangaView: View {
           Text("My Manga")
             .font(.custom(.mbold, size: 23))
             .padding(.top, -70)
-            .padding(.bottom, 10)
 
           LayoutSwitch()
             .padding(.bottom, 15)
@@ -38,7 +37,7 @@ struct MyMangaView: View {
                 headspace: 50,
                 isWrap: true) { manga in
 
-                WebImage(url: URL(string: manga.attributes?.posterImage?.original ?? ""))
+                WebImage(url: URL(string: extensions.getPosterImage(manga: manga)))
                   .resizable()
                   .indicator(.activity)
                   .cornerRadius(12)

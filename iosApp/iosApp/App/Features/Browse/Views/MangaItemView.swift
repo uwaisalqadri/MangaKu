@@ -19,7 +19,7 @@ struct MangaItemView: View {
 
   var body: some View {
     HStack {
-      WebImage(url: URL(string: manga.attributes?.posterImage?.original ?? ""))
+      WebImage(url: URL(string: extensions.getPosterImage(manga: manga)))
         .resizable()
         .indicator(.activity)
         .frame(width: 124, height: 200)
