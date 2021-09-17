@@ -30,7 +30,7 @@ struct SearchView: View {
             .font(.custom(.mmedium, size: 16))
             .frame(height: 40)
             .autocapitalization(.none)
-            .disableAutocorrection(.none)
+            .disableAutocorrection(true)
             .padding(.leading, 13)
             .padding(.trailing, 30)
 

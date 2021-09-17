@@ -4,4 +4,5 @@ target 'iosApp' do
   pod 'core', :path => '../core'
   pod 'KMPNativeCoroutinesCombine'  # Combine implementation
   pod 'SDWebImageSwiftUI'
+  pod 'lottie-ios'
 end

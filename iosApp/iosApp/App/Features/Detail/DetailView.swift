@@ -14,6 +14,7 @@ struct DetailView: View {
 
   @ObservedObject var viewModel: DetailViewModel
   @ObservedObject var mangaViewModel: MyMangaViewModel
+  @State var showDialog = false
   let mangaId: String
 
   private let extensions = Extensions()
@@ -86,7 +87,7 @@ struct DetailView: View {
     }.navigationTitle("Detail")
     .navigationBarItems(trailing: Button(action: {
       mangaViewModel.addFavoriteManga(manga: viewModel.manga ?? Manga(attributes: nil, id: "", type: "")) {
-        print("SAVED")
+        showDialog.toggle()
       }
     }) {
       Image(systemName: "heart")
@@ -96,6 +97,25 @@ struct DetailView: View {
     })
     .onAppear {
       viewModel.fetchManga(mangaId: mangaId)
+    }
+    .customDialog(isShowing: $showDialog) {
+      VStack(alignment: .center) {
+        LottieView(name: "favorite", loopMode: .loop)
+          .frame(width: 70, height: 70)
+
+        Text("Added to Favorite!")
+          .foregroundColor(.black)
+          .font(.custom(.mbold, size: 17))
+          .padding(.bottom, 10)
+
+      }.frame(width: 154, height: 154)
+      .onAppear {
+        if showDialog {
+          DispatchQueue.main.asyncAfter(deadline: .now() + 1.6) {
+            showDialog.toggle()
+          }
+        }
+      }
     }
   }
 }

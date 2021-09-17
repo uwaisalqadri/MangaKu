@@ -37,10 +37,12 @@ struct GridItemView: View {
                 .lineLimit(2)
                 .font(.custom(.mbold, size: 17))
                 .padding(.top, 20)
+                .padding(.horizontal, 5)
 
               Text("Volume \(manga.attributes?.volumeCount ?? 0)")
                 .foregroundColor(.init(.darkGray))
                 .font(.custom(.msemibold, size: 10))
+                .padding(.horizontal, 5)
 
               Spacer()
 
@@ -53,6 +55,7 @@ struct GridItemView: View {
                   .foregroundColor(.black)
                   .frame(width: 6, height: 6)
               }.padding(.bottom, 15)
+              .padding(.horizontal, 5)
 
             }.frame(width: 118, height: 107)
             .background(
