@@ -16,47 +16,72 @@ struct MyMangaView: View {
   @ObservedObject var viewModel: MyMangaViewModel
   @ObservedObject var browseViewModel: MyMangaViewModel
   @State var isSlide = true
+
   private let extensions = Extensions()
+  private let assembler = AppAssembler()
 
   var body: some View {
     GeometryReader { view in
       NavigationView {
-        VStack {
-          Text("My Manga")
-            .font(.custom(.mbold, size: 23))
-            .padding(.top, -70)
+        ScrollView(showsIndicators: false) {
+          VStack {
+            Text("My Manga")
+              .font(.custom(.mbold, size: 23))
+              .padding(.top, -70)
 
-          LayoutSwitch() { switchs in
-            isSlide = switchs
-          }.padding(.bottom, 15)
+            LayoutSwitch() { toggle in
+              isSlide = toggle
+            }.padding(.bottom, 15)
 
-          if !viewModel.loading, isSlide {
-            ZStack(alignment: Alignment(horizontal: .center, vertical: .top)) {
+            if !viewModel.loading {
 
-              ACarousel(
-                viewModel.mangas,
-                id: \.self,
-                spacing: 20,
-                headspace: 50,
-                isWrap: true) { manga in
+              if isSlide {
+                ZStack(alignment: Alignment(horizontal: .center, vertical: .top)) {
 
-                WebImage(url: URL(string: extensions.getPosterImage(manga: manga)))
-                  .resizable()
-                  .indicator(.activity)
-                  .cornerRadius(12)
-                  .overlay(
-                    MyMangaContentView(manga: manga, extensions: extensions)
-                  )
+                  ACarousel(
+                    viewModel.mangas,
+                    id: \.self,
+                    spacing: 20,
+                    headspace: 50,
+                    isWrap: true) { manga in
 
-              }.frame(height: view.size.height / 2)
-              .padding(.top, 50)
+                    WebImage(url: URL(string: extensions.getPosterImage(manga: manga)))
+                      .resizable()
+                      .indicator(.activity)
+                      .cornerRadius(12)
+                      .overlay(
+                        MyMangaContentView(manga: manga, extensions: extensions)
+                      )
 
-            }.padding(.top, 5)
-          } else {
-            Text("Stack")
+                  }.frame(height: view.size.height / 2)
+                  .padding(.top, 50)
+
+                }.padding(.top, 5)
+              } else {
+                LazyVGrid(columns: [
+                  GridItem(.adaptive(minimum: 150), spacing: 25, alignment: .center)
+                ], alignment: .leading, spacing: 10) {
+
+                  ForEach(viewModel.mangas, id: \.id) { manga in
+                    GridItemView(manga: manga, assembler: assembler, extensions: extensions)
+                  }
+
+                }.padding(.horizontal, 30)
+                .padding(.top, 20)
+                .padding(.bottom, 200)
+              }
+
+            } else {
+              Text("Still Empty Here!")
+                .foregroundColor(.black)
+                .font(.custom(.sedgwickave, size: 60))
+                .multilineTextAlignment(.center)
+                .padding(.top, 50)
+                .padding(.horizontal, 20)
+            }
+
+            Spacer()
           }
-
-          Spacer()
         }
       }
     }
