@@ -13,7 +13,6 @@ import KotlinCore
 struct DetailView: View {
 
   @ObservedObject var viewModel: DetailViewModel
-  @State var averageRating = 0.0
   let mangaId: String
 
   private let extensions = Extensions()
@@ -58,13 +57,9 @@ struct DetailView: View {
                   .foregroundColor(.yellow)
                   .frame(width: 15, height: 15)
 
-                Text("\(averageRating)")
+                Text(String(viewModel.manga?.attributes?.averageRating ?? 0.0).removeCharacters(from: "0"))
                   .foregroundColor(.black)
                   .font(.custom(.msemibold, size: 14))
-                  .onAppear {
-                    let current = viewModel.manga?.attributes?.averageRating ?? 0.0
-                    averageRating = Double(round(100*current)/1000)
-                  }
 
               }.padding(.leading, 5)
 
