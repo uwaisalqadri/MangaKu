@@ -14,7 +14,6 @@ import ACarousel
 struct MyMangaView: View {
 
   @ObservedObject var viewModel: MyMangaViewModel
-  @ObservedObject var browseViewModel: MyMangaViewModel
   @State var isSlide = true
 
   private let extensions = Extensions()
@@ -33,7 +32,7 @@ struct MyMangaView: View {
               isSlide = toggle
             }.padding(.bottom, 15)
 
-            if !viewModel.loading {
+            if !viewModel.loading, !viewModel.mangas.isEmpty {
 
               if isSlide {
                 ZStack(alignment: Alignment(horizontal: .center, vertical: .top)) {

@@ -11,6 +11,7 @@ import SwiftUI
 struct BrowseView: View {
 
   @ObservedObject var viewModel: BrowseViewModel
+  @ObservedObject var mangaViewModel: MyMangaViewModel
   private let assembler = AppAssembler()
 
   let genres: [Genre] = [
@@ -54,7 +55,9 @@ struct BrowseView: View {
               ForEach(viewModel.trendingManga, id: \.id) { manga in
                 NavigationLink(destination: DetailView(viewModel: assembler.resolve(), mangaId: manga.id)) {
                   MangaItemView(manga: manga) { item in
-                    viewModel.addFavoriteManga(manga: item)
+                    mangaViewModel.addFavoriteManga(manga: item) {
+                      print("saved")
+                    }
                   }
                 }.buttonStyle(PlainButtonStyle())
               }
