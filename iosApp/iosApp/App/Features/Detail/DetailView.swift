@@ -23,7 +23,7 @@ struct DetailView: View {
 
       ScrollView(showsIndicators: false) {
 
-        if viewModel.loading {
+        if viewModel.loading || viewModel.manga == nil {
           ShimmerDetailView()
         } else {
           WebImage(url: URL(string: extensions.getCoverImage(manga: viewModel.manga ?? Manga(attributes: nil, id: "", type: ""))))
