@@ -31,7 +31,7 @@ struct GridItemView: View {
         HStack(alignment: .top) {
           Spacer()
 
-          NavigationLink(destination: DetailView(viewModel: assembler.resolve(), mangaId: manga.id)) {
+          NavigationLink(destination: DetailView(viewModel: assembler.resolve(), mangaViewModel: assembler.resolve(), mangaId: manga.id)) {
             VStack(alignment: .leading) {
               Text(extensions.getTitle(manga: manga))
                 .lineLimit(2)

@@ -48,7 +48,7 @@ struct SearchView: View {
             }
           } else {
             ForEach(viewModel.mangas, id: \.id) { manga in
-              NavigationLink(destination: DetailView(viewModel: assembler.resolve(), mangaId: manga.id)) {
+              NavigationLink(destination: DetailView(viewModel: assembler.resolve(),mangaViewModel: assembler.resolve() , mangaId: manga.id)) {
                 SearchItemView(manga: manga)
               }.buttonStyle(PlainButtonStyle())
             }

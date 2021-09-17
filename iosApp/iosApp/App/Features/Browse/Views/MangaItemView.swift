@@ -13,8 +13,6 @@ import SDWebImageSwiftUI
 struct MangaItemView: View {
 
   let manga: Manga
-  var onReadMoreListener: ((Manga) -> Void)?
-
   private let extensions = Extensions()
 
   var body: some View {
@@ -44,18 +42,14 @@ struct MangaItemView: View {
 
         Spacer(minLength: 30)
 
-        Button(action: {
-          onReadMoreListener?(manga)
-        }, label: {
-          Text("Read Now")
-            .foregroundColor(.white)
-            .font(.custom(.mbold, size: 15))
-            .padding(.horizontal, 19)
-            .padding(.vertical, 8)
-        })
-        .background(Color.black)
-        .cornerRadius(9)
-        .padding(.bottom, 10)
+        Text("Read More")
+          .foregroundColor(.white)
+          .font(.custom(.mbold, size: 15))
+          .padding(13)
+          .background(Color.black)
+          .cornerRadius(9)
+          .padding(.bottom, 10)
+
       }.padding(.leading, 15)
 
       Spacer()

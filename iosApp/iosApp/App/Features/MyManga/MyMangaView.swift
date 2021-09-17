@@ -61,7 +61,7 @@ struct MyMangaView: View {
                   GridItem(.adaptive(minimum: 150), spacing: 25, alignment: .center)
                 ], alignment: .leading, spacing: 10) {
 
-                  ForEach(viewModel.mangas, id: \.id) { manga in
+                  ForEach(viewModel.mangas, id: \.self) { manga in
                     GridItemView(manga: manga, assembler: assembler, extensions: extensions)
                   }
 

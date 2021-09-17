@@ -20,7 +20,7 @@ struct ContentView: View {
       case 1:
         MyMangaView(viewModel: assembler.resolve())
       default:
-        BrowseView(viewModel: assembler.resolve(), mangaViewModel: assembler.resolve())
+        BrowseView(viewModel: assembler.resolve())
           .animation(.none)
       }
 

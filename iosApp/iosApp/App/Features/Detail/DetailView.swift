@@ -13,6 +13,7 @@ import KotlinCore
 struct DetailView: View {
 
   @ObservedObject var viewModel: DetailViewModel
+  @ObservedObject var mangaViewModel: MyMangaViewModel
   let mangaId: String
 
   private let extensions = Extensions()
@@ -83,6 +84,16 @@ struct DetailView: View {
       }.padding(.top, 30)
 
     }.navigationTitle("Detail")
+    .navigationBarItems(trailing: Button(action: {
+      mangaViewModel.addFavoriteManga(manga: viewModel.manga ?? Manga(attributes: nil, id: "", type: "")) {
+        print("SAVED")
+      }
+    }) {
+      Image(systemName: "heart")
+        .resizable()
+        .foregroundColor(.red)
+        .frame(width: 22, height: 20)
+    })
     .onAppear {
       viewModel.fetchManga(mangaId: mangaId)
     }
