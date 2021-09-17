@@ -19,11 +19,11 @@ protocol FeatureAssembler {
 extension FeatureAssembler where Self: Assembler {
 
   func resolve() -> BrowseViewModel {
-    return BrowseViewModel(listUseCase: resolve(), trendingUseCase: resolve())
+    return BrowseViewModel(listUseCase: resolve(), trendingUseCase: resolve(), createFavoriteUseCase: resolve())
   }
 
   func resolve() -> MyMangaViewModel {
-    return MyMangaViewModel(favoriteUseCase: resolve(), createFavoriteUseCase: resolve())
+    return MyMangaViewModel(favoriteUseCase: resolve())
   }
 
   func resolve() -> SearchViewModel {

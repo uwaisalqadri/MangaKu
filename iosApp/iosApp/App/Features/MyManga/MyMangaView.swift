@@ -14,6 +14,8 @@ import ACarousel
 struct MyMangaView: View {
 
   @ObservedObject var viewModel: MyMangaViewModel
+  @ObservedObject var browseViewModel: MyMangaViewModel
+  @State var isSlide = true
   private let extensions = Extensions()
 
   var body: some View {
@@ -24,10 +26,11 @@ struct MyMangaView: View {
             .font(.custom(.mbold, size: 23))
             .padding(.top, -70)
 
-          LayoutSwitch()
-            .padding(.bottom, 15)
+          LayoutSwitch() { switchs in
+            isSlide = switchs
+          }.padding(.bottom, 15)
 
-          if !viewModel.loading, !viewModel.mangas.isEmpty {
+          if !viewModel.loading, isSlide {
             ZStack(alignment: Alignment(horizontal: .center, vertical: .top)) {
 
               ACarousel(
@@ -49,6 +52,8 @@ struct MyMangaView: View {
               .padding(.top, 50)
 
             }.padding(.top, 5)
+          } else {
+            Text("Stack")
           }
 
           Spacer()

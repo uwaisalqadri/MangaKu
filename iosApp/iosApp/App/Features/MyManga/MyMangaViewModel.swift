@@ -18,30 +18,11 @@ class MyMangaViewModel: ObservableObject {
   @Published var loading = false
 
   private let favoriteUseCase: GetMangaFavoriteUseCase
-  private let createFavoriteUseCase: CreateMangaFavoriteUseCase
   private var cancellables = Set<AnyCancellable>()
 
-  init(favoriteUseCase: GetMangaFavoriteUseCase, createFavoriteUseCase: CreateMangaFavoriteUseCase) {
+  init(favoriteUseCase: GetMangaFavoriteUseCase) {
     self.favoriteUseCase = favoriteUseCase
-    self.createFavoriteUseCase = createFavoriteUseCase
     fetchFavoriteManga()
-  }
-
-  func addFavoriteManga(manga: Manga) {
-    var ids = [String]()
-    mangas.forEach { item in
-      ids.append(item.id)
-    }
-
-    if !ids.contains(manga.id) {
-      createFavoriteUseCase.add(manga: manga)
-    }
-
-    fetchFavoriteManga()
-  }
-
-  func removeFavoriteManga(mangaId: String) {
-    createFavoriteUseCase.delete(mangaId: mangaId)
   }
 
   private func fetchFavoriteManga() {

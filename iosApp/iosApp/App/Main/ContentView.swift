@@ -18,9 +18,9 @@ struct ContentView: View {
     ZStack {
       switch selectedIndex {
       case 1:
-        MyMangaView(viewModel: assembler.resolve())
+        MyMangaView(viewModel: assembler.resolve(), browseViewModel: assembler.resolve())
       default:
-        BrowseView(viewModel: assembler.resolve(), myMangaViewModel: assembler.resolve())
+        BrowseView(viewModel: assembler.resolve())
           .animation(.none)
       }
 
