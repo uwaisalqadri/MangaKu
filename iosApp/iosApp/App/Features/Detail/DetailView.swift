@@ -15,6 +15,7 @@ struct DetailView: View {
   @ObservedObject var viewModel: DetailViewModel
   @ObservedObject var mangaViewModel: MyMangaViewModel
   @State var showDialog = false
+  @State var message = ""
   let mangaId: String
 
   private let extensions = Extensions()
@@ -87,7 +88,8 @@ struct DetailView: View {
     }.navigationTitle("Detail")
     .navigationBarItems(trailing: Button(action: {
       mangaViewModel.addFavoriteManga(manga: viewModel.manga ?? Manga(attributes: nil, id: "", type: ""),
-      isSuccess: {
+      isSuccess: { message in
+        self.message = message
         showDialog.toggle()
       })
     }) {
@@ -107,10 +109,12 @@ struct DetailView: View {
         LottieView(name: "favorite", loopMode: .loop)
           .frame(width: 70, height: 70)
 
-        Text("Added to Favorite!")
+        Text(message)
           .foregroundColor(.black)
           .font(.custom(.mbold, size: 17))
           .padding(.bottom, 10)
+          .padding(.horizontal, 5)
+          .multilineTextAlignment(.center)
 
       }.frame(width: 154, height: 154)
       .onAppear {

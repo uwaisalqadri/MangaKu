@@ -30,18 +30,18 @@ class MyMangaViewModel: ObservableObject {
     fetchFavoriteManga()
   }
 
-  func addFavoriteManga(manga: Manga, isSuccess: () -> Void) {
+  func addFavoriteManga(manga: Manga, isSuccess: (String) -> Void) {
     mangas.forEach { item in
       ids.append(item.id)
     }
 
     if !ids.contains(manga.id) {
       createFavoriteUseCase.add(manga: manga)
-      isSuccess()
+      isSuccess("Added to Favorite!")
       isFavorite = true
     } else {
       createFavoriteUseCase.delete(mangaId: manga.id)
-      isSuccess()
+      isSuccess("Removed from Favorite!")
       isFavorite = false
     }
   }
