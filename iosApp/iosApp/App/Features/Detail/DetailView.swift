@@ -86,18 +86,22 @@ struct DetailView: View {
 
     }.navigationTitle("Detail")
     .navigationBarItems(trailing: Button(action: {
-      mangaViewModel.addFavoriteManga(manga: viewModel.manga ?? Manga(attributes: nil, id: "", type: "")) {
+      mangaViewModel.addFavoriteManga(manga: viewModel.manga ?? Manga(attributes: nil, id: "", type: ""),
+      isSuccess: {
         showDialog.toggle()
-      }
+      })
     }) {
-      Image(systemName: "heart")
+      Image(systemName: mangaViewModel.isFavorite ? "heart.fill" : "heart")
         .resizable()
         .foregroundColor(.red)
         .frame(width: 22, height: 20)
     })
     .onAppear {
       viewModel.fetchManga(mangaId: mangaId)
+      mangaViewModel.checkFavorite(mangaId: mangaId)
     }
+
+
     .customDialog(isShowing: $showDialog) {
       VStack(alignment: .center) {
         LottieView(name: "favorite", loopMode: .loop)

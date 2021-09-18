@@ -16,6 +16,8 @@ class MyMangaViewModel: ObservableObject {
   @Published var mangas = [Manga]()
   @Published var errorMessage = ""
   @Published var loading = false
+  @Published var isFavorite = false
+  private var ids = [String]()
 
   private let favoriteUseCase: GetMangaFavoriteUseCase
   private let createFavoriteUseCase: CreateMangaFavoriteUseCase
@@ -29,7 +31,6 @@ class MyMangaViewModel: ObservableObject {
   }
 
   func addFavoriteManga(manga: Manga, isSuccess: () -> Void) {
-    var ids = [String]()
     mangas.forEach { item in
       ids.append(item.id)
     }
@@ -37,11 +38,24 @@ class MyMangaViewModel: ObservableObject {
     if !ids.contains(manga.id) {
       createFavoriteUseCase.add(manga: manga)
       isSuccess()
+      isFavorite = true
     }
   }
 
   func removeFavoriteManga(mangaId: String) {
     createFavoriteUseCase.delete(mangaId: mangaId)
+  }
+
+  func checkFavorite(mangaId: String) {
+    mangas.forEach { manga in
+      ids.append(manga.id)
+      let listId = ids.joined(separator: ",")
+      if listId.contains(mangaId) {
+        isFavorite = true
+      } else {
+        isFavorite = false
+      }
+    }
   }
 
   private func fetchFavoriteManga() {
