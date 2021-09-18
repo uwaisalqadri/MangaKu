@@ -39,11 +39,11 @@ class MyMangaViewModel: ObservableObject {
       createFavoriteUseCase.add(manga: manga)
       isSuccess()
       isFavorite = true
+    } else {
+      createFavoriteUseCase.delete(mangaId: manga.id)
+      isSuccess()
+      isFavorite = false
     }
-  }
-
-  func removeFavoriteManga(mangaId: String) {
-    createFavoriteUseCase.delete(mangaId: mangaId)
   }
 
   func checkFavorite(mangaId: String) {
