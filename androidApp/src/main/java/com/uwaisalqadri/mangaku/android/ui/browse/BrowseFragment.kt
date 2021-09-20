@@ -48,7 +48,6 @@ class BrowseFragment: Fragment() {
     @Composable
     fun BrowseScreen(
         viewModel: BrowseViewModel = getViewModel(),
-        myMangaViewModel: MyMangaViewModel = getViewModel()
     ) {
         val uiState by viewModel.uiState.collectAsState()
 
@@ -93,7 +92,6 @@ class BrowseFragment: Fragment() {
             } else {
                 MangaTrending(
                     trendingManga = uiState.listManga,
-                    myMangaViewModel = myMangaViewModel,
                     modifier = Modifier
                         .fillMaxWidth()
                         .fillMaxHeight()

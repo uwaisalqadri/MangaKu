@@ -6,15 +6,15 @@ import android.view.RoundedCorner
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
@@ -22,10 +22,17 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.google.accompanist.pager.ExperimentalPagerApi
+import com.uwaisalqadri.mangaku.android.R
+import com.uwaisalqadri.mangaku.android.ui.composables.ShimmerSearchItem
 import com.uwaisalqadri.mangaku.android.ui.composables.TopBar
+import com.uwaisalqadri.mangaku.android.ui.detail.DetailFragment
 import com.uwaisalqadri.mangaku.android.ui.mymanga.composables.HorizontalPagerWithTransition
 import com.uwaisalqadri.mangaku.android.ui.mymanga.composables.LayoutSwitch
+import com.uwaisalqadri.mangaku.android.ui.mymanga.composables.MyMangaGridItem
+import com.uwaisalqadri.mangaku.android.ui.search.composables.SearchResult
+import com.uwaisalqadri.mangaku.android.ui.search.composables.StaggeredVerticalGrid
 import com.uwaisalqadri.mangaku.android.ui.theme.MangaTypography
 import org.koin.androidx.compose.getViewModel
 
@@ -49,8 +56,11 @@ class MyMangaFragment: Fragment() {
         viewModel: MyMangaViewModel = getViewModel()
     ) {
         val uiState by viewModel.uiState.collectAsState()
+        var state by remember { mutableStateOf(true) }
 
-        Column {
+        Column(
+            modifier = Modifier.verticalScroll(rememberScrollState())
+        ) {
 
             Row(
                 horizontalArrangement = Arrangement.Center,
@@ -69,8 +79,10 @@ class MyMangaFragment: Fragment() {
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(60.dp)
-                    .padding(top = 20.dp)
-            )
+                    .padding(top = 20.dp, start = 20.dp, end = 20.dp)
+            ) {
+                state = it
+            }
 
             if (uiState.loading) {
                 Text(
@@ -84,12 +96,35 @@ class MyMangaFragment: Fragment() {
                         .padding(horizontal = 40.dp)
                 )
             } else {
-                HorizontalPagerWithTransition(
-                    manga = uiState.listManga,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(500.dp)
-                )
+                when(state) {
+                    true -> {
+                        HorizontalPagerWithTransition(
+                            manga = uiState.listManga,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(500.dp)
+                        )
+                    }
+
+                    false -> {
+                        StaggeredVerticalGrid(
+                            maxColumnWidth = 200.dp,
+                            modifier = Modifier
+                                .padding(horizontal = 20.dp, vertical = 30.dp)
+                        ) {
+                            uiState.listManga.forEach {
+                                MyMangaGridItem(manga = it) { manga ->
+                                    val bundle = Bundle().apply { putString(DetailFragment.DETAIL, manga.id) }
+                                    findNavController().navigate(R.id.action_navigation_mymanga_to_detailFragment, bundle)
+                                }
+                            }
+                        }
+                        
+                        Spacer(modifier = Modifier.height(200.dp))
+                    }
+                }
+
+
             }
         }
 

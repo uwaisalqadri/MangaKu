@@ -4,24 +4,24 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
+import android.widget.Toast
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Star
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
@@ -30,6 +30,7 @@ import com.google.accompanist.coil.rememberCoilPainter
 import com.uwaisalqadri.mangaku.android.ui.composables.BackButton
 import com.uwaisalqadri.mangaku.android.ui.composables.ShimmerDetail
 import com.uwaisalqadri.mangaku.android.ui.composables.TopBar
+import com.uwaisalqadri.mangaku.android.ui.mymanga.MyMangaViewModel
 import com.uwaisalqadri.mangaku.android.ui.theme.MangaTypography
 import com.uwaisalqadri.mangaku.utils.Extensions
 import org.koin.androidx.compose.getViewModel
@@ -57,21 +58,46 @@ class DetailFragment: Fragment() {
     fun DetailScreen(
         mangaId: String,
         viewModel: DetailViewModel = getViewModel(),
+        mangaViewModel: MyMangaViewModel = getViewModel(),
         extension: Extensions = Extensions
     ) {
         viewModel.fetchDetailManga(mangaId)
+//        mangaViewModel.checkFavorite(mangaId)
+
         val manga by viewModel.detailManga
         val loading by viewModel.loading
+
+        val isFavorite by mangaViewModel.isFavorite.collectAsState()
 
         Column(
             modifier = Modifier.verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.Start
         ) {
 
-            BackButton(
-                modifier = Modifier.padding(start = 25.dp, top = 25.dp)
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 25.dp, top = 25.dp, end = 25.dp)
             ) {
-                findNavController().popBackStack()
+                BackButton {
+                    findNavController().popBackStack()
+                }
+
+                Icon(
+                    imageVector = if (isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
+                    contentDescription = null,
+                    tint = Color.Red,
+                    modifier = Modifier
+                        .size(25.dp)
+                        .clickable {
+                            mangaViewModel.addFavoriteManga(manga) {
+                                Toast
+                                    .makeText(requireContext(), it, Toast.LENGTH_SHORT)
+                                    .show()
+                            }
+                        }
+                )
             }
 
             Spacer(modifier = Modifier.padding(top = 20.dp))

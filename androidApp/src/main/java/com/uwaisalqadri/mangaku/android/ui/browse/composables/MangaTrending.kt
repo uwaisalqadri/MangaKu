@@ -10,7 +10,6 @@ import com.uwaisalqadri.mangaku.domain.model.Manga
 
 @Composable
 fun MangaTrending(
-    myMangaViewModel: MyMangaViewModel,
     trendingManga: List<Manga>,
     modifier: Modifier,
     onMangaClick: (String) -> Unit
@@ -25,9 +24,8 @@ fun MangaTrending(
                     .height(197.dp)
                     .fillMaxWidth()
                     .padding(0.dp, 10.dp)
-                    .clickable { onMangaClick(manga.id) }
             ) {
-                myMangaViewModel.addFavoriteManga(it)
+                onMangaClick(manga.id)
             }
         }
     }

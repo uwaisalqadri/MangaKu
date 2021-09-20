@@ -39,7 +39,7 @@ fun HorizontalPagerWithTransition(
         state = PagerState(
             pageCount = manga.size,
             currentPage = 0,
-            infiniteLoop = true,
+            infiniteLoop = manga.size != 1,
         ),
         modifier = modifier,
     ) { page ->

@@ -20,28 +20,39 @@ class MyMangaViewModel(
 
     private val _uiState = MutableStateFlow(UiState(loading = true))
     private val _favoriteManga: MutableState<List<Manga>> = mutableStateOf(emptyList())
+
     val uiState: StateFlow<UiState> = _uiState
+    val isFavorite = MutableStateFlow(false)
+
+    private val ids = mutableListOf<String>()
 
     init {
         fetchFavoriteManga()
     }
 
-    fun addFavoriteManga(manga: Manga) {
-        val ids = mutableListOf<String>()
-
+    fun addFavoriteManga(manga: Manga, isSuccess: (String) -> Unit) {
         _favoriteManga.value.forEach {
             ids.add(it.id)
         }
 
         if (!ids.contains(manga.id)) {
             createFavoriteUseCase.add(manga)
+            isSuccess("Added to Favorite!")
+            isFavorite.value = true
+        } else {
+            createFavoriteUseCase.delete(manga.id)
+            isSuccess("Removed from Favorite!")
+            isFavorite.value = false
         }
 
-        fetchFavoriteManga()
     }
 
-    fun removeFavoriteManga(mangaId: String) {
-        createFavoriteUseCase.delete(mangaId)
+    fun checkFavorite(mangaId: String) {
+        _uiState.value.listManga.forEach {
+            ids.add(it.id)
+            val listId = ids.joinToString(",")
+            isFavorite.value = listId.contains(mangaId)
+        }
     }
 
     private fun fetchFavoriteManga() = viewModelScope.launch {
