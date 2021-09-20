@@ -21,7 +21,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.ComposeView
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
@@ -30,6 +29,7 @@ import com.google.accompanist.coil.rememberCoilPainter
 import com.uwaisalqadri.mangaku.android.ui.composables.BackButton
 import com.uwaisalqadri.mangaku.android.ui.composables.ShimmerDetail
 import com.uwaisalqadri.mangaku.android.ui.composables.TopBar
+import com.uwaisalqadri.mangaku.android.ui.detail.composables.FavoriteDialog
 import com.uwaisalqadri.mangaku.android.ui.mymanga.MyMangaViewModel
 import com.uwaisalqadri.mangaku.android.ui.theme.MangaTypography
 import com.uwaisalqadri.mangaku.utils.Extensions
@@ -62,17 +62,25 @@ class DetailFragment: Fragment() {
         extension: Extensions = Extensions
     ) {
         viewModel.fetchDetailManga(mangaId)
-//        mangaViewModel.checkFavorite(mangaId)
 
         val manga by viewModel.detailManga
         val loading by viewModel.loading
 
-        val isFavorite by mangaViewModel.isFavorite.collectAsState()
+        val (isFavorite, setFavorite) = remember { mutableStateOf(false) }
+        val (showDialog, setShowDialog) = remember { mutableStateOf(false) }
+        val message = remember { mutableStateOf("") }
 
         Column(
             modifier = Modifier.verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.Start
         ) {
+
+            FavoriteDialog(
+                message = message.value,
+                showDialog = showDialog,
+                setShowDialog = setShowDialog,
+                modifier = Modifier.size(134.dp)
+            )
 
             Row(
                 horizontalArrangement = Arrangement.SpaceBetween,
@@ -91,10 +99,12 @@ class DetailFragment: Fragment() {
                     modifier = Modifier
                         .size(25.dp)
                         .clickable {
-                            mangaViewModel.addFavoriteManga(manga) {
-                                Toast
-                                    .makeText(requireContext(), it, Toast.LENGTH_SHORT)
-                                    .show()
+                            setShowDialog(true)
+                            if (!loading) {
+                                mangaViewModel.addFavoriteManga(manga) { msg, state ->
+                                    setFavorite(state)
+                                    message.value = msg
+                                }
                             }
                         }
                 )
@@ -107,6 +117,9 @@ class DetailFragment: Fragment() {
             if (loading) {
                 ShimmerDetail()
             } else {
+
+                mangaViewModel.checkFavorite(mangaId) { setFavorite(it) }
+
                 Card(
                     shape = RoundedCornerShape(9.dp),
                     elevation = 0.dp,

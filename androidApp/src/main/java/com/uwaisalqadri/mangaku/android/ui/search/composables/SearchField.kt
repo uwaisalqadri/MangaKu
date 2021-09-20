@@ -45,8 +45,7 @@ fun SearchField(
             style = MangaTypography.h3,
             color = Color.DarkGray,
             modifier = Modifier
-                .fillMaxWidth()
-                .height(30.dp)
+                .fillMaxSize()
                 .clickable { text = "" }
                 .padding(
                     start = 60.dp,
