@@ -10,6 +10,7 @@ interface MangaRepository {
     suspend fun fetchDetailManga(id: String): Flow<Manga?>
 
     suspend fun getFavoriteManga(): Flow<List<Manga>>
+    suspend fun getFavoriteMangaById(mangaId: String): Flow<List<Manga>>
     fun addMangaFavorite(manga: Manga)
     fun removeMangaFavorite(mangaId: String)
 }

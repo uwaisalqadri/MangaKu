@@ -77,6 +77,7 @@ dependencies {
         implementation(composeUtil)
         implementation(composeLottie)
         implementation(composeShimmer)
+        implementation(composeLiveData)
 
         implementation(ktorAndroid)
         implementation(koinAndroid)

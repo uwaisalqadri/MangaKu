@@ -9,7 +9,7 @@ import org.koin.dsl.module
 
 val appModule = module {
     viewModel { BrowseViewModel(get(), get()) }
-    viewModel { MyMangaViewModel(get(), get()) }
+    viewModel { MyMangaViewModel(get()) }
     viewModel { SearchViewModel(get()) }
     viewModel { DetailViewModel(get()) }
 }

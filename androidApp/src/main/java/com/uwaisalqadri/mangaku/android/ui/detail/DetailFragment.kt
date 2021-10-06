@@ -1,6 +1,7 @@
 package com.uwaisalqadri.mangaku.android.ui.detail
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,7 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -64,13 +66,14 @@ class DetailFragment: Fragment() {
         extension: Extensions = Extensions
     ) {
         viewModel.fetchDetailManga(mangaId)
+        mangaViewModel.checkFavorite(mangaId)
 
         val manga by viewModel.detailManga
         val loading by viewModel.loading
+        val favState by mangaViewModel.favState.observeAsState()
 
         val (isFavorite, setFavorite) = remember { mutableStateOf(false) }
         val (showDialog, setShowDialog) = remember { mutableStateOf(false) }
-        val message = remember { mutableStateOf("") }
 
         Column(
             modifier = Modifier.verticalScroll(rememberScrollState()),
@@ -78,7 +81,7 @@ class DetailFragment: Fragment() {
         ) {
 
             FavoriteDialog(
-                message = message.value,
+                message = if (isFavorite) "Added to Favorite" else "Removed from Favorite",
                 showDialog = showDialog,
                 setShowDialog = setShowDialog,
                 modifier = Modifier.size(134.dp)
@@ -103,10 +106,8 @@ class DetailFragment: Fragment() {
                         .clickable {
                             setShowDialog(true)
                             if (!loading) {
-                                mangaViewModel.addFavoriteManga(manga) { msg, state ->
-                                    setFavorite(state)
-                                    message.value = msg
-                                }
+                                if (isFavorite) mangaViewModel.removeFavoriteManga(manga.id)
+                                else  mangaViewModel.addFavoriteManga(manga)
                             }
                         }
                 )
@@ -120,7 +121,12 @@ class DetailFragment: Fragment() {
                 ShimmerDetail()
             } else {
 
-                mangaViewModel.checkFavorite(mangaId) { setFavorite(it) }
+                when {
+                    favState?.favMangaFound == true -> setFavorite(true)
+                    favState?.addFavorite == true -> setFavorite(true)
+                    favState?.removeFavorite == true -> setFavorite(false)
+                    else -> setFavorite(false)
+                }
 
                 Card(
                     shape = RoundedCornerShape(9.dp),

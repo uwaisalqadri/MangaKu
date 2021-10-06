@@ -62,6 +62,8 @@ class MyMangaFragment: Fragment() {
             modifier = Modifier.verticalScroll(rememberScrollState())
         ) {
 
+            viewModel.fetchFavoriteManga()
+
             Row(
                 horizontalArrangement = Arrangement.Center,
                 modifier = Modifier

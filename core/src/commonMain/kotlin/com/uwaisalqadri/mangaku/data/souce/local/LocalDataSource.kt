@@ -14,6 +14,10 @@ class LocalDataSource(
         return realm.objects(MangaObject::class)
     }
 
+    fun getMangaById(mangaId: String): List<MangaObject> {
+        return realm.objects(MangaObject::class).query("id = $0", mangaId)
+    }
+
     fun addManga(manga: MangaObject) {
         realm.writeBlocking {
             copyToRealm(manga)

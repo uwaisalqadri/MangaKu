@@ -53,6 +53,13 @@ class DefaultMangaRepository(
         }
     }
 
+    override suspend fun getFavoriteMangaById(mangaId: String): Flow<List<Manga>> {
+        return flow {
+            val result = localDataSource.getMangaById(mangaId).map { mangaObjectMapper.mapToDomain(it) }
+            emit(result)
+        }
+    }
+
     override fun addMangaFavorite(manga: Manga) {
         val mapper = mangaObjectMapper.mapToModel(manga)
         localDataSource.addManga(mapper)
