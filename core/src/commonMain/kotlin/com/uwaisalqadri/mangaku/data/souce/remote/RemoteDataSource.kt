@@ -12,31 +12,16 @@ class RemoteDataSource(
 ) {
 
     suspend fun fetchMangas() =
-        ktor.get<MangaResponse>("${Constants.BASE_URL}/manga") {
-            createHeader()
-        }
+        ktor.get<MangaResponse>("${Constants.baseUrl}/manga")
 
     suspend fun fetchTrendingMangas() =
-        ktor.get<MangaResponse>("${Constants.BASE_URL}/trending/manga") {
-            createHeader()
-        }
+        ktor.get<MangaResponse>("${Constants.baseUrl}/trending/manga")
 
     suspend fun fetchSearchMangas(query: String) =
-        ktor.get<MangaResponse>("${Constants.BASE_URL}/manga") {
-            createHeader()
+        ktor.get<MangaResponse>("${Constants.baseUrl}/manga") {
             parameter("filter[text]", query)
         }
 
     suspend fun fetchDetailManga(id: String) =
-        ktor.get<MangaDetailResponse>("${Constants.BASE_URL}/manga/$id") {
-            createHeader()
-        }
-
-
-    private fun HttpRequestBuilder.createHeader() {
-        headers {
-            append(HttpHeaders.Accept, "application/vnd.api+json")
-            append(HttpHeaders.ContentType, "application/vnd.api+json")
-        }
-    }
+        ktor.get<MangaDetailResponse>("${Constants.baseUrl}/manga/$id")
 }

@@ -18,7 +18,9 @@ import androidx.compose.ui.unit.sp
 import com.google.accompanist.coil.rememberCoilPainter
 import com.uwaisalqadri.mangaku.android.ui.theme.MangaTypography
 import com.uwaisalqadri.mangaku.domain.model.Manga
+import com.uwaisalqadri.mangaku.utils.Constants
 import com.uwaisalqadri.mangaku.utils.Extensions
+import com.uwaisalqadri.mangaku.utils.formatDate
 
 @Composable
 fun Manga(
@@ -72,7 +74,7 @@ fun Manga(
                     .fillMaxWidth()
             ) {
                 Text(
-                    text = manga.attributes?.startDate ?: "",
+                    text = formatDate(manga.attributes?.startDate ?: "", Constants.casualDateFormat),
                     fontSize = 12.sp,
                     color = Color.Gray,
                     style = MangaTypography.h1

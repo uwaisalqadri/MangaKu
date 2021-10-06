@@ -32,7 +32,9 @@ import com.uwaisalqadri.mangaku.android.ui.composables.TopBar
 import com.uwaisalqadri.mangaku.android.ui.detail.composables.FavoriteDialog
 import com.uwaisalqadri.mangaku.android.ui.mymanga.MyMangaViewModel
 import com.uwaisalqadri.mangaku.android.ui.theme.MangaTypography
+import com.uwaisalqadri.mangaku.utils.Constants
 import com.uwaisalqadri.mangaku.utils.Extensions
+import com.uwaisalqadri.mangaku.utils.formatDate
 import org.koin.androidx.compose.getViewModel
 
 class DetailFragment: Fragment() {
@@ -164,7 +166,7 @@ class DetailFragment: Fragment() {
                         shape = RoundedCornerShape(5.dp)
                     ) {
                         Text(
-                            text = manga.attributes?.startDate ?: "",
+                            text = formatDate(manga.attributes?.startDate ?: "", Constants.casualDateFormat),
                             color = Color.White,
                             style = MangaTypography.h1,
                             fontSize = 13.sp,

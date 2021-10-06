@@ -21,9 +21,7 @@ class BaseApplication: Application(), KoinComponent {
 		initKoin {
 			androidLogger()
 			androidContext(this@BaseApplication)
-			modules(
-				viewModelModule
-			)
+			modules(appModule)
 		}
 
 		logger.d { "BaseApplication" }
