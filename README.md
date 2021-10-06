@@ -14,7 +14,7 @@ MangaKu App Powered by Kotlin Multiplatform Mobile, Jetpack Compose, and SwiftUI
 * **`core`**: data and domain layer
 * **`iosApp`**: ios presentation layer
 * **`androidApp`**: android presentation layer
-* **`buildSrc`**: `movieAndroid` and `core` dependencies
+* **`buildSrc`**: `androidApp` and `core` dependencies
 
 ## Table of Contents
 
@@ -74,7 +74,7 @@ A few things you can do with MangaKu:
 * Some Kotlinx & Jetpack Components
 
 ## <a name="domain-to-presentation"></a> 💨 Domain to Presentation
-In Android, Because both `core` and `movieAndroid` write in Kotlin, we can simply collect flow :
+In Android, Because both `core` and `androidApp` write in Kotlin, we can simply collect flow :
 ```
 private fun fetchManga() = viewModelScope.launch {
      _uiState.value = UiState(loading = true)
