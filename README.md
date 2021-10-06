@@ -1,7 +1,7 @@
 <h1 align="center"> MangaKu</h1> <br>
 <p align="center">
   <a href="https://gitpoint.co/">
-    <img alt="MovieCatalogue" title="MovieCatalogue" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fapptractor.ru%2Fwp-content%2Fuploads%2F2020%2F09%2Fkotlin-main.png&f=1&nofb=1" width="200">
+    <img alt="MovieCatalogue" title="MovieCatalogue" src="https://cdn.dribbble.com/users/5027078/screenshots/12022789/media/3e928c7fa9ac0a4e0c320c81302917ea.png" width="500">
   </a>
 </p>
 
