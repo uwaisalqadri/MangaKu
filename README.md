@@ -1,4 +1,4 @@
-<h1 align="center"> Sample Readme</h1> <br>
+<h1 align="center"> MangaKu</h1> <br>
 <p align="center">
   <a href="https://gitpoint.co/">
     <img alt="MovieCatalogue" title="MovieCatalogue" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fapptractor.ru%2Fwp-content%2Fuploads%2F2020%2F09%2Fkotlin-main.png&f=1&nofb=1" width="200">
@@ -7,11 +7,7 @@
 
 ## <a name="introduction"></a> 🤖 Introduction
 
-A sample project TMDB client build with Kotlin Multiplatform Mobile based on NBS recruitment test
-
-**Design**
-
-[Muvi-App-(NBS)](https://www.figma.com/file/2xOtQaTpTgxvdB7LRSmSPK/Muvi-App-(NBS))
+MangaKu App Powered by Kotlin Multiplatform Mobile, Jetpack Compose, and SwiftUI
 
 **Module**
 
@@ -19,11 +15,6 @@ A sample project TMDB client build with Kotlin Multiplatform Mobile based on NBS
 * **`movieIos`**: ios presentation layer
 * **`movieAndroid`**: android presentation layer
 * **`buildSrc`**: `movieAndroid` and `core` dependencies
-
-**Branch**
-* **`main`**: main branch
-* **`flow-coroutine`**: using flow coroutine
-* **`reaktive`**: using reaktive **(in progress)**
 
 ## Table of Contents
 
@@ -38,73 +29,79 @@ A sample project TMDB client build with Kotlin Multiplatform Mobile based on NBS
 
 ## <a name="features"></a> 🦾 Features
 
-A few things you can do with MovieCatalogue:
+A few things you can do with MangaKu:
 
-* View Popular, Upcoming, And Latest Release Movie
-* Easily search for any movie
-* See Movie Detail
-* Save, Remove, and Search your favorite movie
+* View Popular Manga
+* Easily search for any Manga
+* See Manga Detail
+* Save your favorite manga
 
 ## <a name="installation"></a> 🚗 Installation
 
 - Follow the [KMM Guide by Jetbrains](https://kotlinlang.org/docs/kmm-overview.html) for getting started building a project with KMM.
-- Install Kotlin Multiplatform Mobile plugin and SQLDelight plugin (optional) in Android Studio
+- Install Kotlin Multiplatform Mobile plugin in Android Studio
 - Clone or download the repo
 - Rebuild Project
-- To run in iOS, Open Xcode and `pod install` inside `movieIos` package to install shared module and ios dependencies
+- To run in iOS, Open Xcode and `pod install` inside `iosApp` package to install shared module and ios dependencies
 
-**Development Keys**: The `apiKey` in [`utils/Constants.kt`](https://code.nbs.dev/nbs-mobile/kmm-movie-db/-/blob/main/core/src/commonMain/kotlin/com/uwaisalqadri/moviecatalogue/utils/Constants.kt) are generated from [TMDB](https://www.themoviedb.org/), generate your own in [themoviedb.org/settings/api](https://www.themoviedb.org/settings/api).
+<!-- **Development Keys**: The `apiKey` in [`utils/Constants.kt`](https://code.nbs.dev/nbs-mobile/kmm-movie-db/-/blob/main/core/src/commonMain/kotlin/com/uwaisalqadri/moviecatalogue/utils/Constants.kt) are generated from [TMDB](https://www.themoviedb.org/), generate your own in [themoviedb.org/settings/api](https://www.themoviedb.org/settings/api). -->
 
 ## <a name="screenshot"></a> 📸 Screenshot
 
-<p align="center">
+<!-- <p align="center">
   <img src = "https://i.ibb.co/K0fPv1s/Screen-Shot-2021-10-04-at-13-56-33.png" width=400>
-</p>
+</p> -->
 
 ## <a name="libraries"></a> 💡 Libraries
 
 `core`:
 * [Ktor](https://github.com/ktorio/ktor)
-* [SQLDelight](https://github.com/cashapp/sqldelight)
+* [Realm-Kotlin](https://github.com/realm/realm-kotlin)
 * [KMPNativeCoroutines](https://github.com/rickclephas/KMP-NativeCoroutines)
 * [Koin](https://github.com/InsertKoinIO/koin)
 * [Kermit](https://github.com/touchlab/Kermit)
 
-`movieIos`:
-* [RxSwift](https://github.com/ReactiveX/RxSwift)
+`iosApp`:
+* [Combine](https://developer.apple.com/documentation/combine)
 * [SDWebImage](https://github.com/SDWebImage/SDWebImage)
-* [SVProgressHUD](https://github.com/SVProgressHUD/SVProgressHUD)
-* [Reusable](https://github.com/AliSoftware/Reusable)
-* [PinLayout](https://github.com/layoutBox/PinLayout)
+* [Lottie-iOS](https://github.com/airbnb/lottie-ios)
+* [SwiftUI](https://developer.apple.com/documentation/swiftui)
 
 `movieAndroid`:
-* [Gropie](https://github.com/lisawray/groupie)
-* [ViewBindingDelegate](https://github.com/androidbroadcast/ViewBindingPropertyDelegate)
-* [Glide](https://github.com/bumptech/glide)
+* [Jetpack Compose](https://developer.android.com/jetpack/compose)
+* [Accompanist](https://github.com/google/accompanist)
 * [Koin](https://github.com/InsertKoinIO/koin)
 * Some Kotlinx & Jetpack Components
 
 ## <a name="domain-to-presentation"></a> 💨 Domain to Presentation
 In Android, Because both `core` and `movieAndroid` write in Kotlin, we can simply collect flow :
 ```
-private fun requestPopularMovie() = viewModelScope.launch {
-  popularUseCase.execute().collect {			
-    loading.value = false
-    popularMovie.value = it.slice(0 until 10)		
-  }
+private fun fetchManga() = viewModelScope.launch {
+     _uiState.value = UiState(loading = true)
+     trendingUseCase().collect { result ->
+     if (result.isNotEmpty()) _uiState.value = UiState(listManga = result)    
+   }
 }
 
 ```
 
-But in iOS, we need to deal with swift, here i'm using `createObservable()` from `KMPNativeCoroutines` to collect flow as Observable in `RxSwift` :
+But in iOS, we need to deal with swift, here i'm using `createPublisher()` from `KMPNativeCoroutines` to collect flow as Publisher in `Combine` :
 
 ```
-func requestPopularMovie() {
-  createObservable(for: popularUseCase.executeNative(year: Extensions().currentYear, page: 1, sortBy: .popularity))
-    .observe(on: MainScheduler.instance)
-    .subscribe(onNext: { [weak self] result in
-      self?.popularMovies.accept(Array(result[0...9]))
-  }).disposed(by: disposeBag)
+private func fetchTrendingManga() {
+  loading = true
+  createPublisher(for: trendingUseCase.invokeNative())
+    .receive(on: DispatchQueue.main)
+    .sink { completion in
+       switch completion {
+        case .finished:
+          self.loading = false
+        case .failure(let error):
+          self.errorMessage = error.localizedDescription
+       }
+   } receiveValue: { value in
+     self.trendingManga = value
+   }.store(in: &cancellables)
 }
 
 
@@ -127,16 +124,15 @@ expect fun formatDate(dateString: String, format: String): String
 DateTimeFormatter and SimpleDateFormat
 ```
 actual fun formatDate(dateString: String, format: String): String {
-	return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-		val dateFormat = DateTimeFormatter.ofPattern(Constants.formatFromApi)
-		val currentDate = LocalDate.parse(dateString, dateFormat)
-		currentDate.format(DateTimeFormatter.ofPattern(format))
-	} else {
-		val date = SimpleDateFormat(Constants.formatFromApi).parse(dateString)
-		val dateFormatter = SimpleDateFormat(format, Locale.getDefault())
-		dateFormatter.format(date ?: Date())
-	}
-
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+	val dateFormat = DateTimeFormatter.ofPattern(Constants.formatFromApi)
+	val currentDate = LocalDate.parse(dateString, dateFormat)
+	currentDate.format(DateTimeFormatter.ofPattern(format))
+     } else {
+	val date = SimpleDateFormat(Constants.formatFromApi).parse(dateString)
+	val dateFormatter = SimpleDateFormat(format, Locale.getDefault())
+	dateFormatter.format(date ?: Date())
+      }
 }
 
 ```
@@ -147,17 +143,16 @@ NSDateFormatter
 
 ```
 actual fun formatDate(dateString: String, format: String): String {
+    val dateFormatter = NSDateFormatter().apply {
+	dateFormat = Constants.formatFromApi
+     }
 
-	val dateFormatter = NSDateFormatter().apply {
-		dateFormat = Constants.formatFromApi
-	}
+    val formatter = NSDateFormatter().apply {
+	dateFormat = format
+	locale = NSLocale(localeIdentifier = "id_ID")
+     }
 
-	val formatter = NSDateFormatter().apply {
-		dateFormat = format
-		locale = NSLocale(localeIdentifier = "id_ID")
-	}
-
-	return formatter.stringFromDate(dateFormatter.dateFromString(dateString) ?: NSDate())
+    return formatter.stringFromDate(dateFormatter.dateFromString(dateString) ?: NSDate())
 }
 
 ```
@@ -173,28 +168,32 @@ yes, we can use `Foundation` same as what we use in Xcode
   - `repository`
   - `source`
     - `local`
+    	- `entity`
     - `remote`
+      - `response`
 * `di`
 * `domain`
   - `model`
   - `repository`
   - `usecase`
-    - `home`
-    - `favorite`
-    - `search`
-    - `detail` 
+    - `browse`
+    - `detail`
+    - `mymanga`
+    - `search` 
 * `utils`
 
-**`movieAndroid`**:
+**`androidApp`**:
  - `ui`
+    - `composables`
     - `home`
+      - `composables`
     - `favorite`
     - `search`
     - `detail` 
 - `di`
 - `utils`
 
-**`movieIos`**: 
+**`iosApp`**: 
  - `Dependency`
  - `App`
  - `Main`
@@ -203,11 +202,8 @@ yes, we can use `Foundation` same as what we use in Xcode
  - `Extensions`
  - `Utils`
  - `Features`
-    - `Home`
-        - `Navigator`
-        - `ViewController`
-        - `ViewModel`
+    - `Browse`
         - `Views`
     - `Search`
     - `Detail`
-    - `Favorite`
+    - `MyManga`
