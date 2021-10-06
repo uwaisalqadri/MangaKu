@@ -67,7 +67,7 @@ A few things you can do with MangaKu:
 * [Lottie-iOS](https://github.com/airbnb/lottie-ios)
 * [SwiftUI](https://developer.apple.com/documentation/swiftui)
 
-`movieAndroid`:
+`androidApp`:
 * [Jetpack Compose](https://developer.android.com/jetpack/compose)
 * [Accompanist](https://github.com/google/accompanist)
 * [Koin](https://github.com/InsertKoinIO/koin)
