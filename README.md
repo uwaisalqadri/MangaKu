@@ -12,8 +12,8 @@ MangaKu App Powered by Kotlin Multiplatform Mobile, Jetpack Compose, and SwiftUI
 **Module**
 
 * **`core`**: data and domain layer
-* **`movieIos`**: ios presentation layer
-* **`movieAndroid`**: android presentation layer
+* **`iosApp`**: ios presentation layer
+* **`androidApp`**: android presentation layer
 * **`buildSrc`**: `movieAndroid` and `core` dependencies
 
 ## Table of Contents
