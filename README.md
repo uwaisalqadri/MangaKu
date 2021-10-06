@@ -114,30 +114,25 @@ and then each module will use `expect`
 
 example:
 
-[**`commonMain/utils/DateFormatter.kt`**](https://code.nbs.dev/nbs-mobile/kmm-movie-db/-/blob/main/core/src/commonMain/kotlin/com/uwaisalqadri/moviecatalogue/utils/DateFormatter.kt)
+[**`commonMain/utils/DateFormatter.kt`**](https://github.com/uwaisalqadri/MangaKu/blob/master/core/src/commonMain/kotlin/com/uwaisalqadri/mangaku/utils/DateFormatter.kt)
 ```
 expect fun formatDate(dateString: String, format: String): String
 ```
 
-[**`androidMain/utils/DateFormatter.kt`**](https://code.nbs.dev/nbs-mobile/kmm-movie-db/-/blob/main/core/src/androidMain/kotlin/com/uwaisalqadri/moviecatalogue/utils/DateFormatter.kt)
+[**`androidMain/utils/DateFormatter.kt`**](https://github.com/uwaisalqadri/MangaKu/blob/master/core/src/androidMain/kotlin/com/uwaisalqadri/mangaku/utils/DateFormatter.kt)
 
-DateTimeFormatter and SimpleDateFormat
+SimpleDateFormat
+
 ```
 actual fun formatDate(dateString: String, format: String): String {
-    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-	val dateFormat = DateTimeFormatter.ofPattern(Constants.formatFromApi)
-	val currentDate = LocalDate.parse(dateString, dateFormat)
-	currentDate.format(DateTimeFormatter.ofPattern(format))
-     } else {
-	val date = SimpleDateFormat(Constants.formatFromApi).parse(dateString)
-	val dateFormatter = SimpleDateFormat(format, Locale.getDefault())
-	dateFormatter.format(date ?: Date())
-      }
+    val date = SimpleDateFormat(Constants.formatFromApi).parse(dateString)
+    val dateFormatter = SimpleDateFormat(format, Locale.getDefault())
+    return dateFormatter.format(date ?: Date())
 }
 
 ```
 
-[**`iosMain/utils/DateFormatter.kt`**](https://code.nbs.dev/nbs-mobile/kmm-movie-db/-/blob/main/core/src/iosMain/kotlin/com/uwaisalqadri/moviecatalogue/utils/DateFormatter.kt)
+[**`iosMain/utils/DateFormatter.kt`**](https://github.com/uwaisalqadri/MangaKu/blob/master/core/src/iosMain/kotlin/com/uwaisalqadri/mangaku/utils/DateFormatter.kt)
 
 NSDateFormatter
 
