@@ -7,9 +7,7 @@ import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.http.*
 
-class RemoteDataSource(
-    private val ktor: HttpClient
-) {
+class RemoteDataSource(private val ktor: HttpClient) {
 
     suspend fun fetchMangas() =
         ktor.get<MangaResponse>("${Constants.baseUrl}/manga")
@@ -24,4 +22,5 @@ class RemoteDataSource(
 
     suspend fun fetchDetailManga(id: String) =
         ktor.get<MangaDetailResponse>("${Constants.baseUrl}/manga/$id")
+
 }
