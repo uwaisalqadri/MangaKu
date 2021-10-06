@@ -42,7 +42,7 @@ A few things you can do with MangaKu:
 - Install Kotlin Multiplatform Mobile plugin in Android Studio
 - Clone or download the repo
 - Rebuild Project
-- To run in iOS, Open Xcode and `pod install` inside `iosApp` package to install shared module and ios dependencies
+- To run in iOS, Open Xcode and `pod install` inside `iosApp` folder to install shared module and ios dependencies
 
 <!-- **Development Keys**: The `apiKey` in [`utils/Constants.kt`](https://code.nbs.dev/nbs-mobile/kmm-movie-db/-/blob/main/core/src/commonMain/kotlin/com/uwaisalqadri/moviecatalogue/utils/Constants.kt) are generated from [TMDB](https://www.themoviedb.org/), generate your own in [themoviedb.org/settings/api](https://www.themoviedb.org/settings/api). -->
 
