@@ -1,5 +1,5 @@
 //
-//  iOSApp.swift
+//  MangaKuApp.swift
 //  iosApp
 //
 //  Created by Uwais Alqadri on 24/07/21.
@@ -10,10 +10,10 @@ import SwiftUI
 import KotlinCore
 
 @main
-struct iOSApp: App {
+struct MangaKuApp: App {
   var body: some Scene {
     WindowGroup {
-      ContentView()
+      TabNavigationView()
         .onAppear {
           CoreKt.doInitKoin()
         }

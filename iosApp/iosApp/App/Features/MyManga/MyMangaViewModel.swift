@@ -17,50 +17,48 @@ class MyMangaViewModel: ObservableObject {
   @Published var errorMessage = ""
   @Published var loading = false
   @Published var isFavorite = false
-  private var ids = [String]()
+//  @Published var favState: FavState
 
   private let favoriteUseCase: GetMangaFavoriteUseCase
-  private let createFavoriteUseCase: CreateMangaFavoriteUseCase
   private var cancellables = Set<AnyCancellable>()
   let backgroundQueue = DispatchQueue(label: "com.schedulers.dispatch.mangaku", qos: .background)
 
-  init(favoriteUseCase: GetMangaFavoriteUseCase, createFavoriteUseCase: CreateMangaFavoriteUseCase) {
+  init(favoriteUseCase: GetMangaFavoriteUseCase) {
     self.favoriteUseCase = favoriteUseCase
-    self.createFavoriteUseCase = createFavoriteUseCase
     fetchFavoriteManga()
   }
 
-  func addFavoriteManga(manga: Manga, isSuccess: (String) -> Void) {
-    mangas.forEach { item in
-      ids.append(item.id)
-    }
+  func addFavoriteManga(manga: Manga) {
+    favoriteUseCase.add(manga: manga)
+    isFavorite = true
+  }
 
-    if !ids.contains(manga.id) {
-      createFavoriteUseCase.add(manga: manga)
-      isSuccess("Added to Favorite!")
-      isFavorite = true
-    } else {
-      createFavoriteUseCase.delete(mangaId: manga.id)
-      isSuccess("Removed from Favorite!")
-      isFavorite = false
-    }
+  func removeFavoriteManga(mangaId: String) {
+    favoriteUseCase.delete(mangaId: mangaId)
+    isFavorite = false
   }
 
   func checkFavorite(mangaId: String) {
-    mangas.forEach { manga in
-      ids.append(manga.id)
-      let listId = ids.joined(separator: ",")
-      if listId.contains(mangaId) {
-        isFavorite = true
-      } else {
-        isFavorite = false
-      }
-    }
+    createPublisher(for: favoriteUseCase.getByIdNative(mangaId: mangaId))
+      .subscribe(on: backgroundQueue)
+      .receive(on: DispatchQueue.main)
+      .sink { completion in
+        switch completion {
+        case .finished:
+          self.loading = false
+        case .failure(let error):
+          self.errorMessage = error.localizedDescription
+        }
+      } receiveValue: { value in
+        value.forEach { item in
+          self.isFavorite = item.id == mangaId
+        }
+      }.store(in: &cancellables)
   }
 
-  private func fetchFavoriteManga() {
+  func fetchFavoriteManga() {
     loading = true
-    createPublisher(for: favoriteUseCase.invokeNative())
+    createPublisher(for: favoriteUseCase.getNative())
       .subscribe(on: backgroundQueue)
       .receive(on: DispatchQueue.main)
       .sink { completion in

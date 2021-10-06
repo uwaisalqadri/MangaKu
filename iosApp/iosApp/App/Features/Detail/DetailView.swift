@@ -15,7 +15,6 @@ struct DetailView: View {
   @ObservedObject var viewModel: DetailViewModel
   @ObservedObject var mangaViewModel: MyMangaViewModel
   @State var showDialog = false
-  @State var message = ""
   let mangaId: String
 
   private let extensions = Extensions()
@@ -48,7 +47,7 @@ struct DetailView: View {
 
             HStack {
 
-              Text(viewModel.manga?.attributes?.startDate ?? "")
+              Text(DateFormatterKt.formatDate(dateString: viewModel.manga?.attributes?.startDate ?? "", format: Constants().casualDateFormat))
                 .foregroundColor(.white)
                 .font(.custom(.mbold, size: 13))
                 .padding(10)
@@ -87,11 +86,10 @@ struct DetailView: View {
 
     }.navigationTitle("Detail")
     .navigationBarItems(trailing: Button(action: {
-      mangaViewModel.addFavoriteManga(manga: viewModel.manga ?? Manga(attributes: nil, id: "", type: ""),
-      isSuccess: { message in
-        self.message = message
-        showDialog.toggle()
-      })
+      mangaViewModel.isFavorite
+        ? mangaViewModel.removeFavoriteManga(mangaId: viewModel.manga?.id ?? "")
+        : mangaViewModel.addFavoriteManga(manga: viewModel.manga ?? Manga(attributes: nil, id: "", type: ""))
+      showDialog.toggle()
     }) {
       Image(systemName: mangaViewModel.isFavorite ? "heart.fill" : "heart")
         .resizable()
@@ -109,7 +107,7 @@ struct DetailView: View {
         LottieView(name: "favorite", loopMode: .loop)
           .frame(width: 70, height: 70)
 
-        Text(message)
+        Text(mangaViewModel.isFavorite ? "Added to Favorite" : "Removed from Favorite")
           .foregroundColor(.black)
           .font(.custom(.mbold, size: 17))
           .padding(.bottom, 10)

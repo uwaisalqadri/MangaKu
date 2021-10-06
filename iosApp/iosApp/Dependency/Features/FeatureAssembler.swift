@@ -23,7 +23,7 @@ extension FeatureAssembler where Self: Assembler {
   }
 
   func resolve() -> MyMangaViewModel {
-    return MyMangaViewModel(favoriteUseCase: resolve(), createFavoriteUseCase: resolve())
+    return MyMangaViewModel(favoriteUseCase: resolve())
   }
 
   func resolve() -> SearchViewModel {

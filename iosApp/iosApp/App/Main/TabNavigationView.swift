@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  TabNavigationView.swift
 //  iosApp
 //
 //  Created by Uwais Alqadri on 24/07/21.
@@ -9,7 +9,7 @@
 import SwiftUI
 import KotlinCore
 
-struct ContentView: View {
+struct TabNavigationView: View {
 
   @State var selectedIndex = 0
   private let assembler = AppAssembler()
@@ -32,7 +32,7 @@ struct ContentView: View {
   }
 }
 
-extension ContentView {
+extension TabNavigationView {
 
   var tabView: some View {
     HStack {

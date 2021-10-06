@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
+		2152FB042600AC8F00CF470E /* MangaKuApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* MangaKuApp.swift */; };
 		5224F40F26AC38CF00D0D6E8 /* FeatureAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5224F40E26AC38CF00D0D6E8 /* FeatureAssembler.swift */; };
 		5246F3A826AB9C5200CCDA56 /* AppAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5246F3A726AB9C5200CCDA56 /* AppAssembler.swift */; };
 		5246F3B026AB9D0600CCDA56 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5246F3AF26AB9D0600CCDA56 /* Assets.xcassets */; };
@@ -21,6 +21,8 @@
 		527F3BA426F0AB1E0020F8CB /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527F3BA326F0AB1E0020F8CB /* DetailView.swift */; };
 		527F3BA826F0AB2E0020F8CB /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527F3BA726F0AB2E0020F8CB /* DetailViewModel.swift */; };
 		528AC4BD26D7990300B76AA1 /* MyMangaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B7692426ABCECD00227903 /* MyMangaViewModel.swift */; };
+		528D6652270D9D340046E716 /* montserrat-medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 528D6651270D9D340046E716 /* montserrat-medium.ttf */; };
+		528D6659270D9F260046E716 /* FavState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528D6658270D9F260046E716 /* FavState.swift */; };
 		52A12B2C26EE11500021741E /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52A12B2726EE11400021741E /* Pods_iosApp.framework */; };
 		52B7691826ABCE6F00227903 /* BrowseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B7691726ABCE6E00227903 /* BrowseView.swift */; };
 		52B7691B26ABCE8100227903 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B7691A26ABCE8100227903 /* SearchView.swift */; };
@@ -38,14 +40,13 @@
 		52EBD6DF26AE824700E1C28F /* montserrat-semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 52EBD6DE26AE824700E1C28F /* montserrat-semibold.ttf */; };
 		52EBD6E226AE829600E1C28F /* sedgwickavedisplay-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 52EBD6E126AE829600E1C28F /* sedgwickavedisplay-regular.ttf */; };
 		52EBD6E526AE82E000E1C28F /* mashanzheng-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 52EBD6E426AE82E000E1C28F /* mashanzheng-regular.ttf */; };
-		52EBD6E826AE831400E1C28F /* montserrat-medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 52EBD6E726AE831400E1C28F /* montserrat-medium.ttf */; };
 		52EBD6EB26AE845D00E1C28F /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBD6EA26AE845D00E1C28F /* Fonts.swift */; };
 		52FFF18426AFAEE9006A3621 /* KotlinCoreAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FFF18326AFAEE9006A3621 /* KotlinCoreAssembler.swift */; };
-		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
+		7555FF83242A565900829871 /* TabNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* TabNavigationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2152FB032600AC8F00CF470E /* iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
+		2152FB032600AC8F00CF470E /* MangaKuApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangaKuApp.swift; sourceTree = "<group>"; };
 		50D9A0967CCE2583336DF877 /* Pods-iosApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.release.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.release.xcconfig"; sourceTree = "<group>"; };
 		5224F40E26AC38CF00D0D6E8 /* FeatureAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureAssembler.swift; sourceTree = "<group>"; };
 		5246F3A726AB9C5200CCDA56 /* AppAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAssembler.swift; sourceTree = "<group>"; };
@@ -59,6 +60,8 @@
 		527F3B9F26F09DEC0020F8CB /* SearchItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchItemView.swift; sourceTree = "<group>"; };
 		527F3BA326F0AB1E0020F8CB /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		527F3BA726F0AB2E0020F8CB /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
+		528D6651270D9D340046E716 /* montserrat-medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "montserrat-medium.ttf"; sourceTree = "<group>"; };
+		528D6658270D9F260046E716 /* FavState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavState.swift; sourceTree = "<group>"; };
 		52A12B2726EE11400021741E /* Pods_iosApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_iosApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		52B7691726ABCE6E00227903 /* BrowseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseView.swift; sourceTree = "<group>"; };
 		52B7691A26ABCE8100227903 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
@@ -77,12 +80,11 @@
 		52EBD6DE26AE824700E1C28F /* montserrat-semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "montserrat-semibold.ttf"; path = "../../../../../../FrezzFarm/app/src/main/res/font/montserrat-semibold.ttf"; sourceTree = "<group>"; };
 		52EBD6E126AE829600E1C28F /* sedgwickavedisplay-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "sedgwickavedisplay-regular.ttf"; path = "../../../../../../../Downloads/Sedgwick_Ave_Display/sedgwickavedisplay-regular.ttf"; sourceTree = "<group>"; };
 		52EBD6E426AE82E000E1C28F /* mashanzheng-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "mashanzheng-regular.ttf"; path = "../../../../../../../Downloads/Ma_Shan_Zheng/mashanzheng-regular.ttf"; sourceTree = "<group>"; };
-		52EBD6E726AE831400E1C28F /* montserrat-medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "montserrat-medium.ttf"; path = "../../../../../../../Downloads/GithubUserSecond/app/src/main/res/font/montserrat-medium.ttf"; sourceTree = "<group>"; };
 		52EBD6EA26AE845D00E1C28F /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		52FFF18326AFAEE9006A3621 /* KotlinCoreAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KotlinCoreAssembler.swift; sourceTree = "<group>"; };
 		72EE2EB8B612D5078FEE912E /* Pods_iosApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iosApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		7555FF82242A565900829871 /* TabNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabNavigationView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D991336E515F966B88C63CCD /* Pods-iosApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.debug.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -180,8 +182,8 @@
 		5246F3AC26AB9C9700CCDA56 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				2152FB032600AC8F00CF470E /* iOSApp.swift */,
-				7555FF82242A565900829871 /* ContentView.swift */,
+				2152FB032600AC8F00CF470E /* MangaKuApp.swift */,
+				7555FF82242A565900829871 /* TabNavigationView.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -204,6 +206,7 @@
 				5278F04B26B5279400B4249D /* Weakifiable.swift */,
 				526B7D0E26F4441E0035A14A /* String.swift */,
 				52EA567F26F49EC500C8F458 /* View.swift */,
+				528D6658270D9F260046E716 /* FavState.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -211,7 +214,7 @@
 		5246F3B226AB9D1900CCDA56 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				52EBD6E726AE831400E1C28F /* montserrat-medium.ttf */,
+				528D6651270D9D340046E716 /* montserrat-medium.ttf */,
 				52EBD6E426AE82E000E1C28F /* mashanzheng-regular.ttf */,
 				52EBD6E126AE829600E1C28F /* sedgwickavedisplay-regular.ttf */,
 				52EBD6DE26AE824700E1C28F /* montserrat-semibold.ttf */,
@@ -379,11 +382,11 @@
 			files = (
 				52EBD6E226AE829600E1C28F /* sedgwickavedisplay-regular.ttf in Resources */,
 				52EBD6DC26AE823700E1C28F /* montserrat-bold.ttf in Resources */,
+				528D6652270D9D340046E716 /* montserrat-medium.ttf in Resources */,
 				52EBD6DF26AE824700E1C28F /* montserrat-semibold.ttf in Resources */,
 				52EBD6E526AE82E000E1C28F /* mashanzheng-regular.ttf in Resources */,
 				52EA568826F4A7F700C8F458 /* favorite.json in Resources */,
 				5246F3B026AB9D0600CCDA56 /* Assets.xcassets in Resources */,
-				52EBD6E826AE831400E1C28F /* montserrat-medium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -455,10 +458,11 @@
 				52EA567D26F49EA700C8F458 /* CustomDialogView.swift in Sources */,
 				52EBD6D526AE5A5900E1C28F /* MangaItemView.swift in Sources */,
 				52B7691B26ABCE8100227903 /* SearchView.swift in Sources */,
-				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
-				7555FF83242A565900829871 /* ContentView.swift in Sources */,
+				2152FB042600AC8F00CF470E /* MangaKuApp.swift in Sources */,
+				7555FF83242A565900829871 /* TabNavigationView.swift in Sources */,
 				5278F04C26B5279400B4249D /* Weakifiable.swift in Sources */,
 				5246F3A826AB9C5200CCDA56 /* AppAssembler.swift in Sources */,
+				528D6659270D9F260046E716 /* FavState.swift in Sources */,
 				52EA568026F49EC500C8F458 /* View.swift in Sources */,
 				52FFF18426AFAEE9006A3621 /* KotlinCoreAssembler.swift in Sources */,
 				52B7691E26ABCE9D00227903 /* MyMangaView.swift in Sources */,

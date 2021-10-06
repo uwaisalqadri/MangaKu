@@ -32,7 +32,7 @@ struct MangaItemView: View {
           .padding(.top, 5)
 
         HStack {
-          Text(manga.attributes?.startDate ?? "")
+          Text(DateFormatterKt.formatDate(dateString: manga.attributes?.startDate ?? "", format: Constants().casualDateFormat))
             .font(.custom(.mbold, size: 12))
             .foregroundColor(.secondary)
 

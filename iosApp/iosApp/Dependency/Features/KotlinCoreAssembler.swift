@@ -17,7 +17,6 @@ protocol KotlinCoreAssembler {
   func resolve() -> GetMangaTrendingUseCase
   func resolve() -> GetMangaDetailUseCase
   func resolve() -> GetMangaFavoriteUseCase
-  func resolve() -> CreateMangaFavoriteUseCase
 
   // data
   func resolve() -> MangaRepository
@@ -60,19 +59,15 @@ extension KotlinCoreAssembler where Self: Assembler {
     return GetMangaFavoriteInteractor(repository: resolve())
   }
 
-  func resolve() -> CreateMangaFavoriteUseCase {
-    return CreateMangaFavoriteInteractor(repository: resolve())
-  }
-
 
   // MARK: data
   func resolve() -> MangaRepository {
-    return MangaRepositoryImpl(remoteDataSource: resolve(), localDataSource: resolve(), mangaResponseMapper: resolve(), mangaObjectMapper: resolve())
+    return DefaultMangaRepository(remoteDataSource: resolve(), localDataSource: resolve(), mangaResponseMapper: resolve(), mangaObjectMapper: resolve())
   }
 
   func resolve() -> RemoteDataSource {
     let json = CoreKt.createJson()
-    return RemoteDataSource(ktor: CoreKt.createHttpClient(json: json))
+    return RemoteDataSource(ktor: CoreKt.createKtorClient(json: json))
   }
 
   func resolve() -> LocalDataSource {

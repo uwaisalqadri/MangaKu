@@ -82,6 +82,8 @@ struct MyMangaView: View {
             Spacer()
           }
         }
+      }.onAppear {
+        viewModel.fetchFavoriteManga()
       }
     }
   }
