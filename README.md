@@ -1,4 +1,4 @@
-<h1 align="center"> MovieCatalogue</h1> <br>
+<h1 align="center"> Sample Readme</h1> <br>
 <p align="center">
   <a href="https://gitpoint.co/">
     <img alt="MovieCatalogue" title="MovieCatalogue" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fapptractor.ru%2Fwp-content%2Fuploads%2F2020%2F09%2Fkotlin-main.png&f=1&nofb=1" width="200">
