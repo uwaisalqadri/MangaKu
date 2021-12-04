@@ -3,7 +3,7 @@
 //  iosApp
 //
 //  Created by Uwais Alqadri on 06/10/21.
-//  Copyright © 2021 orgName. All rights reserved.
+//  Copyright © 2021 Uwais Alqadri. All rights reserved.
 //
 
 import Foundation

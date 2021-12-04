@@ -1,7 +1,6 @@
 package com.uwaisalqadri.mangaku.di
 
 import com.uwaisalqadri.mangaku.data.souce.local.entity.*
-import com.uwaisalqadri.mangaku.utils.Constants
 import io.ktor.client.*
 import io.ktor.client.features.*
 import io.ktor.client.features.json.*
@@ -18,7 +17,7 @@ import org.koin.dsl.KoinAppDeclaration
 fun initKoin(appDeclaration: KoinAppDeclaration = {}) =
     startKoin {
         appDeclaration()
-        modules(ktorModule, realmModule, repositoryModule, useCaseModule, mapperModule)
+        modules(ktorModule, realmModule, repositoryModule, useCaseModule)
     }
 
 fun initKoin() = initKoin {} // for iOS

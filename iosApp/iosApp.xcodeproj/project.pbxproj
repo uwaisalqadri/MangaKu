@@ -29,20 +29,19 @@
 		52B7691E26ABCE9D00227903 /* MyMangaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B7691D26ABCE9D00227903 /* MyMangaView.swift */; };
 		52B7692126ABCEAC00227903 /* BrowseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B7692026ABCEAC00227903 /* BrowseViewModel.swift */; };
 		52B7692826ABCEE200227903 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B7692726ABCEE200227903 /* SearchViewModel.swift */; };
-		52D35BFF26ECF9F1007B1D81 /* ACarousel in Frameworks */ = {isa = PBXBuildFile; productRef = 52D35BFE26ECF9F1007B1D81 /* ACarousel */; };
 		52EA567D26F49EA700C8F458 /* CustomDialogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EA567C26F49EA700C8F458 /* CustomDialogView.swift */; };
 		52EA568026F49EC500C8F458 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EA567F26F49EC500C8F458 /* View.swift */; };
-		52EA568826F4A7F700C8F458 /* favorite.json in Resources */ = {isa = PBXBuildFile; fileRef = 52EA568726F4A7F700C8F458 /* favorite.json */; };
 		52EA568B26F4A82400C8F458 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EA568A26F4A82400C8F458 /* LottieView.swift */; };
 		52EBD6D526AE5A5900E1C28F /* MangaItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBD6D426AE5A5900E1C28F /* MangaItemView.swift */; };
 		52EBD6D826AE645E00E1C28F /* GenreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBD6D726AE645E00E1C28F /* GenreView.swift */; };
-		52EBD6DC26AE823700E1C28F /* montserrat-bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 52EBD6DB26AE823600E1C28F /* montserrat-bold.ttf */; };
-		52EBD6DF26AE824700E1C28F /* montserrat-semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 52EBD6DE26AE824700E1C28F /* montserrat-semibold.ttf */; };
-		52EBD6E226AE829600E1C28F /* sedgwickavedisplay-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 52EBD6E126AE829600E1C28F /* sedgwickavedisplay-regular.ttf */; };
-		52EBD6E526AE82E000E1C28F /* mashanzheng-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 52EBD6E426AE82E000E1C28F /* mashanzheng-regular.ttf */; };
 		52EBD6EB26AE845D00E1C28F /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBD6EA26AE845D00E1C28F /* Fonts.swift */; };
 		52FFF18426AFAEE9006A3621 /* KotlinCoreAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FFF18326AFAEE9006A3621 /* KotlinCoreAssembler.swift */; };
 		7555FF83242A565900829871 /* TabNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* TabNavigationView.swift */; };
+		91729222275BB94D000F5259 /* ACarousel in Frameworks */ = {isa = PBXBuildFile; productRef = 91729221275BB94D000F5259 /* ACarousel */; };
+		91729224275BBBF6000F5259 /* montserrat-semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 91729223275BBBF6000F5259 /* montserrat-semibold.ttf */; };
+		91729226275BBC0D000F5259 /* montserrat-bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 91729225275BBC0D000F5259 /* montserrat-bold.ttf */; };
+		91729228275BBC28000F5259 /* sedgwickavedisplay-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 91729227275BBC28000F5259 /* sedgwickavedisplay-regular.ttf */; };
+		9172922A275BBC36000F5259 /* mashanzheng-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 91729229275BBC36000F5259 /* mashanzheng-regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,20 +71,20 @@
 		52D35B8D26ECF6F5007B1D81 /* ACarousel */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ACarousel; sourceTree = "<group>"; };
 		52EA567C26F49EA700C8F458 /* CustomDialogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDialogView.swift; sourceTree = "<group>"; };
 		52EA567F26F49EC500C8F458 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
-		52EA568726F4A7F700C8F458 /* favorite.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = favorite.json; path = ../../../../../../../Downloads/favorite.json; sourceTree = "<group>"; };
 		52EA568A26F4A82400C8F458 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		52EBD6D426AE5A5900E1C28F /* MangaItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangaItemView.swift; sourceTree = "<group>"; };
 		52EBD6D726AE645E00E1C28F /* GenreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreView.swift; sourceTree = "<group>"; };
-		52EBD6DB26AE823600E1C28F /* montserrat-bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "montserrat-bold.ttf"; path = "../../../../../../FrezzFarm/app/src/main/res/font/montserrat-bold.ttf"; sourceTree = "<group>"; };
-		52EBD6DE26AE824700E1C28F /* montserrat-semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "montserrat-semibold.ttf"; path = "../../../../../../FrezzFarm/app/src/main/res/font/montserrat-semibold.ttf"; sourceTree = "<group>"; };
-		52EBD6E126AE829600E1C28F /* sedgwickavedisplay-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "sedgwickavedisplay-regular.ttf"; path = "../../../../../../../Downloads/Sedgwick_Ave_Display/sedgwickavedisplay-regular.ttf"; sourceTree = "<group>"; };
-		52EBD6E426AE82E000E1C28F /* mashanzheng-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "mashanzheng-regular.ttf"; path = "../../../../../../../Downloads/Ma_Shan_Zheng/mashanzheng-regular.ttf"; sourceTree = "<group>"; };
 		52EBD6EA26AE845D00E1C28F /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		52FFF18326AFAEE9006A3621 /* KotlinCoreAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KotlinCoreAssembler.swift; sourceTree = "<group>"; };
 		72EE2EB8B612D5078FEE912E /* Pods_iosApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iosApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF82242A565900829871 /* TabNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabNavigationView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		91729223275BBBF6000F5259 /* montserrat-semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "montserrat-semibold.ttf"; path = "../../../../../androidApp/src/main/res/font/montserrat-semibold.ttf"; sourceTree = "<group>"; };
+		91729225275BBC0D000F5259 /* montserrat-bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "montserrat-bold.ttf"; path = "../../../../../androidApp/src/main/res/font/montserrat-bold.ttf"; sourceTree = "<group>"; };
+		91729227275BBC28000F5259 /* sedgwickavedisplay-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "sedgwickavedisplay-regular.ttf"; path = "../../../../../androidApp/src/main/res/font/sedgwickavedisplay-regular.ttf"; sourceTree = "<group>"; };
+		91729229275BBC36000F5259 /* mashanzheng-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "mashanzheng-regular.ttf"; path = "../../../../../androidApp/src/main/res/font/mashanzheng-regular.ttf"; sourceTree = "<group>"; };
+		9181D76927587B5900AB983E /* ACarousel */ = {isa = PBXFileReference; lastKnownFileType = text; path = ACarousel; sourceTree = SOURCE_ROOT; };
 		D991336E515F966B88C63CCD /* Pods-iosApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.debug.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -94,8 +93,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				91729222275BB94D000F5259 /* ACarousel in Frameworks */,
 				52A12B2C26EE11500021741E /* Pods_iosApp.framework in Frameworks */,
-				52D35BFF26ECF9F1007B1D81 /* ACarousel in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -191,7 +190,7 @@
 		5246F3AD26AB9C9E00CCDA56 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				52EA568626F4A7ED00C8F458 /* Lotties */,
+				9181D76927587B5900AB983E /* ACarousel */,
 				52EBD6EA26AE845D00E1C28F /* Fonts.swift */,
 				7555FF8C242A565B00829871 /* Info.plist */,
 				5246F3AF26AB9D0600CCDA56 /* Assets.xcassets */,
@@ -214,11 +213,11 @@
 		5246F3B226AB9D1900CCDA56 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				91729229275BBC36000F5259 /* mashanzheng-regular.ttf */,
+				91729227275BBC28000F5259 /* sedgwickavedisplay-regular.ttf */,
+				91729225275BBC0D000F5259 /* montserrat-bold.ttf */,
+				91729223275BBBF6000F5259 /* montserrat-semibold.ttf */,
 				528D6651270D9D340046E716 /* montserrat-medium.ttf */,
-				52EBD6E426AE82E000E1C28F /* mashanzheng-regular.ttf */,
-				52EBD6E126AE829600E1C28F /* sedgwickavedisplay-regular.ttf */,
-				52EBD6DE26AE824700E1C28F /* montserrat-semibold.ttf */,
-				52EBD6DB26AE823600E1C28F /* montserrat-bold.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -282,14 +281,6 @@
 			path = Detail;
 			sourceTree = "<group>";
 		};
-		52EA568626F4A7ED00C8F458 /* Lotties */ = {
-			isa = PBXGroup;
-			children = (
-				52EA568726F4A7F700C8F458 /* favorite.json */,
-			);
-			path = Lotties;
-			sourceTree = "<group>";
-		};
 		7555FF72242A565900829871 = {
 			isa = PBXGroup;
 			children = (
@@ -336,7 +327,7 @@
 			);
 			name = iosApp;
 			packageProductDependencies = (
-				52D35BFE26ECF9F1007B1D81 /* ACarousel */,
+				91729221275BB94D000F5259 /* ACarousel */,
 			);
 			productName = iosApp;
 			productReference = 7555FF7B242A565900829871 /* iosApp.app */;
@@ -350,7 +341,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 1130;
 				LastUpgradeCheck = 1130;
-				ORGANIZATIONNAME = orgName;
+				ORGANIZATIONNAME = "Uwais Alqadri";
 				TargetAttributes = {
 					7555FF7A242A565900829871 = {
 						CreatedOnToolsVersion = 11.3.1;
@@ -380,12 +371,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52EBD6E226AE829600E1C28F /* sedgwickavedisplay-regular.ttf in Resources */,
-				52EBD6DC26AE823700E1C28F /* montserrat-bold.ttf in Resources */,
+				9172922A275BBC36000F5259 /* mashanzheng-regular.ttf in Resources */,
+				91729224275BBBF6000F5259 /* montserrat-semibold.ttf in Resources */,
 				528D6652270D9D340046E716 /* montserrat-medium.ttf in Resources */,
-				52EBD6DF26AE824700E1C28F /* montserrat-semibold.ttf in Resources */,
-				52EBD6E526AE82E000E1C28F /* mashanzheng-regular.ttf in Resources */,
-				52EA568826F4A7F700C8F458 /* favorite.json in Resources */,
+				91729226275BBC0D000F5259 /* montserrat-bold.ttf in Resources */,
+				91729228275BBC28000F5259 /* sedgwickavedisplay-regular.ttf in Resources */,
 				5246F3B026AB9D0600CCDA56 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -652,7 +642,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		52D35BFE26ECF9F1007B1D81 /* ACarousel */ = {
+		91729221275BB94D000F5259 /* ACarousel */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = ACarousel;
 		};

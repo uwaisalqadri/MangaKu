@@ -6,6 +6,6 @@ import org.koin.dsl.module
 
 val repositoryModule = module {
     single<MangaRepository> {
-        DefaultMangaRepository(get(), get(), get(), get())
+        DefaultMangaRepository(get(), get())
     }
 }

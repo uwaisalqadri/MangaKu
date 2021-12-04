@@ -3,7 +3,7 @@
 //  iosApp
 //
 //  Created by Uwais Alqadri on 27/07/21.
-//  Copyright © 2021 orgName. All rights reserved.
+//  Copyright © 2021 Uwais Alqadri. All rights reserved.
 //
 
 import Foundation
@@ -22,18 +22,6 @@ protocol KotlinCoreAssembler {
   func resolve() -> MangaRepository
   func resolve() -> RemoteDataSource
   func resolve() -> LocalDataSource
-
-  // mapper
-  func resolve() -> MangaMapper
-  func resolve() -> MangaObjectMapper
-  func resolve() -> AttributesMapper
-  func resolve() -> AttributesObjectMapper
-  func resolve() -> PosterImageMapper
-  func resolve() -> PosterImageObjectMapper
-  func resolve() -> CoverImageMapper
-  func resolve() -> CoverImageObjectMapper
-  func resolve() -> TitlesMapper
-  func resolve() -> TitlesObjectMapper
 }
 
 extension KotlinCoreAssembler where Self: Assembler {
@@ -62,7 +50,7 @@ extension KotlinCoreAssembler where Self: Assembler {
 
   // MARK: data
   func resolve() -> MangaRepository {
-    return DefaultMangaRepository(remoteDataSource: resolve(), localDataSource: resolve(), mangaResponseMapper: resolve(), mangaObjectMapper: resolve())
+    return DefaultMangaRepository(remoteDataSource: resolve(), localDataSource: resolve())
   }
 
   func resolve() -> RemoteDataSource {
@@ -72,47 +60,5 @@ extension KotlinCoreAssembler where Self: Assembler {
 
   func resolve() -> LocalDataSource {
     return LocalDataSource(realm: CoreKt.createRealmDatabase())
-  }
-
-
-  // MARK: mapper
-  func resolve() -> MangaMapper {
-    return MangaMapper(attributesMapper: resolve())
-  }
-
-  func resolve() -> MangaObjectMapper {
-    return MangaObjectMapper(attributesObjectMapper: resolve())
-  }
-
-  func resolve() -> AttributesMapper {
-    return AttributesMapper(coverImageMapper: resolve(), posterImageMapper: resolve(), titlesMapper: resolve())
-  }
-
-  func resolve() -> AttributesObjectMapper {
-    return AttributesObjectMapper(coverImageMapper: resolve(), posterImageMapper: resolve(), titlesMapper: resolve())
-  }
-
-  func resolve() -> CoverImageMapper {
-    return CoverImageMapper()
-  }
-
-  func resolve() -> CoverImageObjectMapper {
-    return CoverImageObjectMapper()
-  }
-
-  func resolve() -> PosterImageMapper {
-    return PosterImageMapper()
-  }
-
-  func resolve() -> PosterImageObjectMapper {
-    return PosterImageObjectMapper()
-  }
-
-  func resolve() -> TitlesMapper {
-    return TitlesMapper()
-  }
-
-  func resolve() -> TitlesObjectMapper {
-    return TitlesObjectMapper()
   }
 }
