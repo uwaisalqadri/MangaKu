@@ -7,8 +7,8 @@ import com.uwaisalqadri.mangaku.android.ui.search.SearchViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
-val appModule = module {
-    viewModel { BrowseViewModel(get(), get()) }
+val featureModule = module {
+    viewModel { BrowseViewModel(get()) }
     viewModel { MyMangaViewModel(get()) }
     viewModel { SearchViewModel(get()) }
     viewModel { DetailViewModel(get()) }

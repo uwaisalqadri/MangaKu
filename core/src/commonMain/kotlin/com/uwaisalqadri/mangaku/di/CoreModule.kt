@@ -1,6 +1,13 @@
 package com.uwaisalqadri.mangaku.di
 
+import co.touchlab.kermit.CommonLogger
+import co.touchlab.kermit.Kermit
+import co.touchlab.kermit.Logger as KermitLogger
+import com.uwaisalqadri.mangaku.data.souce.local.MangaLocalDataSource
 import com.uwaisalqadri.mangaku.data.souce.local.entity.*
+import com.uwaisalqadri.mangaku.data.souce.remote.MangaRemoteDataSource
+import com.uwaisalqadri.mangaku.di.feature.mangaModule
+import com.uwaisalqadri.mangaku.utils.CustomLogger
 import io.ktor.client.*
 import io.ktor.client.features.*
 import io.ktor.client.features.json.*
@@ -11,17 +18,25 @@ import io.ktor.http.*
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import kotlinx.serialization.json.Json
+import org.koin.core.KoinApplication
 import org.koin.core.context.startKoin
 import org.koin.dsl.KoinAppDeclaration
+import org.koin.dsl.module
 
-fun initKoin(appDeclaration: KoinAppDeclaration = {}) =
-    startKoin {
+fun initKoin(appDeclaration: KoinAppDeclaration = {}): KoinApplication {
+    val koinApplication = startKoin {
         appDeclaration()
-        modules(ktorModule, realmModule, repositoryModule, useCaseModule)
+        modules(
+            ktorModule,
+            realmModule,
+            mangaModule
+        )
     }
 
-fun initKoin() = initKoin {} // for iOS
+    return koinApplication
+}
 
+fun initKoin() = initKoin {} // for iOS
 
 fun createRealmDatabase(): Realm {
     val configuration = RealmConfiguration(schema = setOf(
@@ -55,6 +70,19 @@ fun createKtorClient(json: Json) = HttpClient {
 
     install(Logging) {
         logger = Logger.DEFAULT
-        level = LogLevel.INFO
+        level = LogLevel.ALL
     }
+}
+
+
+val realmModule = module {
+    single { MangaLocalDataSource(get()) }
+    single { createRealmDatabase() }
+}
+
+val ktorModule = module {
+    single { MangaRemoteDataSource(get()) }
+    single { createJson() }
+    single { createKtorClient(get()) }
+    // single { CommonLogger() }
 }

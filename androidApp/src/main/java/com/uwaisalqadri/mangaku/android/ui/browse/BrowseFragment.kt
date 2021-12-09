@@ -28,6 +28,7 @@ import com.uwaisalqadri.mangaku.android.ui.composables.ShimmerBrowseItem
 import com.uwaisalqadri.mangaku.android.ui.composables.TopBar
 import com.uwaisalqadri.mangaku.android.ui.detail.DetailFragment
 import com.uwaisalqadri.mangaku.android.ui.mymanga.MyMangaViewModel
+import com.uwaisalqadri.mangaku.android.ui.theme.MangaTheme
 import com.uwaisalqadri.mangaku.android.ui.theme.MangaTypography
 import org.koin.androidx.compose.getViewModel
 

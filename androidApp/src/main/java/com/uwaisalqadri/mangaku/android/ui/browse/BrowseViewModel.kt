@@ -3,28 +3,26 @@ package com.uwaisalqadri.mangaku.android.ui.browse
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.uwaisalqadri.mangaku.android.utils.UiState
-import com.uwaisalqadri.mangaku.domain.usecase.browse.GetMangaListUseCase
-import com.uwaisalqadri.mangaku.domain.usecase.browse.GetMangaTrendingUseCase
+import com.uwaisalqadri.mangaku.domain.usecase.browse.BrowseUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class BrowseViewModel(
-    private val listUseCase: GetMangaListUseCase,
-    private val trendingUseCase: GetMangaTrendingUseCase
+    private val browseUseCase: BrowseUseCase
 ): ViewModel() {
 
     private val _uiState = MutableStateFlow(UiState(loading = false))
     val uiState: StateFlow<UiState> = _uiState
 
     init {
-        fetchManga()
+        getTrendingManga()
     }
 
-    private fun fetchManga() = viewModelScope.launch {
+    private fun getTrendingManga() = viewModelScope.launch {
         _uiState.value = UiState(loading = true)
-        trendingUseCase().collect { result ->
+        browseUseCase.getTrendingManga().collect { result ->
             if (result.isNotEmpty()) _uiState.value = UiState(listManga = result)
         }
     }

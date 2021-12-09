@@ -1,11 +1,9 @@
 package com.uwaisalqadri.mangaku.android.ui.detail
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -33,6 +31,7 @@ import com.uwaisalqadri.mangaku.android.ui.composables.ShimmerDetail
 import com.uwaisalqadri.mangaku.android.ui.composables.TopBar
 import com.uwaisalqadri.mangaku.android.ui.detail.composables.FavoriteDialog
 import com.uwaisalqadri.mangaku.android.ui.mymanga.MyMangaViewModel
+import com.uwaisalqadri.mangaku.android.ui.theme.MangaTheme
 import com.uwaisalqadri.mangaku.android.ui.theme.MangaTypography
 import com.uwaisalqadri.mangaku.utils.Constants
 import com.uwaisalqadri.mangaku.utils.Extensions
@@ -65,7 +64,7 @@ class DetailFragment: Fragment() {
         mangaViewModel: MyMangaViewModel = getViewModel(),
         extension: Extensions = Extensions
     ) {
-        viewModel.fetchDetailManga(mangaId)
+        viewModel.getDetailManga(mangaId)
         mangaViewModel.checkFavorite(mangaId)
 
         val manga by viewModel.detailManga
@@ -106,8 +105,8 @@ class DetailFragment: Fragment() {
                         .clickable {
                             setShowDialog(true)
                             if (!loading) {
-                                if (isFavorite) mangaViewModel.removeFavoriteManga(manga.id)
-                                else  mangaViewModel.addFavoriteManga(manga)
+                                if (isFavorite) mangaViewModel.deleteMyManga(manga.id)
+                                else mangaViewModel.addMyManga(manga)
                             }
                         }
                 )

@@ -4,13 +4,13 @@ import com.uwaisalqadri.mangaku.domain.model.Manga
 import kotlinx.coroutines.flow.Flow
 
 interface MangaRepository {
-    suspend fun fetchMangas(): Flow<List<Manga>>
-    suspend fun fetchTrendingMangas(): Flow<List<Manga>>
-    suspend fun fetchSearchMangas(query: String): Flow<List<Manga>>
-    suspend fun fetchDetailManga(id: String): Flow<Manga?>
+    suspend fun getManga(): Flow<List<Manga>>
+    suspend fun getTrendingManga(): Flow<List<Manga>>
+    suspend fun getSearchManga(query: String): Flow<List<Manga>>
+    suspend fun getDetailManga(id: String): Flow<Manga?>
 
     suspend fun getFavoriteManga(): Flow<List<Manga>>
     suspend fun getFavoriteMangaById(mangaId: String): Flow<List<Manga>>
     fun addMangaFavorite(manga: Manga)
-    fun removeMangaFavorite(mangaId: String)
+    fun deleteMangaFavorite(mangaId: String)
 }

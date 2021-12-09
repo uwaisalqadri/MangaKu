@@ -12,18 +12,14 @@ import org.koin.core.component.inject
 /**
  * Created by Uwais Alqadri on July 23, 2021
  */
-class BaseApplication: Application(), KoinComponent {
-	private val logger: Kermit by inject()
+class BaseApplication: Application() {
 
 	override fun onCreate() {
 		super.onCreate()
-
 		initKoin {
 			androidLogger()
 			androidContext(this@BaseApplication)
-			modules(appModule)
+			modules(featureModule)
 		}
-
-		logger.d { "BaseApplication" }
 	}
 }

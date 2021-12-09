@@ -7,14 +7,14 @@ import androidx.lifecycle.viewModelScope
 import com.uwaisalqadri.mangaku.android.utils.FavState
 import com.uwaisalqadri.mangaku.android.utils.UiState
 import com.uwaisalqadri.mangaku.domain.model.Manga
-import com.uwaisalqadri.mangaku.domain.usecase.mymanga.GetMangaFavoriteUseCase
+import com.uwaisalqadri.mangaku.domain.usecase.mymanga.MyMangaUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class MyMangaViewModel(
-    private val favoriteUseCase: GetMangaFavoriteUseCase
+    private val myMangaUseCase: MyMangaUseCase
 ): ViewModel() {
 
     private val _uiState = MutableStateFlow(UiState(loading = true))
@@ -24,26 +24,26 @@ class MyMangaViewModel(
     val favState: LiveData<FavState> = _favState
 
 
-    fun addFavoriteManga(manga: Manga) {
-        favoriteUseCase.add(manga)
+    fun addMyManga(manga: Manga) {
+        myMangaUseCase.addManga(manga)
         _favState.value = FavState(addFavorite = true)
     }
 
-    fun removeFavoriteManga(mangaId: String) {
-        favoriteUseCase.delete(mangaId)
+    fun deleteMyManga(mangaId: String) {
+        myMangaUseCase.deleteManga(mangaId)
         _favState.value = FavState(removeFavorite = true)
     }
 
     fun checkFavorite(mangaId: String) = viewModelScope.launch {
-        favoriteUseCase.getById(mangaId).collect { result ->
+        myMangaUseCase.getMyMangaById(mangaId).collect { result ->
             result.forEach {
                 _favState.value = FavState(favMangaFound = it.id == mangaId)
             }
         }
     }
 
-    fun fetchFavoriteManga() = viewModelScope.launch {
-        favoriteUseCase.get().collect { result ->
+    fun getMyManga() = viewModelScope.launch {
+        myMangaUseCase.getMyManga().collect { result ->
             if (result.isNotEmpty()) {
                 _uiState.value = UiState(listManga = result)
             }

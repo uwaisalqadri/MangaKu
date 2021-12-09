@@ -2,18 +2,12 @@ package com.uwaisalqadri.mangaku.android.ui.mymanga
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.RoundedCorner
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Card
-import androidx.compose.material.Icon
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Star
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -25,14 +19,12 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.uwaisalqadri.mangaku.android.R
-import com.uwaisalqadri.mangaku.android.ui.composables.ShimmerSearchItem
-import com.uwaisalqadri.mangaku.android.ui.composables.TopBar
 import com.uwaisalqadri.mangaku.android.ui.detail.DetailFragment
 import com.uwaisalqadri.mangaku.android.ui.mymanga.composables.HorizontalPagerWithTransition
 import com.uwaisalqadri.mangaku.android.ui.mymanga.composables.LayoutSwitch
 import com.uwaisalqadri.mangaku.android.ui.mymanga.composables.MyMangaGridItem
-import com.uwaisalqadri.mangaku.android.ui.search.composables.SearchResult
 import com.uwaisalqadri.mangaku.android.ui.search.composables.StaggeredVerticalGrid
+import com.uwaisalqadri.mangaku.android.ui.theme.MangaTheme
 import com.uwaisalqadri.mangaku.android.ui.theme.MangaTypography
 import org.koin.androidx.compose.getViewModel
 
@@ -62,7 +54,7 @@ class MyMangaFragment: Fragment() {
             modifier = Modifier.verticalScroll(rememberScrollState())
         ) {
 
-            viewModel.fetchFavoriteManga()
+            viewModel.getMyManga()
 
             Row(
                 horizontalArrangement = Arrangement.Center,

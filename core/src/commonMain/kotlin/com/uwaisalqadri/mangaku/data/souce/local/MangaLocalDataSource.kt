@@ -6,9 +6,7 @@ import io.realm.delete
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 
-class LocalDataSource(
-    private val realm: Realm
-) {
+class MangaLocalDataSource(private val realm: Realm) {
 
     fun getAllManga(): List<MangaObject> {
         return realm.objects(MangaObject::class)

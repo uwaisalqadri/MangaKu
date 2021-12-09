@@ -23,6 +23,7 @@ import com.uwaisalqadri.mangaku.android.ui.detail.DetailFragment
 import com.uwaisalqadri.mangaku.android.ui.search.composables.SearchField
 import com.uwaisalqadri.mangaku.android.ui.search.composables.SearchResult
 import com.uwaisalqadri.mangaku.android.ui.search.composables.StaggeredVerticalGrid
+import com.uwaisalqadri.mangaku.android.ui.theme.MangaTheme
 import org.koin.androidx.compose.getViewModel
 
 class SearchFragment: Fragment() {
@@ -64,7 +65,7 @@ class SearchFragment: Fragment() {
                 query = query,
                 placeholder = "Search All Manga..",
                 onQueryChanged = viewModel::onQueryChanged,
-                onExecuteSearch = { viewModel.fetchSearchManga(query) },
+                onExecuteSearch = { viewModel.getSearchManga(query) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 20.dp, vertical = 20.dp)
