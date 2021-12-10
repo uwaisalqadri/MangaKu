@@ -1,7 +1,9 @@
 package com.uwaisalqadri.mangaku.di.feature
 
 import com.uwaisalqadri.mangaku.data.repository.DefaultMangaRepository
+import com.uwaisalqadri.mangaku.data.souce.local.DefaultMangaLocalDataSource
 import com.uwaisalqadri.mangaku.data.souce.local.MangaLocalDataSource
+import com.uwaisalqadri.mangaku.data.souce.remote.DefaultMangaRemoteDataSource
 import com.uwaisalqadri.mangaku.data.souce.remote.MangaRemoteDataSource
 import com.uwaisalqadri.mangaku.domain.repository.MangaRepository
 import com.uwaisalqadri.mangaku.domain.usecase.browse.BrowseInteractor
@@ -15,8 +17,8 @@ import com.uwaisalqadri.mangaku.domain.usecase.search.SearchUseCase
 import org.koin.dsl.module
 
 val mangaModule = module {
-    single { MangaRemoteDataSource(get()) }
-    single { MangaLocalDataSource(get()) }
+    single<MangaRemoteDataSource> { DefaultMangaRemoteDataSource(get()) }
+    single<MangaLocalDataSource> { DefaultMangaLocalDataSource(get()) }
     single<MangaRepository> { DefaultMangaRepository(get(), get()) }
     single<BrowseUseCase> { BrowseInteractor(get()) }
     single<DetailUseCase> { DetailInteractor(get()) }

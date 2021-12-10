@@ -1,13 +1,10 @@
 package com.uwaisalqadri.mangaku.di
 
-import co.touchlab.kermit.CommonLogger
-import co.touchlab.kermit.Kermit
-import co.touchlab.kermit.Logger as KermitLogger
-import com.uwaisalqadri.mangaku.data.souce.local.MangaLocalDataSource
+import com.uwaisalqadri.mangaku.data.souce.local.DefaultMangaLocalDataSource
 import com.uwaisalqadri.mangaku.data.souce.local.entity.*
-import com.uwaisalqadri.mangaku.data.souce.remote.MangaRemoteDataSource
+import com.uwaisalqadri.mangaku.data.souce.remote.DefaultMangaRemoteDataSource
 import com.uwaisalqadri.mangaku.di.feature.mangaModule
-import com.uwaisalqadri.mangaku.utils.CustomLogger
+import com.uwaisalqadri.mangaku.utils.Constants
 import io.ktor.client.*
 import io.ktor.client.features.*
 import io.ktor.client.features.json.*
@@ -39,7 +36,7 @@ fun initKoin(appDeclaration: KoinAppDeclaration = {}): KoinApplication {
 fun initKoin() = initKoin {} // for iOS
 
 fun createRealmDatabase(): Realm {
-    val configuration = RealmConfiguration(schema = setOf(
+    val configuration = RealmConfiguration.with(schema = setOf(
         MangaObject::class,
         AttributesObject::class,
         CoverImageObject::class,
@@ -47,7 +44,7 @@ fun createRealmDatabase(): Realm {
         TitlesObject::class
     ))
 
-    return Realm(configuration)
+    return Realm.open(configuration = configuration)
 }
 
 fun createJson() = Json {
@@ -58,6 +55,12 @@ fun createJson() = Json {
 
 fun createKtorClient(json: Json) = HttpClient {
     defaultRequest {
+//        host = Constants.baseUrl
+//
+//        url {
+//            protocol = URLProtocol.HTTPS
+//        }
+
         headers {
             append(HttpHeaders.Accept, "application/vnd.api+json")
             append(HttpHeaders.ContentType, "application/vnd.api+json")
@@ -68,6 +71,12 @@ fun createKtorClient(json: Json) = HttpClient {
         serializer = KotlinxSerializer(json)
     }
 
+    install(HttpTimeout) {
+        requestTimeoutMillis = 60000
+        connectTimeoutMillis = 60000
+        socketTimeoutMillis = 60000
+    }
+
     install(Logging) {
         logger = Logger.DEFAULT
         level = LogLevel.ALL
@@ -76,12 +85,12 @@ fun createKtorClient(json: Json) = HttpClient {
 
 
 val realmModule = module {
-    single { MangaLocalDataSource(get()) }
+    single { DefaultMangaLocalDataSource(get()) }
     single { createRealmDatabase() }
 }
 
 val ktorModule = module {
-    single { MangaRemoteDataSource(get()) }
+    single { DefaultMangaRemoteDataSource(get()) }
     single { createJson() }
     single { createKtorClient(get()) }
     // single { CommonLogger() }

@@ -1,7 +1,9 @@
 package com.uwaisalqadri.mangaku.data.repository
 
 import com.uwaisalqadri.mangaku.domain.mapper.map
+import com.uwaisalqadri.mangaku.data.souce.local.DefaultMangaLocalDataSource
 import com.uwaisalqadri.mangaku.data.souce.local.MangaLocalDataSource
+import com.uwaisalqadri.mangaku.data.souce.remote.DefaultMangaRemoteDataSource
 import com.uwaisalqadri.mangaku.data.souce.remote.MangaRemoteDataSource
 import com.uwaisalqadri.mangaku.domain.model.Manga
 import com.uwaisalqadri.mangaku.domain.repository.MangaRepository

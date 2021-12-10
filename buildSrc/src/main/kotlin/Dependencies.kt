@@ -41,7 +41,7 @@ object Dependencies {
     const val ktorAndroid = "io.ktor:ktor-client-android:${Versions.ktor}"
     const val ktorIos = "io.ktor:ktor-client-ios:${Versions.ktor}"
 
-    const val realmKotlin = "io.realm.kotlin:library:${Versions.realm}"
+    const val realmKotlin = "io.realm.kotlin:library-base:${Versions.realm}"
 
     const val kermitLogger = "co.touchlab:kermit:${Versions.kermit}"
 }
