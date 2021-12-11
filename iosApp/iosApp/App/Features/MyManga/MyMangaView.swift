@@ -58,7 +58,7 @@ struct MyMangaView: View {
                 }.padding(.top, 5)
               } else {
                 LazyVGrid(columns: [
-                  GridItem(.adaptive(minimum: 150), spacing: 25, alignment: .center)
+                  GridItem(.adaptive(minimum: 120), spacing: 25, alignment: .center)
                 ], alignment: .leading, spacing: 10) {
 
                   ForEach(viewModel.mangas, id: \.self) { manga in
