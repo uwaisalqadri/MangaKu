@@ -50,11 +50,11 @@
 	</array>
 	<key>UIAppFonts</key>
 	<array>
-		<string>montserrat-medium.ttf</string>
-		<string>montserrat-semibold.ttf</string>
-		<string>montserrat-bold.ttf</string>
-		<string>sedgwickavedisplay-regular.ttf</string>
-		<string>mashanzheng-regular.ttf</string>
+		<string>montserrat_medium.ttf</string>
+		<string>montserrat_semibold.ttf</string>
+		<string>montserrat_bold.ttf</string>
+		<string>sedgwickavedisplay_regular.ttf</string>
+		<string>mashanzheng_regular.ttf</string>
 	</array>
 </dict>
 </plist>

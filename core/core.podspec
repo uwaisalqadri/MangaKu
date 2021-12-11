@@ -1,11 +1,11 @@
 Pod::Spec.new do |spec|
     spec.name                     = 'core'
-    spec.version                  = '1.0'
+    spec.version                  = '1.2'
     spec.homepage                 = 'https://github.com/uwaisalqadri/MangaKu'
     spec.source                   = { :git => "Not Published", :tag => "Cocoapods/#{spec.name}/#{spec.version}" }
     spec.authors                  = ''
     spec.license                  = ''
-    spec.summary                  = 'MangaApp'
+    spec.summary                  = 'MangaKu'
 
     spec.vendored_frameworks      = "build/cocoapods/framework/KotlinCore.framework"
     spec.libraries                = "c++"

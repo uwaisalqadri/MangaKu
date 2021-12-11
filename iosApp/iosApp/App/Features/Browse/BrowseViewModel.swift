@@ -18,20 +18,18 @@ class BrowseViewModel: ObservableObject {
   @Published var loading = false
   @Published var errorMessage = ""
 
-  private let listUseCase: GetMangaListUseCase
-  private let trendingUseCase: GetMangaTrendingUseCase
+  private let browseUseCase: BrowseUseCase
   private var cancellables = Set<AnyCancellable>()
 
-  init(listUseCase: GetMangaListUseCase, trendingUseCase: GetMangaTrendingUseCase) {
-    self.listUseCase = listUseCase
-    self.trendingUseCase = trendingUseCase
+  init(browseUseCase: BrowseUseCase) {
+    self.browseUseCase = browseUseCase
     fetchManga()
     fetchTrendingManga()
   }
 
   private func fetchManga() {
     loading = true
-    createPublisher(for: listUseCase.invokeNative())
+    createPublisher(for: browseUseCase.getMangaNative())
       .receive(on: DispatchQueue.main)
       .sink { completion in
         switch completion {
@@ -47,7 +45,7 @@ class BrowseViewModel: ObservableObject {
   
   private func fetchTrendingManga() {
     loading = true
-    createPublisher(for: trendingUseCase.invokeNative())
+    createPublisher(for: browseUseCase.getTrendingMangaNative())
       .receive(on: DispatchQueue.main)
       .sink { completion in
         switch completion {

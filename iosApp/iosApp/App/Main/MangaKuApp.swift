@@ -15,7 +15,7 @@ struct MangaKuApp: App {
     WindowGroup {
       TabNavigationView()
         .onAppear {
-          CoreKt.doInitKoin()
+          CoreModuleKt.doInitKoin()
         }
     }
   }

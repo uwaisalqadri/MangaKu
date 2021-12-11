@@ -17,18 +17,13 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.transition.Hold
-import com.google.android.material.transition.MaterialFadeThrough
 import com.uwaisalqadri.mangaku.android.R
 import com.uwaisalqadri.mangaku.android.ui.browse.composables.Genres
 import com.uwaisalqadri.mangaku.android.ui.browse.composables.MangaTrending
 import com.uwaisalqadri.mangaku.android.ui.composables.ShimmerBrowseItem
 import com.uwaisalqadri.mangaku.android.ui.composables.TopBar
 import com.uwaisalqadri.mangaku.android.ui.detail.DetailFragment
-import com.uwaisalqadri.mangaku.android.ui.mymanga.MyMangaViewModel
-import com.uwaisalqadri.mangaku.android.ui.theme.MangaTheme
 import com.uwaisalqadri.mangaku.android.ui.theme.MangaTypography
 import org.koin.androidx.compose.getViewModel
 

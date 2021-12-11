@@ -12,53 +12,47 @@ import KotlinCore
 protocol KotlinCoreAssembler {
 
   // domain
-  func resolve() -> GetMangaListUseCase
-  func resolve() -> GetMangaSearchUseCase
-  func resolve() -> GetMangaTrendingUseCase
-  func resolve() -> GetMangaDetailUseCase
-  func resolve() -> GetMangaFavoriteUseCase
+  func resolve() -> BrowseUseCase
+  func resolve() -> SearchUseCase
+  func resolve() -> DetailUseCase
+  func resolve() -> MyMangaUseCase
 
   // data
   func resolve() -> MangaRepository
-  func resolve() -> RemoteDataSource
-  func resolve() -> LocalDataSource
+  func resolve() -> MangaRemoteDataSource
+  func resolve() -> MangaLocalDataSource
 }
 
 extension KotlinCoreAssembler where Self: Assembler {
 
   // MARK: domain
-  func resolve() -> GetMangaListUseCase {
-    return GetMangaListInteractor(repository: resolve())
+  func resolve() -> BrowseUseCase {
+    return BrowseInteractor(repository: resolve())
   }
 
-  func resolve() -> GetMangaSearchUseCase {
-    return GetMangaSearchInteractor(repository: resolve())
+  func resolve() -> SearchUseCase {
+    return SearchInteractor(repository: resolve())
   }
 
-  func resolve() -> GetMangaTrendingUseCase {
-    return GetMangaTrendingInteractor(repository: resolve())
+  func resolve() -> DetailUseCase {
+    return DetailInteractor(repository: resolve())
   }
 
-  func resolve() -> GetMangaDetailUseCase {
-    return GetMangaDetailInteractor(repository: resolve())
-  }
-
-  func resolve() -> GetMangaFavoriteUseCase {
-    return GetMangaFavoriteInteractor(repository: resolve())
+  func resolve() -> MyMangaUseCase {
+    return MyMangaInteractor(repository: resolve())
   }
 
 
   // MARK: data
   func resolve() -> MangaRepository {
-    return DefaultMangaRepository(remoteDataSource: resolve(), localDataSource: resolve())
+    return DefaultMangaRepository(mangaRemoteDataSource: resolve(), mangaLocalDataSource: resolve())
   }
 
-  func resolve() -> RemoteDataSource {
-    let json = CoreKt.createJson()
-    return RemoteDataSource(ktor: CoreKt.createKtorClient(json: json))
+  func resolve() -> MangaRemoteDataSource {
+    return DefaultMangaRemoteDataSource(ktor: CoreModuleKt.createKtorClient(json: CoreModuleKt.createJson()))
   }
 
-  func resolve() -> LocalDataSource {
-    return LocalDataSource(realm: CoreKt.createRealmDatabase())
+  func resolve() -> MangaLocalDataSource {
+    return DefaultMangaLocalDataSource(realm: CoreModuleKt.createRealmDatabase())
   }
 }

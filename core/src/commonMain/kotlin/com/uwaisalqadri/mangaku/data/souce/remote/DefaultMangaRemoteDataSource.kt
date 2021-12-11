@@ -11,21 +11,21 @@ import io.ktor.http.*
 class DefaultMangaRemoteDataSource(private val ktor: HttpClient): MangaRemoteDataSource {
 
     override suspend fun fetchManga(): MangaResponse {
-        return ktor.get(path = Constants.baseUrl + "/manga")
+        return ktor.get(urlString = Constants.baseUrl + "/manga")
     }
 
     override suspend fun fetchTrendingManga(): MangaResponse {
-        return ktor.get(path = Constants.baseUrl + "/trending/manga")
+        return ktor.get(urlString = Constants.baseUrl + "/trending/manga")
     }
 
     override suspend fun fetchSearchManga(query: String): MangaResponse {
-        return ktor.get(path = Constants.baseUrl + "/manga") {
+        return ktor.get(urlString = Constants.baseUrl + "/manga") {
             parameter("filter[text]", query)
         }
     }
 
     override suspend fun fetchDetailManga(id: String): MangaDetailResponse {
-        return ktor.get(path = Constants.baseUrl + "/manga/$id")
+        return ktor.get(urlString = Constants.baseUrl + "/manga/$id")
     }
 
 }

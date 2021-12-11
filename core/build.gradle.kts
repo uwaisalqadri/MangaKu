@@ -11,7 +11,7 @@ plugins {
 }
 
 // CocoaPods requires the podspec to have a version.
-version = "1.0"
+version = "1.2"
 
 android {
     compileSdk = AndroidConfigs.compileSdkVersion
@@ -39,10 +39,10 @@ kotlin {
     android()
 
     cocoapods {
-        summary = "MangaApp"
+        summary = "MangaKu"
         homepage = "https://github.com/uwaisalqadri/MangaKu"
         ios.deploymentTarget = "14.1"
-        frameworkName = "KotlinCore"
+        framework { baseName = "KotlinCore" }
         podfile = project.file("../iosApp/Podfile")
     }
     

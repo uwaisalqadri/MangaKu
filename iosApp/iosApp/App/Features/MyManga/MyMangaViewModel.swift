@@ -19,27 +19,27 @@ class MyMangaViewModel: ObservableObject {
   @Published var isFavorite = false
 //  @Published var favState: FavState
 
-  private let favoriteUseCase: GetMangaFavoriteUseCase
+  private let myMangaUseCase: MyMangaUseCase
   private var cancellables = Set<AnyCancellable>()
   let backgroundQueue = DispatchQueue(label: "com.schedulers.dispatch.mangaku", qos: .background)
 
-  init(favoriteUseCase: GetMangaFavoriteUseCase) {
-    self.favoriteUseCase = favoriteUseCase
+  init(myMangaUseCase: MyMangaUseCase) {
+    self.myMangaUseCase = myMangaUseCase
     fetchFavoriteManga()
   }
 
   func addFavoriteManga(manga: Manga) {
-    favoriteUseCase.add(manga: manga)
+    myMangaUseCase.addManga(manga: manga)
     isFavorite = true
   }
 
   func removeFavoriteManga(mangaId: String) {
-    favoriteUseCase.delete(mangaId: mangaId)
+    myMangaUseCase.deleteManga(mangaId: mangaId)
     isFavorite = false
   }
 
   func checkFavorite(mangaId: String) {
-    createPublisher(for: favoriteUseCase.getByIdNative(mangaId: mangaId))
+    createPublisher(for: myMangaUseCase.getMyMangaByIdNative(mangaId: mangaId))
       .subscribe(on: backgroundQueue)
       .receive(on: DispatchQueue.main)
       .sink { completion in
@@ -58,7 +58,7 @@ class MyMangaViewModel: ObservableObject {
 
   func fetchFavoriteManga() {
     loading = true
-    createPublisher(for: favoriteUseCase.getNative())
+    createPublisher(for: myMangaUseCase.getMyMangaNative())
       .subscribe(on: backgroundQueue)
       .receive(on: DispatchQueue.main)
       .sink { completion in

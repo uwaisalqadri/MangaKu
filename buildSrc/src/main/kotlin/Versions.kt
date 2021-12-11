@@ -16,7 +16,7 @@ object Versions {
     const val coroutine = "1.5.2-native-mt"
     const val serialization = "1.3.0"
     const val dateTime = "0.3.1"
-    const val ktor = "1.6.7"
+    const val ktor = "1.6.4"
     const val realm = "0.7.0"
     const val lottie = "4.0.0"
     const val shimmer = "1.0.0"

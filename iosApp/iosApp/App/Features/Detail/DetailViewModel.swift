@@ -17,16 +17,16 @@ class DetailViewModel: ObservableObject {
   @Published var loading = false
   @Published var errorMessage = ""
 
-  private let detailUseCase: GetMangaDetailUseCase
+  private let detailUseCase: DetailUseCase
   private var cancellables = Set<AnyCancellable>()
 
-  init(detailUseCase: GetMangaDetailUseCase) {
+  init(detailUseCase: DetailUseCase) {
     self.detailUseCase = detailUseCase
   }
 
   func fetchManga(mangaId: String) {
     loading = true
-    createPublisher(for: detailUseCase.invokeNative(id: mangaId))
+    createPublisher(for: detailUseCase.getDetailMangaNative(id: mangaId))
       .receive(on: DispatchQueue.main)
       .sink { completion in
         switch completion {

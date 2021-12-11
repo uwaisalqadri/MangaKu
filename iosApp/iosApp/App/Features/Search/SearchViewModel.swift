@@ -18,10 +18,10 @@ class SearchViewModel: ObservableObject {
   @Published var loading = false
   @Published var searchQuery: String = ""
 
-  private let searcUseCase: GetMangaSearchUseCase
+  private let searcUseCase: SearchUseCase
   private var cancellables = Set<AnyCancellable>()
 
-  init(searcUseCase: GetMangaSearchUseCase) {
+  init(searcUseCase: SearchUseCase) {
     self.searcUseCase = searcUseCase
 
     $searchQuery
@@ -45,7 +45,7 @@ class SearchViewModel: ObservableObject {
 
   private func fetchSearchManga(query: String) {
     loading = true
-    createPublisher(for: searcUseCase.invokeNative(query: query))
+    createPublisher(for: searcUseCase.getSearchMangaNative(query: query))
       .receive(on: DispatchQueue.main)
       .sink { completion in
         switch completion {
