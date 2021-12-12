@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.google.accompanist.coil.rememberCoilPainter
 import com.uwaisalqadri.mangaku.android.ui.detail.composables.FavoriteDialog
@@ -33,39 +34,40 @@ import com.uwaisalqadri.mangaku.utils.Extensions
 import com.uwaisalqadri.mangaku.utils.formatDate
 import org.koin.androidx.compose.getViewModel
 
-data class DetailScreen(val mangaId: String): Screen {
+data class DetailScreen(
+    val navigator: Navigator,
+    val mangaId: String
+): Screen {
 
     @Composable
     override fun Content() {
-        DetailContent(mangaId = mangaId)
+        DetailContent()
     }
 
     @Composable
     fun DetailContent(
-        mangaId: String,
         viewModel: DetailViewModel = getViewModel(),
         mangaViewModel: MyMangaViewModel = getViewModel(),
         extension: Extensions = Extensions
     ) {
-        viewModel.getDetailManga(mangaId)
-        mangaViewModel.checkFavorite(mangaId)
-
         val manga by viewModel.detailManga
         val loading by viewModel.loading
         val favState by mangaViewModel.favState.observeAsState()
-        val navigator = LocalNavigator.currentOrThrow
 
         val (isFavorite, setFavorite) = remember { mutableStateOf(false) }
-        val (showDialog, setShowDialog) = remember { mutableStateOf(false) }
+        val (isShowDialog, setShowDialog) = remember { mutableStateOf(false) }
 
         Column(
             modifier = Modifier.verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.Start
         ) {
 
+            viewModel.getDetailManga(mangaId)
+            mangaViewModel.checkFavorite(mangaId)
+
             FavoriteDialog(
                 message = if (isFavorite) "Added to Favorite" else "Removed from Favorite",
-                showDialog = showDialog,
+                isShowDialog = isShowDialog,
                 setShowDialog = setShowDialog,
                 modifier = Modifier.size(134.dp)
             )
@@ -78,7 +80,6 @@ data class DetailScreen(val mangaId: String): Screen {
             ) {
                 BackButton {
                     navigator.pop()
-                    //findNavController().popBackStack()
                 }
 
                 Icon(

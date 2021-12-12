@@ -22,13 +22,13 @@ import com.uwaisalqadri.mangaku.android.ui.theme.MangaTypography
 @Composable
 fun FavoriteDialog(
     message: String,
-    showDialog: Boolean,
+    isShowDialog: Boolean,
     modifier: Modifier = Modifier,
     setShowDialog: (Boolean) -> Unit
 ) {
     val handler = Handler(Looper.getMainLooper())
 
-    if (showDialog) {
+    if (isShowDialog) {
         Dialog(onDismissRequest = {}) {
 
             handler.postDelayed({

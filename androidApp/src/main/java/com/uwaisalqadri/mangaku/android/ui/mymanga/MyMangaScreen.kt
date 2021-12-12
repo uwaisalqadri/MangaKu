@@ -66,7 +66,7 @@ class MyMangaScreen: Screen {
                 state = it
             }
 
-            if (uiState.loading) {
+            if (uiState.isLoading) {
                 Text(
                     text = "Still Empty Here!",
                     style = MangaTypography.overline,
@@ -96,7 +96,9 @@ class MyMangaScreen: Screen {
                         ) {
                             uiState.listManga.forEach {
                                 MyMangaGridItem(manga = it) { manga ->
-                                    navigator.push(DetailScreen(mangaId = manga.id))
+                                    navigator.push(
+                                        DetailScreen(navigator = navigator, mangaId = manga.id)
+                                    )
                                 }
                             }
                         }

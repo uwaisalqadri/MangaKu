@@ -14,7 +14,7 @@ class SearchViewModel(
     private val searchUseCase: SearchUseCase
 ): ViewModel() {
 
-    private val _uiState = MutableStateFlow(UiState(loading = false))
+    private val _uiState = MutableStateFlow(UiState(isLoading = false))
     val uiState: StateFlow<UiState> = _uiState
     val query = mutableStateOf("")
 
@@ -24,7 +24,7 @@ class SearchViewModel(
     }
 
     fun getSearchManga(query: String) = viewModelScope.launch {
-        _uiState.value = UiState(loading = true)
+        _uiState.value = UiState(isLoading = true)
         searchUseCase.getSearchManga(query).collect { result ->
             if (result.isNotEmpty()) _uiState.value = UiState(listManga = result)
         }

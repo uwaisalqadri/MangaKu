@@ -9,9 +9,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.navigator.LocalNavigator
-import cafe.adriel.voyager.navigator.currentOrThrow
-import com.uwaisalqadri.mangaku.android.ui.browse.BrowseScreen
+import cafe.adriel.voyager.navigator.Navigator
 import com.uwaisalqadri.mangaku.android.ui.detail.DetailScreen
 import com.uwaisalqadri.mangaku.android.ui.search.composables.SearchField
 import com.uwaisalqadri.mangaku.android.ui.search.composables.SearchResult
@@ -21,7 +19,7 @@ import com.uwaisalqadri.mangaku.android.ui.theme.composables.ShimmerSearchItem
 import com.uwaisalqadri.mangaku.android.ui.theme.composables.TopBar
 import org.koin.androidx.compose.getViewModel
 
-class SearchScreen: Screen {
+class SearchScreen(val navigator: Navigator): Screen {
 
     @Composable
     override fun Content() {
@@ -34,7 +32,6 @@ class SearchScreen: Screen {
     ) {
         val uiState by viewModel.uiState.collectAsState()
         val query = viewModel.query.value
-        val navigator = LocalNavigator.currentOrThrow
 
         Column(
             modifier = Modifier.verticalScroll(rememberScrollState())
@@ -63,14 +60,14 @@ class SearchScreen: Screen {
             StaggeredVerticalGrid(
                 maxColumnWidth = 150.dp
             ) {
-                if (uiState.loading) {
+                if (uiState.isLoading) {
                     repeat(10) {
                         ShimmerSearchItem()
                     }
                 } else {
                     uiState.listManga.forEach { manga ->
                         SearchResult(manga = manga) {
-                            navigator.push(DetailScreen(mangaId = it))
+                            navigator.push(DetailScreen(navigator = navigator, mangaId = it))
                         }
                     }
                 }

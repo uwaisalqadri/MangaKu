@@ -45,7 +45,7 @@ class BrowseScreen: Screen {
                 name = "Browse",
                 icon = R.drawable.ic_search
             ) {
-                navigator.push(SearchScreen())
+                navigator.push(SearchScreen(navigator = navigator))
             }
 
             Spacer(modifier = Modifier.height(35.dp))
@@ -71,7 +71,7 @@ class BrowseScreen: Screen {
                 modifier = Modifier.padding(start = 20.dp)
             )
 
-            if (uiState.loading) {
+            if (uiState.isLoading) {
                 repeat(10) {
                     ShimmerBrowseItem()
                 }
@@ -83,7 +83,7 @@ class BrowseScreen: Screen {
                         .fillMaxHeight()
                         .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 120.dp)
                 ) { mangaId ->
-                    navigator.push(DetailScreen(mangaId = mangaId))
+                    navigator.push(DetailScreen(navigator = navigator, mangaId = mangaId))
                 }
             }
 

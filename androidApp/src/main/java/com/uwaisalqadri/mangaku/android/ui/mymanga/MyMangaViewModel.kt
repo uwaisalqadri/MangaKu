@@ -17,7 +17,7 @@ class MyMangaViewModel(
     private val myMangaUseCase: MyMangaUseCase
 ): ViewModel() {
 
-    private val _uiState = MutableStateFlow(UiState(loading = true))
+    private val _uiState = MutableStateFlow(UiState(isLoading = true))
     val uiState: StateFlow<UiState> = _uiState
 
     private val _favState = MutableLiveData<FavState>()
