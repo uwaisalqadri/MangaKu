@@ -15,9 +15,8 @@ class MyMangaViewModel: ObservableObject {
 
   @Published var mangas = [Manga]()
   @Published var errorMessage = ""
-  @Published var loading = false
+  @Published var isLoading = false
   @Published var isFavorite = false
-//  @Published var favState: FavState
 
   private let myMangaUseCase: MyMangaUseCase
   private var cancellables = Set<AnyCancellable>()
@@ -45,7 +44,7 @@ class MyMangaViewModel: ObservableObject {
       .sink { completion in
         switch completion {
         case .finished:
-          self.loading = false
+          self.isLoading = false
         case .failure(let error):
           self.errorMessage = error.localizedDescription
         }
@@ -57,14 +56,14 @@ class MyMangaViewModel: ObservableObject {
   }
 
   func fetchFavoriteManga() {
-    loading = true
+    isLoading = true
     createPublisher(for: myMangaUseCase.getMyMangaNative())
       .subscribe(on: backgroundQueue)
       .receive(on: DispatchQueue.main)
       .sink { completion in
         switch completion {
         case .finished:
-          self.loading = false
+          self.isLoading = false
         case .failure(let error):
           self.errorMessage = error.localizedDescription
         }

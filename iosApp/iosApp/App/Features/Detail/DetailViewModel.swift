@@ -14,7 +14,7 @@ import Combine
 class DetailViewModel: ObservableObject {
 
   @Published var manga: Manga?
-  @Published var loading = false
+  @Published var isLoading = false
   @Published var errorMessage = ""
 
   private let detailUseCase: DetailUseCase
@@ -25,13 +25,13 @@ class DetailViewModel: ObservableObject {
   }
 
   func fetchManga(mangaId: String) {
-    loading = true
+    isLoading = true
     createPublisher(for: detailUseCase.getDetailMangaNative(id: mangaId))
       .receive(on: DispatchQueue.main)
       .sink { completion in
         switch completion {
         case .finished:
-          self.loading = false
+          self.isLoading = false
         case .failure(let error):
           self.errorMessage = error.localizedDescription
         }

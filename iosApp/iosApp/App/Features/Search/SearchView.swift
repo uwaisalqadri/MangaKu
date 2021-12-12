@@ -17,32 +17,15 @@ struct SearchView: View {
     VStack {
       ScrollView(showsIndicators: false) {
 
-        // MARK: Search Bar
-        HStack {
-          Image(systemName: "magnifyingglass")
-            .resizable()
-            .foregroundColor(.init(.darkGray))
-            .frame(width: 20, height: 20)
-            .padding(.leading, 30)
-
-          TextField("Search Manga...", text: $viewModel.searchQuery)
-            .foregroundColor(.init(.darkGray))
-            .font(.custom(.mmedium, size: 16))
-            .frame(height: 40)
-            .autocapitalization(.none)
-            .disableAutocorrection(true)
-            .padding(.leading, 13)
-            .padding(.trailing, 30)
-
-        }.background(Color.init(.systemGray6))
-        .cornerRadius(20)
-        .padding([.horizontal, .top], 30)
+        SearchInputView { query in
+          viewModel.fetchSearchManga(query: query)
+        }
 
         LazyVGrid(columns: [
           GridItem(.adaptive(minimum: 90), spacing: 25, alignment: .center)
         ], alignment: .leading, spacing: 10) {
 
-          if viewModel.loading {
+          if viewModel.isLoading {
             ForEach(0..<12) { _ in
               ShimmerSearchView()
             }

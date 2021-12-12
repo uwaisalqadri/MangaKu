@@ -14,7 +14,7 @@ struct DetailView: View {
 
   @ObservedObject var viewModel: DetailViewModel
   @ObservedObject var mangaViewModel: MyMangaViewModel
-  @State var showDialog = false
+  @State var isShowDialog = false
   let mangaId: String
 
   private let extensions = Extensions()
@@ -24,7 +24,7 @@ struct DetailView: View {
 
       ScrollView(showsIndicators: false) {
 
-        if viewModel.loading || viewModel.manga == nil {
+        if viewModel.isLoading || viewModel.manga == nil {
           ShimmerDetailView()
         } else {
           WebImage(url: URL(string: extensions.getCoverImage(manga: viewModel.manga ?? Manga(attributes: nil, id: "", type: ""))))
@@ -41,7 +41,7 @@ struct DetailView: View {
               .font(.custom(.mbold, size: 25))
               .padding(.top, 15)
 
-            Text("Action, Adventure")
+            Text(viewModel.manga?.attributes?.slug ?? "")
               .foregroundColor(.black)
               .font(.custom(.mmedium, size: 15))
 
@@ -89,7 +89,7 @@ struct DetailView: View {
       mangaViewModel.isFavorite
         ? mangaViewModel.removeFavoriteManga(mangaId: viewModel.manga?.id ?? "")
         : mangaViewModel.addFavoriteManga(manga: viewModel.manga ?? Manga(attributes: nil, id: "", type: ""))
-      showDialog.toggle()
+      isShowDialog.toggle()
     }) {
       Image(systemName: mangaViewModel.isFavorite ? "heart.fill" : "heart")
         .resizable()
@@ -102,7 +102,7 @@ struct DetailView: View {
     }
 
 
-    .customDialog(isShowing: $showDialog) {
+    .customDialog(isShowing: $isShowDialog) {
       VStack(alignment: .center) {
         LottieView(name: "favorite", loopMode: .loop)
           .frame(width: 70, height: 70)
@@ -116,9 +116,9 @@ struct DetailView: View {
 
       }.frame(width: 154, height: 154)
       .onAppear {
-        if showDialog {
+        if isShowDialog {
           DispatchQueue.main.asyncAfter(deadline: .now() + 1.6) {
-            showDialog.toggle()
+            isShowDialog.toggle()
           }
         }
       }

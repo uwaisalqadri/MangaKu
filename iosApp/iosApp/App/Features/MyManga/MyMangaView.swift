@@ -32,7 +32,7 @@ struct MyMangaView: View {
               isSlide = toggle
             }.padding(.bottom, 15)
 
-            if !viewModel.loading, !viewModel.mangas.isEmpty {
+            if !viewModel.isLoading, !viewModel.mangas.isEmpty {
 
               if isSlide {
                 ZStack(alignment: Alignment(horizontal: .center, vertical: .top)) {

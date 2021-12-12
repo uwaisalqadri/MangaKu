@@ -138,7 +138,7 @@ data class DetailScreen(val mangaId: String): Screen {
                 )
 
                 Text(
-                    text = "Action, Adventure, RPG",
+                    text = manga.attributes?.slug ?: "",
                     color = Color.Black,
                     style = MangaTypography.h3,
                     fontSize = 15.sp,

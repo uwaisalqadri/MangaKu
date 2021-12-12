@@ -15,7 +15,7 @@ class BrowseViewModel: ObservableObject {
 
   @Published var mangas = [Manga]()
   @Published var trendingManga = [Manga]()
-  @Published var loading = false
+  @Published var isLoading = false
   @Published var errorMessage = ""
 
   private let browseUseCase: BrowseUseCase
@@ -28,13 +28,13 @@ class BrowseViewModel: ObservableObject {
   }
 
   private func fetchManga() {
-    loading = true
+    isLoading = true
     createPublisher(for: browseUseCase.getMangaNative())
       .receive(on: DispatchQueue.main)
       .sink { completion in
         switch completion {
         case .finished:
-          self.loading = false
+          self.isLoading = false
         case .failure(let error):
           self.errorMessage = error.localizedDescription
         }
@@ -44,13 +44,13 @@ class BrowseViewModel: ObservableObject {
   }
   
   private func fetchTrendingManga() {
-    loading = true
+    isLoading = true
     createPublisher(for: browseUseCase.getTrendingMangaNative())
       .receive(on: DispatchQueue.main)
       .sink { completion in
         switch completion {
         case .finished:
-          self.loading = false
+          self.isLoading = false
         case .failure(let error):
           self.errorMessage = error.localizedDescription
         }

@@ -13,7 +13,7 @@ struct CustomDialogView<DialogContent: View>: ViewModifier {
   let dialogContent: DialogContent
 
   init(isShowing: Binding<Bool>, @ViewBuilder dialogContent: () -> DialogContent) {
-    _isShowing = isShowing
+    self._isShowing = isShowing
     self.dialogContent = dialogContent()
   }
 
@@ -28,7 +28,6 @@ struct CustomDialogView<DialogContent: View>: ViewModifier {
                 .foregroundColor(.white)
                 .shadow(radius: 10)
             )
-
         }.padding(40)
       }
     }
