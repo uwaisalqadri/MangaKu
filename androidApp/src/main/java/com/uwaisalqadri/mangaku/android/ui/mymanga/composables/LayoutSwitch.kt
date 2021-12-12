@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -23,8 +24,11 @@ fun LayoutSwitch(
         horizontalArrangement = Arrangement.Center,
         modifier = modifier
     ) {
+        val activeColor = MaterialTheme.colors.surface
+        val inactiveColor = MaterialTheme.colors.primaryVariant
+
         Card(
-            backgroundColor = if (isSlide) Color.LightGray else Color.White,
+            backgroundColor = if (isSlide) activeColor else inactiveColor,
             shape = RoundedCornerShape(5.dp),
             elevation = 5.dp,
             modifier = Modifier
@@ -39,6 +43,7 @@ fun LayoutSwitch(
             Icon(
                 painter = painterResource(id = R.drawable.ic_slide),
                 contentDescription = null,
+                tint = MaterialTheme.colors.secondary,
                 modifier = Modifier
                     .size(20.dp)
                     .padding(3.dp)
@@ -46,7 +51,7 @@ fun LayoutSwitch(
         }
 
         Card(
-            backgroundColor = if (!isSlide) Color.LightGray else Color.White,
+            backgroundColor = if (!isSlide) activeColor else inactiveColor,
             shape = RoundedCornerShape(5.dp),
             elevation = 5.dp,
             modifier = Modifier
@@ -61,6 +66,7 @@ fun LayoutSwitch(
             Icon(
                 painter = painterResource(id = R.drawable.ic_stack),
                 contentDescription = null,
+                tint = MaterialTheme.colors.secondary,
                 modifier = Modifier
                     .size(20.dp)
                     .padding(10.dp)

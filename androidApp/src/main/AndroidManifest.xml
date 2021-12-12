@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/Theme.MangaKu">
         <activity
             android:name="com.uwaisalqadri.mangaku.android.ui.MainActivity">
             <intent-filter>

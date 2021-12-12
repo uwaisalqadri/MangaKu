@@ -15,6 +15,7 @@ import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
 import com.uwaisalqadri.mangaku.android.ui.browse.BrowseTab
 import com.uwaisalqadri.mangaku.android.ui.mymanga.MyMangaTab
+import com.uwaisalqadri.mangaku.android.ui.theme.MangaTheme
 import com.uwaisalqadri.mangaku.android.ui.theme.composables.MangaBottomNavigation
 
 class MainActivity : ComponentActivity() {
@@ -23,12 +24,14 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            Content()
+            MangaTheme {
+                MainContent()
+            }
         }
     }
 
     @Composable
-    fun Content() {
+    fun MainContent() {
         TabNavigator(tab = BrowseTab) {
             Scaffold(
                 content = {

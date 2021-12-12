@@ -1,11 +1,13 @@
 package com.uwaisalqadri.mangaku.android.ui.mymanga.composables
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBackIos
@@ -39,7 +41,7 @@ fun MyMangaGridItem(
         )
 
         Column(horizontalAlignment = Alignment.End) {
-            Spacer(modifier = Modifier.aspectRatio(1.4f))
+            Spacer(modifier = Modifier.aspectRatio(ratio = 1.4f))
 
             Row(horizontalArrangement = Arrangement.End) {
                 Card(
@@ -49,10 +51,14 @@ fun MyMangaGridItem(
                         .size(117.dp, 107.dp)
                         .clickable { onClick(manga) }
                 ) {
-                    Column(modifier = Modifier.padding(10.dp)) {
+                    Column(
+                        modifier = Modifier
+                            .background(color = MaterialTheme.colors.primaryVariant)
+                            .padding(10.dp)
+                    ) {
                         Text(
                             text = extension.getTitle(manga),
-                            color = Color.Black,
+                            color = MaterialTheme.colors.secondary,
                             style = MangaTypography.h1,
                             fontSize = 15.sp,
                             maxLines = 2,
@@ -61,7 +67,7 @@ fun MyMangaGridItem(
 
                         Text(
                             text = "Volume ${manga.attributes?.volumeCount}",
-                            color = Color.DarkGray,
+                            color = MaterialTheme.colors.surface,
                             style = MangaTypography.h2,
                             fontSize = 10.sp
                         )
@@ -74,7 +80,7 @@ fun MyMangaGridItem(
                         ) {
                             Text(
                                 text = "Read More",
-                                color = Color.Black,
+                                color = MaterialTheme.colors.secondary,
                                 style = MangaTypography.h1,
                                 fontSize = 10.sp
                             )
@@ -82,7 +88,7 @@ fun MyMangaGridItem(
                             Icon(
                                 imageVector = Icons.Default.ArrowForwardIos,
                                 contentDescription = null,
-                                tint = Color.Black,
+                                tint = MaterialTheme.colors.secondary,
                                 modifier = Modifier.size(15.dp)
                             )
                         }

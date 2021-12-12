@@ -1,8 +1,10 @@
 package com.uwaisalqadri.mangaku.android.ui.mymanga
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -39,7 +41,9 @@ class MyMangaScreen: Screen {
         val navigator = LocalNavigator.currentOrThrow
 
         Column(
-            modifier = Modifier.verticalScroll(rememberScrollState())
+            modifier = Modifier
+                .verticalScroll(rememberScrollState())
+                .background(color = MaterialTheme.colors.primary)
         ) {
 
             viewModel.getMyManga()
@@ -53,7 +57,8 @@ class MyMangaScreen: Screen {
                 Text(
                     text = "My Manga",
                     style = MangaTypography.h1,
-                    fontSize = 25.sp
+                    fontSize = 25.sp,
+                    color = MaterialTheme.colors.secondary
                 )
             }
 
@@ -71,7 +76,7 @@ class MyMangaScreen: Screen {
                     text = "Still Empty Here!",
                     style = MangaTypography.overline,
                     fontSize = 60.sp,
-                    color = Color.Black,
+                    color = MaterialTheme.colors.secondary,
                     textAlign = TextAlign.Center,
                     modifier = Modifier
                         .fillMaxSize()
@@ -103,10 +108,12 @@ class MyMangaScreen: Screen {
                             }
                         }
                         
-                        Spacer(modifier = Modifier.height(200.dp))
+                        Spacer(modifier = Modifier
+                            .background(color = MaterialTheme.colors.primary)
+                            .height(200.dp)
+                        )
                     }
                 }
-
 
             }
         }

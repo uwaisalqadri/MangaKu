@@ -4,6 +4,7 @@ import androidx.annotation.DrawableRes
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -30,16 +31,18 @@ fun TopBar(
         Text(
             text = name,
             style = MangaTypography.h1,
+            color = MaterialTheme.colors.secondary,
             fontSize = 25.sp
         )
 
-        Spacer(modifier = if (icon != null) Modifier.width(100.dp) else Modifier.width(200.dp))
+        Spacer(modifier = Modifier.width(if (icon != null) 100.dp else 200.dp))
 
         if (icon != null) {
             Icon(
                 painter = painterResource(id = icon),
+                tint = MaterialTheme.colors.secondary,
                 contentDescription = null,
-                Modifier.clickable {
+                modifier = Modifier.clickable {
                     if (onIconClick != null) onIconClick()
                 }
             )

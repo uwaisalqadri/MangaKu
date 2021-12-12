@@ -64,6 +64,7 @@ fun Manga(
                 fontSize = 18.sp,
                 style = MangaTypography.h1,
                 maxLines = 2,
+                color = MaterialTheme.colors.secondary,
                 overflow = TextOverflow.Ellipsis
             )
 
@@ -76,7 +77,7 @@ fun Manga(
                 Text(
                     text = formatDate(manga.attributes?.startDate ?: "", Constants.casualDateFormat),
                     fontSize = 12.sp,
-                    color = Color.Gray,
+                    color = MaterialTheme.colors.surface,
                     style = MangaTypography.h1
                 )
 
@@ -84,6 +85,7 @@ fun Manga(
                     text = "Vol.${manga.attributes?.volumeCount}",
                     fontSize = 15.sp,
                     style = MangaTypography.h1,
+                    color = MaterialTheme.colors.secondary,
                     modifier = Modifier
                         .padding(start = 7.dp)
                 )

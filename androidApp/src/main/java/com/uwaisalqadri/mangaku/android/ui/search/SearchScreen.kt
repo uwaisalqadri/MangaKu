@@ -1,8 +1,10 @@
 package com.uwaisalqadri.mangaku.android.ui.search
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -34,7 +36,9 @@ class SearchScreen(val navigator: Navigator): Screen {
         val query = viewModel.query.value
 
         Column(
-            modifier = Modifier.verticalScroll(rememberScrollState())
+            modifier = Modifier
+                .verticalScroll(rememberScrollState())
+                .background(color = MaterialTheme.colors.primary)
         ) {
 
             BackButton(
@@ -73,7 +77,10 @@ class SearchScreen(val navigator: Navigator): Screen {
                 }
             }
 
-            Spacer(modifier = Modifier.height(200.dp))
+            Spacer(modifier = Modifier
+                .background(color = MaterialTheme.colors.primary)
+                .height(200.dp)
+            )
 
         }
     }

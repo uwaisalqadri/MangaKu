@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
@@ -23,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.uwaisalqadri.mangaku.android.R
 import com.uwaisalqadri.mangaku.android.ui.theme.MangaTypography
+import com.uwaisalqadri.mangaku.android.ui.theme.Montserrat
 
 @Composable
 fun SearchField(
@@ -43,7 +45,7 @@ fun SearchField(
         Text(
             text = if (query.isEmpty()) text else "",
             style = MangaTypography.h3,
-            color = Color.DarkGray,
+            color = MaterialTheme.colors.secondary,
             modifier = Modifier
                 .fillMaxSize()
                 .clickable { text = "" }
@@ -57,14 +59,14 @@ fun SearchField(
 
         Row(
             modifier = Modifier
-                .background(Color.LightGray.copy(alpha = 0.3f))
+                .background(MaterialTheme.colors.surface.copy(alpha = 0.3f))
         ) {
             Spacer(modifier = Modifier.width(10.dp))
 
             Icon(
                 painter = painterResource(id = R.drawable.ic_search),
                 contentDescription = null,
-                tint = Color.DarkGray,
+                tint = MaterialTheme.colors.secondary,
                 modifier = Modifier
                     .size(40.dp)
                     .padding(start = 10.dp, top = 5.dp)
@@ -72,7 +74,13 @@ fun SearchField(
 
             BasicTextField(
                 value = query,
-                textStyle = MangaTypography.h3,
+                textStyle = TextStyle(
+                    color = MaterialTheme.colors.secondary,
+                    fontFamily = Montserrat,
+                    fontWeight = FontWeight.Medium,
+                    fontSize = 15.sp
+                ),
+
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Text,
                     capitalization = KeyboardCapitalization.None,

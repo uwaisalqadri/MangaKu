@@ -4,6 +4,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBackIos
@@ -26,14 +27,14 @@ fun BackButton(
         Icon(
             imageVector = Icons.Default.ArrowBackIos,
             contentDescription = "Back",
-            tint = Color.Black,
+            tint = MaterialTheme.colors.secondary,
             modifier = Modifier
                 .size(18.dp)
         )
 
         Text(
             text = "Back",
-            color = Color.Black,
+            color = MaterialTheme.colors.secondary,
             style = MangaTypography.h3,
             fontSize = 14.sp
         )

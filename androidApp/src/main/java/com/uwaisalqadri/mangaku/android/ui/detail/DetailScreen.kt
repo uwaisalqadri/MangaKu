@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
@@ -58,8 +59,10 @@ data class DetailScreen(
         val (isShowDialog, setShowDialog) = remember { mutableStateOf(false) }
 
         Column(
-            modifier = Modifier.verticalScroll(rememberScrollState()),
-            horizontalAlignment = Alignment.Start
+            horizontalAlignment = Alignment.Start,
+            modifier = Modifier
+                .verticalScroll(rememberScrollState())
+                .background(color = MaterialTheme.colors.primary)
         ) {
 
             viewModel.getDetailManga(mangaId)
@@ -130,7 +133,7 @@ data class DetailScreen(
 
                 Text(
                     text = extension.getTitle(manga),
-                    color = Color.Black,
+                    color = MaterialTheme.colors.secondary,
                     style = MangaTypography.h1,
                     fontSize = 23.sp,
                     modifier = Modifier
@@ -140,7 +143,7 @@ data class DetailScreen(
 
                 Text(
                     text = manga.attributes?.slug ?: "",
-                    color = Color.Black,
+                    color = MaterialTheme.colors.secondary,
                     style = MangaTypography.h3,
                     fontSize = 15.sp,
                     modifier = Modifier
@@ -180,7 +183,7 @@ data class DetailScreen(
 
                         Text(
                             text = (manga.attributes?.averageRating ?: 0.0).toString(),
-                            color = Color.Black,
+                            color = MaterialTheme.colors.secondary,
                             style = MangaTypography.h2,
                             fontSize = 13.sp
                         )
@@ -191,7 +194,7 @@ data class DetailScreen(
 
                 Text(
                     text = "Description",
-                    color = Color.Black,
+                    color = MaterialTheme.colors.secondary,
                     style = MangaTypography.h2,
                     fontSize = 21.sp,
                     modifier = Modifier.padding(horizontal = 30.dp)
@@ -199,7 +202,7 @@ data class DetailScreen(
 
                 Text(
                     text = manga.attributes?.synopsis ?: "",
-                    color = Color.Black,
+                    color = MaterialTheme.colors.secondary,
                     style = MangaTypography.h3,
                     fontSize = 15.sp,
                     modifier = Modifier.padding(top = 15.dp, start = 30.dp, end = 30.dp)
