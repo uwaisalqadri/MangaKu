@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
@@ -38,6 +39,7 @@ fun FavoriteDialog(
             Card(
                 shape = RoundedCornerShape(10.dp),
                 elevation = 8.dp,
+                backgroundColor = MaterialTheme.colors.primaryVariant,
                 modifier = modifier
             ) {
                 Column(
@@ -55,7 +57,7 @@ fun FavoriteDialog(
 
                     Text(
                         text = message,
-                        color = Color.Black,
+                        color = MaterialTheme.colors.secondary,
                         style = MangaTypography.h1,
                         fontSize = 18.sp,
                         textAlign = TextAlign.Center,

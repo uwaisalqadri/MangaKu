@@ -51,6 +51,9 @@ data class DetailScreen(
         mangaViewModel: MyMangaViewModel = getViewModel(),
         extension: Extensions = Extensions
     ) {
+        viewModel.getDetailManga(mangaId)
+        mangaViewModel.checkFavorite(mangaId)
+
         val manga by viewModel.detailManga
         val loading by viewModel.loading
         val favState by mangaViewModel.favState.observeAsState()
@@ -64,10 +67,6 @@ data class DetailScreen(
                 .verticalScroll(rememberScrollState())
                 .background(color = MaterialTheme.colors.primary)
         ) {
-
-            viewModel.getDetailManga(mangaId)
-            mangaViewModel.checkFavorite(mangaId)
-
             FavoriteDialog(
                 message = if (isFavorite) "Added to Favorite" else "Removed from Favorite",
                 isShowDialog = isShowDialog,
