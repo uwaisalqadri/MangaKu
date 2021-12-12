@@ -71,6 +71,7 @@ A few things you can do with MangaKu:
 * [Jetpack Compose](https://developer.android.com/jetpack/compose)
 * [Accompanist](https://github.com/google/accompanist)
 * [Koin](https://github.com/InsertKoinIO/koin)
+* [Voyager](https://github.com/adrielcafe/voyager)
 * Some Kotlinx & Jetpack Components
 
 ## <a name="domain-to-presentation"></a> 💨 Domain to Presentation
