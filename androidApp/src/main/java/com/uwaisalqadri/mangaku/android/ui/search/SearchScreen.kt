@@ -1,9 +1,5 @@
 package com.uwaisalqadri.mangaku.android.ui.search
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -11,41 +7,34 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.unit.dp
-import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-import com.uwaisalqadri.mangaku.android.R
-import com.uwaisalqadri.mangaku.android.ui.composables.BackButton
-import com.uwaisalqadri.mangaku.android.ui.composables.ShimmerSearchItem
-import com.uwaisalqadri.mangaku.android.ui.composables.TopBar
-import com.uwaisalqadri.mangaku.android.ui.detail.DetailFragment
+import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
+import com.uwaisalqadri.mangaku.android.ui.browse.BrowseScreen
+import com.uwaisalqadri.mangaku.android.ui.detail.DetailScreen
 import com.uwaisalqadri.mangaku.android.ui.search.composables.SearchField
 import com.uwaisalqadri.mangaku.android.ui.search.composables.SearchResult
 import com.uwaisalqadri.mangaku.android.ui.search.composables.StaggeredVerticalGrid
-import com.uwaisalqadri.mangaku.android.ui.theme.MangaTheme
+import com.uwaisalqadri.mangaku.android.ui.theme.composables.BackButton
+import com.uwaisalqadri.mangaku.android.ui.theme.composables.ShimmerSearchItem
+import com.uwaisalqadri.mangaku.android.ui.theme.composables.TopBar
 import org.koin.androidx.compose.getViewModel
 
-class SearchFragment: Fragment() {
+class SearchScreen: Screen {
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        return ComposeView(requireContext()).apply {
-            setContent {
-                SearchScreen()
-            }
-        }
+    @Composable
+    override fun Content() {
+        SearchContent()
     }
 
     @Composable
-    fun SearchScreen(
+    fun SearchContent(
         viewModel: SearchViewModel = getViewModel()
     ) {
         val uiState by viewModel.uiState.collectAsState()
         val query = viewModel.query.value
+        val navigator = LocalNavigator.currentOrThrow
 
         Column(
             modifier = Modifier.verticalScroll(rememberScrollState())
@@ -54,7 +43,7 @@ class SearchFragment: Fragment() {
             BackButton(
                 modifier = Modifier.padding(start = 25.dp, top = 25.dp)
             ) {
-                findNavController().popBackStack(R.id.navigation_browse, false)
+                navigator.pop()
             }
 
             Spacer(modifier = Modifier.padding(top = 20.dp))
@@ -81,8 +70,7 @@ class SearchFragment: Fragment() {
                 } else {
                     uiState.listManga.forEach { manga ->
                         SearchResult(manga = manga) {
-                            val bundle = Bundle().apply { putString(DetailFragment.DETAIL, it) }
-                            findNavController().navigate(R.id.action_searchFragment_to_detailFragment, bundle)
+                            navigator.push(DetailScreen(mangaId = it))
                         }
                     }
                 }

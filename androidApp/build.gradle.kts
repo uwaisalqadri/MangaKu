@@ -13,6 +13,7 @@ android {
         versionCode = 1
         versionName = "1.0"
         multiDexEnabled = true
+        vectorDrawables.useSupportLibrary = true
     }
 
     buildTypes {
@@ -85,5 +86,12 @@ dependencies {
 
         implementation(accompanistCoil)
         implementation(accompanistPager)
+
+        implementation(voyagerNavigator)
+        implementation(voyagerTabNavigator)
+        implementation(voyagerTransitions)
+        implementation(voyagerAndroidx)
+        implementation(voyagerLivedata)
+        implementation(voyagerKoin)
     }
 }

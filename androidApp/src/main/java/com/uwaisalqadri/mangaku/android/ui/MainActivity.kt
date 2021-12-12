@@ -1,24 +1,60 @@
 package com.uwaisalqadri.mangaku.android.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.navigation.findNavController
-import androidx.navigation.ui.setupWithNavController
-import com.uwaisalqadri.mangaku.android.R
-import com.uwaisalqadri.mangaku.android.databinding.ActivityMainBinding
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.RowScope
+import androidx.compose.material.BottomNavigation
+import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.Icon
+import androidx.compose.material.Scaffold
+import androidx.compose.runtime.Composable
+import cafe.adriel.voyager.navigator.tab.CurrentTab
+import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
+import cafe.adriel.voyager.navigator.tab.Tab
+import cafe.adriel.voyager.navigator.tab.TabNavigator
+import com.uwaisalqadri.mangaku.android.ui.browse.BrowseTab
+import com.uwaisalqadri.mangaku.android.ui.mymanga.MyMangaTab
+import com.uwaisalqadri.mangaku.android.ui.theme.composables.MangaBottomNavigation
 
-class MainActivity : AppCompatActivity() {
-
-    private lateinit var binding: ActivityMainBinding
+class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        supportActionBar?.hide()
 
-        binding.apply {
-            navView.setupWithNavController(findNavController(R.id.nav_host_fragment))
+        setContent {
+            Content()
         }
     }
+
+    @Composable
+    fun Content() {
+        TabNavigator(tab = BrowseTab) {
+            Scaffold(
+                content = {
+                    CurrentTab()
+                },
+
+                bottomBar = {
+                    MangaBottomNavigation {
+                        TabNavigationItem(tab = BrowseTab)
+                        TabNavigationItem(tab = MyMangaTab)
+                    }
+                }
+            )
+        }
+    }
+
+
+    @Composable
+    private fun RowScope.TabNavigationItem(tab: Tab) {
+        val tabNavigator = LocalTabNavigator.current
+
+        BottomNavigationItem(
+            selected = tabNavigator.current.key == tab.key,
+            onClick = { tabNavigator.current = tab },
+            icon = { tab.options.icon?.let { Icon(painter = it, contentDescription = tab.options.title) } }
+        )
+    }
+
 }

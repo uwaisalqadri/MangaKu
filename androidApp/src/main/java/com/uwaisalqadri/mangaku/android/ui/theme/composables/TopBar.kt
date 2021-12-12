@@ -1,4 +1,4 @@
-package com.uwaisalqadri.mangaku.android.ui.composables
+package com.uwaisalqadri.mangaku.android.ui.theme.composables
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.clickable

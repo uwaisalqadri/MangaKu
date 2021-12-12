@@ -1,9 +1,5 @@
 package com.uwaisalqadri.mangaku.android.ui.detail
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -20,45 +16,32 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
+import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
 import com.google.accompanist.coil.rememberCoilPainter
-import com.uwaisalqadri.mangaku.android.ui.composables.BackButton
-import com.uwaisalqadri.mangaku.android.ui.composables.ShimmerDetail
-import com.uwaisalqadri.mangaku.android.ui.composables.TopBar
 import com.uwaisalqadri.mangaku.android.ui.detail.composables.FavoriteDialog
 import com.uwaisalqadri.mangaku.android.ui.mymanga.MyMangaViewModel
-import com.uwaisalqadri.mangaku.android.ui.theme.MangaTheme
 import com.uwaisalqadri.mangaku.android.ui.theme.MangaTypography
+import com.uwaisalqadri.mangaku.android.ui.theme.composables.BackButton
+import com.uwaisalqadri.mangaku.android.ui.theme.composables.ShimmerDetail
+import com.uwaisalqadri.mangaku.android.ui.theme.composables.TopBar
 import com.uwaisalqadri.mangaku.utils.Constants
 import com.uwaisalqadri.mangaku.utils.Extensions
 import com.uwaisalqadri.mangaku.utils.formatDate
 import org.koin.androidx.compose.getViewModel
 
-class DetailFragment: Fragment() {
+data class DetailScreen(val mangaId: String): Screen {
 
-    companion object {
-        const val DETAIL = "detail"
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        return ComposeView(requireContext()).apply {
-            setContent {
-                val mangaId = arguments?.getString(DETAIL)
-                DetailScreen(mangaId = mangaId ?: "")
-            }
-        }
+    @Composable
+    override fun Content() {
+        DetailContent(mangaId = mangaId)
     }
 
     @Composable
-    fun DetailScreen(
+    fun DetailContent(
         mangaId: String,
         viewModel: DetailViewModel = getViewModel(),
         mangaViewModel: MyMangaViewModel = getViewModel(),
@@ -70,6 +53,7 @@ class DetailFragment: Fragment() {
         val manga by viewModel.detailManga
         val loading by viewModel.loading
         val favState by mangaViewModel.favState.observeAsState()
+        val navigator = LocalNavigator.currentOrThrow
 
         val (isFavorite, setFavorite) = remember { mutableStateOf(false) }
         val (showDialog, setShowDialog) = remember { mutableStateOf(false) }
@@ -93,7 +77,8 @@ class DetailFragment: Fragment() {
                     .padding(start = 25.dp, top = 25.dp, end = 25.dp)
             ) {
                 BackButton {
-                    findNavController().popBackStack()
+                    navigator.pop()
+                    //findNavController().popBackStack()
                 }
 
                 Icon(

@@ -21,7 +21,6 @@ object Dependencies {
     const val composeMaterialIcon = "androidx.compose.material:material-icons-extended:${Versions.compose}"
     const val composeLiveData = "androidx.compose.runtime:runtime-livedata:${Versions.compose}"
 
-
     const val composeActivity = "androidx.activity:activity-compose:${Versions.activityCompose}"
     const val composeNavigation = "androidx.navigation:navigation-compose:${Versions.navCompose}"
     const val composeLottie = "com.airbnb.android:lottie-compose:${Versions.lottie}"
@@ -29,6 +28,13 @@ object Dependencies {
 
     const val accompanistCoil = "com.google.accompanist:accompanist-coil:${Versions.coilAccompanist}"
     const val accompanistPager = "com.google.accompanist:accompanist-pager:${Versions.pagerAccompanist}"
+
+    const val voyagerNavigator = "cafe.adriel.voyager:voyager-navigator:${Versions.voyager}"
+    const val voyagerTabNavigator = "cafe.adriel.voyager:voyager-tab-navigator:${Versions.voyager}"
+    const val voyagerTransitions = "cafe.adriel.voyager:voyager-transitions:${Versions.voyager}"
+    const val voyagerAndroidx = "cafe.adriel.voyager:voyager-androidx:${Versions.voyager}"
+    const val voyagerKoin = "cafe.adriel.voyager:voyager-koin:${Versions.voyager}"
+    const val voyagerLivedata = "cafe.adriel.voyager:voyager-livedata:${Versions.voyager}"
 
     const val koinCore = "io.insert-koin:koin-core:${Versions.koin}"
     const val koinTest = "io.insert-koin:koin-test:${Versions.koin}"
