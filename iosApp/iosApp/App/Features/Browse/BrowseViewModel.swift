@@ -24,6 +24,8 @@ class BrowseViewModel: ObservableObject {
 
   init(browseUseCase: BrowseUseCase) {
     self.browseUseCase = browseUseCase
+
+    fetchTrendingManga()
   }
 
 //  func fetchManga() {

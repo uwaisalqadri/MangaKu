@@ -71,9 +71,6 @@ struct BrowseView: View {
             .frame(width: 20, height: 20)
         }
       )
-      .onAppear {
-        viewModel.fetchTrendingManga()
-      }
     }
   }
 }

@@ -19,7 +19,7 @@ protocol KotlinCoreAssembler {
 
   // data
   func resolve() -> MangaRepository
-  func resolve() -> MangaRemoteDataSource
+  func resolve() -> MangaApiClient
   func resolve() -> MangaLocalDataSource
 }
 
@@ -45,11 +45,11 @@ extension KotlinCoreAssembler where Self: Assembler {
 
   // MARK: data
   func resolve() -> MangaRepository {
-    return DefaultMangaRepository(mangaRemoteDataSource: resolve(), mangaLocalDataSource: resolve())
+    return MangaDataStore(mangaApiClient: resolve(), mangaLocalDataSource: resolve())
   }
 
-  func resolve() -> MangaRemoteDataSource {
-    return DefaultMangaRemoteDataSource(ktor: CoreModuleKt.createKtorClient(json: CoreModuleKt.createJson()))
+  func resolve() -> MangaApiClient {
+    return MangaApi(ktor: CoreModuleKt.createKtorClient(json: CoreModuleKt.createJson()))
   }
 
   func resolve() -> MangaLocalDataSource {

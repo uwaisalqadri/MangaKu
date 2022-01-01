@@ -2,34 +2,32 @@ package com.uwaisalqadri.mangaku.data.repository
 
 import com.uwaisalqadri.mangaku.data.souce.local.MangaLocalDataSource
 import com.uwaisalqadri.mangaku.data.souce.local.entity.MangaObject
-import com.uwaisalqadri.mangaku.data.souce.remote.MangaRemoteDataSource
-import com.uwaisalqadri.mangaku.data.souce.remote.response.MangaDetailResponse
+import com.uwaisalqadri.mangaku.data.souce.remote.MangaApiClient
 import com.uwaisalqadri.mangaku.data.souce.remote.response.MangaItem
-import com.uwaisalqadri.mangaku.data.souce.remote.response.MangaResponse
 import com.uwaisalqadri.mangaku.domain.repository.MangaRepository
 
-class DefaultMangaRepository(
-    private val mangaRemoteDataSource: MangaRemoteDataSource,
+class MangaDataStore(
+    private val mangaApiClient: MangaApiClient,
     private val mangaLocalDataSource: MangaLocalDataSource
 ): MangaRepository {
 
     override suspend fun getManga(): List<MangaItem> {
-        val response = mangaRemoteDataSource.fetchManga()
+        val response = mangaApiClient.fetchManga()
         return response.data
     }
 
     override suspend fun getTrendingManga(): List<MangaItem> {
-        val response = mangaRemoteDataSource.fetchTrendingManga()
+        val response = mangaApiClient.fetchTrendingManga()
         return response.data
     }
 
     override suspend fun getSearchManga(query: String): List<MangaItem> {
-        val response = mangaRemoteDataSource.fetchSearchManga(query = query)
+        val response = mangaApiClient.fetchSearchManga(query = query)
         return response.data
     }
 
     override suspend fun getDetailManga(mangaId: String): MangaItem? {
-        val response = mangaRemoteDataSource.fetchDetailManga(id = mangaId)
+        val response = mangaApiClient.fetchDetailManga(id = mangaId)
         return response.data
     }
 

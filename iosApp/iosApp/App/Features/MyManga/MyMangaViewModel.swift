@@ -24,7 +24,6 @@ class MyMangaViewModel: ObservableObject {
 
   init(myMangaUseCase: MyMangaUseCase) {
     self.myMangaUseCase = myMangaUseCase
-    fetchFavoriteManga()
   }
 
   func addFavoriteManga(manga: Manga) {
