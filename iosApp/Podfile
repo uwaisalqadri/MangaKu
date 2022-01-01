@@ -5,4 +5,5 @@ target 'iosApp' do
   pod 'KMPNativeCoroutinesCombine'  # Combine implementation
   pod 'SDWebImageSwiftUI'
   pod 'lottie-ios'
+  pod 'KMPNativeCoroutinesAsync' 
 end

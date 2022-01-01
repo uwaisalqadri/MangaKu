@@ -11,9 +11,12 @@ import KotlinCore
 
 @main
 struct MangaKuApp: App {
+
+  private let assembler = AppAssembler()
+
   var body: some Scene {
     WindowGroup {
-      TabNavigationView()
+      TabNavigationView(assembler: assembler)
         .onAppear {
           CoreModuleKt.doInitKoin()
         }

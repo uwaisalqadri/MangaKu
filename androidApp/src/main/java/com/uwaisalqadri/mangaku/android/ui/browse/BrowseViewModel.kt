@@ -22,7 +22,7 @@ class BrowseViewModel(
 
     private fun getTrendingManga() = viewModelScope.launch {
         _uiState.value = UiState(isLoading = true)
-        browseUseCase.getTrendingManga().collect { result ->
+        browseUseCase.getManga().collect { result ->
             if (result.isNotEmpty()) _uiState.value = UiState(listManga = result)
         }
     }

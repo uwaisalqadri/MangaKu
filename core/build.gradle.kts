@@ -3,10 +3,10 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
-    kotlin("plugin.serialization") version "1.5.31"
+    kotlin("plugin.serialization")
     id("com.android.library")
     id("io.realm.kotlin") version Versions.realm
-    id("com.rickclephas.kmp.nativecoroutines") version "0.6.0"
+    id("com.rickclephas.kmp.nativecoroutines")
     id("koin")
 }
 

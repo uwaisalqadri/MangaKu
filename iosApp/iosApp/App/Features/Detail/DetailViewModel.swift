@@ -26,14 +26,15 @@ class DetailViewModel: ObservableObject {
 
   func fetchManga(mangaId: String) {
     isLoading = true
-    createPublisher(for: detailUseCase.getDetailMangaNative(id: mangaId))
+    createPublisher(for: detailUseCase.getDetailMangaNative(mangaId: mangaId))
       .receive(on: DispatchQueue.main)
       .sink { completion in
         switch completion {
         case .finished:
           self.isLoading = false
         case .failure(let error):
-          self.errorMessage = error.localizedDescription
+          guard let apiError = error.apiError else { return }
+          self.errorMessage = apiError.errorMessage
         }
       } receiveValue: { value in
         self.manga = value

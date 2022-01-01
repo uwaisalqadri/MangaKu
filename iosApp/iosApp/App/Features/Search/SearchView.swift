@@ -11,14 +11,16 @@ import SwiftUI
 struct SearchView: View {
 
   @ObservedObject var viewModel: SearchViewModel
-  private let assembler = AppAssembler()
+  let assembler: Assembler
 
   var body: some View {
     VStack {
       ScrollView(showsIndicators: false) {
 
         SearchInputView { query in
-          viewModel.fetchSearchManga(query: query)
+          if !viewModel.isLoading {
+            viewModel.fetchSearchManga(query: query)
+          }
         }
 
         LazyVGrid(columns: [

@@ -10,7 +10,7 @@ import Foundation
 import KotlinCore
 
 protocol FeatureAssembler {
-  func resolve() -> BrowseViewModel
+  @MainActor func resolve() -> BrowseViewModel
   func resolve() -> MyMangaViewModel
   func resolve() -> SearchViewModel
   func resolve() -> DetailViewModel
@@ -18,7 +18,7 @@ protocol FeatureAssembler {
 
 extension FeatureAssembler where Self: Assembler {
 
-  func resolve() -> BrowseViewModel {
+  @MainActor func resolve() -> BrowseViewModel {
     return BrowseViewModel(browseUseCase: resolve())
   }
 

@@ -46,7 +46,8 @@ class MyMangaViewModel: ObservableObject {
         case .finished:
           self.isLoading = false
         case .failure(let error):
-          self.errorMessage = error.localizedDescription
+          guard let apiError = error.apiError else { return }
+          self.errorMessage = apiError.errorMessage
         }
       } receiveValue: { value in
         value.forEach { item in
@@ -65,7 +66,8 @@ class MyMangaViewModel: ObservableObject {
         case .finished:
           self.isLoading = false
         case .failure(let error):
-          self.errorMessage = error.localizedDescription
+          guard let apiError = error.apiError else { return }
+          self.errorMessage = apiError.errorMessage
         }
       } receiveValue: { value in
         self.mangas = value

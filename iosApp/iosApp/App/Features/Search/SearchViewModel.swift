@@ -16,7 +16,6 @@ class SearchViewModel: ObservableObject {
   @Published var mangas = [Manga]()
   @Published var errorMessage = ""
   @Published var isLoading = false
-  @Published var searchQuery: String = ""
 
   private let searcUseCase: SearchUseCase
   private var cancellables = Set<AnyCancellable>()
@@ -34,7 +33,8 @@ class SearchViewModel: ObservableObject {
         case .finished:
           self.isLoading = false
         case .failure(let error):
-          self.errorMessage = error.localizedDescription
+          guard let apiError = error.apiError else { return }
+          self.errorMessage = apiError.errorMessage
         }
       } receiveValue: { value in
         self.mangas = value

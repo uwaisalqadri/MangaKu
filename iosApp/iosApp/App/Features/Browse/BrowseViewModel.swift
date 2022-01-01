@@ -10,7 +10,9 @@ import Foundation
 import KotlinCore
 import Combine
 import KMPNativeCoroutinesCombine
+import KMPNativeCoroutinesAsync
 
+@MainActor
 class BrowseViewModel: ObservableObject {
 
   @Published var mangas = [Manga]()
@@ -23,29 +25,27 @@ class BrowseViewModel: ObservableObject {
 
   init(browseUseCase: BrowseUseCase) {
     self.browseUseCase = browseUseCase
-    fetchManga()
-    fetchTrendingManga()
   }
 
-  private func fetchManga() {
-    isLoading = true
-    createPublisher(for: browseUseCase.getMangaNative())
-      .receive(on: DispatchQueue.main)
-      .sink { completion in
-        switch completion {
-        case .finished:
-          self.isLoading = false
-        case .failure(let error):
-          self.errorMessage = error.localizedDescription
+  func fetchManga() {
+    Task {
+      do {
+        isLoading = true
+        let stream = asyncStream(for: browseUseCase.getMangaNative())
+        for try await data in stream {
+          // mangas = data
+          isLoading = false
         }
-      } receiveValue: { value in
-        self.mangas = value
-      }.store(in: &cancellables)
+      } catch {
+        errorMessage = error.localizedDescription
+        isLoading = false
+      }
+    }
   }
   
-  private func fetchTrendingManga() {
+  func fetchTrendingManga() {
     isLoading = true
-    createPublisher(for: browseUseCase.getTrendingMangaNative())
+    createPublisher(for: browseUseCase.getMangaNative())
       .receive(on: DispatchQueue.main)
       .sink { completion in
         switch completion {

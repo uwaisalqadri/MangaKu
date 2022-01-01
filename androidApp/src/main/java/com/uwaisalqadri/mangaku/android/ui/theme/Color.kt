@@ -1,6 +1,7 @@
 package com.uwaisalqadri.mangaku.android.ui.theme
 
 import androidx.compose.material.darkColors
+import androidx.compose.material.lightColors
 import androidx.compose.ui.graphics.Color
 
 val MangaDarkColors = darkColors(
@@ -12,7 +13,7 @@ val MangaDarkColors = darkColors(
     background = Color.DarkGray
 )
 
-val MangaLightColors = darkColors(
+val MangaLightColors = lightColors(
     primary = Color.White,
     primaryVariant = Color.White,
     secondary = Color.Black,

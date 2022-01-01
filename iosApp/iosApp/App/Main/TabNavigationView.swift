@@ -12,15 +12,15 @@ import KotlinCore
 struct TabNavigationView: View {
 
   @State var selectedIndex = 0
-  private let assembler = AppAssembler()
+  let assembler: Assembler
 
   var body: some View {
     ZStack {
       switch selectedIndex {
       case 1:
-        MyMangaView(viewModel: assembler.resolve())
+        MyMangaView(viewModel: assembler.resolve(), assembler: assembler)
       default:
-        BrowseView(viewModel: assembler.resolve())
+        BrowseView(viewModel: assembler.resolve(), assembler: assembler)
           .animation(.none)
       }
 

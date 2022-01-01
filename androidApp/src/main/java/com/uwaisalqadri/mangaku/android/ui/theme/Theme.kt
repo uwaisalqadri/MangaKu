@@ -10,7 +10,7 @@ fun MangaTheme(
     content: @Composable () -> Unit
 ) {
     MaterialTheme(
-        colors = if (darkTheme) MangaDarkColors else MangaLightColors,
+        colors = MangaLightColors,
         typography = MangaTypography,
         shapes = MangaShapes,
         content = content

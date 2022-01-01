@@ -4,5 +4,5 @@ import com.uwaisalqadri.mangaku.domain.model.Manga
 import kotlinx.coroutines.flow.Flow
 
 interface DetailUseCase {
-    suspend fun getDetailManga(id: String): Flow<Manga?>
+    suspend fun getDetailManga(mangaId: String): Flow<Manga?>
 }

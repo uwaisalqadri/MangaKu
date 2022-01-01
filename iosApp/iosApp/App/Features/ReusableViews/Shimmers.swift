@@ -11,30 +11,30 @@ import SwiftUI
 struct ShimmerBrowseView: View {
   var body: some View {
     HStack {
-      ShimmerView()
+      ShimmerView(isAnimating: false)
         .frame(width: 124, height: 200)
         .cornerRadius(12)
 
       VStack(alignment: .leading) {
 
-        ShimmerView()
+        ShimmerView(isAnimating: false)
           .frame(height: 30)
           .cornerRadius(12)
           .padding(.top, 5)
 
         HStack {
-          ShimmerView()
+          ShimmerView(isAnimating: false)
             .frame(width: 80, height: 20)
             .cornerRadius(12)
 
-          ShimmerView()
+          ShimmerView(isAnimating: false)
             .frame(width: 60, height: 20)
             .cornerRadius(12)
         }.padding(.top, 5)
 
         Spacer(minLength: 30)
 
-        ShimmerView()
+        ShimmerView(isAnimating: false)
           .frame(width: 100, height: 40)
           .cornerRadius(9)
           .padding(.bottom, 10)

@@ -1,5 +1,6 @@
 package com.uwaisalqadri.mangaku.android.ui.browse.composables
 
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -17,6 +18,7 @@ fun MangaTrending(
 ) {
     Column(
         modifier = modifier
+            .animateContentSize()
     ) {
         trendingManga.forEach { manga ->
             Manga(

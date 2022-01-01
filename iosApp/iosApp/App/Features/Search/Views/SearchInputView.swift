@@ -14,6 +14,8 @@ struct SearchInputView: View {
   @State var query = ""
   var onQueryChange: ((String) -> Void)?
 
+  @FocusState private var isFocused: Bool
+
   var body: some View {
     HStack {
       Image(systemName: "magnifyingglass")
@@ -22,20 +24,34 @@ struct SearchInputView: View {
         .frame(width: 20, height: 20)
         .padding(.leading, 30)
 
-      TextField("Search Manga...", text: $query, onCommit: {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-          onQueryChange?(query)
-        }
-      })
+      TextField("Search Manga...", text: $query)
+      .focused($isFocused)
+      .submitLabel(.done)
       .foregroundColor(.init(.darkGray))
       .font(.custom(.mmedium, size: 16))
       .frame(height: 40)
       .autocapitalization(.none)
       .disableAutocorrection(true)
       .padding(.leading, 13)
-      .padding(.trailing, 30)
+      .padding(.trailing, 20)
       .onChange(of: query) { text in
         onQueryChange?(text)
+      }
+      .onSubmit {
+        isFocused = false
+      }
+
+      if !query.isEmpty {
+        Button(action: {
+          query = ""
+          isFocused = false
+        }, label: {
+          Image(systemName: "xmark.circle.fill")
+            .resizable()
+            .foregroundColor(.init(.darkGray))
+            .frame(width: 20, height: 20)
+            .padding(.trailing, 20)
+        })
       }
 
     }.background(Color.init(.systemGray6))

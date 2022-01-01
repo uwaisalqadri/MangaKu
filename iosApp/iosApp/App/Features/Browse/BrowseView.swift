@@ -11,7 +11,7 @@ import SwiftUI
 struct BrowseView: View {
 
   @ObservedObject var viewModel: BrowseViewModel
-  private let assembler = AppAssembler()
+  let assembler: Assembler
 
   let genres: [Genre] = [
     Genre(name: "Shonen", image: "imgShonen", query: "shonen", font: .sedgwickave),
@@ -64,13 +64,16 @@ struct BrowseView: View {
       }
       .navigationBarTitle("Browse")
       .navigationBarItems(
-        trailing: NavigationLink(destination: SearchView(viewModel: assembler.resolve())) {
+        trailing: NavigationLink(destination: SearchView(viewModel: assembler.resolve(), assembler: assembler)) {
           Image(systemName: "magnifyingglass")
             .resizable()
             .foregroundColor(.black)
             .frame(width: 20, height: 20)
         }
       )
+      .onAppear {
+        viewModel.fetchTrendingManga()
+      }
     }
   }
 }

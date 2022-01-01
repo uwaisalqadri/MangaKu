@@ -14,10 +14,10 @@ import ACarousel
 struct MyMangaView: View {
 
   @ObservedObject var viewModel: MyMangaViewModel
+  let assembler: Assembler
   @State var isSlide = true
 
   private let extensions = Extensions()
-  private let assembler = AppAssembler()
 
   var body: some View {
     GeometryReader { view in

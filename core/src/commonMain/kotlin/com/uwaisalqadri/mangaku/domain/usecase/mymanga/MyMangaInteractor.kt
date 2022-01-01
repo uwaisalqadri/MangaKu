@@ -1,21 +1,28 @@
 package com.uwaisalqadri.mangaku.domain.usecase.mymanga
 
+import com.uwaisalqadri.mangaku.domain.base.BaseInteractor
+import com.uwaisalqadri.mangaku.domain.mapper.map
 import com.uwaisalqadri.mangaku.domain.model.Manga
 import com.uwaisalqadri.mangaku.domain.repository.MangaRepository
 import kotlinx.coroutines.flow.Flow
 
-class MyMangaInteractor(private val repository: MangaRepository): MyMangaUseCase {
+class MyMangaInteractor(private val repository: MangaRepository): MyMangaUseCase, BaseInteractor() {
 
     override suspend fun getMyManga(): Flow<List<Manga>> {
-        return repository.getFavoriteManga()
+        return execute {
+            repository.getFavoriteManga().map()
+        }
     }
 
     override suspend fun getMyMangaById(mangaId: String): Flow<List<Manga>> {
-        return repository.getFavoriteMangaById(mangaId = mangaId)
+        return execute {
+            repository.getFavoriteMangaById(mangaId = mangaId).map()
+        }
     }
 
     override fun addManga(manga: Manga) {
-        repository.addMangaFavorite(manga = manga)
+        val mapper = manga.map()
+        repository.addMangaFavorite(manga = mapper)
     }
 
     override fun deleteManga(mangaId: String) {

@@ -18,6 +18,7 @@ struct ShimmerView: View {
   }
 
   @State private var opacity: Double = Constants.minOpacity
+  var isAnimating: Bool = true
 
   var body: some View {
     RoundedRectangle(cornerRadius: Constants.cornerRadius)
@@ -27,8 +28,10 @@ struct ShimmerView: View {
       .onAppear {
         let baseAnimation = Animation.easeInOut(duration: Constants.duration)
         let repeated = baseAnimation.repeatForever(autoreverses: true)
-        withAnimation(repeated) {
-          self.opacity = Constants.maxOpacity
+        if isAnimating {
+          withAnimation(repeated) {
+            self.opacity = Constants.maxOpacity
+          }
         }
       }
   }

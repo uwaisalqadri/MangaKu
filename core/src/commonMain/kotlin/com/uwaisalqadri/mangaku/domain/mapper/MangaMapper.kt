@@ -3,6 +3,10 @@ package com.uwaisalqadri.mangaku.domain.mapper
 import com.uwaisalqadri.mangaku.data.souce.remote.response.*
 import com.uwaisalqadri.mangaku.domain.model.*
 
+fun List<MangaItem>.map(): List<Manga> {
+    return map { it.map() }
+}
+
 fun MangaItem.map(): Manga {
     return Manga(
         attributes = attributes?.let { it.map() },

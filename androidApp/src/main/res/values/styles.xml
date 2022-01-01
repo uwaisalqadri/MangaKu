@@ -1,6 +1,6 @@
 <resources>
 
-    <style name="Theme.MangaKu" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.MangaKu" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:colorPrimary">#FFFFFF</item>
         <item name="android:colorPrimaryDark">#FFFFFF</item>
         <item name="android:colorAccent">#000000</item>
