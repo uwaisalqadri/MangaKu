@@ -13,7 +13,7 @@ import SDWebImageSwiftUI
 struct GridItemView: View {
 
   let manga: Manga
-  let assembler: Assembler
+  let navigator: MyMangaNavigator
   let extensions: Extensions
 
   var body: some View {
@@ -31,7 +31,7 @@ struct GridItemView: View {
         HStack(alignment: .top) {
           Spacer()
 
-          NavigationLink(destination: DetailView(viewModel: assembler.resolve(), mangaViewModel: assembler.resolve(), mangaId: manga.id)) {
+          NavigationLink(destination: navigator.navigateToDetailView(mangaId: manga.id)) {
             VStack(alignment: .leading) {
               Text(extensions.getTitle(manga: manga))
                 .lineLimit(2)

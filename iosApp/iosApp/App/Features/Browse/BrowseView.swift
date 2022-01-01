@@ -11,7 +11,7 @@ import SwiftUI
 struct BrowseView: View {
 
   @ObservedObject var viewModel: BrowseViewModel
-  let assembler: Assembler
+  let navigator: BrowseNavigator
 
   let genres: [Genre] = [
     Genre(name: "Shonen", image: "imgShonen", query: "shonen", font: .sedgwickave),
@@ -52,7 +52,7 @@ struct BrowseView: View {
           } else {
             VStack {
               ForEach(viewModel.trendingManga, id: \.id) { manga in
-                NavigationLink(destination: DetailView(viewModel: assembler.resolve(), mangaViewModel: assembler.resolve(), mangaId: manga.id)) {
+                NavigationLink(destination: navigator.navigateToDetailView(mangaId: manga.id)) {
                   MangaItemView(manga: manga)
                 }.buttonStyle(PlainButtonStyle())
               }
@@ -64,7 +64,7 @@ struct BrowseView: View {
       }
       .navigationBarTitle("Browse")
       .navigationBarItems(
-        trailing: NavigationLink(destination: SearchView(viewModel: assembler.resolve(), assembler: assembler)) {
+        trailing: NavigationLink(destination: navigator.navigateToSearchView()) {
           Image(systemName: "magnifyingglass")
             .resizable()
             .foregroundColor(.black)

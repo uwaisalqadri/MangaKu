@@ -14,7 +14,7 @@ import ACarousel
 struct MyMangaView: View {
 
   @ObservedObject var viewModel: MyMangaViewModel
-  let assembler: Assembler
+  let navigator: MyMangaNavigator
   @State var isSlide = true
 
   private let extensions = Extensions()
@@ -62,7 +62,7 @@ struct MyMangaView: View {
                 ], alignment: .leading, spacing: 10) {
 
                   ForEach(viewModel.mangas, id: \.self) { manga in
-                    GridItemView(manga: manga, assembler: assembler, extensions: extensions)
+                    GridItemView(manga: manga, navigator: navigator, extensions: extensions)
                   }
 
                 }.padding(.horizontal, 30)

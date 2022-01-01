@@ -11,7 +11,7 @@ import SwiftUI
 struct SearchView: View {
 
   @ObservedObject var viewModel: SearchViewModel
-  let assembler: Assembler
+  let navigator: SearchNavigator
 
   var body: some View {
     VStack {
@@ -33,7 +33,7 @@ struct SearchView: View {
             }
           } else {
             ForEach(viewModel.mangas, id: \.id) { manga in
-              NavigationLink(destination: DetailView(viewModel: assembler.resolve(),mangaViewModel: assembler.resolve() , mangaId: manga.id)) {
+              NavigationLink(destination: navigator.navigateToDetailView(mangaId: manga.id)) {
                 SearchItemView(manga: manga)
               }.buttonStyle(PlainButtonStyle())
             }

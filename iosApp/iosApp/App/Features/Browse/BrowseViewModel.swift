@@ -12,7 +12,6 @@ import Combine
 import KMPNativeCoroutinesCombine
 import KMPNativeCoroutinesAsync
 
-@MainActor
 class BrowseViewModel: ObservableObject {
 
   @Published var mangas = [Manga]()
@@ -27,21 +26,21 @@ class BrowseViewModel: ObservableObject {
     self.browseUseCase = browseUseCase
   }
 
-  func fetchManga() {
-    Task {
-      do {
-        isLoading = true
-        let stream = asyncStream(for: browseUseCase.getMangaNative())
-        for try await data in stream {
-          // mangas = data
-          isLoading = false
-        }
-      } catch {
-        errorMessage = error.localizedDescription
-        isLoading = false
-      }
-    }
-  }
+//  func fetchManga() {
+//    Task {
+//      do {
+//        isLoading = true
+//        let stream = asyncStream(for: browseUseCase.getMangaNative())
+//        for try await data in stream {
+//          // mangas = data
+//          isLoading = false
+//        }
+//      } catch {
+//        errorMessage = error.localizedDescription
+//        isLoading = false
+//      }
+//    }
+//  }
   
   func fetchTrendingManga() {
     isLoading = true
