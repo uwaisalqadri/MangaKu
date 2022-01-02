@@ -1,6 +1,6 @@
 package com.uwaisalqadri.mangaku.di
 
-import com.uwaisalqadri.mangaku.data.souce.local.DefaultMangaLocalDataSource
+import com.uwaisalqadri.mangaku.data.souce.local.MangaPersistenceContainer
 import com.uwaisalqadri.mangaku.data.souce.local.entity.*
 import com.uwaisalqadri.mangaku.data.souce.remote.MangaApi
 import com.uwaisalqadri.mangaku.data.souce.remote.response.ApiException
@@ -110,7 +110,7 @@ fun createKtorClient(json: Json) = HttpClient {
 
 
 val realmModule = module {
-    single { DefaultMangaLocalDataSource(get()) }
+    single { MangaPersistenceContainer(get()) }
     single { createRealmDatabase() }
 }
 

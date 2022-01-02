@@ -20,7 +20,7 @@ protocol KotlinCoreAssembler {
   // data
   func resolve() -> MangaRepository
   func resolve() -> MangaApiClient
-  func resolve() -> MangaLocalDataSource
+  func resolve() -> MangaPersistence
 }
 
 extension KotlinCoreAssembler where Self: Assembler {
@@ -45,14 +45,14 @@ extension KotlinCoreAssembler where Self: Assembler {
 
   // MARK: data
   func resolve() -> MangaRepository {
-    return MangaDataStore(mangaApiClient: resolve(), mangaLocalDataSource: resolve())
+    return MangaDataStore(mangaApiClient: resolve(), mangaPersistence: resolve())
   }
 
   func resolve() -> MangaApiClient {
     return MangaApi(ktor: CoreModuleKt.createKtorClient(json: CoreModuleKt.createJson()))
   }
 
-  func resolve() -> MangaLocalDataSource {
-    return DefaultMangaLocalDataSource(realm: CoreModuleKt.createRealmDatabase())
+  func resolve() -> MangaPersistence {
+    return MangaPersistenceContainer(realm: CoreModuleKt.createRealmDatabase())
   }
 }

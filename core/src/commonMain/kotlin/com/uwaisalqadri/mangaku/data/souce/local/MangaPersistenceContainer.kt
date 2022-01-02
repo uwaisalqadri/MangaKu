@@ -3,10 +3,8 @@ package com.uwaisalqadri.mangaku.data.souce.local
 import com.uwaisalqadri.mangaku.data.souce.local.entity.MangaObject
 import io.realm.Realm
 import io.realm.delete
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
 
-class DefaultMangaLocalDataSource(private val realm: Realm): MangaLocalDataSource {
+class MangaPersistenceContainer(private val realm: Realm): MangaPersistence {
 
     override fun getAllManga(): List<MangaObject> {
         return realm.objects(MangaObject::class)

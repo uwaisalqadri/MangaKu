@@ -1,6 +1,6 @@
 package com.uwaisalqadri.mangaku.data.repository
 
-import com.uwaisalqadri.mangaku.data.souce.local.MangaLocalDataSource
+import com.uwaisalqadri.mangaku.data.souce.local.MangaPersistence
 import com.uwaisalqadri.mangaku.data.souce.local.entity.MangaObject
 import com.uwaisalqadri.mangaku.data.souce.remote.MangaApiClient
 import com.uwaisalqadri.mangaku.data.souce.remote.response.MangaItem
@@ -8,7 +8,7 @@ import com.uwaisalqadri.mangaku.domain.repository.MangaRepository
 
 class MangaDataStore(
     private val mangaApiClient: MangaApiClient,
-    private val mangaLocalDataSource: MangaLocalDataSource
+    private val mangaPersistence: MangaPersistence
 ): MangaRepository {
 
     override suspend fun getManga(): List<MangaItem> {
@@ -32,19 +32,19 @@ class MangaDataStore(
     }
 
     override suspend fun getFavoriteManga(): List<MangaObject> {
-        return mangaLocalDataSource.getAllManga()
+        return mangaPersistence.getAllManga()
     }
 
     override suspend fun getFavoriteMangaById(mangaId: String): List<MangaObject> {
-        return mangaLocalDataSource.getMangaById(mangaId = mangaId)
+        return mangaPersistence.getMangaById(mangaId = mangaId)
     }
 
     override fun addMangaFavorite(manga: MangaObject) {
-        mangaLocalDataSource.addManga(manga)
+        mangaPersistence.addManga(manga)
     }
 
     override fun deleteMangaFavorite(mangaId: String) {
-        mangaLocalDataSource.deleteManga(mangaId)
+        mangaPersistence.deleteManga(mangaId)
     }
 
 }
