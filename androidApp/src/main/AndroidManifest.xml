@@ -14,7 +14,7 @@
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.MangaKu">
         <activity
-            android:name="com.uwaisalqadri.mangaku.android.ui.MainActivity">
+            android:name="com.uwaisalqadri.mangaku.android.presentation.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
