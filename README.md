@@ -77,32 +77,36 @@ A few things you can do with MangaKu:
 ## <a name="domain-to-presentation"></a> 💨 Domain to Presentation
 In Android, Because both `core` and `androidApp` write in Kotlin, we can simply collect flow :
 ```
-private fun fetchManga() = viewModelScope.launch {
-     _uiState.value = UiState(loading = true)
-     trendingUseCase().collect { result ->
-     if (result.isNotEmpty()) _uiState.value = UiState(listManga = result)    
+private fun getTrendingManga() = viewModelScope.launch {
+  _trendingManga.value = Result.loading()
+  browseUseCase.getManga()
+   .catch { cause: Throwable ->
+     _trendingManga.value = Result.failed(cause)
    }
-}
+   .collect { result ->
+     if (result.isNotEmpty())
+     _trendingManga.value = Result.success(result)
+   }
+ }
 
 ```
 
 But in iOS, we need to deal with swift, here i'm using `createPublisher()` from `KMPNativeCoroutines` to collect flow as Publisher in `Combine` :
 
 ```
-private func fetchTrendingManga() {
-  loading = true
-  createPublisher(for: trendingUseCase.invokeNative())
-    .receive(on: DispatchQueue.main)
-    .sink { completion in
-       switch completion {
-        case .finished:
-          self.loading = false
-        case .failure(let error):
-          self.errorMessage = error.localizedDescription
+func fetchTrendingManga() {
+  trendingManga = .loading
+  createPublisher(for: browseUseCase.getTrendingMangaNative())
+   .receive(on: DispatchQueue.main)
+   .sink { completion in
+     switch completion {
+       case .finished: ()
+       case .failure(let error):
+         self.trendingManga = .error(error: error)
        }
-   } receiveValue: { value in
-     self.trendingManga = value
-   }.store(in: &cancellables)
+    } receiveValue: { value in
+        self.trendingManga = .success(data: value)
+    }.store(in: &cancellables)
 }
 
 
