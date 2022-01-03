@@ -1,19 +1,18 @@
 package com.uwaisalqadri.mangaku.android.presentation.search.composables
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.Card
+import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.runtime.*
-import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -32,9 +31,11 @@ fun SearchField(
     placeholder: String,
     onQueryChanged: (String) -> Unit,
     onExecuteSearch: () -> Unit,
+    onEraseQuery: () -> Unit,
     modifier: Modifier
 ) {
     Card(
+        backgroundColor = MaterialTheme.colors.onSurface,
         shape = RoundedCornerShape(20.dp),
         elevation = 0.dp,
         modifier = modifier
@@ -58,10 +59,9 @@ fun SearchField(
         )
 
         Row(
-            modifier = Modifier
-                .background(MaterialTheme.colors.surface.copy(alpha = 0.3f))
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
         ) {
-            Spacer(modifier = Modifier.width(10.dp))
 
             Icon(
                 painter = painterResource(id = R.drawable.ic_search),
@@ -69,11 +69,12 @@ fun SearchField(
                 tint = MaterialTheme.colors.secondary,
                 modifier = Modifier
                     .size(40.dp)
-                    .padding(start = 10.dp, top = 5.dp)
+                    .padding(start = 10.dp)
             )
 
             BasicTextField(
                 value = query,
+                singleLine = true,
                 textStyle = TextStyle(
                     color = MaterialTheme.colors.secondary,
                     fontFamily = Montserrat,
@@ -101,8 +102,20 @@ fun SearchField(
 
                 modifier = Modifier
                     .padding(start = 10.dp, end = 10.dp, top = 11.dp, bottom = 5.dp)
-                    .fillMaxWidth()
+                    .width(230.dp)
                     .height(30.dp)
+            )
+
+            Icon(
+                painter = painterResource(id = android.R.drawable.ic_menu_close_clear_cancel),
+                contentDescription = null,
+                tint = MaterialTheme.colors.secondary,
+                modifier = Modifier
+                    .size(30.dp)
+                    .padding(end = 10.dp)
+                    .clickable {
+                        onEraseQuery()
+                    }
             )
         }
     }

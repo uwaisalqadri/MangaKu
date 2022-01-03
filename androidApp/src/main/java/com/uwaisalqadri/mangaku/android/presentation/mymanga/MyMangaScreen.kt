@@ -2,6 +2,7 @@ package com.uwaisalqadri.mangaku.android.presentation.mymanga
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
@@ -39,83 +40,88 @@ class MyMangaScreen: Screen {
         var state by remember { mutableStateOf(true) }
         val navigator = LocalNavigator.currentOrThrow
 
-        Column(
-            modifier = Modifier
-                .verticalScroll(rememberScrollState())
-                .background(color = MaterialTheme.colors.primary)
+        LazyColumn(
+            modifier = Modifier.background(color = MaterialTheme.colors.primary)
         ) {
 
             viewModel.getMyManga()
 
-            Row(
-                horizontalArrangement = Arrangement.Center,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 20.dp)
-            ) {
-                Text(
-                    text = "My Manga",
-                    style = MangaTypography.h1,
-                    fontSize = 25.sp,
-                    color = MaterialTheme.colors.secondary
-                )
-            }
-
-            LayoutSwitch(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(60.dp)
-                    .padding(top = 20.dp, start = 20.dp, end = 20.dp)
-            ) {
-                state = it
-            }
-
-            if (myManga.loading) {
-                Text(
-                    text = "Still Empty Here!",
-                    style = MangaTypography.overline,
-                    fontSize = 60.sp,
-                    color = MaterialTheme.colors.secondary,
-                    textAlign = TextAlign.Center,
+            item {
+                Row(
+                    horizontalArrangement = Arrangement.Center,
                     modifier = Modifier
-                        .fillMaxSize()
-                        .padding(horizontal = 40.dp)
-                )
-            } else {
-                when(state) {
-                    true -> {
-                        myManga.data?.let {
-                            HorizontalPagerWithTransition(
-                                manga = it,
+                        .fillMaxWidth()
+                        .padding(top = 20.dp)
+                ) {
+                    Text(
+                        text = "My Manga",
+                        style = MangaTypography.h1,
+                        fontSize = 25.sp,
+                        color = MaterialTheme.colors.secondary
+                    )
+                }
+            }
+
+            item {
+                LayoutSwitch(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(60.dp)
+                        .padding(top = 20.dp, start = 20.dp, end = 20.dp)
+                ) {
+                    state = it
+                }
+            }
+
+            item {
+                if (myManga.loading) {
+                    Text(
+                        text = "Still Empty Here!",
+                        style = MangaTypography.overline,
+                        fontSize = 60.sp,
+                        color = MaterialTheme.colors.secondary,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(horizontal = 40.dp)
+                    )
+                } else {
+                    when (state) {
+                        true -> {
+                            myManga.data?.let {
+                                HorizontalPagerWithTransition(
+                                    manga = it,
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .height(500.dp)
+                                )
+                            }
+                        }
+
+                        false -> {
+                            StaggeredVerticalGrid(
+                                maxColumnWidth = 200.dp,
                                 modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(500.dp)
+                                    .padding(horizontal = 20.dp, vertical = 30.dp)
+                            ) {
+                                myManga.data?.forEach {
+                                    MyMangaGridItem(manga = it) { manga ->
+                                        navigator.push(
+                                            DetailScreen(navigator = navigator, mangaId = manga.id)
+                                        )
+                                    }
+                                }
+                            }
+
+                            Spacer(
+                                modifier = Modifier
+                                    .background(color = MaterialTheme.colors.primary)
+                                    .height(200.dp)
                             )
                         }
                     }
 
-                    false -> {
-                        StaggeredVerticalGrid(
-                            maxColumnWidth = 200.dp,
-                            modifier = Modifier
-                                .padding(horizontal = 20.dp, vertical = 30.dp)
-                        ) {
-                            myManga.data?.forEach {
-                                MyMangaGridItem(manga = it) { manga ->
-                                    navigator.push(
-                                        DetailScreen(navigator = navigator, mangaId = manga.id)
-                                    )
-                                }
-                            }
-                        }
-                        
-                        Spacer(modifier = Modifier
-                            .background(color = MaterialTheme.colors.primary)
-                            .height(200.dp)
-                        )
-                    }
                 }
-
             }
         }
 

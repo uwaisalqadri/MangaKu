@@ -40,7 +40,7 @@ object BrowseTab: Tab {
         Navigator(
             screen = BrowseScreen()
         ) {
-            SlideTransition(navigator = it)
+            ScaleTransition(navigator = it)
         }
     }
 }

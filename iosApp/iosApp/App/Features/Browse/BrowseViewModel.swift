@@ -14,10 +14,7 @@ import KMPNativeCoroutinesAsync
 
 class BrowseViewModel: ObservableObject {
 
-  @Published var mangas = [Manga]()
   @Published var trendingManga: ViewState<[Manga]> = .initiate
-  @Published var isLoading = false
-  @Published var errorMessage = ""
 
   private let browseUseCase: BrowseUseCase
   private var cancellables = Set<AnyCancellable>()

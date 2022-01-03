@@ -1,11 +1,10 @@
 <resources>
 
-    <style name="Theme.MangaKu" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="android:colorPrimary">#FFFFFF</item>
-        <item name="android:colorPrimaryDark">#FFFFFF</item>
-        <item name="android:colorAccent">#000000</item>
-        <item name="android:statusBarColor">#000000</item>
-        <item name="android:navigationBarColor">#000000</item>
+    <style name="Theme.MangaKu" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:colorPrimary">?attr/colorPrimary</item>
+        <item name="android:colorPrimaryDark">?attr/colorPrimaryDark</item>
+        <item name="android:colorAccent">@color/colorAccent</item>
+        <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
     </style>
 
 </resources>

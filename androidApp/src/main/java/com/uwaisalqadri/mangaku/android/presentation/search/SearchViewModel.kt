@@ -6,18 +6,15 @@ import androidx.lifecycle.viewModelScope
 import com.uwaisalqadri.mangaku.android.utils.Result
 import com.uwaisalqadri.mangaku.domain.model.Manga
 import com.uwaisalqadri.mangaku.domain.usecase.search.SearchUseCase
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class SearchViewModel(
     private val searchUseCase: SearchUseCase
 ): ViewModel() {
 
-    private val _searchManga: MutableStateFlow<Result<List<Manga>>> = MutableStateFlow(Result())
-    val searchManga: StateFlow<Result<List<Manga>>> = _searchManga
+    private val _searchManga = MutableStateFlow<Result<List<Manga>>>(Result.success(listOf()))
+    val searchManga = _searchManga.asStateFlow()
 
     val query = mutableStateOf("")
 
@@ -33,8 +30,8 @@ class SearchViewModel(
                 _searchManga.value = Result.failed(cause)
             }
             .collect { result ->
-                if (result.isNotEmpty()) _searchManga.value = Result.success(result)
-                else _searchManga.value = Result.empty()
+                if (query.isNotEmpty()) _searchManga.value = Result.success(result)
+                else _searchManga.value = Result.success(listOf())
             }
     }
 }

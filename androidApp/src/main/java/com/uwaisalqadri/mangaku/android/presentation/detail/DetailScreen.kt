@@ -2,6 +2,7 @@ package com.uwaisalqadri.mangaku.android.presentation.detail
 
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
@@ -21,6 +22,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.Navigator
+import co.touchlab.kermit.CommonLogger
+import co.touchlab.kermit.Kermit
 import com.google.accompanist.coil.rememberCoilPainter
 import com.uwaisalqadri.mangaku.android.presentation.detail.composables.FavoriteDialog
 import com.uwaisalqadri.mangaku.android.presentation.mymanga.MyMangaViewModel
@@ -28,6 +31,7 @@ import com.uwaisalqadri.mangaku.android.presentation.theme.MangaTypography
 import com.uwaisalqadri.mangaku.android.presentation.theme.composables.BackButton
 import com.uwaisalqadri.mangaku.android.presentation.theme.composables.ShimmerDetail
 import com.uwaisalqadri.mangaku.android.presentation.theme.composables.TopBar
+import com.uwaisalqadri.mangaku.android.utils.Result
 import com.uwaisalqadri.mangaku.domain.model.Manga
 import com.uwaisalqadri.mangaku.utils.Constants
 import com.uwaisalqadri.mangaku.utils.Extensions
@@ -50,79 +54,87 @@ data class DetailScreen(
         mangaViewModel: MyMangaViewModel = getViewModel(),
         extension: Extensions = Extensions
     ) {
-        viewModel.getDetailManga(mangaId)
-        mangaViewModel.checkFavorite(mangaId)
-
         val detailManga by viewModel.detailManga.collectAsState()
-        val favState by mangaViewModel.favState.observeAsState()
+        val favState by mangaViewModel.favState.collectAsState()
 
         val (isFavorite, setFavorite) = remember { mutableStateOf(false) }
         val (isShowDialog, setShowDialog) = remember { mutableStateOf(false) }
 
-        Column(
+        LazyColumn(
             horizontalAlignment = Alignment.Start,
-            modifier = Modifier
-                .verticalScroll(rememberScrollState())
-                .background(color = MaterialTheme.colors.primary)
+            modifier = Modifier.background(color = MaterialTheme.colors.primary)
         ) {
-            FavoriteDialog(
-                message = if (isFavorite) "Added to Favorite" else "Removed from Favorite",
-                isShowDialog = isShowDialog,
-                setShowDialog = setShowDialog,
-                modifier = Modifier.size(134.dp)
-            )
 
-            Row(
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = 25.dp, top = 25.dp, end = 25.dp)
-            ) {
-                BackButton {
-                    navigator.pop()
-                }
+            viewModel.getDetailManga(mangaId)
+            mangaViewModel.checkFavorite(mangaId)
 
-                Icon(
-                    imageVector = if (isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
-                    contentDescription = null,
-                    tint = Color.Red,
-                    modifier = Modifier
-                        .size(25.dp)
-                        .clickable {
-                            setShowDialog(true)
-                            if (!detailManga.loading) {
-                                detailManga.data?.let {
-                                    if (isFavorite) mangaViewModel.deleteMyManga(it.id)
-                                    else mangaViewModel.addMyManga(it)
-                                }
-                            }
-                        }
+            item {
+                FavoriteDialog(
+                    message = if (isFavorite) "Added to Favorite" else "Removed from Favorite",
+                    isShowDialog = isShowDialog,
+                    setShowDialog = setShowDialog,
+                    modifier = Modifier.size(134.dp)
                 )
             }
 
-            Spacer(modifier = Modifier.padding(top = 20.dp))
+            item {
+                Row(
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 25.dp, top = 25.dp, end = 25.dp)
+                ) {
+                    BackButton {
+                        navigator.pop()
+                    }
 
-            TopBar(name = "Detail")
-
-            if (detailManga.loading) {
-                ShimmerDetail()
-            } else {
-
-                when {
-                    favState?.favMangaFound == true -> setFavorite(true)
-                    favState?.addFavorite == true -> setFavorite(true)
-                    favState?.removeFavorite == true -> setFavorite(false)
-                    else -> setFavorite(false)
-                }
-
-                detailManga.data?.let {
-                    MangaDetail(
-                        manga = it,
-                        extension = extension
+                    Icon(
+                        imageVector = if (isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
+                        contentDescription = null,
+                        tint = Color.Red,
+                        modifier = Modifier
+                            .size(25.dp)
+                            .clickable {
+                                setShowDialog(true)
+                                if (!detailManga.loading) {
+                                    detailManga.data?.let {
+                                        if (isFavorite) mangaViewModel.deleteMyManga(it.id)
+                                        else mangaViewModel.addMyManga(it)
+                                    }
+                                }
+                            }
                     )
                 }
+            }
 
-                Spacer(modifier = Modifier.height(200.dp))
+            item {
+                Spacer(modifier = Modifier.padding(top = 20.dp))
+            }
+
+            item {
+                TopBar(name = "Detail")
+            }
+
+            item {
+                if (detailManga.loading) {
+                    ShimmerDetail()
+                } else {
+                    when {
+                        favState.favMangaFound -> setFavorite(true)
+                        favState.addFavorite -> setFavorite(true)
+                        favState.removeFavorite -> setFavorite(false)
+                        else -> setFavorite(false)
+                    }
+
+                    detailManga.data?.let {
+                        MangaDetail(
+                            manga = it,
+                            extension = extension
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(200.dp))
+                }
             }
         }
     }

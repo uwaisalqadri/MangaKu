@@ -2,6 +2,7 @@ package com.uwaisalqadri.mangaku.android.presentation.browse
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
@@ -39,58 +40,68 @@ class BrowseScreen: Screen {
         val listManga by viewModel.trendingManga.collectAsState()
         val navigator = LocalNavigator.currentOrThrow
 
-        Column(
-            modifier = Modifier
-                .verticalScroll(state = rememberScrollState())
-                .background(color = MaterialTheme.colors.primary)
+        LazyColumn(
+            modifier = Modifier.background(color = MaterialTheme.colors.primary)
         ) {
 
-            TopBar(
-                name = "Browse",
-                icon = R.drawable.ic_search
-            ) {
-                navigator.push(SearchScreen(navigator = navigator))
+            item {
+                TopBar(
+                    name = "Browse",
+                    icon = R.drawable.ic_search
+                ) {
+                    navigator.push(SearchScreen(navigator = navigator))
+                }
             }
 
-            Spacer(modifier = Modifier.height(35.dp))
+            item {
+                Spacer(modifier = Modifier.height(35.dp))
+            }
 
-            Text(
-                text = "Genre",
-                style = MangaTypography.h2,
-                color = MaterialTheme.colors.secondary,
-                fontSize = 15.sp,
-                modifier = Modifier.padding(start = 20.dp)
-            )
+            item {
+                Text(
+                    text = "Genre",
+                    style = MangaTypography.h2,
+                    color = MaterialTheme.colors.secondary,
+                    fontSize = 15.sp,
+                    modifier = Modifier.padding(start = 20.dp)
+                )
+            }
 
-            Genres(
-                modifier = Modifier
-                    .height(130.dp)
-                    .fillMaxWidth()
-                    .padding(top = 15.dp, bottom = 25.dp, start = 10.dp)
-            )
+            item {
+                Genres(
+                    modifier = Modifier
+                        .height(130.dp)
+                        .fillMaxWidth()
+                        .padding(top = 15.dp, bottom = 25.dp, start = 10.dp)
+                )
+            }
 
-            Text(
-                text = "Trending Now",
-                style = MangaTypography.h2,
-                fontSize = 15.sp,
-                color = MaterialTheme.colors.secondary,
-                modifier = Modifier.padding(start = 20.dp)
-            )
+            item {
+                Text(
+                    text = "Trending Now",
+                    style = MangaTypography.h2,
+                    fontSize = 15.sp,
+                    color = MaterialTheme.colors.secondary,
+                    modifier = Modifier.padding(start = 20.dp)
+                )
+            }
 
-            if (listManga.loading) {
-                repeat(10) {
-                    ShimmerBrowseItem()
-                }
-            } else {
-                listManga.data?.let {
-                    MangaTrending(
-                        trendingManga = it,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .fillMaxHeight()
-                            .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 120.dp)
-                    ) { mangaId ->
-                        navigator.push(DetailScreen(navigator = navigator, mangaId = mangaId))
+            item {
+                if (listManga.loading) {
+                    repeat(10) {
+                        ShimmerBrowseItem()
+                    }
+                } else {
+                    listManga.data?.let {
+                        MangaTrending(
+                            trendingManga = it,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .fillMaxHeight()
+                                .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 120.dp)
+                        ) { mangaId ->
+                            navigator.push(DetailScreen(navigator = navigator, mangaId = mangaId))
+                        }
                     }
                 }
             }

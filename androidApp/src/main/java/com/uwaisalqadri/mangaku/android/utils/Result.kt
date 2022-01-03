@@ -1,10 +1,10 @@
 package com.uwaisalqadri.mangaku.android.utils
 
 data class Result<T>(
-    var data: T? = null,
-    var loading: Boolean = false,
-    var empty: Boolean = false,
-    var error: Throwable? = null,
+    val data: T? = null,
+    val loading: Boolean = false,
+    val empty: Boolean = false,
+    val error: Throwable? = null,
 ) {
     companion object {
         fun <T> loading(): Result<T> = Result(loading = true)
