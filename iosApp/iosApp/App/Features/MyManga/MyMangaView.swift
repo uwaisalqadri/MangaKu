@@ -32,13 +32,13 @@ struct MyMangaView: View {
               isSlide = toggle
             }.padding(.bottom, 15)
 
-            if !viewModel.isLoading, !viewModel.mangas.isEmpty {
+            if case let .success(data) = viewModel.listManga {
 
               if isSlide {
                 ZStack(alignment: Alignment(horizontal: .center, vertical: .top)) {
 
                   ACarousel(
-                    viewModel.mangas,
+                    data,
                     id: \.self,
                     spacing: 20,
                     headspace: 50,
@@ -61,7 +61,7 @@ struct MyMangaView: View {
                   GridItem(.adaptive(minimum: 120), spacing: 25, alignment: .center)
                 ], alignment: .leading, spacing: 10) {
 
-                  ForEach(viewModel.mangas, id: \.self) { manga in
+                  ForEach(data, id: \.self) { manga in
                     GridItemView(manga: manga, navigator: navigator, extensions: extensions)
                   }
 

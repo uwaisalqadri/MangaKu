@@ -18,21 +18,19 @@ struct SearchView: View {
       ScrollView(showsIndicators: false) {
 
         SearchInputView { query in
-          if !viewModel.isLoading {
-            viewModel.fetchSearchManga(query: query)
-          }
+          viewModel.fetchSearchManga(query: query)
         }
 
         LazyVGrid(columns: [
           GridItem(.adaptive(minimum: 90), spacing: 25, alignment: .center)
         ], alignment: .leading, spacing: 10) {
 
-          if viewModel.isLoading {
+          if case .loading = viewModel.listManga {
             ForEach(0..<12) { _ in
               ShimmerSearchView()
             }
-          } else {
-            ForEach(viewModel.mangas, id: \.id) { manga in
+          } else if case let .success(data) = viewModel.listManga {
+            ForEach(data, id: \.id) { manga in
               NavigationLink(destination: navigator.navigateToDetailView(mangaId: manga.id)) {
                 SearchItemView(manga: manga)
               }.buttonStyle(PlainButtonStyle())

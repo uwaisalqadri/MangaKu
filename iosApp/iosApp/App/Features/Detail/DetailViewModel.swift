@@ -13,9 +13,7 @@ import Combine
 
 class DetailViewModel: ObservableObject {
 
-  @Published var manga: Manga?
-  @Published var isLoading = false
-  @Published var errorMessage = ""
+  @Published var manga: ViewState<Manga> = .initiate
 
   private let detailUseCase: DetailUseCase
   private var cancellables = Set<AnyCancellable>()
@@ -25,19 +23,21 @@ class DetailViewModel: ObservableObject {
   }
 
   func fetchManga(mangaId: String) {
-    isLoading = true
+    manga = .loading
     createPublisher(for: detailUseCase.getDetailMangaNative(mangaId: mangaId))
       .receive(on: DispatchQueue.main)
       .sink { completion in
         switch completion {
-        case .finished:
-          self.isLoading = false
+        case .finished: ()
         case .failure(let error):
-          guard let apiError = error.apiError else { return }
-          self.errorMessage = apiError.errorMessage
+          self.manga = .error(error: error)
         }
       } receiveValue: { value in
-        self.manga = value
+        if let manga = value, value != nil {
+          self.manga = .success(data: manga)
+        } else {
+          self.manga = .empty
+        }
       }.store(in: &cancellables)
   }
 

@@ -24,10 +24,12 @@ struct DetailView: View {
 
       ScrollView(showsIndicators: false) {
 
-        if viewModel.isLoading || viewModel.manga == nil {
+        if case .loading = viewModel.manga {
           ShimmerDetailView()
-        } else {
-          WebImage(url: URL(string: extensions.getCoverImage(manga: viewModel.manga ?? Manga(attributes: nil, id: "", type: ""))))
+        } else if case .empty = viewModel.manga {
+          ShimmerDetailView()
+        } else if case let .success(data) = viewModel.manga {
+          WebImage(url: URL(string: extensions.getCoverImage(manga: data)))
             .resizable()
             .indicator(.activity)
             .clipped()
@@ -36,18 +38,18 @@ struct DetailView: View {
             .padding(.horizontal, 24)
 
           VStack(alignment: .leading) {
-            Text(extensions.getTitle(manga: viewModel.manga ?? Manga(attributes: nil, id: "", type: "")))
+            Text(extensions.getTitle(manga: data))
               .foregroundColor(.black)
               .font(.custom(.mbold, size: 25))
               .padding(.top, 15)
 
-            Text(viewModel.manga?.attributes?.slug ?? "")
+            Text(data.attributes?.slug ?? "")
               .foregroundColor(.black)
               .font(.custom(.mmedium, size: 15))
 
             HStack {
 
-              Text(DateFormatterKt.formatDate(dateString: viewModel.manga?.attributes?.startDate ?? "", format: Constants().casualDateFormat))
+              Text(DateFormatterKt.formatDate(dateString: data.attributes?.startDate ?? "", format: Constants().casualDateFormat))
                 .foregroundColor(.white)
                 .font(.custom(.mbold, size: 13))
                 .padding(10)
@@ -59,7 +61,7 @@ struct DetailView: View {
                   .foregroundColor(.yellow)
                   .frame(width: 15, height: 15)
 
-                Text(String(viewModel.manga?.attributes?.averageRating ?? 0.0).removeCharacters(from: "0"))
+                Text(String(data.attributes?.averageRating ?? 0.0).removeCharacters(from: "0"))
                   .foregroundColor(.black)
                   .font(.custom(.msemibold, size: 14))
 
@@ -72,7 +74,7 @@ struct DetailView: View {
               .font(.custom(.mbold, size: 21))
               .padding(.top, 50)
 
-            Text(viewModel.manga?.attributes?.synopsis ?? "")
+            Text(data.attributes?.synopsis ?? "")
               .foregroundColor(.black)
               .font(.custom(.mmedium, size: 15))
               .padding(.top, 15)
@@ -87,8 +89,8 @@ struct DetailView: View {
     }.navigationTitle("Detail")
     .navigationBarItems(trailing: Button(action: {
       mangaViewModel.isFavorite
-        ? mangaViewModel.removeFavoriteManga(mangaId: viewModel.manga?.id ?? "")
-        : mangaViewModel.addFavoriteManga(manga: viewModel.manga ?? Manga(attributes: nil, id: "", type: ""))
+      ? mangaViewModel.removeFavoriteManga(mangaId: viewModel.manga.value?.id ?? "")
+      : mangaViewModel.addFavoriteManga(manga: viewModel.manga.value ?? Manga(attributes: nil, id: "", type: ""))
       isShowDialog.toggle()
     }) {
       Image(systemName: mangaViewModel.isFavorite ? "heart.fill" : "heart")

@@ -15,7 +15,7 @@ import KMPNativeCoroutinesAsync
 class BrowseViewModel: ObservableObject {
 
   @Published var mangas = [Manga]()
-  @Published var trendingManga = [Manga]()
+  @Published var trendingManga: ViewState<[Manga]> = .initiate
   @Published var isLoading = false
   @Published var errorMessage = ""
 
@@ -45,18 +45,17 @@ class BrowseViewModel: ObservableObject {
 //  }
   
   func fetchTrendingManga() {
-    isLoading = true
-    createPublisher(for: browseUseCase.getMangaNative())
+    trendingManga = .loading
+    createPublisher(for: browseUseCase.getTrendingMangaNative())
       .receive(on: DispatchQueue.main)
       .sink { completion in
         switch completion {
-        case .finished:
-          self.isLoading = false
+        case .finished: ()
         case .failure(let error):
-          self.errorMessage = error.localizedDescription
+          self.trendingManga = .error(error: error)
         }
       } receiveValue: { value in
-        self.trendingManga = value
+        self.trendingManga = .success(data: value)
       }.store(in: &cancellables)
   }
 }

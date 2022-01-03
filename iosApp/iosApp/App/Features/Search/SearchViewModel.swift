@@ -13,9 +13,7 @@ import KMPNativeCoroutinesCombine
 
 class SearchViewModel: ObservableObject {
 
-  @Published var mangas = [Manga]()
-  @Published var errorMessage = ""
-  @Published var isLoading = false
+  @Published var listManga: ViewState<[Manga]> = .initiate
 
   private let searcUseCase: SearchUseCase
   private var cancellables = Set<AnyCancellable>()
@@ -25,19 +23,17 @@ class SearchViewModel: ObservableObject {
   }
 
   func fetchSearchManga(query: String) {
-    isLoading = true
+    listManga = .loading
     createPublisher(for: searcUseCase.getSearchMangaNative(query: query))
       .receive(on: DispatchQueue.main)
       .sink { completion in
         switch completion {
-        case .finished:
-          self.isLoading = false
+        case .finished: ()
         case .failure(let error):
-          guard let apiError = error.apiError else { return }
-          self.errorMessage = apiError.errorMessage
+          self.listManga = .error(error: error)
         }
       } receiveValue: { value in
-        self.mangas = value
+        self.listManga = .success(data: value)
       }.store(in: &cancellables)
   }
 }

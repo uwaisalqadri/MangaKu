@@ -41,7 +41,7 @@ struct BrowseView: View {
             .padding(.top, 30)
 
 
-          if viewModel.isLoading {
+          if case .loading = viewModel.trendingManga {
             VStack {
               ForEach(0..<10) { _ in
                 ShimmerBrowseView()
@@ -49,9 +49,9 @@ struct BrowseView: View {
             }.padding(.leading, 17)
             .padding(.trailing, 30)
             .padding(.bottom, 100)
-          } else {
+          } else if case let .success(data) = viewModel.trendingManga {
             VStack {
-              ForEach(viewModel.trendingManga, id: \.id) { manga in
+              ForEach(data, id: \.id) { manga in
                 NavigationLink(destination: navigator.navigateToDetailView(mangaId: manga.id)) {
                   MangaItemView(manga: manga)
                 }.buttonStyle(PlainButtonStyle())

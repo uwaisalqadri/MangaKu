@@ -46,6 +46,7 @@
 		913390432780607B00DB8E19 /* DetailNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913390422780607B00DB8E19 /* DetailNavigator.swift */; };
 		913390462780611D00DB8E19 /* MyMangaNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913390452780611D00DB8E19 /* MyMangaNavigator.swift */; };
 		91729222275BB94D000F5259 /* ACarousel in Frameworks */ = {isa = PBXBuildFile; productRef = 91729221275BB94D000F5259 /* ACarousel */; };
+		91B7E9892782C13500DCDB19 /* ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B7E9882782C13500DCDB19 /* ViewState.swift */; };
 		979C3D075D326522E98CB9AD /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7409001EFEE5792C2EC13B64 /* Pods_iosApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -94,6 +95,7 @@
 		913390422780607B00DB8E19 /* DetailNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailNavigator.swift; sourceTree = "<group>"; };
 		913390452780611D00DB8E19 /* MyMangaNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMangaNavigator.swift; sourceTree = "<group>"; };
 		9181D76927587B5900AB983E /* ACarousel */ = {isa = PBXFileReference; lastKnownFileType = text; path = ACarousel; sourceTree = SOURCE_ROOT; };
+		91B7E9882782C13500DCDB19 /* ViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewState.swift; sourceTree = "<group>"; };
 		B8015A9E89A7779AB6015FE1 /* Pods-iosApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.release.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -213,6 +215,7 @@
 			children = (
 				913288902764B6BD006FA4FA /* Extensions */,
 				528D6658270D9F260046E716 /* FavState.swift */,
+				91B7E9882782C13500DCDB19 /* ViewState.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -496,6 +499,7 @@
 				52B7692826ABCEE200227903 /* SearchViewModel.swift in Sources */,
 				526B7D0C26F4361A0035A14A /* GridItemView.swift in Sources */,
 				52B7691826ABCE6F00227903 /* BrowseView.swift in Sources */,
+				91B7E9892782C13500DCDB19 /* ViewState.swift in Sources */,
 				9133903A27804F4700DB8E19 /* Error.swift in Sources */,
 				526B7D0F26F4441E0035A14A /* String.swift in Sources */,
 				527F3BA826F0AB2E0020F8CB /* DetailViewModel.swift in Sources */,

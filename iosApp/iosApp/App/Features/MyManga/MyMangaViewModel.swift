@@ -13,9 +13,7 @@ import KMPNativeCoroutinesCombine
 
 class MyMangaViewModel: ObservableObject {
 
-  @Published var mangas = [Manga]()
-  @Published var errorMessage = ""
-  @Published var isLoading = false
+  @Published var listManga: ViewState<[Manga]> = .initiate
   @Published var isFavorite = false
 
   private let myMangaUseCase: MyMangaUseCase
@@ -42,11 +40,8 @@ class MyMangaViewModel: ObservableObject {
       .receive(on: DispatchQueue.main)
       .sink { completion in
         switch completion {
-        case .finished:
-          self.isLoading = false
-        case .failure(let error):
-          guard let apiError = error.apiError else { return }
-          self.errorMessage = apiError.errorMessage
+        case .finished: ()
+        case .failure: ()
         }
       } receiveValue: { value in
         value.forEach { item in
@@ -56,20 +51,18 @@ class MyMangaViewModel: ObservableObject {
   }
 
   func fetchFavoriteManga() {
-    isLoading = true
+    listManga = .loading
     createPublisher(for: myMangaUseCase.getMyMangaNative())
       .subscribe(on: backgroundQueue)
       .receive(on: DispatchQueue.main)
       .sink { completion in
         switch completion {
-        case .finished:
-          self.isLoading = false
+        case .finished: ()
         case .failure(let error):
-          guard let apiError = error.apiError else { return }
-          self.errorMessage = apiError.errorMessage
+          self.listManga = .error(error: error)
         }
       } receiveValue: { value in
-        self.mangas = value
+        self.listManga = value.isEmpty ? .empty : .success(data: value)
       }.store(in: &cancellables)
   }
 }
