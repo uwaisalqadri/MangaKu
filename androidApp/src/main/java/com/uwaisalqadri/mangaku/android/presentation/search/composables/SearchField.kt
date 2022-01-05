@@ -106,17 +106,19 @@ fun SearchField(
                     .height(30.dp)
             )
 
-            Icon(
-                painter = painterResource(id = android.R.drawable.ic_menu_close_clear_cancel),
-                contentDescription = null,
-                tint = MaterialTheme.colors.secondary,
-                modifier = Modifier
-                    .size(30.dp)
-                    .padding(end = 10.dp)
-                    .clickable {
-                        onEraseQuery()
-                    }
-            )
+            if (query != "") {
+                Icon(
+                    painter = painterResource(id = android.R.drawable.ic_menu_close_clear_cancel),
+                    contentDescription = null,
+                    tint = MaterialTheme.colors.secondary,
+                    modifier = Modifier
+                        .size(30.dp)
+                        .padding(end = 10.dp)
+                        .clickable {
+                            onEraseQuery()
+                        }
+                )
+            }
         }
     }
 }
