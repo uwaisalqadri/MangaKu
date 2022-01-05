@@ -36,6 +36,8 @@ A few things you can do with MangaKu:
 * See Manga Detail
 * Save your favorite manga
 
+⚠️ **`This project have no concern about backward compatibility, and only support the very latest or experimental api's for both android and ios `** ⚠️
+
 ## <a name="installation"></a> 🚗 Installation
 
 - Follow the [KMM Guide by Jetbrains](https://kotlinlang.org/docs/kmm-overview.html) for getting started building a project with KMM.
@@ -75,7 +77,7 @@ A few things you can do with MangaKu:
 * Some Kotlinx & Jetpack Components
 
 ## <a name="domain-to-presentation"></a> 💨 Domain to Presentation
-In Android, Because both `core` and `androidApp` write in Kotlin, we can simply collect flow :
+In Android, Because both `core` and `androidApp` written in Kotlin, we can simply collect flow :
 ```
 private fun getTrendingManga() = viewModelScope.launch {
   _trendingManga.value = Result.loading()
@@ -91,7 +93,7 @@ private fun getTrendingManga() = viewModelScope.launch {
 
 ```
 
-But in iOS, we need to deal with swift, here i'm using `createPublisher()` from `KMPNativeCoroutines` to collect flow as Publisher in `Combine` :
+But in iOS, we have to deal with swift, here i'm using `createPublisher()` from `KMPNativeCoroutines` to collect flow as Publisher in `Combine` :
 
 ```
 func fetchTrendingManga() {
