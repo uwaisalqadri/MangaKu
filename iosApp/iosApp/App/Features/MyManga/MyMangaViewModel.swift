@@ -18,7 +18,6 @@ class MyMangaViewModel: ObservableObject {
 
   private let myMangaUseCase: MyMangaUseCase
   private var cancellables = Set<AnyCancellable>()
-  let backgroundQueue = DispatchQueue(label: "com.schedulers.dispatch.mangaku", qos: .background)
 
   init(myMangaUseCase: MyMangaUseCase) {
     self.myMangaUseCase = myMangaUseCase
@@ -36,7 +35,7 @@ class MyMangaViewModel: ObservableObject {
 
   func checkFavorite(mangaId: String) {
     createPublisher(for: myMangaUseCase.getMyMangaByIdNative(mangaId: mangaId))
-      .subscribe(on: backgroundQueue)
+      .subscribe(on: DispatchQueue.global(qos: .background))
       .receive(on: DispatchQueue.main)
       .sink { completion in
         switch completion {
@@ -53,7 +52,7 @@ class MyMangaViewModel: ObservableObject {
   func fetchFavoriteManga() {
     listManga = .loading
     createPublisher(for: myMangaUseCase.getMyMangaNative())
-      .subscribe(on: backgroundQueue)
+      .subscribe(on: DispatchQueue.global(qos: .background))
       .receive(on: DispatchQueue.main)
       .sink { completion in
         switch completion {

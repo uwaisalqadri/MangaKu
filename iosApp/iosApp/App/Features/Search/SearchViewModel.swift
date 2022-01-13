@@ -33,7 +33,7 @@ class SearchViewModel: ObservableObject {
           self.listManga = .error(error: error)
         }
       } receiveValue: { value in
-        self.listManga = .success(data: value)
+        self.listManga = value.isEmpty ? .empty : .success(data: value)
       }.store(in: &cancellables)
   }
 }

@@ -15,22 +15,25 @@ struct TabNavigationView: View {
   let assembler: Assembler
 
   var body: some View {
-    ZStack {
-      switch selectedIndex {
-      case 1:
-        let navigator: MyMangaNavigator = assembler.resolve()
-        navigator.navigateToMyManga()
-      default:
-        let navigator: BrowseNavigator = assembler.resolve()
-        navigator.navigateToBrowseView()
-          .animation(.none)
-      }
+    NavigationView {
+      ZStack {
+        switch selectedIndex {
+        case 1:
+          let navigator: MyMangaNavigator = assembler.resolve()
+          navigator.navigateToMyManga()
+        default:
+          let navigator: BrowseNavigator = assembler.resolve()
+          navigator.navigateToBrowseView()
+            .animation(.none)
+        }
 
-      VStack {
-        Spacer()
-        tabView.padding(.bottom, 30)
+        VStack {
+          Spacer()
+          tabView.padding(.bottom, 30)
+        }
       }
-    }
+    }.accentColor(.black)
+
   }
 }
 
@@ -38,7 +41,6 @@ extension TabNavigationView {
 
   var tabView: some View {
     HStack {
-
       Button(action: {
         selectedIndex = 0
       }, label: {

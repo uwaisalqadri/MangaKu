@@ -20,57 +20,56 @@ struct BrowseView: View {
   ]
 
   var body: some View {
-    NavigationView {
-      ScrollView(.vertical, showsIndicators: false) {
-        VStack(alignment: .leading) {
-          Text("Genre")
-            .font(.custom(.msemibold, size: 15))
-            .padding(.horizontal, 17)
+    ScrollView(.vertical, showsIndicators: false) {
+      VStack(alignment: .leading) {
+        Text("Genre")
+          .font(.custom(.msemibold, size: 15))
+          .padding(.horizontal, 17)
 
-          ScrollView(.horizontal, showsIndicators: false) {
-            HStack {
-              ForEach(genres, id: \.id) { genre in
-                GenreView(genre: genre)
-              }
-            }.padding(.leading, 13)
-          }
-
-          Text("Trending Now")
-            .font(.custom(.msemibold, size: 15))
-            .padding(.leading, 17)
-            .padding(.top, 30)
-
-
-          if case .loading = viewModel.trendingManga {
-            VStack {
-              ForEach(0..<10) { _ in
-                ShimmerBrowseView()
-              }
-            }.padding(.leading, 17)
-            .padding(.trailing, 30)
-            .padding(.bottom, 100)
-          } else if case let .success(data) = viewModel.trendingManga {
-            VStack {
-              ForEach(data, id: \.id) { manga in
-                NavigationLink(destination: navigator.navigateToDetailView(mangaId: manga.id)) {
-                  MangaItemView(manga: manga)
-                }.buttonStyle(PlainButtonStyle())
-              }
-            }.padding(.leading, 17)
-            .padding(.trailing, 30)
-            .padding(.bottom, 100)
-          }
-        }.padding(.top, 30)
-      }
-      .navigationBarTitle("Browse")
-      .navigationBarItems(
-        trailing: NavigationLink(destination: navigator.navigateToSearchView()) {
-          Image(systemName: "magnifyingglass")
-            .resizable()
-            .foregroundColor(.black)
-            .frame(width: 20, height: 20)
+        ScrollView(.horizontal, showsIndicators: false) {
+          HStack {
+            ForEach(genres, id: \.id) { genre in
+              GenreView(genre: genre)
+            }
+          }.padding(.leading, 13)
         }
-      )
+
+        Text("Trending Now")
+          .font(.custom(.msemibold, size: 15))
+          .padding(.leading, 17)
+          .padding(.top, 30)
+
+
+        if case .loading = viewModel.trendingManga {
+          VStack {
+            ForEach(0..<10) { _ in
+              ShimmerBrowseView()
+            }
+          }.padding(.leading, 17)
+          .padding(.trailing, 30)
+          .padding(.bottom, 100)
+
+        } else if case .success(let data) = viewModel.trendingManga {
+          VStack {
+            ForEach(data, id: \.id) { manga in
+              NavigationLink(destination: navigator.navigateToDetailView(mangaId: manga.id)) {
+                MangaItemView(manga: manga)
+              }.buttonStyle(PlainButtonStyle())
+            }
+          }.padding(.leading, 17)
+          .padding(.trailing, 30)
+          .padding(.bottom, 100)
+        }
+      }.padding(.top, 30)
     }
+    .navigationBarTitle("Browse")
+    .navigationBarItems(
+      trailing: NavigationLink(destination: navigator.navigateToSearchView()) {
+        Image(systemName: "magnifyingglass")
+          .resizable()
+          .foregroundColor(.black)
+          .frame(width: 20, height: 20)
+      }
+    )
   }
 }

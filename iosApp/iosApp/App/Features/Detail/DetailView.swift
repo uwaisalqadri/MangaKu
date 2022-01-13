@@ -28,7 +28,7 @@ struct DetailView: View {
           ShimmerDetailView()
         } else if case .empty = viewModel.manga {
           ShimmerDetailView()
-        } else if case let .success(data) = viewModel.manga {
+        } else if case .success(let data) = viewModel.manga {
           WebImage(url: URL(string: extensions.getCoverImage(manga: data)))
             .resizable()
             .indicator(.activity)
@@ -48,7 +48,6 @@ struct DetailView: View {
               .font(.custom(.mmedium, size: 15))
 
             HStack {
-
               Text(DateFormatterKt.formatDate(dateString: data.attributes?.startDate ?? "", format: Constants().casualDateFormat))
                 .foregroundColor(.white)
                 .font(.custom(.mbold, size: 13))

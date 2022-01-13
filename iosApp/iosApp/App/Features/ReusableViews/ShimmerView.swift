@@ -25,6 +25,7 @@ struct ShimmerView: View {
       .fill(Color.init(.systemGray5))
       .opacity(opacity)
       .transition(.opacity)
+      .drawingGroup()
       .onAppear {
         let baseAnimation = Animation.easeInOut(duration: Constants.duration)
         let repeated = baseAnimation.repeatForever(autoreverses: true)
