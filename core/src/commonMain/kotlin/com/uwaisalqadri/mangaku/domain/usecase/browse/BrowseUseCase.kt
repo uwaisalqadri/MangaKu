@@ -4,6 +4,6 @@ import com.uwaisalqadri.mangaku.domain.model.Manga
 import kotlinx.coroutines.flow.Flow
 
 interface BrowseUseCase {
-    suspend fun getManga(): Flow<List<Manga>>
+    suspend fun getManga(): List<Manga>
     suspend fun getTrendingManga(): Flow<List<Manga>>
 }

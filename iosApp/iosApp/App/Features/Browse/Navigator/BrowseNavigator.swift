@@ -15,7 +15,7 @@ struct BrowseNavigator {
     self.asssembler = asssembler
   }
 
-  func navigateToBrowseView() -> some View {
+  @MainActor func navigateToBrowseView() -> some View {
     BrowseView(viewModel: asssembler.resolve(), navigator: self)
   }
 
