@@ -111,8 +111,30 @@ func fetchTrendingManga() {
     }.store(in: &cancellables)
 }
 
+```
+
+or even better, you can use `asyncFunction` / `asyncResult` / `asyncStream` function to collect coroutine flow as new swift's concurrency features, checkout branch **feat/experimenting-swift-new-concurrency** to see the example
+
+**combining two powerful concurrency feature from both native framework, how cool is that !?**
 
 ```
+  func fetchManga() {
+    Task {
+      trendingManga = .loading
+      let manga = await asyncResult(for: browseUseCase.getMangaNative())
+      switch manga {
+      case .success(let data):
+        trendingManga = .success(data: data)
+      case .failure(let error):
+        trendingManga = .error(error: error)
+      }
+    }
+  }
+
+```
+
+learn more: https://github.com/rickclephas/KMP-NativeCoroutines
+
 ## <a name="expect-actual"></a> 🚀 Expect and Actual
 in KMM, there is a negative case when there's no support to share code for some feature in both ios and android, and it's expensive to write separately in each module
 
@@ -165,8 +187,6 @@ yes, we can use `Foundation` same as what we use in Xcode
 
 * `data`
   - `mapper`
-    - `entity`
-    - `response`
   - `repository`
   - `source`
     - `local`
@@ -205,6 +225,7 @@ yes, we can use `Foundation` same as what we use in Xcode
  - `Utils`
  - `Features`
     - `Browse`
+        - `Navigator`
         - `Views`
     - `Search`
     - `Detail`
