@@ -60,8 +60,5 @@ struct SearchView: View {
     .onSubmit(of: .search) {
       viewModel.fetchSearchManga(query: searchQuery.isEmpty ? "naruto" : searchQuery)
     }
-    .onAppear {
-      viewModel.fetchSearchManga(query: "naruto")
-    }
   }
 }

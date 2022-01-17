@@ -23,34 +23,21 @@ class BrowseViewModel: ObservableObject {
   init(browseUseCase: BrowseUseCase) {
     self.browseUseCase = browseUseCase
 
-    fetchManga()
+    fetchTrendingManga()
   }
 
-  func fetchManga() {
+  func fetchTrendingManga() {
     Task {
       trendingManga = .loading
-      let manga = await asyncResult(for: browseUseCase.getMangaNative())
-      switch manga {
-      case .success(let data):
-        trendingManga = .success(data: data)
-      case .failure(let error):
+      do {
+        let nativeFlow = try await asyncFunction(for: browseUseCase.getTrendingMangaNative())
+        let stream = asyncStream(for: nativeFlow)
+        for try await data in stream {
+          trendingManga = .success(data: data)
+        }
+      } catch {
         trendingManga = .error(error: error)
       }
     }
-  }
-  
-  func fetchTrendingManga() {
-    trendingManga = .loading
-    createPublisher(for: browseUseCase.getTrendingMangaNative())
-      .receive(on: DispatchQueue.main)
-      .sink { completion in
-        switch completion {
-        case .finished: ()
-        case .failure(let error):
-          self.trendingManga = .error(error: error)
-        }
-      } receiveValue: { value in
-        self.trendingManga = .success(data: value)
-      }.store(in: &cancellables)
   }
 }

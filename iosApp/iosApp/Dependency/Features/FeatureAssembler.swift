@@ -13,13 +13,13 @@ protocol FeatureAssembler {
   @MainActor func resolve() -> BrowseViewModel
   func resolve() -> BrowseNavigator
 
-  func resolve() -> MyMangaViewModel
+  @MainActor func resolve() -> MyMangaViewModel
   func resolve() -> MyMangaNavigator
 
-  func resolve() -> SearchViewModel
+  @MainActor func resolve() -> SearchViewModel
   func resolve() -> SearchNavigator
 
-  func resolve() -> DetailViewModel
+  @MainActor func resolve() -> DetailViewModel
   func resolve() -> DetailNavigator
 }
 
@@ -33,7 +33,7 @@ extension FeatureAssembler where Self: Assembler {
     return BrowseNavigator(asssembler: self)
   }
 
-  func resolve() -> MyMangaViewModel {
+  @MainActor func resolve() -> MyMangaViewModel {
     return MyMangaViewModel(myMangaUseCase: resolve())
   }
 
@@ -41,7 +41,7 @@ extension FeatureAssembler where Self: Assembler {
     return MyMangaNavigator(assembler: self)
   }
 
-  func resolve() -> SearchViewModel {
+  @MainActor func resolve() -> SearchViewModel {
     return SearchViewModel(searcUseCase: resolve())
   }
 
@@ -49,7 +49,7 @@ extension FeatureAssembler where Self: Assembler {
     return SearchNavigator(assembler: self)
   }
 
-  func resolve() -> DetailViewModel {
+  @MainActor func resolve() -> DetailViewModel {
     return DetailViewModel(detailUseCase: resolve())
   }
 

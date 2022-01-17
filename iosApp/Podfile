@@ -1,6 +1,6 @@
 target 'iosApp' do
   use_frameworks!
-  platform :ios, '14.1'
+  platform :ios, '15.0'
   pod 'core', :path => '../core'
   pod 'KMPNativeCoroutinesCombine'  # Combine implementation
   pod 'SDWebImageSwiftUI'

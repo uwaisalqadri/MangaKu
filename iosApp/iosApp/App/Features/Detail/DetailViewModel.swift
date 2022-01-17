@@ -8,9 +8,10 @@
 
 import Foundation
 import KotlinCore
-import KMPNativeCoroutinesCombine
+import KMPNativeCoroutinesAsync
 import Combine
 
+@MainActor
 class DetailViewModel: ObservableObject {
 
   @Published var manga: ViewState<Manga> = .initiate
@@ -23,22 +24,22 @@ class DetailViewModel: ObservableObject {
   }
 
   func fetchManga(mangaId: String) {
-    manga = .loading
-    createPublisher(for: detailUseCase.getDetailMangaNative(mangaId: mangaId))
-      .receive(on: DispatchQueue.main)
-      .sink { completion in
-        switch completion {
-        case .finished: ()
-        case .failure(let error):
-          self.manga = .error(error: error)
+    Task {
+      manga = .loading
+      do {
+        let nativeFlow = try await asyncFunction(for: detailUseCase.getDetailMangaNative(mangaId: mangaId))
+        let stream = asyncStream(for: nativeFlow)
+        for try await value in stream {
+          if let manga = value, value != nil {
+            self.manga = .success(data: manga)
+          } else {
+            self.manga = .empty
+          }
         }
-      } receiveValue: { value in
-        if let manga = value, value != nil {
-          self.manga = .success(data: manga)
-        } else {
-          self.manga = .empty
-        }
-      }.store(in: &cancellables)
+      } catch {
+        manga = .error(error: error)
+      }
+    }
   }
 
 }

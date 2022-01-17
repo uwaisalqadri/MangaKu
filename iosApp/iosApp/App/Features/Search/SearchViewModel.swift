@@ -9,8 +9,9 @@
 import Foundation
 import KotlinCore
 import Combine
-import KMPNativeCoroutinesCombine
+import KMPNativeCoroutinesAsync
 
+@MainActor
 class SearchViewModel: ObservableObject {
 
   @Published var listManga: ViewState<[Manga]> = .initiate
@@ -23,17 +24,18 @@ class SearchViewModel: ObservableObject {
   }
 
   func fetchSearchManga(query: String) {
-    listManga = .loading
-    createPublisher(for: searcUseCase.getSearchMangaNative(query: query))
-      .receive(on: DispatchQueue.main)
-      .sink { completion in
-        switch completion {
-        case .finished: ()
-        case .failure(let error):
-          self.listManga = .error(error: error)
+    Task {
+      listManga = .loading
+      do {
+        let nativeFlow = try await asyncFunction(for: searcUseCase.getSearchMangaNative(query: query))
+        let stream = asyncStream(for: nativeFlow)
+        for try await value in stream {
+          listManga = value.isEmpty ? .empty : .success(data: value)
         }
-      } receiveValue: { value in
-        self.listManga = value.isEmpty ? .empty : .success(data: value)
-      }.store(in: &cancellables)
+      } catch {
+        listManga = .error(error: error)
+      }
+    }
   }
+
 }

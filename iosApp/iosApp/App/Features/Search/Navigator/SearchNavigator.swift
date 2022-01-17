@@ -16,11 +16,11 @@ struct SearchNavigator {
     self.assembler = assembler
   }
 
-  func navigateToSearchView() -> some View {
+  @MainActor func navigateToSearchView() -> some View {
     SearchView(viewModel: assembler.resolve(), navigator: self)
   }
 
-  func navigateToDetailView(mangaId: String) -> some View {
+  @MainActor func navigateToDetailView(mangaId: String) -> some View {
     let navigator: DetailNavigator = assembler.resolve()
     return navigator.navigateToDetailView(mangaId: mangaId)
   }

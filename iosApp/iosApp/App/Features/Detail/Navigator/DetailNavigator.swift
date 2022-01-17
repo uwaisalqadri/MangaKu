@@ -15,7 +15,7 @@ struct DetailNavigator {
     self.assembler = assembler
   }
 
-  func navigateToDetailView(mangaId: String) -> some View {
+  @MainActor func navigateToDetailView(mangaId: String) -> some View {
     DetailView(viewModel: assembler.resolve(), mangaViewModel: assembler.resolve(), mangaId: mangaId)
   }
 }

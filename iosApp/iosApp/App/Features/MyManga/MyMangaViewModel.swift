@@ -10,7 +10,9 @@ import Foundation
 import Combine
 import KotlinCore
 import KMPNativeCoroutinesCombine
+import KMPNativeCoroutinesAsync
 
+@MainActor
 class MyMangaViewModel: ObservableObject {
 
   @Published var listManga: ViewState<[Manga]> = .initiate
@@ -34,34 +36,33 @@ class MyMangaViewModel: ObservableObject {
   }
 
   func checkFavorite(mangaId: String) {
-    createPublisher(for: myMangaUseCase.getMyMangaByIdNative(mangaId: mangaId))
-      .subscribe(on: DispatchQueue.global(qos: .background))
-      .receive(on: DispatchQueue.main)
-      .sink { completion in
-        switch completion {
-        case .finished: ()
-        case .failure: ()
+    Task {
+      do {
+        let nativeFlow = try await asyncFunction(for: myMangaUseCase.getMyMangaByIdNative(mangaId: mangaId))
+        let stream = asyncStream(for: nativeFlow)
+        for try await value in stream {
+          value.forEach { item in
+            self.isFavorite = item.id == mangaId
+          }
         }
-      } receiveValue: { value in
-        value.forEach { item in
-          self.isFavorite = item.id == mangaId
-        }
-      }.store(in: &cancellables)
+      } catch {
+        print("")
+      }
+    }
   }
 
   func fetchFavoriteManga() {
-    listManga = .loading
-    createPublisher(for: myMangaUseCase.getMyMangaNative())
-      .subscribe(on: DispatchQueue.global(qos: .background))
-      .receive(on: DispatchQueue.main)
-      .sink { completion in
-        switch completion {
-        case .finished: ()
-        case .failure(let error):
-          self.listManga = .error(error: error)
+    Task {
+      listManga = .loading
+      do {
+        let nativeFlow = try await asyncFunction(for: myMangaUseCase.getMyMangaNative())
+        let stream = asyncStream(for: nativeFlow)
+        for try await value in stream {
+          listManga = value.isEmpty ? .empty : .success(data: value)
         }
-      } receiveValue: { value in
-        self.listManga = value.isEmpty ? .empty : .success(data: value)
-      }.store(in: &cancellables)
+      } catch {
+        listManga = .error(error: error)
+      }
+    }
   }
 }

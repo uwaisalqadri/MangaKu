@@ -19,12 +19,12 @@ struct BrowseNavigator {
     BrowseView(viewModel: asssembler.resolve(), navigator: self)
   }
 
-  func navigateToDetailView(mangaId: String) -> some View {
+  @MainActor func navigateToDetailView(mangaId: String) -> some View {
     let navigator: DetailNavigator = asssembler.resolve()
     return navigator.navigateToDetailView(mangaId: mangaId)
   }
 
-  func navigateToSearchView() -> some View {
+  @MainActor func navigateToSearchView() -> some View {
     let navigator: SearchNavigator = asssembler.resolve()
     return navigator.navigateToSearchView()
   }
