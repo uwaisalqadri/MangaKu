@@ -24,7 +24,7 @@ struct TabNavigationView: View {
         default:
           let navigator: BrowseNavigator = assembler.resolve()
           navigator.navigateToBrowseView()
-            .animation(.none)
+            .animation(.none, value: selectedIndex)
         }
 
         VStack {
