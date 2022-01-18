@@ -1,9 +1,9 @@
 //
-//  CarouselView.swift
+//  MangaCarouselView.swift
 //  iosApp
 //
 //  Created by Uwais Alqadri on 27/07/21.
-//  Copyright © 2021 orgName. All rights reserved.
+//  Copyright © 2021 Uwais Alqadri. All rights reserved.
 //
 
 import SwiftUI
@@ -13,13 +13,13 @@ struct MangaCarouselView: View {
   @GestureState private var dragState = DragState.inactive
   @State var carouselLocation = 0
 
+  var itemWidth: CGFloat
   var itemHeight: CGFloat
   var views: [AnyView]
 
-
   private func onDragEnded(drag: DragGesture.Value) {
-    print("drag ended")
-    let dragThreshold:CGFloat = 200
+    let dragThreshold: CGFloat = 200
+
     if drag.predictedEndTranslation.width > dragThreshold || drag.translation.width > dragThreshold{
       carouselLocation =  carouselLocation - 1
     } else if (drag.predictedEndTranslation.width) < (-1 * dragThreshold) || (drag.translation.width) < (-1 * dragThreshold)
@@ -28,47 +28,44 @@ struct MangaCarouselView: View {
     }
   }
 
-
-
   var body: some View {
+
     ZStack {
       VStack {
         ZStack {
-          ForEach(0..<views.count) { i in
+          ForEach(0..<views.count) { index in
             VStack {
               Spacer()
-              self.views[i]
-                //Text("\(i)")
 
-                .frame(width: 240, height: self.getHeight(i))
-                .animation(.interpolatingSpring(stiffness: 300.0, damping: 30.0, initialVelocity: 10.0))
+              let interpolatingSpring: Animation? = .interpolatingSpring(stiffness: 300.0, damping: 30.0, initialVelocity: 10.0)
+
+              views[index]
+                .frame(width: itemWidth, height: getHeight(index))
+                .animation(interpolatingSpring, value: carouselLocation)
                 .background(Color.white)
-                .shadow(radius: 3)
+                .cornerRadius(12)
+                .shadow(radius: 5)
 
+                .opacity(getOpacity(index))
+                .animation(interpolatingSpring, value: carouselLocation)
+                .offset(x: getOffset(index))
+                .animation(interpolatingSpring, value: carouselLocation)
 
-                .opacity(self.getOpacity(i))
-                .animation(.interpolatingSpring(stiffness: 300.0, damping: 30.0, initialVelocity: 10.0))
-                .offset(x: self.getOffset(i))
-                .animation(.interpolatingSpring(stiffness: 300.0, damping: 30.0, initialVelocity: 10.0))
               Spacer()
             }
           }
-
         }.gesture(
-
           DragGesture()
             .updating($dragState) { drag, state, transaction in
               state = .dragging(translation: drag.translation)
-            }
-            .onEnded(onDragEnded)
-
+            }.onEnded(onDragEnded)
         )
 
         Spacer()
       }
       VStack {
         Spacer()
-        Spacer().frame(height:itemHeight + 50)
+        Spacer().frame(height: itemHeight + 50)
         Spacer()
       }
     }
@@ -88,7 +85,6 @@ struct MangaCarouselView: View {
 
 
   func getOpacity(_ i:Int) -> Double{
-
     if i == relativeLoc()
         || i + 1 == relativeLoc()
         || i - 1 == relativeLoc()
@@ -179,12 +175,7 @@ struct MangaCarouselView: View {
       return 10000
     }
   }
-
-
 }
-
-
-
 
 
 enum DragState {

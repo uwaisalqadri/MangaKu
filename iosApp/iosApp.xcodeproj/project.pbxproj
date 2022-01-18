@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -44,7 +44,7 @@
 		913390402780601700DB8E19 /* SearchNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9133903F2780601700DB8E19 /* SearchNavigator.swift */; };
 		913390432780607B00DB8E19 /* DetailNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913390422780607B00DB8E19 /* DetailNavigator.swift */; };
 		913390462780611D00DB8E19 /* MyMangaNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913390452780611D00DB8E19 /* MyMangaNavigator.swift */; };
-		91729222275BB94D000F5259 /* ACarousel in Frameworks */ = {isa = PBXBuildFile; productRef = 91729221275BB94D000F5259 /* ACarousel */; };
+		91745D0C2796897B00B29DC3 /* MangaCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91745D0B2796897A00B29DC3 /* MangaCarouselView.swift */; };
 		91B7E9892782C13500DCDB19 /* ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B7E9882782C13500DCDB19 /* ViewState.swift */; };
 		979C3D075D326522E98CB9AD /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7409001EFEE5792C2EC13B64 /* Pods_iosApp.framework */; };
 /* End PBXBuildFile section */
@@ -92,7 +92,7 @@
 		9133903F2780601700DB8E19 /* SearchNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchNavigator.swift; sourceTree = "<group>"; };
 		913390422780607B00DB8E19 /* DetailNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailNavigator.swift; sourceTree = "<group>"; };
 		913390452780611D00DB8E19 /* MyMangaNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMangaNavigator.swift; sourceTree = "<group>"; };
-		9181D76927587B5900AB983E /* ACarousel */ = {isa = PBXFileReference; lastKnownFileType = text; path = ACarousel; sourceTree = SOURCE_ROOT; };
+		91745D0B2796897A00B29DC3 /* MangaCarouselView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MangaCarouselView.swift; sourceTree = "<group>"; };
 		91B7E9882782C13500DCDB19 /* ViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewState.swift; sourceTree = "<group>"; };
 		B8015A9E89A7779AB6015FE1 /* Pods-iosApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.release.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -102,7 +102,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				91729222275BB94D000F5259 /* ACarousel in Frameworks */,
 				979C3D075D326522E98CB9AD /* Pods_iosApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -198,7 +197,6 @@
 		5246F3AD26AB9C9E00CCDA56 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				9181D76927587B5900AB983E /* ACarousel */,
 				52EBD6EA26AE845D00E1C28F /* Fonts.swift */,
 				7555FF8C242A565B00829871 /* Info.plist */,
 				5246F3AF26AB9D0600CCDA56 /* Assets.xcassets */,
@@ -244,7 +242,7 @@
 			isa = PBXGroup;
 			children = (
 				913390442780610A00DB8E19 /* Navigator */,
-				5273469F26F35F1B007F3C53 /* View */,
+				91745D0A2796897A00B29DC3 /* Views */,
 				52B7691D26ABCE9D00227903 /* MyMangaView.swift */,
 				52B7692426ABCECD00227903 /* MyMangaViewModel.swift */,
 			);
@@ -271,15 +269,6 @@
 				52EA568A26F4A82400C8F458 /* LottieView.swift */,
 			);
 			path = ReusableViews;
-			sourceTree = "<group>";
-		};
-		5273469F26F35F1B007F3C53 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				527346A026F35F3C007F3C53 /* LayoutSwitch.swift */,
-				526B7D0B26F4361A0035A14A /* GridItemView.swift */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		527F3BA226F0AB0E0020F8CB /* Detail */ = {
@@ -361,6 +350,16 @@
 			path = Navigator;
 			sourceTree = "<group>";
 		};
+		91745D0A2796897A00B29DC3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				527346A026F35F3C007F3C53 /* LayoutSwitch.swift */,
+				526B7D0B26F4361A0035A14A /* GridItemView.swift */,
+				91745D0B2796897A00B29DC3 /* MangaCarouselView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -380,7 +379,6 @@
 			);
 			name = iosApp;
 			packageProductDependencies = (
-				91729221275BB94D000F5259 /* ACarousel */,
 			);
 			productName = iosApp;
 			productReference = 7555FF7B242A565900829871 /* iosApp.app */;
@@ -495,6 +493,7 @@
 				52EBD6D826AE645E00E1C28F /* GenreView.swift in Sources */,
 				52B7692826ABCEE200227903 /* SearchViewModel.swift in Sources */,
 				526B7D0C26F4361A0035A14A /* GridItemView.swift in Sources */,
+				91745D0C2796897B00B29DC3 /* MangaCarouselView.swift in Sources */,
 				52B7691826ABCE6F00227903 /* BrowseView.swift in Sources */,
 				91B7E9892782C13500DCDB19 /* ViewState.swift in Sources */,
 				9133903A27804F4700DB8E19 /* Error.swift in Sources */,
@@ -698,13 +697,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		91729221275BB94D000F5259 /* ACarousel */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = ACarousel;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 7555FF73242A565900829871 /* Project object */;
 }

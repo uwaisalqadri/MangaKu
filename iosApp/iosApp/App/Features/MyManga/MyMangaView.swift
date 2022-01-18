@@ -9,14 +9,13 @@
 import SwiftUI
 import KotlinCore
 import SDWebImageSwiftUI
-import ACarousel
 
 struct MyMangaView: View {
 
   @ObservedObject var viewModel: MyMangaViewModel
-  let navigator: MyMangaNavigator
   @State var isSlide = true
 
+  let navigator: MyMangaNavigator
   private let extensions = Extensions()
 
   var body: some View {
@@ -33,26 +32,13 @@ struct MyMangaView: View {
 
           if case .success(let data) = viewModel.listManga {
             if isSlide {
-              ZStack(alignment: Alignment(horizontal: .center, vertical: .top)) {
-                ACarousel(
-                  data,
-                  id: \.self,
-                  spacing: 20,
-                  headspace: 50,
-                  isWrap: true) { manga in
 
-                    WebImage(url: URL(string: extensions.getPosterImage(manga: manga)))
-                      .resizable()
-                      .indicator(.activity)
-                      .cornerRadius(12)
-                      .overlay(
-                        MyMangaContentView(manga: manga, extensions: extensions)
-                      )
-
-                  }.frame(height: view.size.height / 2)
-                  .padding(.top, 50)
-
-              }.padding(.top, 5)
+              MangaCarouselView(
+                itemWidth: 240,
+                itemHeight: 361,
+                views: getMangaItemView(items: data)
+              ).frame(width: view.size.width, height: view.size.height / 2)
+              .padding(.top, 50)
 
             } else {
               LazyVGrid(columns: [
@@ -82,6 +68,24 @@ struct MyMangaView: View {
         viewModel.fetchFavoriteManga()
       }
     }
+  }
+
+  private func getMangaItemView(items: [Manga]) -> [AnyView] {
+    var anyViews = [AnyView]()
+
+    items.forEach { manga in
+      anyViews.append(AnyView(
+        WebImage(url: URL(string: extensions.getPosterImage(manga: manga)))
+          .resizable()
+          .indicator(.activity)
+          .cornerRadius(12)
+          .overlay(
+            MyMangaContentView(manga: manga, extensions: extensions)
+          )
+      ))
+    }
+
+    return anyViews
   }
 }
 

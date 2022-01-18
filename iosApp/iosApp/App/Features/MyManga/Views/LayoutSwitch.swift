@@ -28,7 +28,7 @@ struct LayoutSwitch: View {
           .background(
             RoundedRectangle(cornerRadius: 10)
               .foregroundColor(isSlide ? .init(.systemGray6) : .white)
-              .shadow(radius: 5)
+              .shadow(radius: 3)
           )
           .padding(.trailing, 3)
       }.disabled(isSlide)
@@ -45,7 +45,7 @@ struct LayoutSwitch: View {
           .background(
             RoundedRectangle(cornerRadius: 10)
               .foregroundColor(!isSlide ? .init(.systemGray6) : .white)
-              .shadow(radius: 5)
+              .shadow(radius: 3)
           )
           .padding(.leading, 3)
       }.disabled(!isSlide)
