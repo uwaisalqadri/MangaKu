@@ -118,14 +118,16 @@ or even better, you can use `asyncFunction` / `asyncResult` / `asyncStream` func
 **combining two powerful concurrency feature from both native framework, how cool is that !?**
 
 ```
-  func fetchManga() {
+func fetchTrendingManga() {
     Task {
       trendingManga = .loading
-      let manga = await asyncResult(for: browseUseCase.getMangaNative())
-      switch manga {
-      case .success(let data):
-        trendingManga = .success(data: data)
-      case .failure(let error):
+      do {
+        let nativeFlow = try await asyncFunction(for: browseUseCase.getTrendingMangaNative())
+        let stream = asyncStream(for: nativeFlow)
+        for try await data in stream {
+          trendingManga = .success(data: data)
+        }
+      } catch {
         trendingManga = .error(error: error)
       }
     }
