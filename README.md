@@ -113,7 +113,7 @@ func fetchTrendingManga() {
 
 ```
 
-or even better, you can use `asyncFunction` / `asyncResult` / `asyncStream` function to collect coroutine flow as new swift's concurrency features, checkout branch **feat/experimenting-swift-new-concurrency** to see the example
+or even better, you can use `asyncFunction` / `asyncResult` / `asyncStream` function to collect coroutine flow as new swift's concurrency features, ~~checkout branch **feat/experimenting-swift-new concurrency** to see the example~~
 
 **combining two powerful concurrency feature from both native framework, how cool is that !?**
 
