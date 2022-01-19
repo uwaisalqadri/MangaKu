@@ -8,7 +8,7 @@ object Versions {
 
     const val compose = "1.0.5"
     const val activityCompose = "1.3.1"
-    const val navCompose = "2.4.0-alpha08"
+    const val navCompose = "2.4.0-rc01"
     const val voyager = "1.0.0-beta13"
     const val coilAccompanist = "0.13.0"
     const val pagerAccompanist = "0.18.0"

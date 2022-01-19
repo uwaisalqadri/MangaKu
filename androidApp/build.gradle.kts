@@ -1,5 +1,6 @@
 plugins {
     id("com.android.application")
+    id("com.google.devtools.ksp") version "1.5.31-1.0.0"
     kotlin("android")
 }
 
@@ -55,8 +56,21 @@ android {
     }
 }
 
+kotlin {
+    sourceSets {
+        debug {
+            kotlin.srcDir("build/generated/ksp/debug/kotlin")
+        }
+        release {
+            kotlin.srcDir("build/generated/ksp/release/kotlin")
+        }
+    }
+}
+
 dependencies {
     implementation(project(":core"))
+    implementation("io.github.raamcosta.compose-destinations:core:1.1.5-beta")
+    ksp("io.github.raamcosta.compose-destinations:ksp:1.1.5-beta")
 
     with(Dependencies) {
         implementation(androidMaterial)
