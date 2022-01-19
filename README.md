@@ -64,16 +64,15 @@ A few things you can do with MangaKu:
 * [Kermit](https://github.com/touchlab/Kermit)
 
 `iosApp`:
-* [Combine](https://developer.apple.com/documentation/combine)
+* [Swift's New Concurrency](https://developer.apple.com/news/?id=2o3euotz)
 * [SDWebImage](https://github.com/SDWebImage/SDWebImage)
-* [Lottie-iOS](https://github.com/airbnb/lottie-ios)
 * [SwiftUI](https://developer.apple.com/documentation/swiftui)
 
 `androidApp`:
 * [Jetpack Compose](https://developer.android.com/jetpack/compose)
 * [Accompanist](https://github.com/google/accompanist)
 * [Koin](https://github.com/InsertKoinIO/koin)
-* [Voyager](https://github.com/adrielcafe/voyager)
+* [Compose Destinations](https://github.com/raamcosta/compose-destinations)
 * Some Kotlinx & Jetpack Components
 
 ## <a name="domain-to-presentation"></a> 💨 Domain to Presentation
