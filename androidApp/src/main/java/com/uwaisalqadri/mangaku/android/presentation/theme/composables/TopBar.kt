@@ -1,11 +1,8 @@
 package com.uwaisalqadri.mangaku.android.presentation.theme.composables
 
 import androidx.annotation.DrawableRes
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -38,14 +35,19 @@ fun TopBar(
         Spacer(modifier = Modifier.width(if (icon != null) 100.dp else 200.dp))
 
         if (icon != null) {
-            Icon(
-                painter = painterResource(id = icon),
-                tint = MaterialTheme.colors.secondary,
-                contentDescription = null,
-                modifier = Modifier.clickable {
+            Button(
+                elevation = ButtonDefaults.elevation(0.dp, 0.dp),
+                onClick = {
                     if (onIconClick != null) onIconClick()
                 }
-            )
+            ) {
+                Icon(
+                    painter = painterResource(id = icon),
+                    tint = MaterialTheme.colors.secondary,
+                    contentDescription = null
+                )
+            }
         }
+
     }
 }

@@ -3,7 +3,10 @@ package com.uwaisalqadri.mangaku.android.presentation.theme.composables
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -23,10 +26,11 @@ fun BackButton(
     modifier: Modifier = Modifier,
     onBackClick: () -> Unit
 ) {
-    Box(
-        contentAlignment = Alignment.Center,
-        modifier = modifier
-            .clickable { onBackClick() }
+    Button(
+        elevation = ButtonDefaults.elevation(0.dp, 0.dp),
+        onClick = {
+          onBackClick()
+        }
     ) {
         Row {
             Icon(
@@ -45,4 +49,5 @@ fun BackButton(
             )
         }
     }
+
 }

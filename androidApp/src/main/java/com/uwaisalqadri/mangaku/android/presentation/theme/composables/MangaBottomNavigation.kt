@@ -67,8 +67,8 @@ fun MangaBottomNavigation(
 
                 BottomNavigationItem(
                     icon = { Icon(painterResource(id = item.icon), contentDescription = item.title) },
-                    selectedContentColor = Color.White,
-                    unselectedContentColor = Color.White.copy(0.4f),
+                    selectedContentColor = MaterialTheme.colors.secondary,
+                    unselectedContentColor = MaterialTheme.colors.secondary.copy(0.4f),
                     alwaysShowLabel = false,
                     selected = currentRoute == item.route,
                     onClick = {

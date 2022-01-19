@@ -34,7 +34,9 @@ fun MyMangaScreen(
     var state by remember { mutableStateOf(true) }
 
     LazyColumn(
-        modifier = Modifier.background(color = MaterialTheme.colors.primary)
+        modifier = Modifier
+            .fillMaxHeight()
+            .background(color = MaterialTheme.colors.primary)
     ) {
 
         viewModel.getMyManga()

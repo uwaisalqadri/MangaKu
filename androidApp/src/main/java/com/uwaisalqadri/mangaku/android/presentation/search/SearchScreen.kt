@@ -29,13 +29,14 @@ fun SearchScreen(
     var query by viewModel.query
 
     LazyColumn(
-        modifier = Modifier.background(color = MaterialTheme.colors.primary)
+        modifier = Modifier
+            .fillMaxHeight()
+            .background(color = MaterialTheme.colors.primary)
+            .padding(top = 20.dp, bottom = 20.dp, start = 10.dp, end = 10.dp)
     ) {
 
         item {
-            BackButton(
-                modifier = Modifier.padding(start = 25.dp, top = 25.dp)
-            ) {
+            BackButton {
                 navigator.popBackStack()
             }
         }

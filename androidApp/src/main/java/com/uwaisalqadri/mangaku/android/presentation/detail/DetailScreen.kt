@@ -3,10 +3,12 @@ package com.uwaisalqadri.mangaku.android.presentation.detail
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
+import androidx.compose.material.Button
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -74,28 +76,31 @@ fun DetailScreen(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(start = 25.dp, top = 25.dp, end = 25.dp)
+                    .padding(start = 12.dp, top = 25.dp, end = 25.dp)
             ) {
                 BackButton {
                     navigator.popBackStack()
                 }
 
-                Icon(
-                    imageVector = if (isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
-                    contentDescription = null,
-                    tint = Color.Red,
-                    modifier = Modifier
-                        .size(25.dp)
-                        .clickable {
-                            setShowDialog(true)
-                            if (!detailManga.loading) {
-                                detailManga.data?.let {
-                                    if (isFavorite) mangaViewModel.deleteMyManga(it.id)
-                                    else mangaViewModel.addMyManga(it)
-                                }
+                Button(
+                    elevation = ButtonDefaults.elevation(0.dp, 0.dp),
+                    onClick = {
+                        setShowDialog(true)
+                        if (!detailManga.loading) {
+                            detailManga.data?.let {
+                                if (isFavorite) mangaViewModel.deleteMyManga(it.id)
+                                else mangaViewModel.addMyManga(it)
                             }
                         }
-                )
+                    }
+                ) {
+                    Icon(
+                        imageVector = if (isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
+                        contentDescription = null,
+                        tint = Color.Red,
+                        modifier = Modifier.size(25.dp),
+                    )
+                }
             }
         }
 

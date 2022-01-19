@@ -13,12 +13,14 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.uwaisalqadri.mangaku.android.R
@@ -41,6 +43,9 @@ fun SearchField(
         modifier = modifier
     ) {
 
+        val configuration = LocalConfiguration.current
+        val screenWidth = configuration.screenWidthDp
+
         var text by remember { mutableStateOf(placeholder) }
 
         Text(
@@ -48,13 +53,12 @@ fun SearchField(
             style = MangaTypography.h3,
             color = MaterialTheme.colors.secondary,
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxWidth()
                 .clickable { text = "" }
                 .padding(
                     start = 60.dp,
                     end = 10.dp,
                     top = 11.dp,
-                    bottom = 5.dp
                 )
         )
 
@@ -102,28 +106,43 @@ fun SearchField(
 
                 modifier = Modifier
                     .padding(start = 10.dp, end = 10.dp, top = 11.dp, bottom = 5.dp)
-                    .width(230.dp)
+                    .width((screenWidth - 150).dp)
                     .height(30.dp)
             )
 
             if (query != "") {
                 Icon(
-                    painter = painterResource(id = android.R.drawable.ic_menu_close_clear_cancel),
+                    painter = painterResource(id = R.drawable.ic_cancel),
                     contentDescription = null,
                     tint = MaterialTheme.colors.secondary,
                     modifier = Modifier
-                        .size(30.dp)
-                        .padding(end = 10.dp)
+                        .size(20.dp)
                         .clickable {
                             onEraseQuery()
                         }
                 )
             }
+
+            Spacer(modifier = Modifier.width(10.dp))
+
         }
     }
 }
 
-
+@Preview
+@Composable
+fun SearchFieldPreview() {
+    SearchField(
+        query = "Mencari Manga oke mantap",
+        placeholder = "Search All Manga..",
+        onQueryChanged = {  },
+        onExecuteSearch = {  },
+        onEraseQuery = {  },
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 20.dp, vertical = 20.dp)
+    )
+}
 
 
 
