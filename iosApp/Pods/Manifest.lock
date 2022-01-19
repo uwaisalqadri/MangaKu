@@ -3,7 +3,6 @@ PODS:
   - KMPNativeCoroutinesAsync (0.9.0):
     - KMPNativeCoroutinesCore (= 0.9.0)
   - KMPNativeCoroutinesCore (0.9.0)
-  - lottie-ios (3.2.3)
   - SDWebImage (5.12.1):
     - SDWebImage/Core (= 5.12.1)
   - SDWebImage/Core (5.12.1)
@@ -13,14 +12,12 @@ PODS:
 DEPENDENCIES:
   - core (from `../core`)
   - KMPNativeCoroutinesAsync
-  - lottie-ios
   - SDWebImageSwiftUI
 
 SPEC REPOS:
   trunk:
     - KMPNativeCoroutinesAsync
     - KMPNativeCoroutinesCore
-    - lottie-ios
     - SDWebImage
     - SDWebImageSwiftUI
 
@@ -32,10 +29,9 @@ SPEC CHECKSUMS:
   core: b5f0bc96105a71cc477b4e2c6fb1056042127bb3
   KMPNativeCoroutinesAsync: dab1affe55b5d9cbc140768870ff163d299f6f95
   KMPNativeCoroutinesCore: a9abca92a371f0c1af62bfb06c94c943ad515114
-  lottie-ios: c058aeafa76daa4cf64d773554bccc8385d0150e
   SDWebImage: 4dc3e42d9ec0c1028b960a33ac6b637bb432207b
   SDWebImageSwiftUI: 8a3923c95108312b03a599ec1498754af55a6819
 
-PODFILE CHECKSUM: 5d5a772e1b09ca2275c738c0d1041c9e045ef1c7
+PODFILE CHECKSUM: 9b6074216fc9d6eb5663571464f520d72133db2d
 
 COCOAPODS: 1.11.2

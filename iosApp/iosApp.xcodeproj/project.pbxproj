@@ -28,7 +28,6 @@
 		52B7692826ABCEE200227903 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B7692726ABCEE200227903 /* SearchViewModel.swift */; };
 		52EA567D26F49EA700C8F458 /* CustomDialogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EA567C26F49EA700C8F458 /* CustomDialogView.swift */; };
 		52EA568026F49EC500C8F458 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EA567F26F49EC500C8F458 /* View.swift */; };
-		52EA568B26F4A82400C8F458 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EA568A26F4A82400C8F458 /* LottieView.swift */; };
 		52EBD6D526AE5A5900E1C28F /* MangaItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBD6D426AE5A5900E1C28F /* MangaItemView.swift */; };
 		52EBD6D826AE645E00E1C28F /* GenreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBD6D726AE645E00E1C28F /* GenreView.swift */; };
 		52EBD6EB26AE845D00E1C28F /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBD6EA26AE845D00E1C28F /* Fonts.swift */; };
@@ -72,7 +71,6 @@
 		52D35B8D26ECF6F5007B1D81 /* ACarousel */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ACarousel; sourceTree = "<group>"; };
 		52EA567C26F49EA700C8F458 /* CustomDialogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDialogView.swift; sourceTree = "<group>"; };
 		52EA567F26F49EC500C8F458 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
-		52EA568A26F4A82400C8F458 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		52EBD6D426AE5A5900E1C28F /* MangaItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangaItemView.swift; sourceTree = "<group>"; };
 		52EBD6D726AE645E00E1C28F /* GenreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreView.swift; sourceTree = "<group>"; };
 		52EBD6EA26AE845D00E1C28F /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
@@ -266,7 +264,6 @@
 				525295E326D0EFF800E36429 /* ShimmerView.swift */,
 				5252960426D0F9B800E36429 /* Shimmers.swift */,
 				52EA567C26F49EA700C8F458 /* CustomDialogView.swift */,
-				52EA568A26F4A82400C8F458 /* LottieView.swift */,
 			);
 			path = ReusableViews;
 			sourceTree = "<group>";
@@ -482,7 +479,6 @@
 			files = (
 				527346A126F35F3C007F3C53 /* LayoutSwitch.swift in Sources */,
 				528AC4BD26D7990300B76AA1 /* MyMangaViewModel.swift in Sources */,
-				52EA568B26F4A82400C8F458 /* LottieView.swift in Sources */,
 				5252960526D0F9B800E36429 /* Shimmers.swift in Sources */,
 				5224F40F26AC38CF00D0D6E8 /* FeatureAssembler.swift in Sources */,
 				913390402780601700DB8E19 /* SearchNavigator.swift in Sources */,

@@ -105,8 +105,11 @@ struct DetailView: View {
 
     .customDialog(isShowing: $isShowDialog) {
       VStack(alignment: .center) {
-        LottieView(name: "favorite", loopMode: .loop)
-          .frame(width: 70, height: 70)
+        Image(systemName: "heart.fill")
+          .resizable()
+          .foregroundColor(.red)
+          .frame(width: 33, height: 30)
+          .padding(.bottom, 15)
 
         Text(mangaViewModel.isFavorite ? "Added to Favorite" : "Removed from Favorite")
           .foregroundColor(.black)

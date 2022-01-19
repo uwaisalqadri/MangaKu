@@ -3,6 +3,5 @@ target 'iosApp' do
   platform :ios, '15.0'
   pod 'core', :path => '../core'
   pod 'SDWebImageSwiftUI'
-  pod 'lottie-ios'
-  pod 'KMPNativeCoroutinesAsync' 
+  pod 'KMPNativeCoroutinesAsync'
 end
