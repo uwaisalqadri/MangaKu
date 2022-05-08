@@ -1,5 +1,5 @@
 //
-//  GridItemView.swift
+//  MangaGridItem.swift
 //  iosApp
 //
 //  Created by Uwais Alqadri on 17/09/21.
@@ -10,15 +10,14 @@ import SwiftUI
 import KotlinCore
 import SDWebImageSwiftUI
 
-struct GridItemView: View {
+struct MangaGridItem: View {
 
   let manga: Manga
-  let navigator: MyMangaNavigator
-  let extensions: Extensions
+  let navigator: MyMangaRouter
 
   var body: some View {
     ZStack(alignment: .topLeading) {
-      WebImage(url: URL(string: extensions.getPosterImage(manga: manga)))
+      WebImage(url: URL(string: manga.getPosterImage()))
         .resizable()
         .indicator(.activity)
         .clipped()
@@ -31,9 +30,9 @@ struct GridItemView: View {
         HStack(alignment: .top) {
           Spacer()
 
-          NavigationLink(destination: navigator.navigateToDetailView(mangaId: manga.id)) {
+          NavigationLink(destination: navigator.routeToDetail(mangaId: manga.id)) {
             VStack(alignment: .leading) {
-              Text(extensions.getTitle(manga: manga))
+              Text(manga.getTitle())
                 .lineLimit(2)
                 .font(.custom(.mbold, size: 17))
                 .padding(.top, 20)

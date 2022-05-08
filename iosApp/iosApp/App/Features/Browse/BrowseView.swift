@@ -11,7 +11,7 @@ import SwiftUI
 struct BrowseView: View {
 
   @ObservedObject var viewModel: BrowseViewModel
-  let navigator: BrowseNavigator
+  let navigator: BrowseRouter
 
   let genres: [Genre] = [
     Genre(name: "Shonen", image: "imgShonen", query: "shonen", font: .sedgwickave),
@@ -52,8 +52,8 @@ struct BrowseView: View {
         } else if case .success(let data) = viewModel.trendingManga {
           VStack {
             ForEach(data, id: \.id) { manga in
-              NavigationLink(destination: navigator.navigateToDetailView(mangaId: manga.id)) {
-                MangaItemView(manga: manga)
+              NavigationLink(destination: navigator.routeToDetail(mangaId: manga.id)) {
+                MangaRow(manga: manga)
               }.buttonStyle(PlainButtonStyle())
             }
           }.padding(.leading, 17)
@@ -64,7 +64,7 @@ struct BrowseView: View {
     }
     .navigationBarTitle("Browse")
     .navigationBarItems(
-      trailing: NavigationLink(destination: navigator.navigateToSearchView()) {
+      trailing: NavigationLink(destination: navigator.routeToSearch()) {
         Image(systemName: "magnifyingglass")
           .resizable()
           .foregroundColor(.black)

@@ -9,21 +9,21 @@ import io.ktor.client.request.*
 class MangaApi(private val ktor: HttpClient): MangaApiClient {
 
     override suspend fun fetchManga(): MangaResponse {
-        return ktor.get("manga").body()
+        return ktor.get("api/edge/manga").body()
     }
 
     override suspend fun fetchTrendingManga(): MangaResponse {
-        return ktor.get("trending/manga").body()
+        return ktor.get("api/edge/trending/manga").body()
     }
 
     override suspend fun fetchSearchManga(query: String): MangaResponse {
-        return ktor.get("manga") {
+        return ktor.get("api/edge/manga") {
             parameter("filter[text]", query)
         }.body()
     }
 
     override suspend fun fetchDetailManga(id: String): MangaDetailResponse {
-        return ktor.get("manga/$id").body()
+        return ktor.get("api/edge/manga/$id").body()
     }
 
 }

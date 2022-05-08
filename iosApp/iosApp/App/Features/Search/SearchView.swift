@@ -12,7 +12,7 @@ struct SearchView: View {
 
   @ObservedObject var viewModel: SearchViewModel
   @State var searchQuery: String = ""
-  let navigator: SearchNavigator
+  let navigator: SearchRouter
 
   var body: some View {
     VStack {
@@ -35,8 +35,8 @@ struct SearchView: View {
 
             } else if case .success(let data) = viewModel.listManga {
               ForEach(data, id: \.id) { manga in
-                NavigationLink(destination: navigator.navigateToDetailView(mangaId: manga.id)) {
-                  SearchItemView(manga: manga)
+                NavigationLink(destination: navigator.routeToDetail(mangaId: manga.id)) {
+                  SearchRow(manga: manga)
                 }.buttonStyle(PlainButtonStyle())
               }
 

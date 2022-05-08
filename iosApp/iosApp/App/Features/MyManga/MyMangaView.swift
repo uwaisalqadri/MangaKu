@@ -15,8 +15,7 @@ struct MyMangaView: View {
   @ObservedObject var viewModel: MyMangaViewModel
   @State var isSlide = true
 
-  let navigator: MyMangaNavigator
-  private let extensions = Extensions()
+  let navigator: MyMangaRouter
 
   var body: some View {
     GeometryReader { view in
@@ -46,7 +45,7 @@ struct MyMangaView: View {
               ], alignment: .leading, spacing: 10) {
 
                 ForEach(data, id: \.self) { manga in
-                  GridItemView(manga: manga, navigator: navigator, extensions: extensions)
+                  MangaGridItem(manga: manga, navigator: navigator)
                 }
               }.padding(.horizontal, 30)
                 .padding(.top, 20)
@@ -75,12 +74,12 @@ struct MyMangaView: View {
 
     items.forEach { manga in
       anyViews.append(AnyView(
-        WebImage(url: URL(string: extensions.getPosterImage(manga: manga)))
+        WebImage(url: URL(string: manga.getPosterImage()))
           .resizable()
           .indicator(.activity)
           .cornerRadius(12)
           .overlay(
-            MyMangaContentView(manga: manga, extensions: extensions)
+            MyMangaContentView(manga: manga)
           )
       ))
     }
@@ -92,7 +91,6 @@ struct MyMangaView: View {
 struct MyMangaContentView: View {
 
   var manga: Manga
-  var extensions: Extensions
 
   var body: some View {
     ZStack(alignment: .bottomLeading) {
@@ -102,7 +100,7 @@ struct MyMangaContentView: View {
 
       VStack(alignment: .leading) {
 
-        Text(extensions.getTitle(manga: manga))
+        Text(manga.getTitle())
           .foregroundColor(.white)
           .font(.custom(.sedgwickave, size: 35))
           .multilineTextAlignment(.leading)

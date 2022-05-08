@@ -9,6 +9,8 @@
 import Foundation
 import KotlinCore
 
+typealias KtorHttpClient = Ktor_client_coreHttpClient
+
 protocol KotlinCoreAssembler {
 
   // domain
@@ -21,6 +23,7 @@ protocol KotlinCoreAssembler {
   func resolve() -> MangaRepository
   func resolve() -> MangaApiClient
   func resolve() -> MangaPersistence
+  func resolve() -> KtorHttpClient
 }
 
 extension KotlinCoreAssembler where Self: Assembler {
@@ -49,10 +52,14 @@ extension KotlinCoreAssembler where Self: Assembler {
   }
 
   func resolve() -> MangaApiClient {
-    return MangaApi(ktor: CoreModuleKt.createKtorClient(json: CoreModuleKt.createJson()))
+    return MangaApi(ktor: resolve())
   }
 
   func resolve() -> MangaPersistence {
     return MangaPersistenceContainer(realm: CoreModuleKt.createRealmDatabase())
+  }
+
+  func resolve() -> KtorHttpClient {
+    return CoreModuleKt.createKtorClient(httpClientEngine: KtorEngineKt.getDarwinEngine(), json: CoreModuleKt.createJson())
   }
 }

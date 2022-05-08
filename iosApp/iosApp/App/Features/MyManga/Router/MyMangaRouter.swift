@@ -1,5 +1,5 @@
 //
-//  MyMangaNavigator.swift
+//  MyMangaRouter.swift
 //  iosApp
 //
 //  Created by Uwais Alqadri on 1/1/22.
@@ -8,19 +8,19 @@
 
 import SwiftUI
 
-struct MyMangaNavigator {
+struct MyMangaRouter {
   private let assembler: Assembler
 
   init(assembler: Assembler) {
     self.assembler = assembler
   }
 
-  @MainActor func navigateToMyManga() -> some View {
+  @MainActor func routeToMyManga() -> some View {
     MyMangaView(viewModel: assembler.resolve(), navigator: self)
   }
 
-  @MainActor func navigateToDetailView(mangaId: String) -> some View {
-    let navigator: DetailNavigator = assembler.resolve()
-    return navigator.navigateToDetailView(mangaId: mangaId)
+  @MainActor func routeToDetail(mangaId: String) -> some View {
+    let navigator: DetailRouter = assembler.resolve()
+    return navigator.routeToDetail(mangaId: mangaId)
   }
 }

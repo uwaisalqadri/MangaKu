@@ -14,7 +14,7 @@ object Versions {
     const val pagerAccompanist = "0.15.0"
     const val kermit = "0.1.9"
     const val koin = "3.1.4"
-    const val coroutine = "1.5.2-native-mt"
+    const val coroutine = "1.6.0-native-mt"
     const val serialization = "1.3.0"
     const val dateTime = "0.3.1"
     const val ktor = "2.0.0"

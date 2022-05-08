@@ -19,11 +19,11 @@ struct TabNavigationView: View {
       ZStack {
         switch selectedIndex {
         case 1:
-          let navigator: MyMangaNavigator = assembler.resolve()
-          navigator.navigateToMyManga()
+          let navigator: MyMangaRouter = assembler.resolve()
+          navigator.routeToMyManga()
         default:
-          let navigator: BrowseNavigator = assembler.resolve()
-          navigator.navigateToBrowseView()
+          let navigator: BrowseRouter = assembler.resolve()
+          navigator.routeToBrowse()
             .animation(.none, value: selectedIndex)
         }
 

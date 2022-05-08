@@ -1,5 +1,5 @@
 //
-//  SearchNavigator.swift
+//  SearchRouter.swift
 //  iosApp
 //
 //  Created by Uwais Alqadri on 1/1/22.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct SearchNavigator {
+struct SearchRouter {
 
   private let assembler: Assembler
 
@@ -16,12 +16,12 @@ struct SearchNavigator {
     self.assembler = assembler
   }
 
-  @MainActor func navigateToSearchView() -> some View {
+  @MainActor func routeToSearch() -> some View {
     SearchView(viewModel: assembler.resolve(), navigator: self)
   }
 
-  @MainActor func navigateToDetailView(mangaId: String) -> some View {
-    let navigator: DetailNavigator = assembler.resolve()
-    return navigator.navigateToDetailView(mangaId: mangaId)
+  @MainActor func routeToDetail(mangaId: String) -> some View {
+    let navigator: DetailRouter = assembler.resolve()
+    return navigator.routeToDetail(mangaId: mangaId)
   }
 }

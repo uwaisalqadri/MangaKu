@@ -11,33 +11,41 @@ import SwiftUI
 struct ShimmerBrowseView: View {
   var body: some View {
     HStack {
-      ShimmerView(isAnimating: false)
+      Color(.systemGray3)
         .frame(width: 124, height: 200)
         .cornerRadius(12)
+        .shimmering()
 
       VStack(alignment: .leading) {
 
-        ShimmerView(isAnimating: false)
+        Color(.systemGray3)
           .frame(height: 30)
           .cornerRadius(12)
+          .shimmering()
           .padding(.top, 5)
 
         HStack {
-          ShimmerView(isAnimating: false)
+          Color(.systemGray3)
             .frame(width: 80, height: 20)
             .cornerRadius(12)
+            .shimmering()
 
-          ShimmerView(isAnimating: false)
+          Color(.systemGray3)
             .frame(width: 60, height: 20)
             .cornerRadius(12)
+            .shimmering()
+
         }.padding(.top, 5)
 
         Spacer(minLength: 30)
 
-        ShimmerView(isAnimating: false)
+        Color(.systemGray3)
           .frame(width: 100, height: 40)
           .cornerRadius(9)
+          .shimmering()
           .padding(.bottom, 10)
+
+
       }.padding(.leading, 15)
 
       Spacer()
@@ -50,9 +58,10 @@ struct ShimmerBrowseView: View {
 struct ShimmerSearchView: View {
 
   var body: some View {
-    ShimmerView()
+    Color(.systemGray3)
       .frame(height: 140)
       .cornerRadius(8)
+      .shimmering()
       .padding(.bottom, 20)
   }
 }
@@ -61,29 +70,33 @@ struct ShimmerDetailView: View {
 
   var body: some View {
     VStack(alignment: .leading) {
-      ShimmerView()
+      Color(.systemGray3)
         .frame(height: 200)
         .cornerRadius(10)
+        .shimmering()
         .padding(.horizontal, 24)
 
       VStack(alignment: .leading) {
-        ShimmerView()
+        Color(.systemGray3)
           .frame(height: 40)
           .cornerRadius(8)
+          .shimmering()
           .padding(.leading, 24)
           .padding(.trailing, 80)
 
-        ShimmerView()
+        Color(.systemGray3)
           .frame(height: 25)
           .cornerRadius(8)
+          .shimmering()
           .padding(.leading, 24)
           .padding(.trailing, 50)
 
         HStack {
 
-          ShimmerView()
+          Color(.systemGray3)
             .frame(width: 100, height: 30)
             .cornerRadius(8)
+            .shimmering()
             .padding(.leading, 24)
 
           HStack {
@@ -91,26 +104,30 @@ struct ShimmerDetailView: View {
               .foregroundColor(.yellow)
               .frame(width: 15, height: 15)
 
-            ShimmerView()
+            Color(.systemGray3)
               .frame(width: 100, height: 20)
               .cornerRadius(8)
+              .shimmering()
               .padding(.leading, 7)
+
           }.padding(.leading, 5)
 
         }.padding(.top, 10)
 
-        ShimmerView()
+        Color(.systemGray3)
           .frame(height: 40)
           .cornerRadius(8)
+          .shimmering()
           .padding(.leading, 24)
           .padding(.trailing, 100)
           .padding(.top, 50)
 
         ForEach(0..<10) { _ in
 
-          ShimmerView()
+          Color(.systemGray3)
             .frame(height: 20)
             .cornerRadius(8)
+            .shimmering()
             .padding(.vertical, -15)
 
         }.padding(.horizontal, 24)

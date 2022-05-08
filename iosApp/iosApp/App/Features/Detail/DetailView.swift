@@ -17,8 +17,6 @@ struct DetailView: View {
   @State var isShowDialog = false
   let mangaId: String
 
-  private let extensions = Extensions()
-
   var body: some View {
     VStack(alignment: .leading) {
 
@@ -29,7 +27,7 @@ struct DetailView: View {
         } else if case .empty = viewModel.manga {
           ShimmerDetailView()
         } else if case .success(let data) = viewModel.manga {
-          WebImage(url: URL(string: extensions.getCoverImage(manga: data)))
+          WebImage(url: URL(string: data.getCoverImage()))
             .resizable()
             .indicator(.activity)
             .clipped()
@@ -38,7 +36,7 @@ struct DetailView: View {
             .padding(.horizontal, 24)
 
           VStack(alignment: .leading) {
-            Text(extensions.getTitle(manga: data))
+            Text(data.getTitle())
               .foregroundColor(.black)
               .font(.custom(.mbold, size: 25))
               .padding(.top, 15)
@@ -48,7 +46,7 @@ struct DetailView: View {
               .font(.custom(.mmedium, size: 15))
 
             HStack {
-              Text(DateFormatterKt.formatDate(dateString: data.attributes?.startDate ?? "", format: Constants().casualDateFormat))
+              Text(DateFormatterKt.formatDate(dateString: data.attributes?.startDate ?? "", format: Configs().CASUAL_DATE_FORMAT))
                 .foregroundColor(.white)
                 .font(.custom(.mbold, size: 13))
                 .padding(10)

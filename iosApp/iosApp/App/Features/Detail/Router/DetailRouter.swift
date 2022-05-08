@@ -1,5 +1,5 @@
 //
-//  DetailNavigator.swift
+//  DetailRouter.swift
 //  iosApp
 //
 //  Created by Uwais Alqadri on 1/1/22.
@@ -8,14 +8,14 @@
 
 import SwiftUI
 
-struct DetailNavigator {
+struct DetailRouter {
   private let assembler: Assembler
 
   init(assembler: Assembler) {
     self.assembler = assembler
   }
 
-  @MainActor func navigateToDetailView(mangaId: String) -> some View {
+  @MainActor func routeToDetail(mangaId: String) -> some View {
     DetailView(viewModel: assembler.resolve(), mangaViewModel: assembler.resolve(), mangaId: mangaId)
   }
 }
