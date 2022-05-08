@@ -7,6 +7,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -60,7 +61,11 @@ fun MyMangaScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(60.dp)
-                    .padding(top = 20.dp, start = 20.dp, end = 20.dp)
+                    .padding(
+                        top = 20.dp,
+                        start = 20.dp,
+                        end = 20.dp
+                    )
             ) {
                 state = it
             }
@@ -99,16 +104,14 @@ fun MyMangaScreen(
                         ) {
                             myManga.data?.forEach {
                                 MyMangaGridItem(manga = it) { manga ->
-                                    navigator.navigate(
-                                        DetailScreenDestination(mangaId = manga.id)
-                                    )
+                                    navigator.navigate(DetailScreenDestination(mangaId = manga.id))
                                 }
                             }
                         }
 
                         Spacer(
                             modifier = Modifier
-                                .background(color = MaterialTheme.colors.primary)
+                                .background(color = Color.Transparent)
                                 .height(200.dp)
                         )
                     }

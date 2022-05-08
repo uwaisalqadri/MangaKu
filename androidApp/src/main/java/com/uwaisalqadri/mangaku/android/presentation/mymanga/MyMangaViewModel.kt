@@ -15,9 +15,9 @@ class MyMangaViewModel(
 ): ViewModel() {
 
     private val _myManga = MutableStateFlow<Result<List<Manga>>>(Result.loading())
-    val myManga = _myManga.asStateFlow()
+    val myManga: StateFlow<Result<List<Manga>>> = _myManga.asStateFlow()
 
-    private val _favState = MutableStateFlow<FavState>(FavState())
+    private val _favState = MutableStateFlow(FavState())
     val favState: StateFlow<FavState> = _favState.asStateFlow()
 
 

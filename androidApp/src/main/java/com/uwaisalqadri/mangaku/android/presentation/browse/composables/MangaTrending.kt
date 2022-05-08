@@ -12,8 +12,8 @@ import com.uwaisalqadri.mangaku.domain.model.Manga
 
 @Composable
 fun MangaTrending(
+    modifier: Modifier = Modifier,
     trendingManga: List<Manga>,
-    modifier: Modifier,
     onMangaClick: (String) -> Unit
 ) {
     Column(
@@ -21,7 +21,7 @@ fun MangaTrending(
             .animateContentSize()
     ) {
         trendingManga.forEach { manga ->
-            Manga(
+            MangaItem(
                 manga = manga,
                 modifier = Modifier
                     .height(197.dp)

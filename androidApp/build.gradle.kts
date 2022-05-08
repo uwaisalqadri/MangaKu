@@ -81,7 +81,6 @@ dependencies {
         implementation(composeShimmer)
         implementation(composeLiveData)
 
-        implementation(ktorAndroid)
         implementation(koinAndroid)
         implementation(koinCompose)
 

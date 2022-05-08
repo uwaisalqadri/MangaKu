@@ -12,7 +12,7 @@ import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.uwaisalqadri.mangaku.android.presentation.destinations.DetailScreenDestination
 import com.uwaisalqadri.mangaku.android.presentation.search.composables.SearchField
-import com.uwaisalqadri.mangaku.android.presentation.search.composables.SearchResult
+import com.uwaisalqadri.mangaku.android.presentation.search.composables.SearchCard
 import com.uwaisalqadri.mangaku.android.presentation.search.composables.StaggeredVerticalGrid
 import com.uwaisalqadri.mangaku.android.presentation.theme.composables.BackButton
 import com.uwaisalqadri.mangaku.android.presentation.theme.composables.ShimmerSearchItem
@@ -36,17 +36,14 @@ fun SearchScreen(
     ) {
 
         item {
-            BackButton {
-                navigator.popBackStack()
-            }
+            BackButton { navigator.popBackStack() }
         }
 
         item {
-            Spacer(modifier = Modifier.padding(top = 20.dp))
-        }
-
-        item {
-            TopBar(name = "Search")
+            TopBar(
+                name = "Search",
+                modifier = Modifier.padding(top = 20.dp)
+            )
         }
 
         item {
@@ -63,20 +60,16 @@ fun SearchScreen(
         }
 
         item {
-            StaggeredVerticalGrid(
-                maxColumnWidth = 150.dp
-            ) {
+            StaggeredVerticalGrid(maxColumnWidth = 150.dp) {
                 if (searchManga.loading) {
                     repeat(10) {
                         ShimmerSearchItem()
                     }
-                } else {
-                    searchManga.data?.forEach { manga ->
-                        SearchResult(manga = manga) {
-                            navigator.navigate(
-                                DetailScreenDestination(mangaId = it)
-                            )
-                        }
+                }
+
+                searchManga.data?.forEach { manga ->
+                    SearchCard(manga = manga) {
+                        navigator.navigate(DetailScreenDestination(mangaId = it))
                     }
                 }
             }

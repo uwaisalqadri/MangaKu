@@ -3,6 +3,7 @@ package com.uwaisalqadri.mangaku.android.presentation.browse
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -29,10 +30,14 @@ fun BrowseScreen(
     navigator: DestinationsNavigator,
     viewModel: BrowseViewModel = getViewModel(),
 ) {
+    viewModel.getTrendingManga()
+
     val listManga by viewModel.trendingManga.collectAsState()
 
     LazyColumn(
-        modifier = Modifier.background(color = MaterialTheme.colors.primary)
+        modifier = Modifier
+            .background(color = MaterialTheme.colors.primary)
+            .fillMaxSize()
     ) {
 
         item {
@@ -40,14 +45,8 @@ fun BrowseScreen(
                 name = "Browse",
                 icon = R.drawable.ic_search
             ) {
-                navigator.navigate(
-                    SearchScreenDestination()
-                )
+                navigator.navigate(SearchScreenDestination())
             }
-        }
-
-        item {
-            Spacer(modifier = Modifier.height(35.dp))
         }
 
         item {
@@ -56,7 +55,8 @@ fun BrowseScreen(
                 style = MangaTypography.h2,
                 color = MaterialTheme.colors.secondary,
                 fontSize = 15.sp,
-                modifier = Modifier.padding(start = 20.dp)
+                modifier = Modifier
+                    .padding(start = 20.dp, top = 35.dp)
             )
         }
 
@@ -65,7 +65,11 @@ fun BrowseScreen(
                 modifier = Modifier
                     .height(130.dp)
                     .fillMaxWidth()
-                    .padding(top = 15.dp, bottom = 25.dp, start = 10.dp)
+                    .padding(
+                        top = 15.dp,
+                        bottom = 25.dp,
+                        start = 10.dp
+                    )
             )
         }
 
@@ -84,20 +88,21 @@ fun BrowseScreen(
                 repeat(10) {
                     ShimmerBrowseItem()
                 }
-            } else {
-                listManga.data?.let {
-                    MangaTrending(
-                        trendingManga = it,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .fillMaxHeight()
-                            .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 120.dp)
-                    ) { mangaId ->
-                        navigator.navigate(
-                            DetailScreenDestination(mangaId = mangaId)
-                        )
-                    }
-                }
+            }
+
+            MangaTrending(
+                trendingManga = listManga.data.orEmpty(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight()
+                    .padding(
+                        start = 20.dp,
+                        end = 20.dp,
+                        top = 10.dp,
+                        bottom = 120.dp
+                    )
+            ) { mangaId ->
+                navigator.navigate(DetailScreenDestination(mangaId = mangaId))
             }
         }
 

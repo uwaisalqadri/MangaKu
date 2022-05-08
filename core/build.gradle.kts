@@ -63,6 +63,7 @@ kotlin {
         val androidMain by getting {
             dependencies {
                 with(Dependencies) {
+                    implementation(ktorOkhttp)
                     implementation(ktorAndroid)
                     implementation(koinAndroid)
                 }
@@ -79,6 +80,7 @@ kotlin {
             //iosSimulatorArm64Main.dependsOn(this)
 
             dependencies {
+                implementation(Dependencies.ktorDarwin)
                 implementation(Dependencies.ktorIos)
             }
         }
@@ -109,7 +111,7 @@ kotlin {
 }
 
 // add support for kotlin extension function and sealed class to enum swift
-//kswift {
-//    install(dev.icerock.moko.kswift.plugin.feature.SealedToSwiftEnumFeature)
-//    install(dev.icerock.moko.kswift.plugin.feature.PlatformExtensionFunctionsFeature)
-//}
+kswift {
+    install(dev.icerock.moko.kswift.plugin.feature.SealedToSwiftEnumFeature)
+    install(dev.icerock.moko.kswift.plugin.feature.PlatformExtensionFunctionsFeature)
+}

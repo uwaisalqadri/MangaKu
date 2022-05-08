@@ -2,16 +2,10 @@ package com.uwaisalqadri.mangaku.android.presentation.detail
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.material.ButtonDefaults
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.Button
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
@@ -33,9 +27,7 @@ import com.uwaisalqadri.mangaku.android.presentation.theme.composables.BackButto
 import com.uwaisalqadri.mangaku.android.presentation.theme.composables.ShimmerDetail
 import com.uwaisalqadri.mangaku.android.presentation.theme.composables.TopBar
 import com.uwaisalqadri.mangaku.domain.model.Manga
-import com.uwaisalqadri.mangaku.utils.Constants
-import com.uwaisalqadri.mangaku.utils.Extensions
-import com.uwaisalqadri.mangaku.utils.formatDate
+import com.uwaisalqadri.mangaku.utils.*
 import org.koin.androidx.compose.getViewModel
 
 @Destination
@@ -44,9 +36,11 @@ fun DetailScreen(
     navigator: DestinationsNavigator,
     mangaId: String,
     viewModel: DetailViewModel = getViewModel(),
-    mangaViewModel: MyMangaViewModel = getViewModel(),
-    extension: Extensions = Extensions
+    mangaViewModel: MyMangaViewModel = getViewModel()
 ) {
+    viewModel.getDetailManga(mangaId)
+    mangaViewModel.checkFavorite(mangaId)
+
     val detailManga by viewModel.detailManga.collectAsState()
     val favState by mangaViewModel.favState.collectAsState()
 
@@ -55,12 +49,10 @@ fun DetailScreen(
 
     LazyColumn(
         horizontalAlignment = Alignment.Start,
-        modifier = Modifier.background(color = MaterialTheme.colors.primary)
+        modifier = Modifier
+            .background(color = MaterialTheme.colors.primary)
+            .fillMaxSize()
     ) {
-
-        viewModel.getDetailManga(mangaId)
-        mangaViewModel.checkFavorite(mangaId)
-
         item {
             FavoriteDialog(
                 message = if (isFavorite) "Added to Favorite" else "Removed from Favorite",
@@ -104,11 +96,10 @@ fun DetailScreen(
         }
 
         item {
-            Spacer(modifier = Modifier.padding(top = 20.dp))
-        }
-
-        item {
-            TopBar(name = "Detail")
+            TopBar(
+                name = "Detail",
+                modifier = Modifier.padding(top = 20.dp)
+            )
         }
 
         item {
@@ -123,10 +114,7 @@ fun DetailScreen(
                 }
 
                 detailManga.data?.let {
-                    MangaDetail(
-                        manga = it,
-                        extension = extension
-                    )
+                    MangaDetail(manga = it)
                 }
 
                 Spacer(modifier = Modifier.height(200.dp))
@@ -137,8 +125,7 @@ fun DetailScreen(
 
 @Composable
 fun MangaDetail(
-    manga: Manga,
-    extension: Extensions
+    manga: Manga
 ) {
     Card(
         shape = RoundedCornerShape(9.dp),
@@ -149,14 +136,14 @@ fun MangaDetail(
             .height(200.dp)
     ) {
         Image(
-            painter = rememberCoilPainter(request = extension.getCoverImage(manga)),
+            painter = rememberCoilPainter(request = manga.getCoverImage()),
             contentDescription = "cover image",
             contentScale = ContentScale.Crop
         )
     }
 
     Text(
-        text = extension.getTitle(manga),
+        text = manga.getTitle(),
         color = MaterialTheme.colors.secondary,
         style = MangaTypography.h1,
         fontSize = 23.sp,
@@ -184,7 +171,7 @@ fun MangaDetail(
             shape = RoundedCornerShape(5.dp)
         ) {
             Text(
-                text = formatDate(manga.attributes?.startDate ?: "", Constants.casualDateFormat),
+                text = formatDate(manga.attributes?.startDate ?: "", Configs.CASUAL_DATE_FORMAT),
                 color = Color.White,
                 style = MangaTypography.h1,
                 fontSize = 13.sp,
@@ -214,14 +201,16 @@ fun MangaDetail(
         }
     }
 
-    Spacer(modifier = Modifier.height(50.dp))
-
     Text(
         text = "Description",
         color = MaterialTheme.colors.secondary,
         style = MangaTypography.h2,
         fontSize = 21.sp,
-        modifier = Modifier.padding(horizontal = 30.dp)
+        modifier = Modifier.padding(
+            start = 30.dp,
+            end = 30.dp,
+            top = 50.dp
+        )
     )
 
     Text(
@@ -229,6 +218,10 @@ fun MangaDetail(
         color = MaterialTheme.colors.secondary,
         style = MangaTypography.h3,
         fontSize = 15.sp,
-        modifier = Modifier.padding(top = 15.dp, start = 30.dp, end = 30.dp)
+        modifier = Modifier.padding(
+            top = 15.dp,
+            start = 30.dp,
+            end = 30.dp
+        )
     )
 }

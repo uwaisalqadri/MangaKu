@@ -25,15 +25,15 @@ import com.google.accompanist.pager.calculateCurrentOffsetForPage
 import com.uwaisalqadri.mangaku.android.presentation.browse.composables.StarRate
 import com.uwaisalqadri.mangaku.android.presentation.theme.MangaTypography
 import com.uwaisalqadri.mangaku.domain.model.Manga
-import com.uwaisalqadri.mangaku.utils.Extensions
+import com.uwaisalqadri.mangaku.utils.getPosterImage
+import com.uwaisalqadri.mangaku.utils.getTitle
 import kotlin.math.absoluteValue
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun HorizontalPagerWithTransition(
+    modifier: Modifier = Modifier,
     manga: List<Manga>,
-    extension: Extensions = Extensions,
-    modifier: Modifier
 ) {
     HorizontalPager(
         state = PagerState(
@@ -48,12 +48,8 @@ fun HorizontalPagerWithTransition(
             elevation = 10.dp,
             modifier = Modifier
                 .graphicsLayer {
-                    // Calculate the absolute offset for the current page from the
-                    // scroll position. We use the absolute value which allows us to mirror
-                    // any effects for both directions
                     val pageOffset = calculateCurrentOffsetForPage(page).absoluteValue
 
-                    // We animate the scaleX + scaleY, between 85% and 100%
                     lerp(
                         start = 0.85f,
                         stop = 1f,
@@ -63,7 +59,6 @@ fun HorizontalPagerWithTransition(
                         scaleY = scale
                     }
 
-                    // We animate the alpha, between 50% and 100%
                     alpha = lerp(
                         start = 0.5f,
                         stop = 1f,
@@ -74,7 +69,7 @@ fun HorizontalPagerWithTransition(
                 .height(370.dp)
         ) {
             Image(
-                painter = rememberCoilPainter(request = extension.getPosterImage(manga[page])),
+                painter = rememberCoilPainter(request = manga[page].getPosterImage()),
                 contentDescription = null,
                 contentScale = ContentScale.Crop
             )
@@ -82,10 +77,7 @@ fun HorizontalPagerWithTransition(
             Box(
                 modifier = Modifier
                     .background(brush = Brush.verticalGradient(
-                        colors = listOf(
-                            Color.Transparent,
-                            Color.Black
-                        )
+                        colors = listOf(Color.Transparent, Color.Black)
                     ))
             )
 
@@ -96,7 +88,7 @@ fun HorizontalPagerWithTransition(
             ) {
 
                 Text(
-                    text = extension.getTitle(manga[page]),
+                    text = manga[page].getTitle(),
                     fontSize = 40.sp,
                     style = MangaTypography.overline,
                     maxLines = 2,
@@ -113,7 +105,6 @@ fun HorizontalPagerWithTransition(
 
                 StarRate(
                     manga = manga[page],
-                    extension = extension,
                     modifier = Modifier
                         .padding(top = 5.dp, bottom = 30.dp)
                         .fillMaxWidth()

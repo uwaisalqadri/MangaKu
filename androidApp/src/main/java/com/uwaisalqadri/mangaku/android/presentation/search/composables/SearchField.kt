@@ -43,8 +43,7 @@ fun SearchField(
         modifier = modifier
     ) {
 
-        val configuration = LocalConfiguration.current
-        val screenWidth = configuration.screenWidthDp
+        val screenWidth = LocalConfiguration.current.screenWidthDp
 
         var text by remember { mutableStateOf(placeholder) }
 

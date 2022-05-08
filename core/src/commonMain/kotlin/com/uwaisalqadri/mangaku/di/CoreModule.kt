@@ -5,8 +5,10 @@ import com.uwaisalqadri.mangaku.data.souce.local.entity.*
 import com.uwaisalqadri.mangaku.data.souce.remote.MangaApi
 import com.uwaisalqadri.mangaku.data.souce.remote.response.ApiException
 import com.uwaisalqadri.mangaku.di.feature.mangaModule
-import com.uwaisalqadri.mangaku.utils.Constants
+import com.uwaisalqadri.mangaku.utils.Configs
+import com.uwaisalqadri.mangaku.utils.ktorEngineModule
 import io.ktor.client.*
+import io.ktor.client.engine.*
 import io.ktor.client.plugins.*
 import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.plugins.logging.*
@@ -23,19 +25,29 @@ import org.koin.dsl.KoinAppDeclaration
 import org.koin.dsl.module
 
 fun initKoin(appDeclaration: KoinAppDeclaration = {}): KoinApplication {
-    val koinApplication = startKoin {
+    return startKoin {
         appDeclaration()
         modules(
             ktorModule,
+            ktorEngineModule(),
             realmModule,
             mangaModule
         )
     }
-
-    return koinApplication
 }
 
 fun initKoin() = initKoin {} // for iOS
+
+val realmModule = module {
+    single { MangaPersistenceContainer(get()) }
+    single { createRealmDatabase() }
+}
+
+val ktorModule = module {
+    single { MangaApi(get()) }
+    single { createJson() }
+    single { createKtorClient(get(), get()) }
+}
 
 fun createRealmDatabase(): Realm {
     val configuration = RealmConfiguration.with(schema = setOf(
@@ -55,18 +67,20 @@ fun createJson() = Json {
     useAlternativeNames = false
 }
 
-fun createKtorClient(json: Json) = HttpClient {
+fun createKtorClient(httpClientEngine: HttpClientEngine, json: Json) = HttpClient(httpClientEngine) {
     install(ContentNegotiation) {
-        json()
+        json(json = json)
     }
 
     defaultRequest {
         url {
             protocol = URLProtocol.HTTPS
-            host = Constants.baseUrl
+            host = Configs.BASE_URL
 
-            header(HttpHeaders.Accept, "application/vnd.api+json")
-            header(HttpHeaders.ContentType, "application/vnd.api+json")
+            headers {
+                append(HttpHeaders.Accept, "application/vnd.api+json")
+                append(HttpHeaders.ContentType, "application/vnd.api+json")
+            }
         }
     }
 
@@ -103,16 +117,4 @@ fun createKtorClient(json: Json) = HttpClient {
         level = LogLevel.ALL
     }
 
-}
-
-
-val realmModule = module {
-    single { MangaPersistenceContainer(get()) }
-    single { createRealmDatabase() }
-}
-
-val ktorModule = module {
-    single { MangaApi(get()) }
-    single { createJson() }
-    single { createKtorClient(get()) }
 }

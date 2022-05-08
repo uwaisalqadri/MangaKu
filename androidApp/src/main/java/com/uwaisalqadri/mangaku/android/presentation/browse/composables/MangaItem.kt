@@ -18,25 +18,18 @@ import androidx.compose.ui.unit.sp
 import com.google.accompanist.coil.rememberCoilPainter
 import com.uwaisalqadri.mangaku.android.presentation.theme.MangaTypography
 import com.uwaisalqadri.mangaku.domain.model.Manga
-import com.uwaisalqadri.mangaku.utils.Constants
-import com.uwaisalqadri.mangaku.utils.Extensions
-import com.uwaisalqadri.mangaku.utils.formatDate
+import com.uwaisalqadri.mangaku.utils.*
 
 @Composable
-fun Manga(
-    manga: Manga,
+fun MangaItem(
     modifier: Modifier = Modifier,
-    extension: Extensions = Extensions,
+    manga: Manga,
     onReadMore: ((Manga) -> Unit)? = null
 ) {
-    Row(
-        modifier = modifier
-    ) {
-        Card(
-            shape = RoundedCornerShape(12.dp)
-        ) {
+    Row(modifier = modifier) {
+        Card(shape = RoundedCornerShape(12.dp)) {
             Image(
-                painter = rememberCoilPainter(request = extension.getPosterImage(manga)),
+                painter = rememberCoilPainter(request = manga.getPosterImage()),
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
@@ -46,21 +39,20 @@ fun Manga(
         }
 
         Column(
+            verticalArrangement = Arrangement.SpaceEvenly,
             modifier = Modifier
                 .fillMaxHeight()
-                .padding(20.dp, 5.dp),
-            verticalArrangement = Arrangement.SpaceEvenly
+                .padding(20.dp, 5.dp)
         ) {
 
             StarRate(
                 manga = manga,
-                extension = extension,
                 modifier = Modifier
                     .fillMaxWidth()
             )
 
             Text(
-                text = extension.getTitle(manga),
+                text = manga.getTitle(),
                 fontSize = 18.sp,
                 style = MangaTypography.h1,
                 maxLines = 2,
@@ -75,7 +67,7 @@ fun Manga(
                     .fillMaxWidth()
             ) {
                 Text(
-                    text = formatDate(manga.attributes?.startDate ?: "", Constants.casualDateFormat),
+                    text = formatDate(manga.attributes?.startDate ?: "", Configs.CASUAL_DATE_FORMAT),
                     fontSize = 12.sp,
                     color = MaterialTheme.colors.surface,
                     style = MangaTypography.h1
@@ -91,14 +83,12 @@ fun Manga(
                 )
             }
 
-            Spacer(modifier = Modifier.height(25.dp))
-
             Button(
                 colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black),
-                modifier = Modifier.height(40.dp),
-                onClick = {
-                    if (onReadMore != null) onReadMore(manga)
-                }
+                modifier = Modifier
+                    .height(40.dp)
+                    .padding(top = 25.dp),
+                onClick = { if (onReadMore != null) onReadMore(manga) }
             ) {
                 Text(
                     text = "Read More",
@@ -116,18 +106,14 @@ fun Manga(
 fun StarRate(
     modifier: Modifier,
     manga: Manga,
-    averageRating: Double = (manga.attributes?.averageRating ?: 0.0),
-    extension: Extensions
+    averageRating: Double = (manga.attributes?.averageRating ?: 0.0)
 ) {
     Row(
         modifier = modifier
     ) {
-        val avgToFive = extension.toFiveStars(avgRating = averageRating)
         repeat(5) { index ->
             Icon(
-                imageVector =
-                if (avgToFive <= index - 1) Icons.Outlined.Grade
-                else Icons.Default.Star,
+                imageVector = if (averageRating.toFiveStars() <= index - 1) Icons.Outlined.Grade else Icons.Default.Star,
                 contentDescription = null,
                 tint = Color.Yellow,
                 modifier = Modifier.size(18.dp)

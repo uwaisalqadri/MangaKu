@@ -1,12 +1,12 @@
 package com.uwaisalqadri.mangaku.domain.usecase.mymanga
 
-import com.uwaisalqadri.mangaku.domain.base.BaseInteractor
+import com.uwaisalqadri.mangaku.domain.base.execute
 import com.uwaisalqadri.mangaku.domain.mapper.map
 import com.uwaisalqadri.mangaku.domain.model.Manga
 import com.uwaisalqadri.mangaku.domain.repository.MangaRepository
 import kotlinx.coroutines.flow.Flow
 
-class MyMangaInteractor(private val repository: MangaRepository): MyMangaUseCase, BaseInteractor() {
+class MyMangaInteractor(private val repository: MangaRepository): MyMangaUseCase {
 
     override suspend fun getMyManga(): Flow<List<Manga>> {
         return execute {

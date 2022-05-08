@@ -43,8 +43,8 @@ fun Genres(
 
 @Composable
 fun Genre(
-    genre: Genre,
-    modifier: Modifier
+    modifier: Modifier = Modifier,
+    genre: Genre
 ) {
     Card(
         shape = RoundedCornerShape(10.dp),
@@ -59,7 +59,7 @@ fun Genre(
                 contentDescription = "Manga Genre",
                 contentScale = ContentScale.FillBounds,
                 modifier = Modifier
-                    .fillMaxSize(),
+                    .fillMaxSize()
             )
 
             Spacer(

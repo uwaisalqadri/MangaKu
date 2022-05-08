@@ -10,31 +10,29 @@ import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBackIos
 import androidx.compose.material.icons.filled.ArrowForwardIos
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.google.accompanist.coil.rememberCoilPainter
 import com.uwaisalqadri.mangaku.android.presentation.theme.MangaTypography
 import com.uwaisalqadri.mangaku.domain.model.Manga
-import com.uwaisalqadri.mangaku.utils.Extensions
+import com.uwaisalqadri.mangaku.utils.getPosterImage
+import com.uwaisalqadri.mangaku.utils.getTitle
 
 @Composable
 fun MyMangaGridItem(
     manga: Manga,
-    extension: Extensions = Extensions,
     onClick: (Manga) -> Unit
 ) {
     Box(
         modifier = Modifier.padding(start = 10.dp, bottom = 20.dp)
     ) {
         Image(
-            painter = rememberCoilPainter(request = extension.getPosterImage(manga)),
+            painter = rememberCoilPainter(request = manga.getPosterImage()),
             contentDescription = null,
             modifier = Modifier
                 .size(width = 118.dp, height = 177.dp)
@@ -57,7 +55,7 @@ fun MyMangaGridItem(
                             .padding(10.dp)
                     ) {
                         Text(
-                            text = extension.getTitle(manga),
+                            text = manga.getTitle(),
                             color = MaterialTheme.colors.secondary,
                             style = MangaTypography.h1,
                             fontSize = 15.sp,

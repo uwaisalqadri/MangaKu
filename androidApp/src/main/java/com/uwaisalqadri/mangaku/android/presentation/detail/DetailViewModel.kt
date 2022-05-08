@@ -6,10 +6,7 @@ import com.uwaisalqadri.mangaku.android.utils.Result
 import com.uwaisalqadri.mangaku.android.utils.collectFlow
 import com.uwaisalqadri.mangaku.domain.model.Manga
 import com.uwaisalqadri.mangaku.domain.usecase.detail.DetailUseCase
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class DetailViewModel(
@@ -17,7 +14,7 @@ class DetailViewModel(
 ) : ViewModel() {
 
     private val _detailManga = MutableStateFlow<Result<Manga>>(Result.loading())
-    val detailManga = _detailManga.asStateFlow()
+    val detailManga: StateFlow<Result<Manga>> = _detailManga.asStateFlow()
 
     fun getDetailManga(mangaId: String) = viewModelScope.launch {
         detailUseCase.getDetailManga(mangaId)

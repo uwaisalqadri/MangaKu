@@ -11,37 +11,45 @@ Kotlin suspend functions are exposed to Swift as functions with a completion han
 This allows you to easily use them from your Swift code, but it doesn't support cancellation.
 
 > While Swift 5.5 brings async functions to Swift, it doesn't solve this issue.  
-> For interoperability with ObjC all function with a completion handler can be called like an async function.  
+> For interoperability with ObjC all functions with a completion handler can be called like an async function.  
 > This means starting with Swift 5.5 your Kotlin suspend functions will look like Swift async functions.  
 > But that's just syntactic sugar, so there's still no cancellation support.
 
 Besides cancellation support, ObjC doesn't support generics on protocols.  
 So all the `Flow` interfaces lose their generic value type which make them hard to use.
 
-This library solves both of these limitations :smile: .
+This library solves both of these limitations 😄.
 
 ## Compatibility
 
-As of version `0.9.0` the library uses Kotlin version `1.6.0`.  
-Compatibility versions for older and early access Kotlin versions are also available:
+> **NOTE:** at the moment the [new Kotlin Native memory model][new-mm] is still experimental.  
+> The regular versions of this library are therefore currently using the [`-native-mt`][native-mt] versions 
+> of the kotlinx.coroutines library.  
+> If you would like to try the new memory model, please use the `-new-mm` versions instead.
 
-|Version|Version suffix|Kotlin|Coroutines|
-|---|---|:---:|:---:|
-|_latest_|-new-mm|1.6.0|1.5.1-new-mm-dev2|
-|**_latest_**|**_no suffix_**|**1.6.0**|**1.5.2-native-mt**|
-|0.8.0|_no suffix_|1.5.30|1.5.2-native-mt|
-|0.8.0|-kotlin-1.5.20|1.5.20|1.5.0-native-mt|
+[new-mm]: https://github.com/JetBrains/kotlin/blob/0b871d7534a9c8e90fb9ad61cd5345716448d08c/kotlin-native/NEW_MM.md
+[native-mt]: https://github.com/kotlin/kotlinx.coroutines/issues/462
+
+The latest version of the library uses Kotlin version `1.6.21`.  
+Compatibility versions for older Kotlin versions are also available:
+
+| Version      | Version suffix  |   Kotlin   |     Coroutines      |
+|--------------|-----------------|:----------:|:-------------------:|
+| _latest_     | -new-mm         |   1.6.21   |        1.6.1        |
+| **_latest_** | **_no suffix_** | **1.6.21** | **1.6.1-native-mt** |
+| 0.11.4       | -new-mm         |   1.6.10   |        1.6.0        |
+| 0.11.4       | _no suffix_     |   1.6.10   |   1.6.0-native-mt   |
+| 0.11.4       | -kotlin-1.6.0   |   1.6.0    |   1.6.0-native-mt   |
+| 0.9.0        | -new-mm-3       |   1.6.0    |      1.6.0-RC2      |
 
 You can choose from a couple of Swift implementations.  
 Depending on the implementation you can support as low as iOS 9, macOS 10.9, tvOS 9 and watchOS 3:
 
-|Implementation|Swift|iOS|macOS|tvOS|watchOS|
-|---|:---:|:---:|:---:|:---:|:---:|
-|RxSwift|5.0|9.0|10.9|9.0|3.0|
-|Combine|5.0|13.0|10.15|13.0|6.0|
-|Async :construction:|5.5|13.0|10.15|13.0|6.0|
-
-> :construction: : the Async implementation requires Xcode 13.2 which is currently in beta!
+| Implementation | Swift | iOS  | macOS | tvOS | watchOS |
+|----------------|:-----:|:----:|:-----:|:----:|:-------:|
+| Async          |  5.5  | 13.0 | 10.15 | 13.0 |   6.0   |
+| Combine        |  5.0  | 13.0 | 10.15 | 13.0 |   6.0   |
+| RxSwift        |  5.0  | 9.0  | 10.9  | 9.0  |   3.0   |
 
 ## Installation
 
@@ -62,23 +70,9 @@ plugins {
 }
 ```
 
-### Swift (CocoaPods)
-
-Now for Swift you can choose from a couple of implementations.  
-Add one or more of the following libraries to your `Podfile`:
-```ruby
-pod 'KMPNativeCoroutinesCombine'  # Combine implementation
-pod 'KMPNativeCoroutinesRxSwift'  # RxSwift implementation
-pod 'KMPNativeCoroutinesAsync'    # Swift 5.5 Async/Await implementation
-```
-
 ### Swift (Swift Package Manager)
 
-All Swift implementations are also available via the Swift Package Manager.
-
-> **NOTE:** `KMPNativeCoroutinesAsync` requires Xcode 13.2 which is currently in beta.  
-> To add the async implementation you should add the `-swift-async-await` suffix to the version.
-
+The Swift implementations are available via the Swift Package Manager.  
 Just add it to your `Package.swift` file:
 ```swift
 dependencies: [
@@ -86,17 +80,43 @@ dependencies: [
 ]
 ```
 
-Or add it in Xcode by going to `File` > `Add Packages...` and providing the URL: 
+Or add it in Xcode by going to `File` > `Add Packages...` and providing the URL:
 `https://github.com/rickclephas/KMP-NativeCoroutines.git`.
+
+**Note:** the version for the Swift package should not contain the Kotlin version suffix 
+(e.g. `-new-mm` or `-kotlin-1.6.0`).
+
+**Tip:** If you only need a single implementation you can also use the SPM specific versions with suffixes 
+`-spm-async`, `-spm-combine` and `-spm-rxswift`. 
+
+### Swift (CocoaPods)
+
+If you use CocoaPods add one or more of the following libraries to your `Podfile`:
+```ruby
+pod 'KMPNativeCoroutinesAsync', '<version>'    # Swift 5.5 Async/Await implementation
+pod 'KMPNativeCoroutinesCombine', '<version>'  # Combine implementation
+pod 'KMPNativeCoroutinesRxSwift', '<version>'  # RxSwift implementation
+```
+**Note:** the version for CocoaPods should not contain the Kotlin version suffix (e.g. `-new-mm` or `-kotlin-1.6.0`).
 
 ## Usage
 
 Using your Kotlin Coroutines code from Swift is almost as easy as calling the Kotlin code.   
-Just use the wrapper functions in Swift to get Observables, Publishers, AsyncStreams or async functions.
+Just use the wrapper functions in Swift to get async functions, AsyncStreams, Publishers or Observables.
 
 ### Kotlin
 
-The plugin will automagically generate the necessary code for you! :crystal_ball:
+> **WARNING:** The Kotlin part of this library consists of helper functions and a Kotlin compiler plugin.  
+> Using the plugin removes the boilerplate code from your project, however **Kotlin compiler plugins aren't stable**!
+> 
+> The plugin is known to cause recursion errors in some scenarios such as in [#4][GH-4] and [#23][GH-23].  
+> To prevent such recursion errors it's best to explicitly define the (return) types of public 
+> properties and functions.
+
+[GH-4]: https://github.com/rickclephas/KMP-NativeCoroutines/issues/4
+[GH-23]: https://github.com/rickclephas/KMP-NativeCoroutines/issues/23
+
+The plugin will automagically generate the necessary code for you! 🔮
 
 Your `Flow` properties/functions get a `Native` version:
 ```kotlin
@@ -123,7 +143,6 @@ val timeNativeReplayCache
 
 The plugin also generates `Native` versions for all your suspend functions:
 ```kotlin
-
 class RandomLettersGenerator {
     // Somewhere in your Kotlin code you define a suspend function
     suspend fun getRandomLetters(): String { 
@@ -178,6 +197,94 @@ val ignoredFlowProperty: Flow<Int>
 suspend fun ignoredSuspendFunction() { }
 ```
 
+### Swift 5.5 Async/Await
+
+The Async implementation provides some functions to get async Swift functions and `AsyncStream`s.
+
+Use the `asyncFunction(for:)` function to get an async function that can be awaited:
+```swift
+let handle = Task {
+    do {
+        let letters = try await asyncFunction(for: randomLettersGenerator.getRandomLettersNative())
+        print("Got random letters: \(letters)")
+    } catch {
+        print("Failed with error: \(error)")
+    }
+}
+
+// To cancel the suspend function just cancel the async task
+handle.cancel()
+```
+
+or if you don't like these do-catches you can use the `asyncResult(for:)` function:
+```swift
+let result = await asyncResult(for: randomLettersGenerator.getRandomLettersNative())
+if case let .success(letters) = result {
+    print("Got random letters: \(letters)")
+}
+```
+
+For `Flow`s there is the `asyncStream(for:)` function to get an `AsyncStream`:
+```swift
+let handle = Task {
+    do {
+        let stream = asyncStream(for: randomLettersGenerator.getRandomLettersFlowNative())
+        for try await letters in stream {
+            print("Got random letters: \(letters)")
+        }
+    } catch {
+        print("Failed with error: \(error)")
+    }
+}
+
+// To cancel the flow (collection) just cancel the async task
+handle.cancel()
+```
+
+### Combine
+
+The Combine implementation provides a couple functions to get an `AnyPublisher` for your Coroutines code.
+
+For your `Flow`s use the `createPublisher(for:)` function:
+```swift
+// Create an AnyPublisher for your flow
+let publisher = createPublisher(for: clock.timeNative)
+
+// Now use this publisher as you would any other
+let cancellable = publisher.sink { completion in
+    print("Received completion: \(completion)")
+} receiveValue: { value in
+    print("Received value: \(value)")
+}
+
+// To cancel the flow (collection) just cancel the publisher
+cancellable.cancel()
+```
+
+For the suspend functions you should use the `createFuture(for:)` function:
+```swift
+// Create a Future/AnyPublisher for the suspend function
+let future = createFuture(for: randomLettersGenerator.getRandomLettersNative())
+
+// Now use this future as you would any other
+let cancellable = future.sink { completion in
+    print("Received completion: \(completion)")
+} receiveValue: { value in
+    print("Received value: \(value)")
+}
+
+// To cancel the suspend function just cancel the future
+cancellable.cancel()
+```
+
+You can also use the `createPublisher(for:)` function for suspend functions that return a `Flow`:
+```swift
+let publisher = createPublisher(for: randomLettersGenerator.getRandomLettersFlowNative())
+```
+
+**Note:** these functions create deferred `AnyPublisher`s.  
+Meaning every subscription will trigger the collection of the `Flow` or execution of the suspend function.
+
 ### RxSwift
 
 The RxSwift implementation provides a couple functions to get an `Observable` or `Single` for your Coroutines code.
@@ -227,93 +334,3 @@ let observable = createObservable(for: randomLettersGenerator.getRandomLettersFl
 
 **Note:** these functions create deferred `Observable`s and `Single`s.  
 Meaning every subscription will trigger the collection of the `Flow` or execution of the suspend function.
-
-### Combine
-
-The Combine implementation provides a couple functions to get an `AnyPublisher` for your Coroutines code.
-
-For your `Flow`s use the `createPublisher(for:)` function:
-```swift
-// Create an AnyPublisher for your flow
-let publisher = createPublisher(for: clock.timeNative)
-
-// Now use this publisher as you would any other
-let cancellable = publisher.sink { completion in
-    print("Received completion: \(completion)")
-} receiveValue: { value in
-    print("Received value: \(value)")
-}
-
-// To cancel the flow (collection) just cancel the publisher
-cancellable.cancel()
-```
-
-For the suspend functions you should use the `createFuture(for:)` function:
-```swift
-// Create a Future/AnyPublisher for the suspend function
-let future = createFuture(for: randomLettersGenerator.getRandomLettersNative())
-
-// Now use this future as you would any other
-let cancellable = future.sink { completion in
-    print("Received completion: \(completion)")
-} receiveValue: { value in
-    print("Received value: \(value)")
-}
-
-// To cancel the suspend function just cancel the future
-cancellable.cancel()
-```
-
-You can also use the `createPublisher(for:)` function for suspend functions that return a `Flow`:
-```swift
-let publisher = createPublisher(for: randomLettersGenerator.getRandomLettersFlowNative())
-```
-
-**Note:** these functions create deferred `AnyPublisher`s.  
-Meaning every subscription will trigger the collection of the `Flow` or execution of the suspend function.
-
-### Swift 5.5 Async/Await
-
-> :construction: : the Async implementation requires Xcode 13.2 which is currently in beta!
-
-The Async implementation provides some functions to get async Swift functions and `AsyncStream`s.
-
-Use the `asyncFunction(for:)` function to get an async function that can be awaited:
-```swift
-let handle = Task {
-    do {
-        let letters = try await asyncFunction(for: randomLettersGenerator.getRandomLettersNative())
-        print("Got random letters: \(letters)")
-    } catch {
-        print("Failed with error: \(error)")
-    }
-}
-
-// To cancel the suspend function just cancel the async task
-handle.cancel()
-```
-
-or if you don't like these do-catches you can use the `asyncResult(for:)` function:
-```swift
-let result = await asyncResult(for: randomLettersGenerator.getRandomLettersNative())
-if case let .success(letters) = result {
-    print("Got random letters: \(letters)")
-}
-```
-
-For `Flow`s there is the `asyncStream(for:)` function to get an `AsyncStream`:
-```swift
-let handle = Task {
-    do {
-        let stream = asyncStream(for: randomLettersGenerator.getRandomLettersFlowNative())
-        for try await letters in stream {
-            print("Got random letters: \(letters)")
-        }
-    } catch {
-        print("Failed with error: \(error)")
-    }
-}
-
-// To cancel the flow (collection) just cancel the async task
-handle.cancel()
-```

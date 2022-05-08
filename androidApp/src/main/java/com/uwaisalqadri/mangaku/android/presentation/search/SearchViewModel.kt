@@ -15,7 +15,7 @@ class SearchViewModel(
 ): ViewModel() {
 
     private val _searchManga = MutableStateFlow<Result<List<Manga>>>(Result.success(listOf()))
-    val searchManga = _searchManga.asStateFlow()
+    val searchManga: StateFlow<Result<List<Manga>>> = _searchManga.asStateFlow()
 
     val query = mutableStateOf("")
 
