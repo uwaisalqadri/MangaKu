@@ -2,16 +2,16 @@ package com.uwaisalqadri.mangaku.data.souce.local
 
 import com.uwaisalqadri.mangaku.data.souce.local.entity.MangaObject
 import io.realm.Realm
-import io.realm.delete
+import io.realm.query
 
 class MangaPersistenceContainer(private val realm: Realm): MangaPersistence {
 
     override fun getAllManga(): List<MangaObject> {
-        return realm.objects(MangaObject::class)
+        return realm.query<MangaObject>().find()
     }
 
     override fun getMangaById(mangaId: String): List<MangaObject> {
-        return realm.objects(MangaObject::class).query("id = $0", mangaId)
+        return realm.query<MangaObject>("id = $0", mangaId).find()
     }
 
     override fun addManga(manga: MangaObject) {
@@ -22,13 +22,15 @@ class MangaPersistenceContainer(private val realm: Realm): MangaPersistence {
 
     override fun deleteManga(mangaId: String) {
         realm.writeBlocking {
-            objects(MangaObject::class).query("id = $0", mangaId).first().delete()
+            val query = query<MangaObject>("id = $0", mangaId).first()
+            delete(query)
         }
     }
 
     override fun clearAllManga() {
         realm.writeBlocking {
-            objects(MangaObject::class).delete()
+            val queries = query<MangaObject>().find()
+            delete(queries)
         }
     }
 }

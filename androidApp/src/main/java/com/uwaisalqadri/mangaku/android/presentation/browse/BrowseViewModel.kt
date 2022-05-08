@@ -2,6 +2,7 @@ package com.uwaisalqadri.mangaku.android.presentation.browse
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.uwaisalqadri.mangaku.android.utils.collectFlow
 import com.uwaisalqadri.mangaku.domain.model.Manga
 import com.uwaisalqadri.mangaku.domain.usecase.browse.BrowseUseCase
 import kotlinx.coroutines.flow.*
@@ -21,13 +22,8 @@ class BrowseViewModel(
 
     private fun getTrendingManga() = viewModelScope.launch {
         _trendingManga.value = Result.loading()
-        browseUseCase.getTrendingManga()
-            .catch { cause: Throwable ->
-                _trendingManga.value = Result.failed(cause)
-            }
-            .collect { result ->
-                if (result.isNotEmpty())
-                    _trendingManga.value = Result.success(result)
-            }
+        collectFlow(_trendingManga) {
+            browseUseCase.getTrendingManga()
+        }
     }
 }

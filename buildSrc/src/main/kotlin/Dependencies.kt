@@ -1,5 +1,4 @@
 object Dependencies {
-
     const val ktxSerialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.serialization}"
     const val ktxCoroutine = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutine}"
     const val ktxDateTime = "org.jetbrains.kotlinx:kotlinx-datetime:${Versions.dateTime}"
@@ -22,19 +21,15 @@ object Dependencies {
     const val composeLiveData = "androidx.compose.runtime:runtime-livedata:${Versions.compose}"
 
     const val composeActivity = "androidx.activity:activity-compose:${Versions.activityCompose}"
-    const val composeNavigation = "androidx.navigation:navigation-compose:${Versions.navCompose}"
     const val composeLottie = "com.airbnb.android:lottie-compose:${Versions.lottie}"
     const val composeShimmer = "com.valentinilk.shimmer:compose-shimmer:${Versions.shimmer}"
 
     const val accompanistCoil = "com.google.accompanist:accompanist-coil:${Versions.coilAccompanist}"
     const val accompanistPager = "com.google.accompanist:accompanist-pager:${Versions.pagerAccompanist}"
 
-    const val voyagerNavigator = "cafe.adriel.voyager:voyager-navigator:${Versions.voyager}"
-    const val voyagerTabNavigator = "cafe.adriel.voyager:voyager-tab-navigator:${Versions.voyager}"
-    const val voyagerTransitions = "cafe.adriel.voyager:voyager-transitions:${Versions.voyager}"
-    const val voyagerAndroidx = "cafe.adriel.voyager:voyager-androidx:${Versions.voyager}"
-    const val voyagerKoin = "cafe.adriel.voyager:voyager-koin:${Versions.voyager}"
-    const val voyagerLivedata = "cafe.adriel.voyager:voyager-livedata:${Versions.voyager}"
+    const val composeDestinations = "io.github.raamcosta.compose-destinations:core:${Versions.composeDestinations}"
+    const val composeDestinationsAnimation = "io.github.raamcosta.compose-destinations:animations-core:${Versions.composeDestinations}"
+    const val composeDestinationsKsp = "io.github.raamcosta.compose-destinations:ksp:${Versions.composeDestinations}"
 
     const val koinCore = "io.insert-koin:koin-core:${Versions.koin}"
     const val koinTest = "io.insert-koin:koin-test:${Versions.koin}"
@@ -42,7 +37,8 @@ object Dependencies {
     const val koinCompose = "io.insert-koin:koin-androidx-compose:${Versions.koin}"
 
     const val ktorCore = "io.ktor:ktor-client-core:${Versions.ktor}"
-    const val ktorClientSerialization = "io.ktor:ktor-client-serialization:${Versions.ktor}"
+    const val ktorJsonSerialization = "io.ktor:ktor-serialization-kotlinx-json:${Versions.ktor}"
+    const val ktorContentNegotiation = "io.ktor:ktor-client-content-negotiation:${Versions.ktor}"
     const val ktorLogging = "io.ktor:ktor-client-logging:${Versions.ktor}"
     const val ktorAndroid = "io.ktor:ktor-client-android:${Versions.ktor}"
     const val ktorIos = "io.ktor:ktor-client-ios:${Versions.ktor}"

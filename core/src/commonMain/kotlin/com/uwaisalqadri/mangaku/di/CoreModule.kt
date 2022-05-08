@@ -7,13 +7,13 @@ import com.uwaisalqadri.mangaku.data.souce.remote.response.ApiException
 import com.uwaisalqadri.mangaku.di.feature.mangaModule
 import com.uwaisalqadri.mangaku.utils.Constants
 import io.ktor.client.*
-import io.ktor.client.features.*
-import io.ktor.client.features.json.*
-import io.ktor.client.features.json.serializer.*
-import io.ktor.client.features.logging.*
+import io.ktor.client.plugins.*
+import io.ktor.client.plugins.contentnegotiation.*
+import io.ktor.client.plugins.logging.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
+import io.ktor.serialization.kotlinx.json.*
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import kotlinx.serialization.json.Json
@@ -56,20 +56,17 @@ fun createJson() = Json {
 }
 
 fun createKtorClient(json: Json) = HttpClient {
-    install(JsonFeature) {
-        serializer = KotlinxSerializer(json)
+    install(ContentNegotiation) {
+        json()
     }
 
     defaultRequest {
-        host = Constants.baseUrl
-
         url {
             protocol = URLProtocol.HTTPS
-        }
+            host = Constants.baseUrl
 
-        headers {
-            append(HttpHeaders.Accept, "application/vnd.api+json")
-            append(HttpHeaders.ContentType, "application/vnd.api+json")
+            header(HttpHeaders.Accept, "application/vnd.api+json")
+            header(HttpHeaders.ContentType, "application/vnd.api+json")
         }
     }
 
@@ -80,22 +77,22 @@ fun createKtorClient(json: Json) = HttpClient {
     }
 
     HttpResponseValidator {
-        handleResponseException { exception ->
+        handleResponseExceptionWithRequest { exception, _ ->
             when (exception) {
                 is ServerResponseException -> {
                     val serverResponseResponse = exception.response
-                    val serverResponseExceptionText = serverResponseResponse.readText()
+                    val serverResponseExceptionText = serverResponseResponse.bodyAsText()
                     val apiException = json.decodeFromString(ApiException.serializer(), serverResponseExceptionText)
                     throw apiException
                 }
                 is ClientRequestException -> {
                     val exceptionResponse = exception.response
-                    val exceptionResponseText = exceptionResponse.readText()
+                    val exceptionResponseText = exceptionResponse.bodyAsText()
                     val apiException = json.decodeFromString(ApiException.serializer(), exceptionResponseText)
                     throw apiException
                 }
                 else -> {
-                    return@handleResponseException
+                    return@handleResponseExceptionWithRequest
                 }
             }
         }

@@ -1,7 +1,10 @@
 plugins {
     id("com.android.application")
-    id("com.google.devtools.ksp") version "1.5.31-1.0.0"
     kotlin("android")
+    kotlin("kapt")
+    id("kotlin-parcelize")
+    id("kotlin-android")
+    id("com.google.devtools.ksp") version "${Versions.kotlin}-1.0.5"
 }
 
 android {
@@ -37,40 +40,25 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 
+    composeOptions {
+        kotlinCompilerExtensionVersion = Versions.compose
+    }
+
     kotlinOptions {
         jvmTarget = "1.8"
-        useIR = true
-        freeCompilerArgs = freeCompilerArgs + "-Xopt-in=kotlin.RequiresOptIn"
-
     }
 
-    composeOptions {
-        kotlinCompilerExtensionVersion = AndroidConfigs.kotlinCompilerExtensionVersion
-    }
-
-    packagingOptions {
-        resources.excludes.apply {
-            add("META-INF/AL2.0")
-            add("META-INF/LGPL2.1")
-        }
-    }
-}
-
-kotlin {
-    sourceSets {
-        debug {
-            kotlin.srcDir("build/generated/ksp/debug/kotlin")
-        }
-        release {
-            kotlin.srcDir("build/generated/ksp/release/kotlin")
+    applicationVariants.all {
+        kotlin.sourceSets {
+            getByName(name) {
+                kotlin.srcDir("build/generated/ksp/$name/kotlin")
+            }
         }
     }
 }
 
 dependencies {
     implementation(project(":core"))
-    implementation("io.github.raamcosta.compose-destinations:core:1.1.5-beta")
-    ksp("io.github.raamcosta.compose-destinations:ksp:1.1.5-beta")
 
     with(Dependencies) {
         implementation(androidMaterial)
@@ -87,7 +75,6 @@ dependencies {
         implementation(composeFoundationLayout)
         implementation(composeGraphics)
         implementation(composeActivity)
-        implementation(composeNavigation)
         implementation(composeMaterialIcon)
         implementation(composeUtil)
         implementation(composeLottie)
@@ -101,11 +88,8 @@ dependencies {
         implementation(accompanistCoil)
         implementation(accompanistPager)
 
-        implementation(voyagerNavigator)
-        implementation(voyagerTabNavigator)
-        implementation(voyagerTransitions)
-        implementation(voyagerAndroidx)
-        implementation(voyagerLivedata)
-        implementation(voyagerKoin)
+        implementation(composeDestinations)
+        implementation(composeDestinationsAnimation)
+        ksp(composeDestinationsKsp)
     }
 }

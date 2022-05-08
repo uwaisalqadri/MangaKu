@@ -11,8 +11,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import cafe.adriel.voyager.navigator.LocalNavigator
-import cafe.adriel.voyager.navigator.currentOrThrow
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.uwaisalqadri.mangaku.android.R
@@ -20,7 +18,6 @@ import com.uwaisalqadri.mangaku.android.presentation.browse.composables.Genres
 import com.uwaisalqadri.mangaku.android.presentation.browse.composables.MangaTrending
 import com.uwaisalqadri.mangaku.android.presentation.destinations.DetailScreenDestination
 import com.uwaisalqadri.mangaku.android.presentation.destinations.SearchScreenDestination
-import com.uwaisalqadri.mangaku.android.presentation.search.SearchScreen
 import com.uwaisalqadri.mangaku.android.presentation.theme.MangaTypography
 import com.uwaisalqadri.mangaku.android.presentation.theme.composables.ShimmerBrowseItem
 import com.uwaisalqadri.mangaku.android.presentation.theme.composables.TopBar

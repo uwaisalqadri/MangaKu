@@ -4,6 +4,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.uwaisalqadri.mangaku.android.utils.Result
+import com.uwaisalqadri.mangaku.android.utils.collectFlow
 import com.uwaisalqadri.mangaku.domain.model.Manga
 import com.uwaisalqadri.mangaku.domain.usecase.search.SearchUseCase
 import kotlinx.coroutines.flow.*
@@ -25,14 +26,9 @@ class SearchViewModel(
 
     fun getSearchManga(query: String) = viewModelScope.launch {
         _searchManga.value = Result.loading()
-        searchUseCase.getSearchManga(query)
-            .catch { cause: Throwable ->
-                _searchManga.value = Result.failed(cause)
-            }
-            .collect { result ->
-                if (query.isNotEmpty()) _searchManga.value = Result.success(result)
-                else _searchManga.value = Result.success(listOf())
-            }
+        collectFlow(_searchManga) {
+            searchUseCase.getSearchManga(query)
+        }
     }
 }
 

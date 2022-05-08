@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.uwaisalqadri.mangaku.android.utils.FavState
 import com.uwaisalqadri.mangaku.android.utils.Result
+import com.uwaisalqadri.mangaku.android.utils.collectFlow
 import com.uwaisalqadri.mangaku.domain.model.Manga
 import com.uwaisalqadri.mangaku.domain.usecase.mymanga.MyMangaUseCase
 import kotlinx.coroutines.flow.*
@@ -39,17 +40,9 @@ class MyMangaViewModel(
     }
 
     fun getMyManga() = viewModelScope.launch {
-        myMangaUseCase.getMyManga()
-            .catch { cause: Throwable ->
-                _myManga.value = Result.failed(cause)
-            }
-            .collect { result ->
-                if (result.isNotEmpty()) {
-                    _myManga.value = Result.success(result)
-                } else {
-                    _myManga.value = Result.empty()
-                }
-            }
+        collectFlow(_myManga) {
+            myMangaUseCase.getMyManga()
+        }
     }
 
 }

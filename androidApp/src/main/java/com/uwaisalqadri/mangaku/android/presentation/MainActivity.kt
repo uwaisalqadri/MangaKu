@@ -10,6 +10,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.ramcosta.composedestinations.DestinationsNavHost
 import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.uwaisalqadri.mangaku.android.presentation.browse.BrowseScreen
 import com.uwaisalqadri.mangaku.android.presentation.mymanga.MyMangaScreen
@@ -24,14 +25,15 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             MangaTheme {
-                DestinationsNavHost(NavGraphs.root)
+                DestinationsNavHost(navGraph = NavGraphs.root)
             }
         }
 
     }
 }
 
-@Destination(start = true)
+@RootNavGraph(start = true)
+@Destination
 @Composable
 fun MainScreen(
     navigator: DestinationsNavigator

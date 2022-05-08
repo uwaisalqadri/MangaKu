@@ -1,17 +1,16 @@
-import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
-
 plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
-    kotlin("plugin.serialization")
+    kotlin("plugin.serialization") version Versions.kotlin
     id("com.android.library")
     id("io.realm.kotlin") version Versions.realm
-    id("com.rickclephas.kmp.nativecoroutines")
+    id("com.rickclephas.kmp.nativecoroutines") version "0.11.3"
     id("koin")
+    id("dev.icerock.moko.kswift") version "0.5.0"
 }
 
 // CocoaPods requires the podspec to have a version.
-version = "1.2"
+version = "1.5"
 
 android {
     compileSdk = AndroidConfigs.compileSdkVersion
@@ -21,29 +20,22 @@ android {
         minSdk = AndroidConfigs.minSdkVersion
         targetSdk = AndroidConfigs.targetSdkVersion
     }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
 }
 
 kotlin {
-    val iosTarget: (String, KotlinNativeTarget.() -> Unit) -> KotlinNativeTarget = when {
-        System.getenv("SDK_NAME")?.startsWith("iphoneos") == true -> ::iosArm64
-        System.getenv("NATIVE_ARCH")?.startsWith("arm") == true -> ::iosSimulatorArm64
-        else -> ::iosX64
-    }
-
-    iosTarget("ios") {}
     android()
+    iosX64()
+    iosArm64()
+    //iosSimulatorArm64() sure all ios dependencies support this target
 
     cocoapods {
         summary = "MangaKu"
         homepage = "https://github.com/uwaisalqadri/MangaKu"
         ios.deploymentTarget = "14.1"
-        framework { baseName = "KotlinCore" }
         podfile = project.file("../iosApp/Podfile")
+        framework {
+            baseName = "KotlinCore"
+        }
     }
     
     sourceSets {
@@ -54,7 +46,8 @@ kotlin {
                     implementation(koinCore)
 
                     implementation(ktorCore)
-                    implementation(ktorClientSerialization)
+                    implementation(ktorJsonSerialization)
+                    implementation(ktorContentNegotiation)
                     implementation(ktorLogging)
 
                     implementation(ktxSerialization)
@@ -76,7 +69,15 @@ kotlin {
             }
         }
 
-        val iosMain by getting {
+        val iosX64Main by getting
+        val iosArm64Main by getting
+        //val iosSimulatorArm64Main by getting
+        val iosMain by creating {
+            dependsOn(commonMain)
+            iosX64Main.dependsOn(this)
+            iosArm64Main.dependsOn(this)
+            //iosSimulatorArm64Main.dependsOn(this)
+
             dependencies {
                 implementation(Dependencies.ktorIos)
             }
@@ -95,6 +96,20 @@ kotlin {
             }
         }
 
-        val iosTest by getting
+        val iosX64Test by getting
+        val iosArm64Test by getting
+        //val iosSimulatorArm64Test by getting
+        val iosTest by creating {
+            dependsOn(commonTest)
+            iosX64Test.dependsOn(this)
+            iosArm64Test.dependsOn(this)
+            //iosSimulatorArm64Test.dependsOn(this)
+        }
     }
 }
+
+// add support for kotlin extension function and sealed class to enum swift
+//kswift {
+//    install(dev.icerock.moko.kswift.plugin.feature.SealedToSwiftEnumFeature)
+//    install(dev.icerock.moko.kswift.plugin.feature.PlatformExtensionFunctionsFeature)
+//}
