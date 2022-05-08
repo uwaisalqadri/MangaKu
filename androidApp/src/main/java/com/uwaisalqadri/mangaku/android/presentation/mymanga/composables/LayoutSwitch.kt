@@ -7,6 +7,7 @@ import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -18,7 +19,7 @@ fun LayoutSwitch(
     modifier: Modifier,
     onSwitch: (Boolean) -> Unit
 ) {
-    var isSlide by remember { mutableStateOf(true) }
+    var isSlide by rememberSaveable { mutableStateOf(true) }
 
     Row(
         horizontalArrangement = Arrangement.Center,

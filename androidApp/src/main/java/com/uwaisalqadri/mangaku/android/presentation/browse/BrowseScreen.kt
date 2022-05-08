@@ -30,8 +30,6 @@ fun BrowseScreen(
     navigator: DestinationsNavigator,
     viewModel: BrowseViewModel = getViewModel(),
 ) {
-    viewModel.getTrendingManga()
-
     val listManga by viewModel.trendingManga.collectAsState()
 
     LazyColumn(

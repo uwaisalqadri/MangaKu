@@ -40,9 +40,10 @@ fun MangaItem(
 
         Column(
             verticalArrangement = Arrangement.SpaceEvenly,
+            horizontalAlignment = Alignment.Start,
             modifier = Modifier
                 .fillMaxHeight()
-                .padding(20.dp, 5.dp)
+                .padding(horizontal = 20.dp, vertical = 5.dp)
         ) {
 
             StarRate(
@@ -63,7 +64,7 @@ fun MangaItem(
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
-                    .padding(top = 11.dp)
+                    .padding(top = 5.dp)
                     .fillMaxWidth()
             ) {
                 Text(
@@ -83,11 +84,12 @@ fun MangaItem(
                 )
             }
 
+            Spacer(modifier = Modifier.fillMaxHeight(fraction = 0.3f))
+
             Button(
                 colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black),
                 modifier = Modifier
-                    .height(40.dp)
-                    .padding(top = 25.dp),
+                    .height(40.dp),
                 onClick = { if (onReadMore != null) onReadMore(manga) }
             ) {
                 Text(
