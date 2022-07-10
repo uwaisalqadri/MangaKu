@@ -15,8 +15,8 @@ import Combine
 class DetailViewModel: ObservableObject {
 
   @Published var manga: ViewState<Manga> = .initiate
-
   @LazyKoin private var detailUseCase: DetailUseCase
+
   private var cancellables = Set<AnyCancellable>()
 
   func fetchManga(mangaId: String) {

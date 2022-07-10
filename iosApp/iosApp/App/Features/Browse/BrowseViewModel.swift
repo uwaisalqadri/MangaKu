@@ -15,7 +15,6 @@ import KMPNativeCoroutinesAsync
 class BrowseViewModel: ObservableObject {
 
   @Published var trendingManga: ViewState<[Manga]> = .initiate
-
   @LazyKoin private var browseUseCase: BrowseUseCase
 
   private var cancellables = Set<AnyCancellable>()

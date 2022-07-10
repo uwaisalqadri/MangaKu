@@ -15,8 +15,8 @@ import KMPNativeCoroutinesAsync
 class SearchViewModel: ObservableObject {
 
   @Published var listManga: ViewState<[Manga]> = .initiate
-
   @LazyKoin private var searcUseCase: SearchUseCase
+
   private var cancellables = Set<AnyCancellable>()
 
   func fetchSearchManga(query: String) {
