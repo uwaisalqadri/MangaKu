@@ -17,12 +17,8 @@ class MyMangaViewModel: ObservableObject {
   @Published var listManga: ViewState<[Manga]> = .initiate
   @Published var isFavorite = false
 
-  private let myMangaUseCase: MyMangaUseCase
+  @LazyKoin private var myMangaUseCase: MyMangaUseCase
   private var cancellables = Set<AnyCancellable>()
-
-  init(myMangaUseCase: MyMangaUseCase) {
-    self.myMangaUseCase = myMangaUseCase
-  }
 
   func addFavoriteManga(manga: Manga) {
     myMangaUseCase.addManga(manga: manga)

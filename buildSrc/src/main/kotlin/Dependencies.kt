@@ -1,3 +1,28 @@
+object Versions {
+    const val kotlin = "1.6.20"
+    const val material = "1.4.0"
+    const val appCompat = "1.3.1"
+    const val constraint = "2.1.0"
+    const val navFragment = "2.3.5"
+    const val navUi = "2.3.5"
+    const val livedata = "2.3.1"
+    const val multiplatformSettings = "0.8.1"
+    const val compose = "1.2.0-alpha08"
+    const val activityCompose = "1.4.0"
+    const val composeDestinations = "1.5.1-beta"
+    const val coilAccompanist = "0.15.0"
+    const val pagerAccompanist = "0.15.0"
+    const val kermit = "0.3.0-m1"
+    const val koin = "3.1.4"
+    const val coroutine = "1.6.0-native-mt"
+    const val serialization = "1.3.0"
+    const val dateTime = "0.3.1"
+    const val ktor = "2.0.0"
+    const val realm = "0.11.1"
+    const val lottie = "4.0.0"
+    const val shimmer = "1.0.2"
+}
+
 object Dependencies {
     const val ktxSerialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.serialization}"
     const val ktxCoroutine = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutine}"
@@ -48,6 +73,7 @@ object Dependencies {
     const val realmKotlin = "io.realm.kotlin:library-base:${Versions.realm}"
 
     const val kermitLogger = "co.touchlab:kermit:${Versions.kermit}"
+    const val multiplatformSettings = "com.russhwolf:multiplatform-settings:${Versions.multiplatformSettings}"
 }
 
 

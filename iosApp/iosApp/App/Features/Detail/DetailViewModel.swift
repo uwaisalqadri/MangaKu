@@ -16,12 +16,8 @@ class DetailViewModel: ObservableObject {
 
   @Published var manga: ViewState<Manga> = .initiate
 
-  private let detailUseCase: DetailUseCase
+  @LazyKoin private var detailUseCase: DetailUseCase
   private var cancellables = Set<AnyCancellable>()
-
-  init(detailUseCase: DetailUseCase) {
-    self.detailUseCase = detailUseCase
-  }
 
   func fetchManga(mangaId: String) {
     Task {

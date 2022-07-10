@@ -26,7 +26,7 @@ kotlin {
     android()
     iosX64()
     iosArm64()
-    //iosSimulatorArm64() sure all ios dependencies support this target
+    iosSimulatorArm64()
 
     cocoapods {
         summary = "MangaKu"
@@ -44,6 +44,7 @@ kotlin {
                 with(Dependencies) {
                     implementation(realmKotlin)
                     implementation(koinCore)
+                    implementation(multiplatformSettings)
 
                     implementation(ktorCore)
                     implementation(ktorJsonSerialization)
@@ -72,12 +73,12 @@ kotlin {
 
         val iosX64Main by getting
         val iosArm64Main by getting
-        //val iosSimulatorArm64Main by getting
+        val iosSimulatorArm64Main by getting
         val iosMain by creating {
             dependsOn(commonMain)
             iosX64Main.dependsOn(this)
             iosArm64Main.dependsOn(this)
-            //iosSimulatorArm64Main.dependsOn(this)
+            iosSimulatorArm64Main.dependsOn(this)
 
             dependencies {
                 implementation(Dependencies.ktorDarwin)

@@ -16,12 +16,11 @@ class BrowseViewModel: ObservableObject {
 
   @Published var trendingManga: ViewState<[Manga]> = .initiate
 
-  private let browseUseCase: BrowseUseCase
+  @LazyKoin private var browseUseCase: BrowseUseCase
+
   private var cancellables = Set<AnyCancellable>()
 
-  init(browseUseCase: BrowseUseCase) {
-    self.browseUseCase = browseUseCase
-
+  init() {
     fetchTrendingManga()
   }
 

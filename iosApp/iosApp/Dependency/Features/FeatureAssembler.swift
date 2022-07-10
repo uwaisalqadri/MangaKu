@@ -24,19 +24,19 @@ protocol FeatureAssembler {
 extension FeatureAssembler where Self: Assembler {
 
   @MainActor func resolve() -> BrowseViewModel {
-    return BrowseViewModel(browseUseCase: resolve())
+    return BrowseViewModel()
   }
 
   @MainActor func resolve() -> MyMangaViewModel {
-    return MyMangaViewModel(myMangaUseCase: resolve())
+    return MyMangaViewModel()
   }
 
   @MainActor func resolve() -> SearchViewModel {
-    return SearchViewModel(searcUseCase: resolve())
+    return SearchViewModel()
   }
 
   @MainActor func resolve() -> DetailViewModel {
-    return DetailViewModel(detailUseCase: resolve())
+    return DetailViewModel()
   }
 
   func resolve() -> BrowseRouter {

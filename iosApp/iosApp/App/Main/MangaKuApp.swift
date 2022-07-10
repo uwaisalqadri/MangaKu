@@ -14,12 +14,13 @@ struct MangaKuApp: App {
 
   private let assembler = AppAssembler()
 
+  init() {
+    KoinApplication.start()
+  }
+
   var body: some Scene {
     WindowGroup {
       TabNavigationView(assembler: assembler)
-        .onAppear {
-          CoreModuleKt.doInitKoin()
-        }
     }
   }
 }

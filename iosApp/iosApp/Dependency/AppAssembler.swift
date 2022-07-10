@@ -8,7 +8,6 @@
 
 import Foundation
 
-protocol Assembler: FeatureAssembler,
-                    KotlinCoreAssembler {}
+protocol Assembler: FeatureAssembler {}
 
 class AppAssembler: Assembler {}

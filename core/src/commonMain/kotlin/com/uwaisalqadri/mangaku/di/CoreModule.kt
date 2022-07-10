@@ -36,8 +36,6 @@ fun initKoin(appDeclaration: KoinAppDeclaration = {}): KoinApplication {
     }
 }
 
-fun initKoin() = initKoin {} // for iOS
-
 val realmModule = module {
     single { MangaPersistenceContainer(get()) }
     single { createRealmDatabase() }

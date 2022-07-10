@@ -30,7 +30,6 @@
 		52EBD6D526AE5A5900E1C28F /* MangaRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBD6D426AE5A5900E1C28F /* MangaRow.swift */; };
 		52EBD6D826AE645E00E1C28F /* GenreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBD6D726AE645E00E1C28F /* GenreView.swift */; };
 		52EBD6EB26AE845D00E1C28F /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EBD6EA26AE845D00E1C28F /* Fonts.swift */; };
-		52FFF18426AFAEE9006A3621 /* KotlinCoreAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FFF18326AFAEE9006A3621 /* KotlinCoreAssembler.swift */; };
 		7555FF83242A565900829871 /* TabNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* TabNavigationView.swift */; };
 		9132888B2764B054006FA4FA /* sedgwickavedisplay_regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 913288862764B054006FA4FA /* sedgwickavedisplay_regular.ttf */; };
 		9132888C2764B055006FA4FA /* montserrat_semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 913288872764B054006FA4FA /* montserrat_semibold.ttf */; };
@@ -42,6 +41,7 @@
 		913390402780601700DB8E19 /* SearchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9133903F2780601700DB8E19 /* SearchRouter.swift */; };
 		913390432780607B00DB8E19 /* DetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913390422780607B00DB8E19 /* DetailRouter.swift */; };
 		913390462780611D00DB8E19 /* MyMangaRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913390452780611D00DB8E19 /* MyMangaRouter.swift */; };
+		91458110287AE616004998D0 /* Koin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9145810F287AE616004998D0 /* Koin.swift */; };
 		91745D0C2796897B00B29DC3 /* MangaCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91745D0B2796897A00B29DC3 /* MangaCarouselView.swift */; };
 		9193CFFA282823870061E330 /* ShimmerModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9193CFF9282823870061E330 /* ShimmerModifier.swift */; };
 		9193CFFC2828239E0061E330 /* ViewStateModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9193CFFB2828239E0061E330 /* ViewStateModifier.swift */; };
@@ -74,7 +74,6 @@
 		52EBD6D426AE5A5900E1C28F /* MangaRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangaRow.swift; sourceTree = "<group>"; };
 		52EBD6D726AE645E00E1C28F /* GenreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreView.swift; sourceTree = "<group>"; };
 		52EBD6EA26AE845D00E1C28F /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
-		52FFF18326AFAEE9006A3621 /* KotlinCoreAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KotlinCoreAssembler.swift; sourceTree = "<group>"; };
 		7409001EFEE5792C2EC13B64 /* Pods_iosApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iosApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF82242A565900829871 /* TabNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabNavigationView.swift; sourceTree = "<group>"; };
@@ -90,6 +89,7 @@
 		9133903F2780601700DB8E19 /* SearchRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRouter.swift; sourceTree = "<group>"; };
 		913390422780607B00DB8E19 /* DetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRouter.swift; sourceTree = "<group>"; };
 		913390452780611D00DB8E19 /* MyMangaRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMangaRouter.swift; sourceTree = "<group>"; };
+		9145810F287AE616004998D0 /* Koin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Koin.swift; sourceTree = "<group>"; };
 		91745D0B2796897A00B29DC3 /* MangaCarouselView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MangaCarouselView.swift; sourceTree = "<group>"; };
 		9193CFF9282823870061E330 /* ShimmerModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerModifier.swift; sourceTree = "<group>"; };
 		9193CFFB2828239E0061E330 /* ViewStateModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewStateModifier.swift; sourceTree = "<group>"; };
@@ -168,7 +168,6 @@
 			isa = PBXGroup;
 			children = (
 				5224F40E26AC38CF00D0D6E8 /* FeatureAssembler.swift */,
-				52FFF18326AFAEE9006A3621 /* KotlinCoreAssembler.swift */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -190,6 +189,7 @@
 			children = (
 				2152FB032600AC8F00CF470E /* MangaKuApp.swift */,
 				7555FF82242A565900829871 /* TabNavigationView.swift */,
+				9145810F287AE616004998D0 /* Koin.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -512,13 +512,13 @@
 				52EA567D26F49EA700C8F458 /* CustomDialogView.swift in Sources */,
 				52EBD6D526AE5A5900E1C28F /* MangaRow.swift in Sources */,
 				52B7691B26ABCE8100227903 /* SearchView.swift in Sources */,
+				91458110287AE616004998D0 /* Koin.swift in Sources */,
 				2152FB042600AC8F00CF470E /* MangaKuApp.swift in Sources */,
 				7555FF83242A565900829871 /* TabNavigationView.swift in Sources */,
 				5246F3A826AB9C5200CCDA56 /* AppAssembler.swift in Sources */,
 				528D6659270D9F260046E716 /* FavState.swift in Sources */,
 				52EA568026F49EC500C8F458 /* View.swift in Sources */,
 				913390432780607B00DB8E19 /* DetailRouter.swift in Sources */,
-				52FFF18426AFAEE9006A3621 /* KotlinCoreAssembler.swift in Sources */,
 				52B7691E26ABCE9D00227903 /* MyMangaView.swift in Sources */,
 				9193CFFA282823870061E330 /* ShimmerModifier.swift in Sources */,
 			);

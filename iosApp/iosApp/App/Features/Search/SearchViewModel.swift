@@ -16,12 +16,8 @@ class SearchViewModel: ObservableObject {
 
   @Published var listManga: ViewState<[Manga]> = .initiate
 
-  private let searcUseCase: SearchUseCase
+  @LazyKoin private var searcUseCase: SearchUseCase
   private var cancellables = Set<AnyCancellable>()
-
-  init(searcUseCase: SearchUseCase) {
-    self.searcUseCase = searcUseCase
-  }
 
   func fetchSearchManga(query: String) {
     Task {
