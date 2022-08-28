@@ -1,5 +1,5 @@
 //
-//  MyMangaView.swift
+//  MyMangaPageView.swift
 //  iosApp
 //
 //  Created by Uwais Alqadri on 24/07/21.
@@ -10,7 +10,7 @@ import SwiftUI
 import Shared
 import SDWebImageSwiftUI
 
-struct MyMangaView: View {
+struct MyMangaPageView: View {
 
   @ObservedObject var viewModel: MyMangaViewModel
   @State var isSlide = true
@@ -18,55 +18,54 @@ struct MyMangaView: View {
   let navigator: MyMangaRouter
 
   var body: some View {
-    GeometryReader { view in
-      ScrollView(showsIndicators: false) {
-        VStack {
-          Text("My Manga")
-            .font(.custom(.mbold, size: 23))
-            .padding(.top, -30)
+    ScrollView(showsIndicators: false) {
+      VStack {
+        Text("My Manga")
+          .font(.custom(.mbold, size: 23))
+          .padding(.top, -30)
 
-          LayoutSwitch() { toggle in
-            isSlide = toggle
-          }.padding(.bottom, 15)
+        LayoutSwitch() { toggle in
+          isSlide = toggle
+        }.padding(.bottom, 15)
 
-          if case .success(let data) = viewModel.listManga {
-            if isSlide {
+        if case .success(let data) = viewModel.listManga {
+          if isSlide {
 
-              MangaCarouselView(
-                itemWidth: 240,
-                itemHeight: 361,
-                views: getMangaItemView(items: data)
-              ).frame(width: view.size.width, height: view.size.height / 2)
-              .padding(.top, 50)
+            MangaCarouselView(
+              itemWidth: 240,
+              itemHeight: 361,
+              views: getMangaItemView(items: data)
+            ).frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight / 2)
+            .padding(.top, 50)
 
-            } else {
-              LazyVGrid(columns: [
-                GridItem(.adaptive(minimum: 120), spacing: 25, alignment: .center)
-              ], alignment: .leading, spacing: 10) {
+          } else {
+            LazyVGrid(columns: [
+              GridItem(.adaptive(minimum: 120), spacing: 25, alignment: .center)
+            ], alignment: .leading, spacing: 10) {
 
-                ForEach(data, id: \.self) { manga in
-                  MangaGridItem(manga: manga, navigator: navigator)
-                }
-              }.padding(.horizontal, 30)
-                .padding(.top, 20)
-                .padding(.bottom, 200)
-            }
-
-          } else if case .empty = viewModel.listManga {
-            Text("Still Empty Here!")
-              .foregroundColor(.black)
-              .font(.custom(.sedgwickave, size: 60))
-              .multilineTextAlignment(.center)
-              .padding(.top, 50)
-              .padding(.horizontal, 20)
+              ForEach(data, id: \.self) { manga in
+                MangaGridItem(manga: manga, navigator: navigator)
+              }
+            }.padding(.horizontal, 30)
+              .padding(.top, 20)
+              .padding(.bottom, 200)
           }
 
-          Spacer()
+        } else if case .empty = viewModel.listManga {
+          Text("Still Empty Here!")
+            .foregroundColor(.black)
+            .font(.custom(.sedgwickave, size: 60))
+            .multilineTextAlignment(.center)
+            .padding(.top, 50)
+            .padding(.horizontal, 20)
         }
-      }.onAppear {
-        viewModel.fetchFavoriteManga()
+
+        Spacer()
       }
+    }.onAppear {
+      viewModel.fetchFavoriteManga()
     }
+    .frame(width: UIScreen.screenWidth, alignment: .center)
   }
 
   private func getMangaItemView(items: [Manga]) -> [AnyView] {

@@ -16,6 +16,6 @@ struct DetailRouter {
   }
 
   @MainActor func routeToDetail(mangaId: String) -> some View {
-    DetailView(viewModel: assembler.resolve(), mangaViewModel: assembler.resolve(), mangaId: mangaId)
+    DetailPageView(viewModel: assembler.resolve(), mangaViewModel: assembler.resolve(), mangaId: mangaId)
   }
 }

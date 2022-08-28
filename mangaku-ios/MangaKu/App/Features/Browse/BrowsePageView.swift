@@ -1,5 +1,5 @@
 //
-//  BrowseView.swift
+//  BrowsePageView.swift
 //  iosApp
 //
 //  Created by Uwais Alqadri on 24/07/21.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct BrowseView: View {
+struct BrowsePageView: View {
 
   @ObservedObject var viewModel: BrowseViewModel
   let navigator: BrowseRouter

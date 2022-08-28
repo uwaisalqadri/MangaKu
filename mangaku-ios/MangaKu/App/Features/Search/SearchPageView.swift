@@ -1,5 +1,5 @@
 //
-//  SearchView.swift
+//  SearchPageView.swift
 //  iosApp
 //
 //  Created by Uwais Alqadri on 24/07/21.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct SearchView: View {
+struct SearchPageView: View {
 
   @ObservedObject var viewModel: SearchViewModel
   @State var searchQuery: String = ""

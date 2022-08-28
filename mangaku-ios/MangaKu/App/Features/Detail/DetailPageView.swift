@@ -1,5 +1,5 @@
 //
-//  DetailView.swift
+//  DetailPageView.swift
 //  iosApp
 //
 //  Created by Uwais Alqadri on 14/09/21.
@@ -10,7 +10,7 @@ import SwiftUI
 import SDWebImageSwiftUI
 import Shared
 
-struct DetailView: View {
+struct DetailPageView: View {
 
   @ObservedObject var viewModel: DetailViewModel
   @ObservedObject var mangaViewModel: MyMangaViewModel
