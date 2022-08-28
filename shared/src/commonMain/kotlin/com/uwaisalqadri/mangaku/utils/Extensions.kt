@@ -1,6 +1,7 @@
 package com.uwaisalqadri.mangaku.utils
 
 import com.uwaisalqadri.mangaku.domain.model.Manga
+import com.uwaisalqadri.mangaku.domain.model.Titles
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toInstant
 import kotlinx.datetime.toLocalDate
@@ -12,8 +13,10 @@ fun Double.toFiveStars(): Int {
 }
 
 fun Manga.getTitle(): String {
-    val title = attributes?.titles
-    return title?.ja_jp ?: title?.en_jp ?: title?.en_us ?: title?.en ?: ""
+    return attributes?.canonicalTitle ?: ""
+
+    // great logic but somehow unfortunately its not working as expected in swift, probably a font issue
+    // return title?.ja_jp ?: title?.en_jp ?: title?.en_us ?: title?.en ?: ""
 }
 
 fun Manga.getPosterImage(): String {
