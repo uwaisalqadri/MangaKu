@@ -7,5 +7,5 @@ pluginManagement {
 }
 
 rootProject.name = "MangaApp"
-include(":androidApp")
-include(":core")
+include(":mangaku-android")
+include(":shared")
