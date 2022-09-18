@@ -11,9 +11,9 @@ MangaKu App Powered by Kotlin Multiplatform Mobile, Jetpack Compose, and SwiftUI
 
 **Module**
 
-* **`core`**: data and domain layer
-* **`iosApp`**: ios presentation layer
-* **`androidApp`**: android presentation layer
+* **`shared`**: data and domain layer
+* **`mangaku-ios`**: ios presentation layer
+* **`mangaku-android`**: android presentation layer
 * **`buildSrc`**: `androidApp` and `core` dependencies
 
 ## Table of Contents
@@ -184,7 +184,7 @@ actual fun formatDate(dateString: String, format: String): String {
 yes, we can use `Foundation` same as what we use in Xcode
 
 ## <a name="project-structure"></a> 🏛 Project Structure
-**`core`**:
+**`shared`**:
 
 * `data`
   - `mapper`
@@ -205,7 +205,7 @@ yes, we can use `Foundation` same as what we use in Xcode
     - `search` 
 * `utils`
 
-**`androidApp`**:
+**`mangaku-android`**:
  - `ui`
     - `composables`
     - `home`
@@ -216,7 +216,7 @@ yes, we can use `Foundation` same as what we use in Xcode
 - `di`
 - `utils`
 
-**`iosApp`**: 
+**`mangaku-ios`**: 
  - `Dependency`
  - `App`
  - `Main`
