@@ -14,7 +14,7 @@ MangaKu App Powered by Kotlin Multiplatform Mobile, Jetpack Compose, and SwiftUI
 * **`shared`**: data and domain layer
 * **`mangaku-ios`**: ios presentation layer
 * **`mangaku-android`**: android presentation layer
-* **`buildSrc`**: `androidApp` and `core` dependencies
+* **`buildSrc`**: `mangaku-android` and `shared` dependencies
 
 ## Table of Contents
 
