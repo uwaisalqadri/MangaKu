@@ -1,7 +1,7 @@
 <h1 align="center"> MangaKu</h1> <br>
 <p align="center">
   <a href="https://gitpoint.co/">
-    <img alt="MovieCatalogue" title="MovieCatalogue" src="https://cdn.dribbble.com/users/5027078/screenshots/12022789/media/3e928c7fa9ac0a4e0c320c81302917ea.png" width="500">
+    <img alt="Mangaku" title="Mangaku" src="https://cdn.dribbble.com/users/5027078/screenshots/12022789/media/3e928c7fa9ac0a4e0c320c81302917ea.png" width="500">
   </a>
 </p>
 
@@ -44,7 +44,7 @@ A few things you can do with MangaKu:
 - Install Kotlin Multiplatform Mobile plugin in Android Studio
 - Clone or download the repo
 - Rebuild Project
-- To run in iOS, Open Xcode and `pod install` inside `iosApp` folder to install shared module and ios dependencies
+- To run in iOS, Open Xcode and `pod install` inside `mangaku-ios` folder to install shared module and ios dependencies
 
 <!-- **Development Keys**: The `apiKey` in [`utils/Constants.kt`](https://code.nbs.dev/nbs-mobile/kmm-movie-db/-/blob/main/core/src/commonMain/kotlin/com/uwaisalqadri/moviecatalogue/utils/Constants.kt) are generated from [TMDB](https://www.themoviedb.org/), generate your own in [themoviedb.org/settings/api](https://www.themoviedb.org/settings/api). -->
 
@@ -56,19 +56,19 @@ A few things you can do with MangaKu:
 
 ## <a name="libraries"></a> 💡 Libraries
 
-`core`:
+`shared`:
 * [Ktor](https://github.com/ktorio/ktor)
 * [Realm-Kotlin](https://github.com/realm/realm-kotlin)
 * [KMPNativeCoroutines](https://github.com/rickclephas/KMP-NativeCoroutines)
 * [Koin](https://github.com/InsertKoinIO/koin)
 * [Kermit](https://github.com/touchlab/Kermit)
 
-`iosApp`:
+`mangaku-ios`:
 * [Swift's New Concurrency](https://developer.apple.com/news/?id=2o3euotz)
 * [SDWebImage](https://github.com/SDWebImage/SDWebImage)
 * [SwiftUI](https://developer.apple.com/documentation/swiftui)
 
-`androidApp`:
+`mangaku-android`:
 * [Jetpack Compose](https://developer.android.com/jetpack/compose)
 * [Accompanist](https://github.com/google/accompanist)
 * [Koin](https://github.com/InsertKoinIO/koin)
@@ -76,7 +76,7 @@ A few things you can do with MangaKu:
 * Some Kotlinx & Jetpack Components
 
 ## <a name="domain-to-presentation"></a> 💨 Domain to Presentation
-In Android, Because both `core` and `androidApp` written in Kotlin, we can simply collect flow :
+In Android, Because both `shared` and `mangaku-android` written in Kotlin, we can simply collect flow :
 ```
 private fun getTrendingManga() = viewModelScope.launch {
   _trendingManga.value = Result.loading()
