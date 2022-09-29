@@ -19,35 +19,33 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.uwaisalqadri.mangaku.android.R
+import com.uwaisalqadri.mangaku.android.presentation.destinations.BrowseScreenDestination
+import com.uwaisalqadri.mangaku.android.presentation.destinations.MyMangaScreenDestination
 
-sealed class BottomNavItem(
+enum class BottomBarDestination(
     var route: String,
     @DrawableRes var icon: Int,
     var title: String
 ) {
-    object Browse : BottomNavItem(
-        "browse",
-        R.drawable.ic_browse_active,
-        "Browse"
-    )
+    BROWSE(
+        route = BrowseScreenDestination.route,
+        icon = R.drawable.ic_browse_active,
+        title = "Browse"
+    ),
 
-    object MyManga : BottomNavItem(
-        "mymanga",
-        R.drawable.ic_mymanga_active,
-        "MyManga"
+    MY_MANGA(
+        route = MyMangaScreenDestination.route,
+        icon = R.drawable.ic_mymanga_active,
+        title = "MyManga"
     )
 }
 
 @Composable
-fun MangaBottomNavigation(
-    navController: NavController,
-    modifier: Modifier = Modifier
+fun MangakuBottomBar(
+    modifier: Modifier = Modifier,
+    currentRoute: String?,
+    onSelect: (String) -> Unit
 ) {
-    val items = listOf(
-        BottomNavItem.Browse,
-        BottomNavItem.MyManga
-    )
-
     Card(
         shape = RoundedCornerShape(8.dp),
         elevation = 5.dp,
@@ -60,10 +58,7 @@ fun MangaBottomNavigation(
             contentColor = MaterialTheme.colors.secondary,
             elevation = 10.dp
         ) {
-            val navBackStackEntry by navController.currentBackStackEntryAsState()
-            val currentRoute = navBackStackEntry?.destination?.route
-
-            items.forEach { item ->
+            BottomBarDestination.values().forEach { item ->
 
                 BottomNavigationItem(
                     icon = { Icon(painterResource(id = item.icon), contentDescription = item.title) },
@@ -71,37 +66,10 @@ fun MangaBottomNavigation(
                     unselectedContentColor = MaterialTheme.colors.secondary.copy(0.4f),
                     alwaysShowLabel = false,
                     selected = currentRoute == item.route,
-                    onClick = {
-                        navController.navigate(item.route) {
-                            // Pop up to the start destination of the graph to
-                            // avoid building up a large stack of destinations
-                            // on the back stack as users select items
-                            navController.graph.startDestinationRoute?.let { route ->
-                                popUpTo(route) {
-                                    saveState = true
-                                }
-                            }
-                            // Avoid multiple copies of the same destination when
-                            // reselecting the same item
-                            launchSingleTop = true
-                            // Restore state when reselecting a previously selected item
-                            restoreState = true
-                        }
-                    }
+                    onClick = { onSelect(item.route) }
                 )
 
             }
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-

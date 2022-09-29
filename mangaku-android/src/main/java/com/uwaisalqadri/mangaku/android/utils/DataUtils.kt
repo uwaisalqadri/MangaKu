@@ -44,7 +44,7 @@ inline fun <reified T> Result<T>.isLoading(): Boolean {
 }
 
 inline fun <reified T> Result<T>.isEmpty(): Boolean {
-    return this is Result.Empty
+    return (this is Result.Empty || this is Result.Default)
 }
 
 fun <T> observeApiError(resource: Result<T>?): ApiError {

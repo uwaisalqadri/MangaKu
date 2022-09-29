@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -27,7 +28,6 @@ import com.uwaisalqadri.mangaku.android.utils.isEmpty
 import com.uwaisalqadri.mangaku.android.utils.isLoading
 import org.koin.androidx.compose.getViewModel
 
-@OptIn(ExperimentalPagerApi::class)
 @Destination
 @Composable
 fun MyMangaScreen(
@@ -74,18 +74,20 @@ fun MyMangaScreen(
         }
 
         item {
-            if (myMangaState.isLoading() || myMangaState.isEmpty()) {
-                Text(
-                    text = "Still Empty Here!",
-                    style = MangaTypography.overline,
-                    fontSize = 60.sp,
-                    color = MaterialTheme.colors.secondary,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(horizontal = 40.dp)
-                )
-            } else {
+            Box {
+                if (myMangaState.isEmpty() || myMangaState.isLoading()) {
+                    Text(
+                        text = "Still Empty Here!",
+                        style = MangaTypography.overline,
+                        fontSize = 60.sp,
+                        color = MaterialTheme.colors.secondary,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(horizontal = 40.dp)
+                    )
+                }
+
                 if (isPage) {
                     getValue(myMangaState)?.let {
                         HorizontalPagerWithTransition(
