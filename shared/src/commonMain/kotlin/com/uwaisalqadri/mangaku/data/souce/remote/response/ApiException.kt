@@ -1,5 +1,6 @@
 package com.uwaisalqadri.mangaku.data.souce.remote.response
 
+import com.uwaisalqadri.mangaku.domain.base.ApiError
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -9,4 +10,8 @@ data class ApiException(
     val errorTitle: String,
     @SerialName("error_description")
     val errorMessage: String
-): Exception()
+): Exception() {
+    fun map(): ApiError {
+        return ApiError(errorTitle, errorMessage)
+    }
+}

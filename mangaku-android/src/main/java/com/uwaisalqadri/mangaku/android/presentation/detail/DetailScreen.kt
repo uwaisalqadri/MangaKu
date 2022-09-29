@@ -26,6 +26,9 @@ import com.uwaisalqadri.mangaku.android.presentation.theme.MangaTypography
 import com.uwaisalqadri.mangaku.android.presentation.theme.composables.BackButton
 import com.uwaisalqadri.mangaku.android.presentation.theme.composables.ShimmerDetail
 import com.uwaisalqadri.mangaku.android.presentation.theme.composables.TopBar
+import com.uwaisalqadri.mangaku.android.utils.ComposableObserver
+import com.uwaisalqadri.mangaku.android.utils.getValue
+import com.uwaisalqadri.mangaku.android.utils.isLoading
 import com.uwaisalqadri.mangaku.domain.model.Manga
 import com.uwaisalqadri.mangaku.utils.*
 import org.koin.androidx.compose.getViewModel
@@ -38,14 +41,16 @@ fun DetailScreen(
     viewModel: DetailViewModel = getViewModel(),
     mangaViewModel: MyMangaViewModel = getViewModel()
 ) {
-    viewModel.getDetailManga(mangaId)
-    mangaViewModel.checkFavorite(mangaId)
-
-    val detailManga by viewModel.detailManga.collectAsState()
+    val detailMangaState by viewModel.detailManga.collectAsState()
     val favState by mangaViewModel.favState.collectAsState()
 
     val (isFavorite, setFavorite) = remember { mutableStateOf(false) }
     val (isShowDialog, setShowDialog) = remember { mutableStateOf(false) }
+
+    ComposableObserver {
+        viewModel.getDetailManga(mangaId)
+        mangaViewModel.checkFavorite(mangaId)
+    }
 
     LazyColumn(
         horizontalAlignment = Alignment.Start,
@@ -77,8 +82,8 @@ fun DetailScreen(
                     elevation = ButtonDefaults.elevation(0.dp, 0.dp),
                     onClick = {
                         setShowDialog(true)
-                        if (!detailManga.loading) {
-                            detailManga.data?.let {
+                        if (!detailMangaState.isLoading()) {
+                            getValue(detailMangaState)?.let {
                                 if (isFavorite) mangaViewModel.deleteMyManga(it.id)
                                 else mangaViewModel.addMyManga(it)
                             }
@@ -103,7 +108,7 @@ fun DetailScreen(
         }
 
         item {
-            if (detailManga.loading) {
+            if (detailMangaState.isLoading()) {
                 ShimmerDetail()
             } else {
                 when {
@@ -113,7 +118,7 @@ fun DetailScreen(
                     else -> setFavorite(false)
                 }
 
-                detailManga.data?.let {
+                getValue(detailMangaState)?.let {
                     MangaDetail(manga = it)
                 }
 

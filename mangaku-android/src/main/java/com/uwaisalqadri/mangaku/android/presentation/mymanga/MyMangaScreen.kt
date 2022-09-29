@@ -21,6 +21,10 @@ import com.uwaisalqadri.mangaku.android.presentation.mymanga.composables.LayoutS
 import com.uwaisalqadri.mangaku.android.presentation.mymanga.composables.MyMangaGridItem
 import com.uwaisalqadri.mangaku.android.presentation.search.composables.StaggeredVerticalGrid
 import com.uwaisalqadri.mangaku.android.presentation.theme.MangaTypography
+import com.uwaisalqadri.mangaku.android.utils.ComposableObserver
+import com.uwaisalqadri.mangaku.android.utils.getValue
+import com.uwaisalqadri.mangaku.android.utils.isEmpty
+import com.uwaisalqadri.mangaku.android.utils.isLoading
 import org.koin.androidx.compose.getViewModel
 
 @OptIn(ExperimentalPagerApi::class)
@@ -30,17 +34,18 @@ fun MyMangaScreen(
     navigator: DestinationsNavigator,
     viewModel: MyMangaViewModel = getViewModel()
 ) {
-    val myManga by viewModel.myManga.collectAsState()
-    var state by rememberSaveable { mutableStateOf(true) }
+    val myMangaState by viewModel.myManga.collectAsState()
+    var isPage by rememberSaveable { mutableStateOf(true) }
+
+    ComposableObserver {
+        viewModel.getMyManga()
+    }
 
     LazyColumn(
         modifier = Modifier
             .fillMaxHeight()
             .background(color = MaterialTheme.colors.primary)
     ) {
-
-        viewModel.getMyManga()
-
         item {
             Row(
                 horizontalArrangement = Arrangement.Center,
@@ -62,18 +67,14 @@ fun MyMangaScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(60.dp)
-                    .padding(
-                        top = 20.dp,
-                        start = 20.dp,
-                        end = 20.dp
-                    )
+                    .padding(top = 20.dp, start = 20.dp, end = 20.dp)
             ) {
-                state = it
+                isPage = it
             }
         }
 
         item {
-            if (myManga.loading) {
+            if (myMangaState.isLoading() || myMangaState.isEmpty()) {
                 Text(
                     text = "Still Empty Here!",
                     style = MangaTypography.overline,
@@ -85,39 +86,34 @@ fun MyMangaScreen(
                         .padding(horizontal = 40.dp)
                 )
             } else {
-                when (state) {
-                    true -> {
-                        myManga.data?.let {
-                            HorizontalPagerWithTransition(
-                                manga = it,
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(500.dp)
-                            )
-                        }
-                    }
-
-                    false -> {
-                        StaggeredVerticalGrid(
-                            maxColumnWidth = 200.dp,
+                if (isPage) {
+                    getValue(myMangaState)?.let {
+                        HorizontalPagerWithTransition(
+                            manga = it,
                             modifier = Modifier
-                                .padding(horizontal = 20.dp, vertical = 30.dp)
-                        ) {
-                            myManga.data?.forEach {
-                                MyMangaGridItem(manga = it) { manga ->
-                                    navigator.navigate(DetailScreenDestination(mangaId = manga.id))
-                                }
-                            }
-                        }
-
-                        Spacer(
-                            modifier = Modifier
-                                .background(color = Color.Transparent)
-                                .height(200.dp)
+                                .fillMaxWidth()
+                                .height(500.dp)
                         )
                     }
-                }
+                } else {
+                    StaggeredVerticalGrid(
+                        maxColumnWidth = 200.dp,
+                        modifier = Modifier
+                            .padding(horizontal = 20.dp, vertical = 30.dp)
+                    ) {
+                        getValue(myMangaState)?.forEach {
+                            MyMangaGridItem(manga = it) { manga ->
+                                navigator.navigate(DetailScreenDestination(mangaId = manga.id))
+                            }
+                        }
+                    }
 
+                    Spacer(
+                        modifier = Modifier
+                            .background(color = Color.Transparent)
+                            .height(200.dp)
+                    )
+                }
             }
         }
     }

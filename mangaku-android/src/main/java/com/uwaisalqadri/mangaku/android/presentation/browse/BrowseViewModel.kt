@@ -13,15 +13,11 @@ class BrowseViewModel(
     private val browseUseCase: BrowseUseCase
 ): ViewModel() {
 
-    private val _trendingManga = MutableStateFlow<Result<List<Manga>>>(Result())
+    private val _trendingManga = MutableStateFlow<Result<List<Manga>>>(Result.default())
     val trendingManga: StateFlow<Result<List<Manga>>> = _trendingManga.asStateFlow()
 
-    init {
-        getTrendingManga()
-    }
-
     fun getTrendingManga() = viewModelScope.launch {
-        _trendingManga.emit(Result.loading())
+        _trendingManga.value = Result.loading()
         collectFlow(_trendingManga) {
             browseUseCase.getTrendingManga()
         }

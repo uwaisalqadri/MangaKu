@@ -14,12 +14,11 @@ class MyMangaViewModel(
     private val myMangaUseCase: MyMangaUseCase
 ): ViewModel() {
 
-    private val _myManga = MutableStateFlow<Result<List<Manga>>>(Result.loading())
+    private val _myManga = MutableStateFlow<Result<List<Manga>>>(Result.default())
     val myManga: StateFlow<Result<List<Manga>>> = _myManga.asStateFlow()
 
     private val _favState = MutableStateFlow(FavState())
     val favState: StateFlow<FavState> = _favState.asStateFlow()
-
 
     fun addMyManga(manga: Manga) {
         myMangaUseCase.addManga(manga)
@@ -40,6 +39,7 @@ class MyMangaViewModel(
     }
 
     fun getMyManga() = viewModelScope.launch {
+        _myManga.value = Result.loading()
         collectFlow(_myManga) {
             myMangaUseCase.getMyManga()
         }

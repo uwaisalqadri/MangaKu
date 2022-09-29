@@ -1,5 +1,6 @@
 package com.uwaisalqadri.mangaku.android.presentation.search
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -17,6 +18,8 @@ import com.uwaisalqadri.mangaku.android.presentation.search.composables.Staggere
 import com.uwaisalqadri.mangaku.android.presentation.theme.composables.BackButton
 import com.uwaisalqadri.mangaku.android.presentation.theme.composables.ShimmerSearchItem
 import com.uwaisalqadri.mangaku.android.presentation.theme.composables.TopBar
+import com.uwaisalqadri.mangaku.android.utils.getValue
+import com.uwaisalqadri.mangaku.android.utils.isLoading
 import org.koin.androidx.compose.getViewModel
 
 @Destination
@@ -25,8 +28,12 @@ fun SearchScreen(
     navigator: DestinationsNavigator,
     viewModel: SearchViewModel = getViewModel()
 ) {
-    val searchManga by viewModel.searchManga.collectAsState()
+    val searchMangaState by viewModel.searchManga.collectAsState()
     var query by viewModel.query
+
+    BackHandler {
+        navigator.popBackStack()
+    }
 
     LazyColumn(
         modifier = Modifier
@@ -61,13 +68,13 @@ fun SearchScreen(
 
         item {
             StaggeredVerticalGrid(maxColumnWidth = 150.dp) {
-                if (searchManga.loading) {
+                if (searchMangaState.isLoading()) {
                     repeat(10) {
                         ShimmerSearchItem()
                     }
                 }
 
-                searchManga.data?.forEach { manga ->
+                getValue(searchMangaState)?.forEach { manga ->
                     SearchCard(manga = manga) {
                         navigator.navigate(DetailScreenDestination(mangaId = it))
                     }

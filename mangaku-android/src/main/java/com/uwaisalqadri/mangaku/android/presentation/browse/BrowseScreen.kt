@@ -22,15 +22,22 @@ import com.uwaisalqadri.mangaku.android.presentation.destinations.SearchScreenDe
 import com.uwaisalqadri.mangaku.android.presentation.theme.MangaTypography
 import com.uwaisalqadri.mangaku.android.presentation.theme.composables.ShimmerBrowseItem
 import com.uwaisalqadri.mangaku.android.presentation.theme.composables.TopBar
+import com.uwaisalqadri.mangaku.android.utils.ComposableObserver
+import com.uwaisalqadri.mangaku.android.utils.getValue
+import com.uwaisalqadri.mangaku.android.utils.isLoading
 import org.koin.androidx.compose.getViewModel
 
 @Destination
 @Composable
 fun BrowseScreen(
     navigator: DestinationsNavigator,
-    viewModel: BrowseViewModel = getViewModel(),
+    viewModel: BrowseViewModel = getViewModel()
 ) {
-    val listManga by viewModel.trendingManga.collectAsState()
+    val listMangaState by viewModel.trendingManga.collectAsState()
+
+    ComposableObserver {
+        viewModel.getTrendingManga()
+    }
 
     LazyColumn(
         modifier = Modifier
@@ -82,14 +89,14 @@ fun BrowseScreen(
         }
 
         item {
-            if (listManga.loading) {
+            if (listMangaState.isLoading()) {
                 repeat(10) {
                     ShimmerBrowseItem()
                 }
             }
 
             MangaTrending(
-                trendingManga = listManga.data.orEmpty(),
+                trendingManga = getValue(listMangaState).orEmpty(),
                 modifier = Modifier
                     .fillMaxWidth()
                     .fillMaxHeight()
