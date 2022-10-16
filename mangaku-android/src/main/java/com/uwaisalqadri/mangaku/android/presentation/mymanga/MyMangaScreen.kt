@@ -37,7 +37,7 @@ fun MyMangaScreen(
     val myMangaState by viewModel.myManga.collectAsState()
     var isPage by rememberSaveable { mutableStateOf(true) }
 
-    ComposableObserver {
+    LaunchedEffect(Unit) {
         viewModel.getMyManga()
     }
 

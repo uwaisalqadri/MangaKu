@@ -7,6 +7,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -35,7 +36,7 @@ fun BrowseScreen(
 ) {
     val listMangaState by viewModel.trendingManga.collectAsState()
 
-    ComposableObserver {
+    LaunchedEffect(Unit) {
         viewModel.getTrendingManga()
     }
 

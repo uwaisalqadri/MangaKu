@@ -47,7 +47,7 @@ fun DetailScreen(
     val (isFavorite, setFavorite) = remember { mutableStateOf(false) }
     val (isShowDialog, setShowDialog) = remember { mutableStateOf(false) }
 
-    ComposableObserver {
+    LaunchedEffect(Unit) {
         viewModel.getDetailManga(mangaId)
         mangaViewModel.checkFavorite(mangaId)
     }
