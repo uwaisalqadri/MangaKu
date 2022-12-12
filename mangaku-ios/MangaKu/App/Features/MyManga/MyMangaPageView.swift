@@ -22,7 +22,7 @@ struct MyMangaPageView: View {
       VStack {
         Text("My Manga")
           .font(.custom(.mbold, size: 23))
-          .padding(.top, -30)
+          .padding(.top, 30)
 
         LayoutSwitch() { toggle in
           isSlide = toggle
@@ -62,7 +62,9 @@ struct MyMangaPageView: View {
 
         Spacer()
       }
-    }.onAppear {
+    }
+    .navigationBarHidden(true)
+    .onAppear {
       viewModel.fetchFavoriteManga()
     }
     .frame(width: UIScreen.screenWidth, alignment: .center)

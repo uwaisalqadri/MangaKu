@@ -57,6 +57,7 @@
 		7555FF7B242A565900829871 /* MangaKu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MangaKu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7679D5BC912C681FEC50CBF0 /* Pods_MangaKu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MangaKu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		79CD264D4FF6E0F4F2DCB460 /* Pods-iosApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.debug.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.debug.xcconfig"; sourceTree = "<group>"; };
+		912BBF8B29475C990090627B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = MangaKu/App/Resources/Plist/Info.plist; sourceTree = SOURCE_ROOT; };
 		91595DA428BB3F89009BBC89 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		91595DA628BB41AC009BBC89 /* sedgwickavedisplay_regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sedgwickavedisplay_regular.ttf; sourceTree = "<group>"; };
 		91595DA728BB41AC009BBC89 /* mashanzheng_regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = mashanzheng_regular.ttf; sourceTree = "<group>"; };
@@ -90,7 +91,6 @@
 		91BC278528BB391800AD291A /* MangaKuApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MangaKuApp.swift; sourceTree = "<group>"; };
 		91BC278628BB391800AD291A /* TabNavigationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabNavigationView.swift; sourceTree = "<group>"; };
 		91BC278828BB391800AD291A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		91BC278A28BB391800AD291A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		91BC278D28BB391800AD291A /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		91BC278E28BB391800AD291A /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		91BC278F28BB391800AD291A /* View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
@@ -150,6 +150,14 @@
 				7555FF7B242A565900829871 /* MangaKu.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		912BBF8A29475C990090627B /* Plist */ = {
+			isa = PBXGroup;
+			children = (
+				912BBF8B29475C990090627B /* Info.plist */,
+			);
+			path = Plist;
 			sourceTree = "<group>";
 		};
 		91595DA328BB3F41009BBC89 /* Fonts */ = {
@@ -323,9 +331,9 @@
 		91BC278728BB391800AD291A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				912BBF8A29475C990090627B /* Plist */,
 				91595DA328BB3F41009BBC89 /* Fonts */,
 				91BC278828BB391800AD291A /* Assets.xcassets */,
-				91BC278A28BB391800AD291A /* Info.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -651,7 +659,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SM8JGRFPQU;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/MangaKu/App/Resources/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/MangaKu/App/Resources/Plist/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = MangaKu;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -671,7 +681,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SM8JGRFPQU;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/MangaKu/App/Resources/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/MangaKu/App/Resources/Plist/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = MangaKu;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
