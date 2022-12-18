@@ -183,6 +183,9 @@ actual fun formatDate(dateString: String, format: String): String {
 ```
 yes, we can use `Foundation` same as what we use in Xcode
 
+## <a name="buy-me-coffee"></a> ☕️ Buy Me a Coffee
+If you like this project please support me by <a href="https://www.buymeacoffee.com/uwaisalqadri" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-blue.png" alt="Buy Me A Coffee" height=32></a> ;-)
+
 ## <a name="project-structure"></a> 🏛 Project Structure
 **`shared`**:
 
