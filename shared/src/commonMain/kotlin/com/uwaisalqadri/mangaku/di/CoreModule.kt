@@ -1,5 +1,6 @@
 package com.uwaisalqadri.mangaku.di
 
+import com.uwaisalqadri.mangaku.android.MangaKuPublicConfig
 import com.uwaisalqadri.mangaku.data.souce.local.MangaPersistenceContainer
 import com.uwaisalqadri.mangaku.data.souce.local.entity.*
 import com.uwaisalqadri.mangaku.data.souce.remote.MangaApi
@@ -74,7 +75,7 @@ fun createKtorClient(httpClientEngine: HttpClientEngine, json: Json) = HttpClien
     defaultRequest {
         url {
             protocol = URLProtocol.HTTPS
-            host = Configs.BASE_URL
+            host = MangaKuPublicConfig.BASE_URL
 
             headers {
                 append(HttpHeaders.Accept, "application/vnd.api+json")
