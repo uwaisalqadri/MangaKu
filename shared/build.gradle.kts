@@ -1,3 +1,5 @@
+import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
+
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.android.library)
@@ -24,6 +26,7 @@ kotlin {
     ).forEach {
         it.binaries.framework {
             baseName = "Shared"
+            isStatic = true
         }
     }
 
