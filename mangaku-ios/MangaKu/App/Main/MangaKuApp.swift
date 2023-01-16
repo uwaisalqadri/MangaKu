@@ -16,6 +16,7 @@ struct MangaKuApp: App {
 
   init() {
     KoinApplication.start()
+    UpdatePropertiesKt.updateProperties(stage: EnvStage.prod)
   }
 
   var body: some Scene {
