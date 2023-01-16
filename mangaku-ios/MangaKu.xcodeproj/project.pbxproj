@@ -657,7 +657,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = SM8JGRFPQU;
+				DEVELOPMENT_TEAM = 5S8HRB386G;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/MangaKu/App/Resources/Plist/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = MangaKu;
@@ -679,7 +679,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = SM8JGRFPQU;
+				DEVELOPMENT_TEAM = 5S8HRB386G;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/MangaKu/App/Resources/Plist/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = MangaKu;
