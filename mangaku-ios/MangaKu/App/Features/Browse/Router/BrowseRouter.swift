@@ -16,7 +16,7 @@ struct BrowseRouter {
   }
 
   @MainActor func routeToBrowse() -> some View {
-    BrowsePageView(viewModel: asssembler.resolve(), navigator: self)
+    BrowsePageView(navigator: self)
   }
 
   @MainActor func routeToDetail(mangaId: String) -> some View {

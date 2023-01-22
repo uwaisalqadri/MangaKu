@@ -2,12 +2,12 @@
   "object": {
     "pins": [
       {
-        "package": "ACarousel",
-        "repositoryURL": "https://github.com/JWAutumn/ACarousel.git",
+        "package": "KMMViewModel",
+        "repositoryURL": "https://github.com/rickclephas/KMM-ViewModel.git",
         "state": {
-          "branch": null,
-          "revision": "8a322513580f21288fd87eb3a1341c247b3e2a76",
-          "version": "0.2.0"
+          "branch": "master",
+          "revision": "3c73e14db2576edf8b9e8539e80a4fb3f4ff2090",
+          "version": null
         }
       }
     ]

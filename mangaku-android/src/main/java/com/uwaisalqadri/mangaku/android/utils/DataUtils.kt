@@ -2,8 +2,8 @@ package com.uwaisalqadri.mangaku.android.utils
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
-import com.uwaisalqadri.mangaku.data.souce.remote.response.ApiException
 import com.uwaisalqadri.mangaku.domain.base.ApiError
+import com.uwaisalqadri.mangaku.presentation.Result
 
 @Composable
 fun ComposableObserver(observe: @Composable () -> Unit) {
@@ -51,9 +51,9 @@ fun <T> observeApiError(resource: Result<T>?): ApiError {
     val result = resource as Result.Failure<T>
 
     return when (result.throwable) {
-        is ApiException -> {
-            result.throwable.map()
-        }
+//        is ApiException -> {
+//            result.throwable.
+//        }
         else -> {
             ApiError(
                 errorTitle = "Error",
