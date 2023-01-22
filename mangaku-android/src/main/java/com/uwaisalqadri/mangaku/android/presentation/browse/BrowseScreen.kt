@@ -26,14 +26,15 @@ import com.uwaisalqadri.mangaku.android.presentation.theme.composables.TopBar
 import com.uwaisalqadri.mangaku.android.utils.ComposableObserver
 import com.uwaisalqadri.mangaku.android.utils.getValue
 import com.uwaisalqadri.mangaku.android.utils.isLoading
+import com.uwaisalqadri.mangaku.presentation.BrowseViewModel
 import org.koin.androidx.compose.getViewModel
 
 @Destination
 @Composable
 fun BrowseScreen(
     navigator: DestinationsNavigator,
-    viewModel: BrowseViewModel = getViewModel()
 ) {
+    val viewModel: BrowseViewModel = getViewModel()
     val listMangaState by viewModel.trendingManga.collectAsState()
 
     LaunchedEffect(Unit) {
@@ -90,14 +91,14 @@ fun BrowseScreen(
         }
 
         item {
-            if (listMangaState.isLoading()) {
+            if (viewModel.isLoading.value) {
                 repeat(10) {
                     ShimmerBrowseItem()
                 }
             }
 
             MangaTrending(
-                trendingManga = getValue(listMangaState).orEmpty(),
+                trendingManga = listMangaState,
                 modifier = Modifier
                     .fillMaxWidth()
                     .fillMaxHeight()

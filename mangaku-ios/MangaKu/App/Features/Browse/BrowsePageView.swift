@@ -7,10 +7,12 @@
 //
 
 import SwiftUI
+import Shared
+import KMMViewModelSwiftUI
 
 struct BrowsePageView: View {
 
-  @ObservedObject var viewModel: BrowseViewModel
+  @StateViewModel var viewModel = BrowseViewModel()
   let navigator: BrowseRouter
 
   let genres: [Genre] = [
@@ -40,7 +42,7 @@ struct BrowsePageView: View {
           .padding(.top, 30)
 
 
-        if case .loading = viewModel.trendingManga {
+        if viewModel.isLoading {
           VStack {
             ForEach(0..<10) { _ in
               ShimmerBrowseView()
@@ -49,9 +51,9 @@ struct BrowsePageView: View {
           .padding(.trailing, 30)
           .padding(.bottom, 100)
 
-        } else if case .success(let data) = viewModel.trendingManga {
+        } else {
           VStack {
-            ForEach(data, id: \.id) { manga in
+            ForEach(viewModel.trendingManga, id: \.id) { manga in
               NavigationLink(destination: navigator.routeToDetail(mangaId: manga.id)) {
                 MangaRow(manga: manga)
               }.buttonStyle(PlainButtonStyle())
@@ -71,5 +73,8 @@ struct BrowsePageView: View {
           .frame(width: 20, height: 20)
       }
     )
+    .onAppear {
+      viewModel.getTrendingManga()
+    }
   }
 }

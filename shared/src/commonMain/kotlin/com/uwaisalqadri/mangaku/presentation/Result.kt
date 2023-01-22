@@ -1,5 +1,7 @@
-package com.uwaisalqadri.mangaku.android.utils
+package com.uwaisalqadri.mangaku.presentation
 
+
+// TODO: Can't make this working with moko-kswift
 sealed class Result<T> {
     class Loading<T> : Result<T>()
     class Default<T> : Result<T>()
