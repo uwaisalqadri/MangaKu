@@ -4,7 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -13,7 +12,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.google.accompanist.pager.ExperimentalPagerApi
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.uwaisalqadri.mangaku.android.presentation.destinations.DetailScreenDestination
@@ -22,18 +20,18 @@ import com.uwaisalqadri.mangaku.android.presentation.mymanga.composables.LayoutS
 import com.uwaisalqadri.mangaku.android.presentation.mymanga.composables.MyMangaGridItem
 import com.uwaisalqadri.mangaku.android.presentation.search.composables.StaggeredVerticalGrid
 import com.uwaisalqadri.mangaku.android.presentation.theme.MangaTypography
-import com.uwaisalqadri.mangaku.android.utils.ComposableObserver
 import com.uwaisalqadri.mangaku.android.utils.getValue
 import com.uwaisalqadri.mangaku.android.utils.isEmpty
 import com.uwaisalqadri.mangaku.android.utils.isLoading
+import com.uwaisalqadri.mangaku.presentation.MyMangaViewModel
 import org.koin.androidx.compose.getViewModel
 
 @Destination
 @Composable
 fun MyMangaScreen(
-    navigator: DestinationsNavigator,
-    viewModel: MyMangaViewModel = getViewModel()
+    navigator: DestinationsNavigator
 ) {
+    val viewModel: MyMangaViewModel = getViewModel()
     val myMangaState by viewModel.myManga.collectAsState()
     var isPage by rememberSaveable { mutableStateOf(true) }
 

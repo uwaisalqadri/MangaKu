@@ -21,6 +21,10 @@ struct BrowsePageView: View {
     Genre(name: "Shojo", image: "imgShojo", query: "shojo", font: .sedgwickave)
   ]
 
+  var trendingMangaState: ResultEnum<NSArray> {
+    return ResultEnum(viewModel.trendingManga)
+  }
+
   var body: some View {
     ScrollView(.vertical, showsIndicators: false) {
       VStack(alignment: .leading) {
@@ -41,24 +45,26 @@ struct BrowsePageView: View {
           .padding(.leading, 17)
           .padding(.top, 30)
 
-
-        if viewModel.isLoading {
+        if case .loading = trendingMangaState {
           VStack {
             ForEach(0..<10) { _ in
               ShimmerBrowseView()
             }
-          }.padding(.leading, 17)
+          }
+          .padding(.leading, 17)
           .padding(.trailing, 30)
           .padding(.bottom, 100)
 
-        } else {
+        } else if case let .success(resultSuccess) = trendingMangaState,
+                  let mangas = resultSuccess.data?.compactMap({ $0 as? Manga }) {
           VStack {
-            ForEach(viewModel.trendingManga, id: \.id) { manga in
+            ForEach(mangas, id: \.id) { manga in
               NavigationLink(destination: navigator.routeToDetail(mangaId: manga.id)) {
                 MangaRow(manga: manga)
               }.buttonStyle(PlainButtonStyle())
             }
-          }.padding(.leading, 17)
+          }
+          .padding(.leading, 17)
           .padding(.trailing, 30)
           .padding(.bottom, 100)
         }

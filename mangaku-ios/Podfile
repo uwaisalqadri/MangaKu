@@ -2,7 +2,7 @@ target 'MangaKu' do
   use_frameworks!
   platform :ios, '15.0'
   pod 'SDWebImageSwiftUI'
-  pod 'KMPNativeCoroutinesAsync'
+  pod 'KMPNativeCoroutinesAsync', '~> 1.0.0-ALPHA-4'
 end
 
 post_install do |installer|

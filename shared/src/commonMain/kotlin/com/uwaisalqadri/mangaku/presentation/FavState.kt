@@ -1,4 +1,4 @@
-package com.uwaisalqadri.mangaku.android.utils
+package com.uwaisalqadri.mangaku.presentation
 
 data class FavState(
     val favMangaFound: Boolean = false,

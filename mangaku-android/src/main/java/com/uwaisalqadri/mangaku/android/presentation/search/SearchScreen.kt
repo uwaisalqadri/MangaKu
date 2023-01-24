@@ -12,8 +12,8 @@ import androidx.compose.ui.unit.dp
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.uwaisalqadri.mangaku.android.presentation.destinations.DetailScreenDestination
-import com.uwaisalqadri.mangaku.android.presentation.search.composables.SearchField
 import com.uwaisalqadri.mangaku.android.presentation.search.composables.SearchCard
+import com.uwaisalqadri.mangaku.android.presentation.search.composables.SearchField
 import com.uwaisalqadri.mangaku.android.presentation.search.composables.StaggeredVerticalGrid
 import com.uwaisalqadri.mangaku.android.presentation.theme.composables.BackButton
 import com.uwaisalqadri.mangaku.android.presentation.theme.composables.ShimmerSearchItem
@@ -25,9 +25,9 @@ import org.koin.androidx.compose.getViewModel
 @Destination
 @Composable
 fun SearchScreen(
-    navigator: DestinationsNavigator,
-    viewModel: SearchViewModel = getViewModel()
+    navigator: DestinationsNavigator
 ) {
+    val viewModel: SearchViewModelImpl = getViewModel()
     val searchMangaState by viewModel.searchManga.collectAsState()
     var query by viewModel.query
 
