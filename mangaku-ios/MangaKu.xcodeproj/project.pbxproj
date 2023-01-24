@@ -31,7 +31,6 @@
 		91BC279F28BB391800AD291A /* MangaGridItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BC277428BB391800AD291A /* MangaGridItem.swift */; };
 		91BC27A028BB391800AD291A /* CustomDialogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BC277628BB391800AD291A /* CustomDialogView.swift */; };
 		91BC27A128BB391800AD291A /* ShimmerModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BC277828BB391800AD291A /* ShimmerModifier.swift */; };
-		91BC27A228BB391800AD291A /* ViewStateModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BC277928BB391800AD291A /* ViewStateModifier.swift */; };
 		91BC27A428BB391800AD291A /* Shimmers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BC277B28BB391800AD291A /* Shimmers.swift */; };
 		91BC27A528BB391800AD291A /* SearchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BC277E28BB391800AD291A /* SearchRouter.swift */; };
 		91BC27A628BB391800AD291A /* SearchPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BC277F28BB391800AD291A /* SearchPageView.swift */; };
@@ -78,7 +77,6 @@
 		91BC277428BB391800AD291A /* MangaGridItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MangaGridItem.swift; sourceTree = "<group>"; };
 		91BC277628BB391800AD291A /* CustomDialogView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomDialogView.swift; sourceTree = "<group>"; };
 		91BC277828BB391800AD291A /* ShimmerModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShimmerModifier.swift; sourceTree = "<group>"; };
-		91BC277928BB391800AD291A /* ViewStateModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewStateModifier.swift; sourceTree = "<group>"; };
 		91BC277B28BB391800AD291A /* Shimmers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shimmers.swift; sourceTree = "<group>"; };
 		91BC277E28BB391800AD291A /* SearchRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchRouter.swift; sourceTree = "<group>"; };
 		91BC277F28BB391800AD291A /* SearchPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPageView.swift; sourceTree = "<group>"; };
@@ -281,7 +279,6 @@
 			isa = PBXGroup;
 			children = (
 				91BC277828BB391800AD291A /* ShimmerModifier.swift */,
-				91BC277928BB391800AD291A /* ViewStateModifier.swift */,
 			);
 			path = Modifiers;
 			sourceTree = "<group>";
@@ -557,7 +554,6 @@
 				91BC27A428BB391800AD291A /* Shimmers.swift in Sources */,
 				91BC27A828BB391800AD291A /* SearchRow.swift in Sources */,
 				91BC27AA28BB391800AD291A /* MangaKuApp.swift in Sources */,
-				91BC27A228BB391800AD291A /* ViewStateModifier.swift in Sources */,
 				91851C02297A30BD00806695 /* KMMViewModel.swift in Sources */,
 				91BC279228BB391800AD291A /* BrowsePageView.swift in Sources */,
 			);

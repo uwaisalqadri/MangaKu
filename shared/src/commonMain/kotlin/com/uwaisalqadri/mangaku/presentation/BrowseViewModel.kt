@@ -14,15 +14,15 @@ import org.koin.core.component.inject
 open class BrowseViewModel: KMMViewModel(), KoinComponent {
 
     private val browseUseCase: BrowseUseCase by inject()
-    private val _trendingManga = MutableStateFlow<Result<List<Manga>>>(Result.default())
+    private val _trendingManga = MutableStateFlow<ViewState<List<Manga>>>(ViewState.default())
 
     @NativeCoroutinesState
-    val trendingManga: StateFlow<Result<List<Manga>>> = _trendingManga
+    val trendingManga: StateFlow<ViewState<List<Manga>>> = _trendingManga
         .asStateFlow()
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), Result.default())
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), ViewState.default())
 
     fun getTrendingManga() = viewModelScope.coroutineScope.launch {
-        _trendingManga.value = Result.loading()
+        _trendingManga.value = ViewState.loading()
         collectFlow(_trendingManga) {
             browseUseCase.getTrendingManga()
         }

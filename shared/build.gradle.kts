@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.realm)
     alias(libs.plugins.kmp.nativecoroutines)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.skie)
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
@@ -27,7 +28,6 @@ kotlin {
     ).forEach {
         it.binaries.framework {
             baseName = "Shared"
-            isStatic = true
         }
     }
 

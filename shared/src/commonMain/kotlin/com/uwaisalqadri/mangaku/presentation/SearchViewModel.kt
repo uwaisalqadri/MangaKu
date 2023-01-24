@@ -18,15 +18,15 @@ open class SearchViewModel: KMMViewModel(), KoinComponent {
 
     private val searchUseCase: SearchUseCase by inject()
 
-    private val _searchManga = MutableStateFlow<Result<List<Manga>>>(Result.default())
+    private val _searchManga = MutableStateFlow<ViewState<List<Manga>>>(ViewState.default())
 
     @NativeCoroutinesState
-    val searchManga: StateFlow<Result<List<Manga>>> = _searchManga
+    val searchManga: StateFlow<ViewState<List<Manga>>> = _searchManga
         .asStateFlow()
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), Result.default())
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), ViewState.default())
 
     fun getSearchManga(query: String) = viewModelScope.coroutineScope.launch {
-        _searchManga.value = Result.loading()
+        _searchManga.value = ViewState.loading()
         collectFlow(_searchManga) {
             searchUseCase.getSearchManga(query)
         }
