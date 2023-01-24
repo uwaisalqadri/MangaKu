@@ -18,13 +18,13 @@ open class MyMangaViewModel: KMMViewModel(), KoinComponent {
 
     private val myMangaUseCase: MyMangaUseCase by inject()
 
-    private val _myManga = MutableStateFlow<Result<List<Manga>>>(Result.default())
+    private val _myManga = MutableStateFlow<ViewState<List<Manga>>>(ViewState.default())
     private val _favState = MutableStateFlow(FavState())
 
     @NativeCoroutinesState
-    val myManga: StateFlow<Result<List<Manga>>> = _myManga
+    val myManga: StateFlow<ViewState<List<Manga>>> = _myManga
         .asStateFlow()
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), Result.default())
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), ViewState.default())
 
     @NativeCoroutinesState
     val favState: StateFlow<FavState> = _favState
@@ -34,11 +34,13 @@ open class MyMangaViewModel: KMMViewModel(), KoinComponent {
     fun addMyManga(manga: Manga) {
         myMangaUseCase.addManga(manga)
         _favState.value = FavState(addFavorite = true)
+        checkFavorite(manga.id)
     }
 
     fun deleteMyManga(mangaId: String) {
         myMangaUseCase.deleteManga(mangaId)
         _favState.value = FavState(removeFavorite = true)
+        checkFavorite(mangaId)
     }
 
     fun checkFavorite(mangaId: String) = viewModelScope.coroutineScope.launch {
@@ -48,7 +50,7 @@ open class MyMangaViewModel: KMMViewModel(), KoinComponent {
     }
 
     fun getMyManga() = viewModelScope.coroutineScope.launch {
-        _myManga.value = Result.loading()
+        _myManga.value = ViewState.loading()
         collectFlow(_myManga) {
             myMangaUseCase.getMyManga()
         }

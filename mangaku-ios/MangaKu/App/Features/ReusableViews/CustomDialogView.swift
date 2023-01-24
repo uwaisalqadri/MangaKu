@@ -11,12 +11,12 @@ import SwiftUI
 struct CustomDialogView<DialogContent: View>: ViewModifier {
   @Binding var isShowing: Bool
   let dialogContent: DialogContent
-
+  
   init(isShowing: Binding<Bool>, @ViewBuilder dialogContent: () -> DialogContent) {
     self._isShowing = isShowing
     self.dialogContent = dialogContent()
   }
-
+  
   func body(content: Content) -> some View {
     ZStack {
       content

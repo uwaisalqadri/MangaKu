@@ -13,10 +13,8 @@ fun Double.toFiveStars(): Int {
 }
 
 fun Manga.getTitle(): String {
-    return attributes?.canonicalTitle ?: ""
-
-    // great logic but somehow unfortunately its not working as expected in swift, probably a font issue
-    // return title?.ja_jp ?: title?.en_jp ?: title?.en_us ?: title?.en ?: ""
+    return attributes?.canonicalTitle ?: attributes?.titles?.ja_jp ?:
+    attributes?.titles?.en_jp ?: attributes?.titles?.en_us ?: attributes?.titles?.en ?: ""
 }
 
 fun Manga.getPosterImage(): String {

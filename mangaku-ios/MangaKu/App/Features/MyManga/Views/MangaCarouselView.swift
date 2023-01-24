@@ -20,11 +20,10 @@ struct MangaCarouselView: View {
   private func onDragEnded(drag: DragGesture.Value) {
     let dragThreshold: CGFloat = 200
 
-    if drag.predictedEndTranslation.width > dragThreshold || drag.translation.width > dragThreshold{
+    if drag.predictedEndTranslation.width > dragThreshold || drag.translation.width > dragThreshold {
       carouselLocation =  carouselLocation - 1
-    } else if (drag.predictedEndTranslation.width) < (-1 * dragThreshold) || (drag.translation.width) < (-1 * dragThreshold)
-    {
-      carouselLocation =  carouselLocation + 1
+    } else if (drag.predictedEndTranslation.width) < (-1 * dragThreshold) || (drag.translation.width) < (-1 * dragThreshold) {
+      carouselLocation = carouselLocation + 1
     }
   }
 

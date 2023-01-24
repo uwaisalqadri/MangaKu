@@ -15,15 +15,15 @@ open class DetailViewModel: KMMViewModel(), KoinComponent {
 
     private val detailUseCase: DetailUseCase by inject()
 
-    private val _detailManga = MutableStateFlow<Result<Manga>>(Result.default())
+    private val _detailManga = MutableStateFlow<ViewState<Manga>>(ViewState.default())
 
     @NativeCoroutinesState
-    val detailManga: StateFlow<Result<Manga>> = _detailManga
+    val detailManga: StateFlow<ViewState<Manga>> = _detailManga
         .asStateFlow()
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), Result.default())
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), ViewState.default())
 
     fun getDetailManga(mangaId: String) = viewModelScope.coroutineScope.launch {
-        _detailManga.value = Result.loading()
+        _detailManga.value = ViewState.loading()
         collectFlow(_detailManga) {
             detailUseCase.getDetailManga(mangaId).map {
                 Manga(attributes = it?.attributes, id = it?.id.orEmpty(), type = it?.type.orEmpty())
