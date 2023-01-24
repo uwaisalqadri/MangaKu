@@ -9,13 +9,18 @@
 import SwiftUI
 import Shared
 import SDWebImageSwiftUI
+import KMMViewModelSwiftUI
 
 struct MyMangaPageView: View {
 
-  @ObservedObject var viewModel: MyMangaViewModel
+  @StateViewModel var viewModel = MyMangaViewModel()
   @State var isSlide = true
 
   let navigator: MyMangaRouter
+
+  var myMangaState: ResultEnum<NSArray> {
+    return ResultEnum(viewModel.myManga)
+  }
 
   var body: some View {
     ScrollView(showsIndicators: false) {
@@ -28,7 +33,7 @@ struct MyMangaPageView: View {
           isSlide = toggle
         }.padding(.bottom, 15)
 
-        if case .success(let data) = viewModel.listManga {
+        if case let .success(result) = myMangaState, let data = result.data?.compactMap({ $0 as? Manga }) {
           if isSlide {
 
             MangaCarouselView(
@@ -51,7 +56,7 @@ struct MyMangaPageView: View {
               .padding(.bottom, 200)
           }
 
-        } else if case .empty = viewModel.listManga {
+        } else if case .empty = myMangaState {
           Text("Still Empty Here!")
             .foregroundColor(.black)
             .font(.custom(.sedgwickave, size: 60))
@@ -65,7 +70,7 @@ struct MyMangaPageView: View {
     }
     .navigationBarHidden(true)
     .onAppear {
-      viewModel.fetchFavoriteManga()
+      viewModel.getMyManga()
     }
     .frame(width: UIScreen.screenWidth, alignment: .center)
   }

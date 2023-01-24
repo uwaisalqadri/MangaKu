@@ -9,24 +9,33 @@
 import SwiftUI
 import SDWebImageSwiftUI
 import Shared
+import KMMViewModelSwiftUI
 
 struct DetailPageView: View {
 
-  @ObservedObject var viewModel: DetailViewModel
-  @ObservedObject var mangaViewModel: MyMangaViewModel
+  @StateViewModel var viewModel = DetailViewModel()
+  @StateViewModel var mangaViewModel = MyMangaViewModel()
   @State var isShowDialog = false
   let mangaId: String
+
+  var detailMangaState: ResultEnum<Manga> {
+    return ResultEnum(viewModel.detailManga)
+  }
+
+  var isFavorite: Bool {
+    return mangaViewModel.favState.favMangaFound
+  }
 
   var body: some View {
     VStack(alignment: .leading) {
 
       ScrollView(showsIndicators: false) {
 
-        if case .loading = viewModel.manga {
+        if case .loading = detailMangaState {
           ShimmerDetailView()
-        } else if case .empty = viewModel.manga {
+        } else if case .empty = detailMangaState {
           ShimmerDetailView()
-        } else if case .success(let data) = viewModel.manga {
+        } else if case let .success(resultSuccess) = detailMangaState, let data = resultSuccess.data {
           WebImage(url: URL(string: data.getCoverImage()))
             .resizable()
             .indicator(.activity)
@@ -85,18 +94,19 @@ struct DetailPageView: View {
 
     }.navigationTitle("Detail")
     .navigationBarItems(trailing: Button(action: {
-      mangaViewModel.isFavorite
-      ? mangaViewModel.removeFavoriteManga(mangaId: viewModel.manga.value?.id ?? "")
-      : mangaViewModel.addFavoriteManga(manga: viewModel.manga.value ?? Manga(attributes: nil, id: "", type: ""))
-      isShowDialog.toggle()
+      if case let .success(resultSuccess) = detailMangaState,
+          let data = resultSuccess.data {
+        isFavorite ? mangaViewModel.deleteMyManga(mangaId: data.id ?? "") : mangaViewModel.addMyManga(manga: data)
+        isShowDialog.toggle()
+      }
     }) {
-      Image(systemName: mangaViewModel.isFavorite ? "heart.fill" : "heart")
+      Image(systemName: isFavorite ? "heart.fill" : "heart")
         .resizable()
         .foregroundColor(.red)
         .frame(width: 22, height: 20)
     })
     .onAppear {
-      viewModel.fetchManga(mangaId: mangaId)
+      viewModel.getDetailManga(mangaId: mangaId)
       mangaViewModel.checkFavorite(mangaId: mangaId)
     }
 
@@ -109,7 +119,7 @@ struct DetailPageView: View {
           .frame(width: 33, height: 30)
           .padding(.bottom, 15)
 
-        Text(mangaViewModel.isFavorite ? "Added to Favorite" : "Removed from Favorite")
+        Text(isFavorite ? "Added to Favorite" : "Removed from Favorite")
           .foregroundColor(.black)
           .font(.custom(.mbold, size: 17))
           .padding(.bottom, 10)

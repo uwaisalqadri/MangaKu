@@ -7,16 +7,22 @@
 //
 
 import SwiftUI
+import Shared
+import KMMViewModelSwiftUI
 
 struct SearchPageView: View {
 
-  @ObservedObject var viewModel: SearchViewModel
+  @StateViewModel var viewModel = SearchViewModel()
   @State var searchQuery: String = ""
   let navigator: SearchRouter
 
+  var searchMangaState: ResultEnum<NSArray> {
+    return ResultEnum(viewModel.searchManga)
+  }
+
   var body: some View {
     VStack {
-      if case .empty = viewModel.listManga {
+      if case .empty = searchMangaState {
         Text("Result Not Found, Search Something Else :)")
           .foregroundColor(.black)
           .font(.custom(.sedgwickave, size: 60))
@@ -28,12 +34,13 @@ struct SearchPageView: View {
             GridItem(.adaptive(minimum: 90), spacing: 25, alignment: .center)
           ], alignment: .leading, spacing: 10) {
 
-            if case .loading = viewModel.listManga {
+            if case .loading = searchMangaState {
               ForEach(0..<12) { _ in
                 ShimmerSearchView()
               }
 
-            } else if case .success(let data) = viewModel.listManga {
+            } else if case .success(let result) = searchMangaState,
+                        let data = result.data?.compactMap({ $0 as? Manga}) {
               ForEach(data, id: \.id) { manga in
                 NavigationLink(destination: navigator.routeToDetail(mangaId: manga.id)) {
                   SearchRow(manga: manga)
@@ -58,7 +65,7 @@ struct SearchPageView: View {
       //   viewModel.fetchSearchManga(query: query.isEmpty ? "naruto" : query)
       // }
     .onSubmit(of: .search) {
-      viewModel.fetchSearchManga(query: searchQuery.isEmpty ? "naruto" : searchQuery)
+      viewModel.getSearchManga(query: searchQuery.isEmpty ? "naruto" : searchQuery)
     }
   }
 }

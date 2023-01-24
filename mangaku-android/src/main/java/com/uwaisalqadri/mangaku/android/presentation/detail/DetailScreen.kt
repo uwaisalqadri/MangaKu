@@ -21,15 +21,15 @@ import com.google.accompanist.coil.rememberCoilPainter
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.uwaisalqadri.mangaku.android.presentation.detail.composables.FavoriteDialog
-import com.uwaisalqadri.mangaku.android.presentation.mymanga.MyMangaViewModel
+import com.uwaisalqadri.mangaku.presentation.MyMangaViewModel
 import com.uwaisalqadri.mangaku.android.presentation.theme.MangaTypography
 import com.uwaisalqadri.mangaku.android.presentation.theme.composables.BackButton
 import com.uwaisalqadri.mangaku.android.presentation.theme.composables.ShimmerDetail
 import com.uwaisalqadri.mangaku.android.presentation.theme.composables.TopBar
-import com.uwaisalqadri.mangaku.android.utils.ComposableObserver
 import com.uwaisalqadri.mangaku.android.utils.getValue
 import com.uwaisalqadri.mangaku.android.utils.isLoading
 import com.uwaisalqadri.mangaku.domain.model.Manga
+import com.uwaisalqadri.mangaku.presentation.DetailViewModel
 import com.uwaisalqadri.mangaku.utils.*
 import org.koin.androidx.compose.getViewModel
 
@@ -37,10 +37,11 @@ import org.koin.androidx.compose.getViewModel
 @Composable
 fun DetailScreen(
     navigator: DestinationsNavigator,
-    mangaId: String,
-    viewModel: DetailViewModel = getViewModel(),
-    mangaViewModel: MyMangaViewModel = getViewModel()
+    mangaId: String
 ) {
+    val viewModel: DetailViewModel = getViewModel()
+    val mangaViewModel: MyMangaViewModel = getViewModel()
+
     val detailMangaState by viewModel.detailManga.collectAsState()
     val favState by mangaViewModel.favState.collectAsState()
 

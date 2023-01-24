@@ -3,7 +3,6 @@ package com.uwaisalqadri.mangaku.android.presentation.browse
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -23,7 +22,6 @@ import com.uwaisalqadri.mangaku.android.presentation.destinations.SearchScreenDe
 import com.uwaisalqadri.mangaku.android.presentation.theme.MangaTypography
 import com.uwaisalqadri.mangaku.android.presentation.theme.composables.ShimmerBrowseItem
 import com.uwaisalqadri.mangaku.android.presentation.theme.composables.TopBar
-import com.uwaisalqadri.mangaku.android.utils.ComposableObserver
 import com.uwaisalqadri.mangaku.android.utils.getValue
 import com.uwaisalqadri.mangaku.android.utils.isLoading
 import com.uwaisalqadri.mangaku.presentation.BrowseViewModel
@@ -91,14 +89,14 @@ fun BrowseScreen(
         }
 
         item {
-            if (viewModel.isLoading.value) {
+            if (listMangaState.isLoading()) {
                 repeat(10) {
                     ShimmerBrowseItem()
                 }
             }
 
             MangaTrending(
-                trendingManga = listMangaState,
+                trendingManga = getValue(listMangaState).orEmpty(),
                 modifier = Modifier
                     .fillMaxWidth()
                     .fillMaxHeight()
