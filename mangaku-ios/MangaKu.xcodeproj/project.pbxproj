@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		16F3933D1A481FCD46B5F8F9 /* Pods_MangaKu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7679D5BC912C681FEC50CBF0 /* Pods_MangaKu.framework */; };
+		55A427C9007ADC553BC0CCCC /* Pods_MangaKu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B75B52E580EF442B5757A52 /* Pods_MangaKu.framework */; };
 		91595DA528BB3F89009BBC89 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91595DA428BB3F89009BBC89 /* Font.swift */; };
 		91595DAB28BB41AC009BBC89 /* sedgwickavedisplay_regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 91595DA628BB41AC009BBC89 /* sedgwickavedisplay_regular.ttf */; };
 		91595DAC28BB41AC009BBC89 /* mashanzheng_regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 91595DA728BB41AC009BBC89 /* mashanzheng_regular.ttf */; };
@@ -47,15 +47,15 @@
 		91BC27B328BB391800AD291A /* ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BC279128BB391800AD291A /* ViewState.swift */; };
 		91BC27B828BB391E00AD291A /* AppAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BC27B528BB391E00AD291A /* AppAssembler.swift */; };
 		91BC27B928BB391E00AD291A /* FeatureAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BC27B728BB391E00AD291A /* FeatureAssembler.swift */; };
+		91C0FC4C2998687700F01C43 /* dev.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 91C0FC492998687700F01C43 /* dev.yaml */; };
+		91C0FC4D2998687700F01C43 /* release.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 91C0FC4A2998687700F01C43 /* release.yaml */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2E01AA2CF37B5228B4B789D2 /* Pods-MangaKu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MangaKu.debug.xcconfig"; path = "Target Support Files/Pods-MangaKu/Pods-MangaKu.debug.xcconfig"; sourceTree = "<group>"; };
-		3F2BE283F75982908499ED2C /* Pods-MangaKu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MangaKu.release.xcconfig"; path = "Target Support Files/Pods-MangaKu/Pods-MangaKu.release.xcconfig"; sourceTree = "<group>"; };
+		4839C530F4B8443E7E89E04E /* Pods-MangaKu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MangaKu.release.xcconfig"; path = "Target Support Files/Pods-MangaKu/Pods-MangaKu.release.xcconfig"; sourceTree = "<group>"; };
 		52D35B8D26ECF6F5007B1D81 /* ACarousel */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ACarousel; sourceTree = "<group>"; };
+		5B75B52E580EF442B5757A52 /* Pods_MangaKu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MangaKu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF7B242A565900829871 /* MangaKu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MangaKu.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		7679D5BC912C681FEC50CBF0 /* Pods_MangaKu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MangaKu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		79CD264D4FF6E0F4F2DCB460 /* Pods-iosApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.debug.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.debug.xcconfig"; sourceTree = "<group>"; };
 		912BBF8B29475C990090627B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = MangaKu/App/Resources/Plist/Info.plist; sourceTree = SOURCE_ROOT; };
 		91595DA428BB3F89009BBC89 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		91595DA628BB41AC009BBC89 /* sedgwickavedisplay_regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sedgwickavedisplay_regular.ttf; sourceTree = "<group>"; };
@@ -94,7 +94,9 @@
 		91BC279128BB391800AD291A /* ViewState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewState.swift; sourceTree = "<group>"; };
 		91BC27B528BB391E00AD291A /* AppAssembler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppAssembler.swift; sourceTree = "<group>"; };
 		91BC27B728BB391E00AD291A /* FeatureAssembler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeatureAssembler.swift; sourceTree = "<group>"; };
-		B8015A9E89A7779AB6015FE1 /* Pods-iosApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.release.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.release.xcconfig"; sourceTree = "<group>"; };
+		91C0FC492998687700F01C43 /* dev.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = dev.yaml; path = ../../../../../shared/src/commonMain/resources/dev.yaml; sourceTree = "<group>"; };
+		91C0FC4A2998687700F01C43 /* release.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = release.yaml; path = ../../../../../shared/src/commonMain/resources/release.yaml; sourceTree = "<group>"; };
+		AD078875A366E2BADC83D139 /* Pods-MangaKu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MangaKu.debug.xcconfig"; path = "Target Support Files/Pods-MangaKu/Pods-MangaKu.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,7 +106,7 @@
 			files = (
 				91851BFE297A30A900806695 /* KMMViewModelCore in Frameworks */,
 				91851C00297A30A900806695 /* KMMViewModelSwiftUI in Frameworks */,
-				16F3933D1A481FCD46B5F8F9 /* Pods_MangaKu.framework in Frameworks */,
+				55A427C9007ADC553BC0CCCC /* Pods_MangaKu.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,7 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				52D35B8D26ECF6F5007B1D81 /* ACarousel */,
-				7679D5BC912C681FEC50CBF0 /* Pods_MangaKu.framework */,
+				5B75B52E580EF442B5757A52 /* Pods_MangaKu.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -123,10 +125,8 @@
 		290BBA7AB323247F47803A96 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				79CD264D4FF6E0F4F2DCB460 /* Pods-iosApp.debug.xcconfig */,
-				B8015A9E89A7779AB6015FE1 /* Pods-iosApp.release.xcconfig */,
-				2E01AA2CF37B5228B4B789D2 /* Pods-MangaKu.debug.xcconfig */,
-				3F2BE283F75982908499ED2C /* Pods-MangaKu.release.xcconfig */,
+				AD078875A366E2BADC83D139 /* Pods-MangaKu.debug.xcconfig */,
+				4839C530F4B8443E7E89E04E /* Pods-MangaKu.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -326,6 +326,7 @@
 		91BC278728BB391800AD291A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				91C0FC472998682E00F01C43 /* Yaml */,
 				912BBF8A29475C990090627B /* Plist */,
 				91595DA328BB3F41009BBC89 /* Fonts */,
 				91BC278828BB391800AD291A /* Assets.xcassets */,
@@ -372,6 +373,15 @@
 			path = Features;
 			sourceTree = "<group>";
 		};
+		91C0FC472998682E00F01C43 /* Yaml */ = {
+			isa = PBXGroup;
+			children = (
+				91C0FC492998687700F01C43 /* dev.yaml */,
+				91C0FC4A2998687700F01C43 /* release.yaml */,
+			);
+			path = Yaml;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -379,11 +389,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7555FFA5242A565B00829871 /* Build configuration list for PBXNativeTarget "MangaKu" */;
 			buildPhases = (
-				4B79855581ACBF8C802A5848 /* [CP] Check Pods Manifest.lock */,
+				4BFBD54C0763AAF927EA4FBD /* [CP] Check Pods Manifest.lock */,
 				7555FF77242A565900829871 /* Sources */,
 				7555FF79242A565900829871 /* Resources */,
 				3C26FE6BA0859E52A35A7815 /* Frameworks */,
-				B7872A48CCAC90D8DECDE4AC /* [CP] Embed Pods Frameworks */,
+				FC456C3F9035906C406E9C71 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -439,19 +449,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				91C0FC4C2998687700F01C43 /* dev.yaml in Resources */,
 				91595DAC28BB41AC009BBC89 /* mashanzheng_regular.ttf in Resources */,
 				91595DAB28BB41AC009BBC89 /* sedgwickavedisplay_regular.ttf in Resources */,
 				91595DAF28BB41AC009BBC89 /* montserrat_medium.ttf in Resources */,
 				91595DAD28BB41AC009BBC89 /* montserrat_bold.ttf in Resources */,
 				91595DAE28BB41AC009BBC89 /* montserrat_semibold.ttf in Resources */,
 				91BC27AC28BB391800AD291A /* Assets.xcassets in Resources */,
+				91C0FC4D2998687700F01C43 /* release.yaml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		4B79855581ACBF8C802A5848 /* [CP] Check Pods Manifest.lock */ = {
+		4BFBD54C0763AAF927EA4FBD /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -473,7 +485,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B7872A48CCAC90D8DECDE4AC /* [CP] Embed Pods Frameworks */ = {
+		FC456C3F9035906C406E9C71 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -652,7 +664,7 @@
 		};
 		7555FFA6242A565B00829871 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2E01AA2CF37B5228B4B789D2 /* Pods-MangaKu.debug.xcconfig */;
+			baseConfigurationReference = AD078875A366E2BADC83D139 /* Pods-MangaKu.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -674,7 +686,7 @@
 		};
 		7555FFA7242A565B00829871 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3F2BE283F75982908499ED2C /* Pods-MangaKu.release.xcconfig */;
+			baseConfigurationReference = 4839C530F4B8443E7E89E04E /* Pods-MangaKu.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

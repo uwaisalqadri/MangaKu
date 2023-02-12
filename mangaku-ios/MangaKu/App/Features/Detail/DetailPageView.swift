@@ -55,7 +55,7 @@ struct DetailPageView: View {
               .font(.custom(.mmedium, size: 15))
 
             HStack {
-              Text(DateFormatterKt.formatDate(dateString: data.attributes?.startDate ?? "", format: Configs().CASUAL_DATE_FORMAT))
+              Text(DateFormatterKt.formatDate(dateString: data.attributes?.startDate ?? "", format: Shared.DateFormatter().CASUAL_DATE_FORMAT))
                 .foregroundColor(.white)
                 .font(.custom(.mbold, size: 13))
                 .padding(10)

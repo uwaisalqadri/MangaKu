@@ -1,10 +1,18 @@
 package com.uwaisalqadri.mangaku.utils
 
+import kotlinx.serialization.Serializable
+
 /**
  * Created by Uwais Alqadri on July 22, 2021
  */
-object Configs {
-	const val BASE_URL = "kitsu.io"
-	const val NORMAL_DATE_FORMAT = "dd-MM-yyyy"
-	const val CASUAL_DATE_FORMAT = "dd MMM, yy"
+@Serializable
+data class Configs(
+	val baseUrl: String
+)
+
+enum class EnvStage(val file: String) {
+	DEV("dev.yaml"),
+	RELEASE("release.yaml")
 }
+
+expect fun getStage(): EnvStage

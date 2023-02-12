@@ -68,7 +68,7 @@ fun MangaItem(
                     .fillMaxWidth()
             ) {
                 Text(
-                    text = formatDate(manga.attributes?.startDate ?: "", Configs.CASUAL_DATE_FORMAT),
+                    text = formatDate(manga.attributes?.startDate ?: "", DateFormatter.CASUAL_DATE_FORMAT),
                     fontSize = 12.sp,
                     color = MaterialTheme.colors.surface,
                     style = MangaTypography.h1

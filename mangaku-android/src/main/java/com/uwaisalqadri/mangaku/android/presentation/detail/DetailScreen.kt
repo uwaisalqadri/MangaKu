@@ -177,7 +177,7 @@ fun MangaDetail(
             shape = RoundedCornerShape(5.dp)
         ) {
             Text(
-                text = formatDate(manga.attributes?.startDate ?: "", Configs.CASUAL_DATE_FORMAT),
+                text = formatDate(manga.attributes?.startDate ?: "", DateFormatter.CASUAL_DATE_FORMAT),
                 color = Color.White,
                 style = MangaTypography.h1,
                 fontSize = 13.sp,

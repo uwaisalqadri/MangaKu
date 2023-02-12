@@ -5,7 +5,7 @@ import platform.Foundation.*
 actual fun formatDate(dateString: String, format: String): String {
 
     val dateFormatter = NSDateFormatter().apply {
-        dateFormat = Configs.NORMAL_DATE_FORMAT
+        dateFormat = DateFormatter.NORMAL_DATE_FORMAT
     }
 
     val formatter = NSDateFormatter().apply {
