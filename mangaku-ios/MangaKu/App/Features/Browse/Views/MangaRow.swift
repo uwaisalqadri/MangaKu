@@ -31,7 +31,7 @@ struct MangaRow: View {
           .padding(.top, 5)
 
         HStack {
-          Text(DateFormatterKt.formatDate(dateString: manga.attributes?.startDate ?? "", format: Configs().CASUAL_DATE_FORMAT))
+          Text(DateFormatterKt.formatDate(dateString: manga.attributes?.startDate ?? "", format: Shared.DateFormatter().CASUAL_DATE_FORMAT))
             .font(.custom(.mbold, size: 12))
             .foregroundColor(.secondary)
 

@@ -1,5 +1,3 @@
-import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
-
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.android.library)
@@ -46,6 +44,8 @@ kotlin {
             implementation(libs.kotlinx.datetime)
 
             api(libs.kermit.logger)
+            implementation(kmmViewModel)
+            implementation("net.mamoe.yamlkt:yamlkt:0.12.0")
             implementation(kotlin("stdlib-common"))
         }
 

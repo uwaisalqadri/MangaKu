@@ -16,7 +16,7 @@ struct MangaKuApp: App {
 
   init() {
     KoinApplication.start()
-    UpdatePropertiesKt.updateProperties(stage: EnvStage.prod)
+    setupEnvirontment()
   }
 
   var body: some Scene {
@@ -24,4 +24,12 @@ struct MangaKuApp: App {
       TabNavigationView(assembler: assembler)
     }
   }
+}
+
+func setupEnvirontment() {
+  #if DEBUG
+    ConfigsKt.stageIos = .dev
+  #else
+    ConfigsKt.stageIos = .release_
+  #endif
 }

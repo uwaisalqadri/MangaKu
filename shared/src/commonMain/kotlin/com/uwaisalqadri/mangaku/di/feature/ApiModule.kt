@@ -1,9 +1,10 @@
-package com.uwaisalqadri.mangaku.di
+package com.uwaisalqadri.mangaku.di.feature
 
-import com.uwaisalqadri.mangaku.di.feature.apiModule
-import com.uwaisalqadri.mangaku.di.feature.databaseModule
-import com.uwaisalqadri.mangaku.di.feature.mangaModule
-import com.uwaisalqadri.mangaku.utils.ktorEngineModule
+import com.uwaisalqadri.mangaku.data.souce.remote.MangaApi
+import com.uwaisalqadri.mangaku.data.souce.remote.response.ApiException
+import com.uwaisalqadri.mangaku.utils.Configs
+import com.uwaisalqadri.mangaku.utils.YamlResourceReader
+import com.uwaisalqadri.mangaku.utils.getStage
 import io.ktor.client.*
 import io.ktor.client.engine.*
 import io.ktor.client.plugins.*
@@ -13,48 +14,14 @@ import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
-import io.realm.kotlin.Realm
-import io.realm.kotlin.RealmConfiguration
-import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
-import org.koin.core.KoinApplication
-import org.koin.core.context.startKoin
-import org.koin.dsl.KoinAppDeclaration
+import org.koin.dsl.module
 
-fun initKoin(appDeclaration: KoinAppDeclaration = {}): KoinApplication {
-    return startKoin {
-        appDeclaration()
-        modules(
-            apiModule,
-            ktorEngineModule(),
-            resourceReaderModule(),
-            databaseModule,
-            mangaModule
-        )
-    }
-}
-
-val realmModule = module {
-    single { MangaPersistenceContainer(get()) }
-    single { createRealmDatabase() }
-}
-
-val ktorModule = module {
+val apiModule = module {
     single { MangaApi(get()) }
     single { createJson() }
-    single { createKtorClient(get(), get()) }
-}
-
-fun createRealmDatabase(): Realm {
-    val configuration = RealmConfiguration.create(schema = setOf(
-        MangaObject::class,
-        AttributesObject::class,
-        CoverImageObject::class,
-        PosterImageObject::class,
-        TitlesObject::class
-    ))
-
-    return Realm.open(configuration = configuration)
+    single { YamlResourceReader(get()) }
+    single { createKtorClient(get(), get(), get()) }
 }
 
 fun createJson() = Json {
@@ -63,7 +30,9 @@ fun createJson() = Json {
     useAlternativeNames = false
 }
 
-fun createKtorClient(httpClientEngine: HttpClientEngine, json: Json) = HttpClient(httpClientEngine) {
+fun createKtorClient(httpClientEngine: HttpClientEngine, resourceReader: YamlResourceReader, json: Json) = HttpClient(httpClientEngine) {
+    val config = resourceReader.readAndDecodeResource(getStage().file, Configs.serializer())
+
     install(ContentNegotiation) {
         json(json = json)
     }
@@ -71,7 +40,7 @@ fun createKtorClient(httpClientEngine: HttpClientEngine, json: Json) = HttpClien
     defaultRequest {
         url {
             protocol = URLProtocol.HTTPS
-            host = MangaKuPublicConfig.BASE_URL
+            host = config.baseUrl
 
             headers {
                 append(HttpHeaders.Accept, "application/vnd.api+json")
@@ -92,13 +61,13 @@ fun createKtorClient(httpClientEngine: HttpClientEngine, json: Json) = HttpClien
                 is ServerResponseException -> {
                     val serverResponseResponse = exception.response
                     val serverResponseExceptionText = serverResponseResponse.bodyAsText()
-                    val apiException: ApiException = json.decodeFromString(serverResponseExceptionText)
+                    val apiException = json.decodeFromString(ApiException.serializer(), serverResponseExceptionText)
                     throw apiException
                 }
                 is ClientRequestException -> {
                     val exceptionResponse = exception.response
                     val exceptionResponseText = exceptionResponse.bodyAsText()
-                    val apiException: ApiException = json.decodeFromString(exceptionResponseText)
+                    val apiException = json.decodeFromString(ApiException.serializer(), exceptionResponseText)
                     throw apiException
                 }
                 else -> {
