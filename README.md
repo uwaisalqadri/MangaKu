@@ -77,7 +77,7 @@ A few things you can do with MangaKu:
 
 ## <a name="domain-to-presentation"></a> 💨 Domain to Presentation
 In Android, Because both `shared` and `mangaku-android` written in Kotlin, we can simply collect flow :
-```
+```kotlin
 private fun getTrendingManga() = viewModelScope.launch {
   _trendingManga.value = Result.loading()
   browseUseCase.getManga()
@@ -94,7 +94,7 @@ private fun getTrendingManga() = viewModelScope.launch {
 
 But in iOS, we have to deal with swift, here i'm using `createPublisher()` from `KMPNativeCoroutines` to collect flow as Publisher in `Combine` :
 
-```
+```swift
 func fetchTrendingManga() {
   trendingManga = .loading
   createPublisher(for: browseUseCase.getTrendingMangaNative())
@@ -116,7 +116,7 @@ or even better, you can use `asyncFunction` / `asyncResult` / `asyncStream` func
 
 **combining two powerful concurrency feature from both native framework, how cool is that !?**
 
-```
+```swift
 func fetchTrendingManga() {
     Task {
       trendingManga = .loading
@@ -153,7 +153,7 @@ expect fun formatDate(dateString: String, format: String): String
 
 SimpleDateFormat
 
-```
+```kotlin
 actual fun formatDate(dateString: String, format: String): String {
     val date = SimpleDateFormat(Constants.formatFromApi).parse(dateString)
     val dateFormatter = SimpleDateFormat(format, Locale.getDefault())
@@ -166,7 +166,7 @@ actual fun formatDate(dateString: String, format: String): String {
 
 NSDateFormatter
 
-```
+```kotlin
 actual fun formatDate(dateString: String, format: String): String {
     val dateFormatter = NSDateFormatter().apply {
 	dateFormat = Constants.formatFromApi
