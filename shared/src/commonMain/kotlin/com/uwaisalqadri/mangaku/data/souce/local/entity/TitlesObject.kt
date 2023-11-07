@@ -1,6 +1,6 @@
 package com.uwaisalqadri.mangaku.data.souce.local.entity
 
-import io.realm.RealmObject
+import io.realm.kotlin.types.RealmObject
 
 class TitlesObject: RealmObject {
     var en: String = ""

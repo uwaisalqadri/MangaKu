@@ -1,27 +1,7 @@
-buildscript {
-    repositories {
-        gradlePluginPortal()
-        google()
-        mavenCentral()
-        jcenter()
-    }
-
-    dependencies {
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}")
-        classpath("com.android.tools.build:gradle:7.1.3")
-        classpath("io.insert-koin:koin-gradle-plugin:${Versions.koin}")
-    }
-}
-
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-        maven(url = "https://jitpack.io")
-        jcenter()
-    }
-}
-
-tasks.register("clean", Delete::class) {
-    delete(rootProject.buildDir)
+plugins {
+    //trick: for the same plugin versions in all sub-modules
+    alias(libs.plugins.android.application) apply(false)
+    alias(libs.plugins.android.library) apply(false)
+    alias(libs.plugins.kotlin.android) apply(false)
+    alias(libs.plugins.kotlin.multiplatform) apply(false)
 }

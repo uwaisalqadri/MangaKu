@@ -1,7 +1,5 @@
 package com.uwaisalqadri.mangaku.data.repository
 
-import co.touchlab.kermit.CommonLogger
-import co.touchlab.kermit.Kermit
 import com.uwaisalqadri.mangaku.data.souce.local.MangaPersistence
 import com.uwaisalqadri.mangaku.data.souce.local.entity.MangaObject
 import com.uwaisalqadri.mangaku.data.souce.remote.MangaApiClient

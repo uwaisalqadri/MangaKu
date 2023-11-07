@@ -16,8 +16,9 @@ import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
-import io.realm.Realm
-import io.realm.RealmConfiguration
+import io.realm.kotlin.Realm
+import io.realm.kotlin.RealmConfiguration
+import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import org.koin.core.KoinApplication
 import org.koin.core.context.startKoin
@@ -48,7 +49,7 @@ val ktorModule = module {
 }
 
 fun createRealmDatabase(): Realm {
-    val configuration = RealmConfiguration.with(schema = setOf(
+    val configuration = RealmConfiguration.create(schema = setOf(
         MangaObject::class,
         AttributesObject::class,
         CoverImageObject::class,
@@ -94,13 +95,13 @@ fun createKtorClient(httpClientEngine: HttpClientEngine, json: Json) = HttpClien
                 is ServerResponseException -> {
                     val serverResponseResponse = exception.response
                     val serverResponseExceptionText = serverResponseResponse.bodyAsText()
-                    val apiException = json.decodeFromString(ApiException.serializer(), serverResponseExceptionText)
+                    val apiException: ApiException = json.decodeFromString(serverResponseExceptionText)
                     throw apiException
                 }
                 is ClientRequestException -> {
                     val exceptionResponse = exception.response
                     val exceptionResponseText = exceptionResponse.bodyAsText()
-                    val apiException = json.decodeFromString(ApiException.serializer(), exceptionResponseText)
+                    val apiException: ApiException = json.decodeFromString(exceptionResponseText)
                     throw apiException
                 }
                 else -> {
