@@ -1,118 +1,68 @@
 plugins {
-    kotlin("multiplatform")
-    kotlin("native.cocoapods")
-    kotlin("plugin.serialization") version Versions.kotlin
-    id("com.android.library")
-    id("io.realm.kotlin") version Versions.realm
-    id("com.rickclephas.kmp.nativecoroutines") version "0.11.3"
-    id("koin")
-    id("dev.icerock.moko.kswift") version "0.5.0"
+    alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.realm)
+    alias(libs.plugins.skie)
 }
 
-// CocoaPods requires the podspec to have a version.
-version = "1.5"
-
-android {
-    compileSdk = AndroidConfigs.compileSdkVersion
-    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
-
-    defaultConfig {
-        minSdk = AndroidConfigs.minSdkVersion
-        targetSdk = AndroidConfigs.targetSdkVersion
-    }
-}
-
+@OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-    android()
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
+    targetHierarchy.default()
 
-    cocoapods {
-        summary = "MangaKu"
-        homepage = "https://github.com/uwaisalqadri/MangaKu"
-        ios.deploymentTarget = "14.1"
-        podfile = project.file("../mangaku-ios/Podfile")
-        framework {
+    androidTarget {
+        compilations.all {
+            kotlinOptions {
+                jvmTarget = "1.8"
+            }
+        }
+    }
+
+    listOf(
+        iosX64(),
+        iosArm64(),
+        iosSimulatorArm64()
+    ).forEach {
+        it.binaries.framework {
             baseName = "Shared"
         }
     }
-    
+
     sourceSets {
-        val commonMain by getting {
-            dependencies {
-                with(Dependencies) {
-                    implementation(realmKotlin)
-                    implementation(koinCore)
-                    implementation(multiplatformSettings)
+        commonMain.dependencies {
+            implementation(libs.realm)
+            implementation(libs.koin.core)
+            implementation(libs.multiplatform.settings)
 
-                    implementation(ktorCore)
-                    implementation(ktorJsonSerialization)
-                    implementation(ktorContentNegotiation)
-                    implementation(ktorLogging)
+            implementation(libs.ktor.core)
+            implementation(libs.ktor.json.serialization)
+            implementation(libs.ktor.content.negotiation)
+            implementation(libs.ktor.logging)
 
-                    implementation(ktxSerialization)
-                    implementation(ktxCoroutine)
-                    implementation(ktxDateTime)
+            implementation(libs.kotlinx.serialization)
+            implementation(libs.kotlinx.coroutine)
+            implementation(libs.kotlinx.datetime)
 
-                    api(kermitLogger)
-                    implementation(kotlin("stdlib-common"))
-                }
-            }
+            api(libs.kermit.logger)
+            implementation(kotlin("stdlib-common"))
         }
 
-        val androidMain by getting {
-            dependencies {
-                with(Dependencies) {
-                    implementation(ktorOkhttp)
-                    implementation(ktorAndroid)
-                    implementation(koinAndroid)
-                }
-            }
+        androidMain.dependencies {
+            implementation(libs.ktor.okhttp)
+            implementation(libs.ktor.android)
+            implementation(libs.koin.android)
         }
 
-        val iosX64Main by getting
-        val iosArm64Main by getting
-        val iosSimulatorArm64Main by getting
-        val iosMain by creating {
-            dependsOn(commonMain)
-            iosX64Main.dependsOn(this)
-            iosArm64Main.dependsOn(this)
-            iosSimulatorArm64Main.dependsOn(this)
-
-            dependencies {
-                implementation(Dependencies.ktorDarwin)
-                implementation(Dependencies.ktorIos)
-            }
-        }
-
-        val commonTest by getting {
-            dependencies {
-                implementation(kotlin("test-common"))
-                implementation(kotlin("test-annotations-common"))
-            }
-        }
-        val androidTest by getting {
-            dependencies {
-                implementation(kotlin("test-junit"))
-                implementation("junit:junit:4.13.2")
-            }
-        }
-
-        val iosX64Test by getting
-        val iosArm64Test by getting
-        //val iosSimulatorArm64Test by getting
-        val iosTest by creating {
-            dependsOn(commonTest)
-            iosX64Test.dependsOn(this)
-            iosArm64Test.dependsOn(this)
-            //iosSimulatorArm64Test.dependsOn(this)
+        iosMain.dependencies {
+            implementation(libs.ktor.darwin)
+            implementation(libs.ktor.ios)
         }
     }
 }
 
-// add support for kotlin extension function and sealed class to enum swift
-kswift {
-    install(dev.icerock.moko.kswift.plugin.feature.SealedToSwiftEnumFeature)
-    install(dev.icerock.moko.kswift.plugin.feature.PlatformExtensionFunctionsFeature)
+android {
+    namespace = AndroidConfigs.applicationId
+    compileSdk = AndroidConfigs.compileSdkVersion
+    defaultConfig {
+        minSdk = AndroidConfigs.minSdkVersion
+    }
 }

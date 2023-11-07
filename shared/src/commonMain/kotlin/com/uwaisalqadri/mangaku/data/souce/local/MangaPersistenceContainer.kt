@@ -1,8 +1,8 @@
 package com.uwaisalqadri.mangaku.data.souce.local
 
 import com.uwaisalqadri.mangaku.data.souce.local.entity.MangaObject
-import io.realm.Realm
-import io.realm.query
+import io.realm.kotlin.Realm
+import io.realm.kotlin.ext.query
 
 class MangaPersistenceContainer(private val realm: Realm): MangaPersistence {
 

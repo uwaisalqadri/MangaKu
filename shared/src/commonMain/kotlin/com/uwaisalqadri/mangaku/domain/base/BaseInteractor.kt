@@ -1,6 +1,5 @@
 package com.uwaisalqadri.mangaku.domain.base
 
-import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesIgnore
 import com.uwaisalqadri.mangaku.data.souce.remote.response.ApiException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -8,7 +7,6 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlin.coroutines.CoroutineContext
 
-@NativeCoroutinesIgnore
 fun <T>execute(
     context: CoroutineContext = Dispatchers.Default,
     block: suspend () -> T

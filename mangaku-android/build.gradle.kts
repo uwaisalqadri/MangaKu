@@ -3,17 +3,18 @@ plugins {
     kotlin("android")
     kotlin("kapt")
     id("kotlin-parcelize")
-    id("kotlin-android")
-    id("com.google.devtools.ksp") version "${Versions.kotlin}-1.0.5"
+    id("com.google.devtools.ksp") version libs.versions.ksp.get()
 }
 
 android {
+    namespace = AndroidConfigs.applicationId
     compileSdk = AndroidConfigs.compileSdkVersion
 
     defaultConfig {
         applicationId = AndroidConfigs.applicationId
         minSdk = AndroidConfigs.minSdkVersion
         targetSdk = AndroidConfigs.targetSdkVersion
+
         versionCode = 1
         versionName = "1.0"
         multiDexEnabled = true
@@ -41,7 +42,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = Versions.compose
+        kotlinCompilerExtensionVersion = libs.versions.compose.get()
     }
 
     kotlinOptions {
@@ -60,35 +61,33 @@ android {
 dependencies {
 
     implementation(project(":shared"))
-    with(Dependencies) {
-        implementation(androidMaterial)
-        implementation(androidAppCompat)
-        implementation(constraintLayout)
-        implementation(fragmentNavigation)
-        implementation(androidNavigation)
-        implementation(liveDataKtx)
+    implementation(libs.android.material)
+    implementation(libs.android.app.compat)
+    implementation(libs.constraint.layout)
+    implementation(libs.fragment.navigation)
+    implementation(libs.android.navigation)
+    implementation(libs.kotlinx.livedata)
 
-        implementation(composeUi)
-        implementation(composeMaterial)
-        implementation(composeTooling)
-        implementation(composeFoundation)
-        implementation(composeFoundationLayout)
-        implementation(composeGraphics)
-        implementation(composeActivity)
-        implementation(composeMaterialIcon)
-        implementation(composeUtil)
-        implementation(composeLottie)
-        implementation(composeShimmer)
-        implementation(composeLiveData)
+    implementation(libs.compose.ui)
+    implementation(libs.compose.material)
+    implementation(libs.compose.tooling)
+    implementation(libs.compose.foundation)
+    implementation(libs.compose.foundation.layout)
+    implementation(libs.compose.graphics)
+    implementation(libs.compose.activity)
+    implementation(libs.compose.material.icon)
+    implementation(libs.compose.util)
+    implementation(libs.compose.lottie)
+    implementation(libs.compose.shimmer)
+    implementation(libs.compose.livedata)
 
-        implementation(koinAndroid)
-        implementation(koinCompose)
+    implementation(libs.koin.android)
+    implementation(libs.koin.compose)
 
-        implementation(accompanistCoil)
-        implementation(accompanistPager)
+    implementation(libs.accompanist.coil)
+    implementation(libs.accompanist.pager)
 
-        implementation(composeDestinations)
-        implementation(composeDestinationsAnimation)
-        ksp(composeDestinationsKsp)
-    }
+    implementation(libs.compose.destinations)
+    implementation(libs.compose.destinations.animation)
+    ksp(libs.compose.destinations.ksp)
 }

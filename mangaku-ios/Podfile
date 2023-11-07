@@ -1,7 +1,6 @@
 target 'MangaKu' do
   use_frameworks!
   platform :ios, '15.0'
-  pod 'shared', :path => '../shared'
   pod 'SDWebImageSwiftUI'
   pod 'KMPNativeCoroutinesAsync'
 end
