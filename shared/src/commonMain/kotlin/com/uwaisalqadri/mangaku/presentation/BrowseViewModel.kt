@@ -12,8 +12,8 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
 open class BrowseViewModel: KMMViewModel(), KoinComponent {
-    private val browseUseCase: BrowseUseCase by inject()
 
+    private val browseUseCase: BrowseUseCase by inject()
     private val _trendingManga = MutableStateFlow<Result<List<Manga>>>(Result.default())
 
     @NativeCoroutinesState

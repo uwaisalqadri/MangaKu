@@ -15,13 +15,14 @@ import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import kotlinx.serialization.json.Json
+import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
 val apiModule = module {
-    single { MangaApi(get()) }
     single { createJson() }
-    single { YamlResourceReader(get()) }
     single { createKtorClient(get(), get(), get()) }
+    singleOf(::MangaApi)
+    singleOf(::YamlResourceReader)
 }
 
 fun createJson() = Json {
@@ -31,7 +32,7 @@ fun createJson() = Json {
 }
 
 fun createKtorClient(httpClientEngine: HttpClientEngine, resourceReader: YamlResourceReader, json: Json) = HttpClient(httpClientEngine) {
-    val config = resourceReader.readAndDecodeResource(getStage().file, Configs.serializer())
+//    val config = resourceReader.readAndDecodeResource(getStage().file, Configs.serializer())
 
     install(ContentNegotiation) {
         json(json = json)
@@ -40,7 +41,7 @@ fun createKtorClient(httpClientEngine: HttpClientEngine, resourceReader: YamlRes
     defaultRequest {
         url {
             protocol = URLProtocol.HTTPS
-            host = config.baseUrl
+            host = "kitsu.io"
 
             headers {
                 append(HttpHeaders.Accept, "application/vnd.api+json")

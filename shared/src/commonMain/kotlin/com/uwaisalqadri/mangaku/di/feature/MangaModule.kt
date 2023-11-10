@@ -14,6 +14,7 @@ import com.uwaisalqadri.mangaku.domain.usecase.mymanga.MyMangaInteractor
 import com.uwaisalqadri.mangaku.domain.usecase.mymanga.MyMangaUseCase
 import com.uwaisalqadri.mangaku.domain.usecase.search.SearchInteractor
 import com.uwaisalqadri.mangaku.domain.usecase.search.SearchUseCase
+import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
 val mangaModule = module {

@@ -32,6 +32,7 @@ import com.uwaisalqadri.mangaku.domain.model.Manga
 import com.uwaisalqadri.mangaku.presentation.DetailViewModel
 import com.uwaisalqadri.mangaku.utils.*
 import org.koin.androidx.compose.getViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Destination
 @Composable
@@ -39,8 +40,8 @@ fun DetailScreen(
     navigator: DestinationsNavigator,
     mangaId: String
 ) {
-    val viewModel: DetailViewModel = getViewModel()
-    val mangaViewModel: MyMangaViewModel = getViewModel()
+    val viewModel: DetailViewModel = koinViewModel()
+    val mangaViewModel: MyMangaViewModel = koinViewModel()
 
     val detailMangaState by viewModel.detailManga.collectAsState()
     val favState by mangaViewModel.favState.collectAsState()

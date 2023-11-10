@@ -9,6 +9,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -22,21 +26,27 @@ import com.uwaisalqadri.mangaku.android.presentation.destinations.SearchScreenDe
 import com.uwaisalqadri.mangaku.android.presentation.theme.MangaTypography
 import com.uwaisalqadri.mangaku.android.presentation.theme.composables.ShimmerBrowseItem
 import com.uwaisalqadri.mangaku.android.presentation.theme.composables.TopBar
+import com.uwaisalqadri.mangaku.android.utils.OnLifecycleEvent
 import com.uwaisalqadri.mangaku.android.utils.getValue
 import com.uwaisalqadri.mangaku.android.utils.isLoading
 import com.uwaisalqadri.mangaku.presentation.BrowseViewModel
 import org.koin.androidx.compose.getViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Destination
 @Composable
 fun BrowseScreen(
     navigator: DestinationsNavigator,
 ) {
-    val viewModel: BrowseViewModel = getViewModel()
+    val viewModel: BrowseViewModel = koinViewModel()
     val listMangaState by viewModel.trendingManga.collectAsState()
+    var isLoaded by rememberSaveable { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
-        viewModel.getTrendingManga()
+        if (!isLoaded) {
+            viewModel.getTrendingManga()
+            isLoaded = true
+        }
     }
 
     LazyColumn(

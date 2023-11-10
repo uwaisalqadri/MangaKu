@@ -1,6 +1,7 @@
 package com.uwaisalqadri.mangaku.utils
 
-import com.uwaisalqadri.mangaku.BuildConfig
+import co.touchlab.kermit.BuildConfig
+
 
 /**
  * Created by Uwais Alqadri on July 22, 2021

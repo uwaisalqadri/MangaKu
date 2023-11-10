@@ -1,11 +1,31 @@
 package com.uwaisalqadri.mangaku.di
 
+import com.uwaisalqadri.mangaku.di.feature.apiModule
+import com.uwaisalqadri.mangaku.di.feature.databaseModule
+import com.uwaisalqadri.mangaku.di.feature.mangaModule
 import com.uwaisalqadri.mangaku.domain.usecase.browse.BrowseUseCase
 import com.uwaisalqadri.mangaku.domain.usecase.detail.DetailUseCase
 import com.uwaisalqadri.mangaku.domain.usecase.mymanga.MyMangaUseCase
 import com.uwaisalqadri.mangaku.domain.usecase.search.SearchUseCase
+import com.uwaisalqadri.mangaku.utils.ktorEngineModule
+import com.uwaisalqadri.mangaku.utils.resourceReaderModule
 import org.koin.core.Koin
 import org.koin.core.KoinApplication
+import org.koin.core.context.startKoin
+import org.koin.dsl.KoinAppDeclaration
+
+fun initKoin(appDeclaration: KoinAppDeclaration = {}): KoinApplication {
+    return startKoin {
+        appDeclaration()
+        modules(
+            apiModule,
+            ktorEngineModule(),
+            resourceReaderModule(),
+            databaseModule,
+            mangaModule
+        )
+    }
+}
 
 // Koin utilities for iOS injection
 

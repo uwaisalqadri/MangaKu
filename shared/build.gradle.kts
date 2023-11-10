@@ -1,8 +1,11 @@
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.android.library)
+    alias(libs.plugins.ksp)
     alias(libs.plugins.realm)
-    alias(libs.plugins.skie)
+    alias(libs.plugins.kmp.nativecoroutines)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
@@ -12,7 +15,7 @@ kotlin {
     androidTarget {
         compilations.all {
             kotlinOptions {
-                jvmTarget = "1.8"
+                jvmTarget = JavaVersion.VERSION_11.toString()
             }
         }
     }
@@ -24,11 +27,15 @@ kotlin {
     ).forEach {
         it.binaries.framework {
             baseName = "Shared"
-            isStatic = true
         }
     }
 
     sourceSets {
+        all {
+            languageSettings.optIn("kotlinx.cinterop.ExperimentalForeignApi")
+            languageSettings.optIn("kotlin.experimental.ExperimentalObjCName")
+        }
+
         commonMain.dependencies {
             implementation(libs.realm)
             implementation(libs.koin.core)
@@ -44,8 +51,8 @@ kotlin {
             implementation(libs.kotlinx.datetime)
 
             api(libs.kermit.logger)
-            implementation(kmmViewModel)
-            implementation("net.mamoe.yamlkt:yamlkt:0.12.0")
+            api(libs.kmm.viewmodel)
+            implementation(libs.kotlin.yaml)
             implementation(kotlin("stdlib-common"))
         }
 
@@ -63,9 +70,14 @@ kotlin {
 }
 
 android {
-    namespace = AndroidConfigs.applicationId
-    compileSdk = AndroidConfigs.compileSdkVersion
+    namespace = "com.uwaisalqadri.mangaku.android"
+    compileSdk = 34
     defaultConfig {
-        minSdk = AndroidConfigs.minSdkVersion
+        minSdk = 30
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 }

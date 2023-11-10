@@ -2,10 +2,17 @@ package com.uwaisalqadri.mangaku.android.presentation.search
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.MaterialTheme
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -20,16 +27,16 @@ import com.uwaisalqadri.mangaku.android.presentation.theme.composables.ShimmerSe
 import com.uwaisalqadri.mangaku.android.presentation.theme.composables.TopBar
 import com.uwaisalqadri.mangaku.android.utils.getValue
 import com.uwaisalqadri.mangaku.android.utils.isLoading
-import org.koin.androidx.compose.getViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Destination
 @Composable
 fun SearchScreen(
     navigator: DestinationsNavigator
 ) {
-    val viewModel: SearchViewModelImpl = getViewModel()
-    val searchMangaState by viewModel.searchManga.collectAsState()
-    var query by viewModel.query
+    val queryHandler: SearchQueryHandler = koinViewModel()
+    val searchMangaState by queryHandler.searchViewModel.searchManga.collectAsState()
+    var query by queryHandler.query
 
     BackHandler {
         navigator.popBackStack()
@@ -57,8 +64,8 @@ fun SearchScreen(
             SearchField(
                 query = query,
                 placeholder = "Search All Manga..",
-                onQueryChanged = viewModel::onQueryChanged,
-                onExecuteSearch = { viewModel.getSearchManga(query) },
+                onQueryChanged = queryHandler::onQueryChanged,
+                onExecuteSearch = { queryHandler.searchViewModel.getSearchManga(query) },
                 onEraseQuery = { query = "" },
                 modifier = Modifier
                     .fillMaxWidth()
