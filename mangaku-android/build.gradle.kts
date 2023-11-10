@@ -1,3 +1,4 @@
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     id("com.android.application")
     kotlin("android")
@@ -7,13 +8,13 @@ plugins {
 }
 
 android {
-    namespace = AndroidConfigs.applicationId
-    compileSdk = AndroidConfigs.compileSdkVersion
+    namespace = "com.uwaisalqadri.mangaku.android"
+    compileSdk = 34
 
     defaultConfig {
-        applicationId = AndroidConfigs.applicationId
-        minSdk = AndroidConfigs.minSdkVersion
-        targetSdk = AndroidConfigs.targetSdkVersion
+        applicationId = "com.uwaisalqadri.mangaku.android"
+        minSdk = 30
+        targetSdk = 34
 
         versionCode = 1
         versionName = "1.0"
@@ -34,11 +35,12 @@ android {
     buildFeatures {
         compose = true
         viewBinding = true
+        buildConfig = true
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 
     composeOptions {
@@ -46,7 +48,7 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = JavaVersion.VERSION_11.toString()
 
         freeCompilerArgs += listOf(
             "-P",

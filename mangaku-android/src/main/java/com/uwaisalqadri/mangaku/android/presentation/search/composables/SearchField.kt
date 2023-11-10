@@ -37,7 +37,7 @@ fun SearchField(
     modifier: Modifier
 ) {
     Card(
-        backgroundColor = MaterialTheme.colors.onSurface,
+        backgroundColor = MaterialTheme.colors.onSurface.copy(alpha = 0.5F),
         shape = RoundedCornerShape(20.dp),
         elevation = 0.dp,
         modifier = modifier

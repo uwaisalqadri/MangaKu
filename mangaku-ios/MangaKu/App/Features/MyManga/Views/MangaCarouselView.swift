@@ -33,7 +33,7 @@ struct MangaCarouselView: View {
     ZStack {
       VStack {
         ZStack {
-          ForEach(0..<views.count) { index in
+          ForEach(Array(views.enumerated()), id: \.offset) { index, _ in
             VStack {
               Spacer()
 

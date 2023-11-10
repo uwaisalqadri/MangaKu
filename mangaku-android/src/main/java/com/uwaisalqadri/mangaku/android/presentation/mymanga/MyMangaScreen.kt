@@ -25,13 +25,14 @@ import com.uwaisalqadri.mangaku.android.utils.isEmpty
 import com.uwaisalqadri.mangaku.android.utils.isLoading
 import com.uwaisalqadri.mangaku.presentation.MyMangaViewModel
 import org.koin.androidx.compose.getViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Destination
 @Composable
 fun MyMangaScreen(
     navigator: DestinationsNavigator
 ) {
-    val viewModel: MyMangaViewModel = getViewModel()
+    val viewModel: MyMangaViewModel = koinViewModel()
     val myMangaState by viewModel.myManga.collectAsState()
     var isPage by rememberSaveable { mutableStateOf(true) }
 

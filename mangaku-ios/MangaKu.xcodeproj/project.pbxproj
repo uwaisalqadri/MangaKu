@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 53;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -390,6 +390,7 @@
 			buildConfigurationList = 7555FFA5242A565B00829871 /* Build configuration list for PBXNativeTarget "MangaKu" */;
 			buildPhases = (
 				4BFBD54C0763AAF927EA4FBD /* [CP] Check Pods Manifest.lock */,
+				CE9B42442AFEF08D000BC7EE /* Kotlin Multiplatform */,
 				7555FF77242A565900829871 /* Sources */,
 				7555FF79242A565900829871 /* Resources */,
 				3C26FE6BA0859E52A35A7815 /* Frameworks */,
@@ -414,8 +415,9 @@
 		7555FF73242A565900829871 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1130;
-				LastUpgradeCheck = 1130;
+				LastUpgradeCheck = 1430;
 				ORGANIZATIONNAME = "Uwais Alqadri";
 				TargetAttributes = {
 					7555FF7A242A565900829871 = {
@@ -484,6 +486,24 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		CE9B42442AFEF08D000BC7EE /* Kotlin Multiplatform */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Kotlin Multiplatform";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd \"$SRCROOT/..\"\n./gradlew :shared:embedAndSignAppleFrameworkForXcode\n";
 		};
 		FC456C3F9035906C406E9C71 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -670,12 +690,42 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5S8HRB386G;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KMPNativeCoroutinesAsync\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KMPNativeCoroutinesCore\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SDWebImage\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SDWebImageSwiftUI\"",
+					"$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/MangaKu/App/Resources/Plist/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = MangaKu;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"KMPNativeCoroutinesAsync\"",
+					"-framework",
+					"\"KMPNativeCoroutinesCore\"",
+					"-framework",
+					"\"SDWebImage\"",
+					"-framework",
+					"\"SDWebImageSwiftUI\"",
+					"-weak_framework",
+					"\"Combine\"",
+					"-weak_framework",
+					"\"SwiftUI\"",
+					"$(inherited)",
+					"-framework",
+					"shared\n$(inherited)",
+					"-framework",
+					"shared\n",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.uwaisalqadri.mangaku;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -692,12 +742,42 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5S8HRB386G;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KMPNativeCoroutinesAsync\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/KMPNativeCoroutinesCore\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SDWebImage\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SDWebImageSwiftUI\"",
+					"$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/MangaKu/App/Resources/Plist/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = MangaKu;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"KMPNativeCoroutinesAsync\"",
+					"-framework",
+					"\"KMPNativeCoroutinesCore\"",
+					"-framework",
+					"\"SDWebImage\"",
+					"-framework",
+					"\"SDWebImageSwiftUI\"",
+					"-weak_framework",
+					"\"Combine\"",
+					"-weak_framework",
+					"\"SwiftUI\"",
+					"$(inherited)",
+					"-framework",
+					"shared\n$(inherited)",
+					"-framework",
+					"shared\n",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.uwaisalqadri.mangaku;
 				PRODUCT_NAME = "$(TARGET_NAME)";
