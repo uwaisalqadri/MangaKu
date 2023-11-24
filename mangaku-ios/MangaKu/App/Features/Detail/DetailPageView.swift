@@ -12,25 +12,29 @@ import Shared
 import KMMViewModelSwiftUI
 
 struct DetailPageView: View {
+  @StateViewModel var viewModel: DetailViewModel
+  @StateViewModel var mangaViewModel: MyMangaViewModel
   
-  @StateViewModel var viewModel = DetailViewModel()
-  @StateViewModel var mangaViewModel = MyMangaViewModel()
-  @State var isShowDialog = false
+  @State private var isShowDialog = false
   let mangaId: String
   
-  var isFavorite: Bool {
-    return mangaViewModel.favState.favMangaFound
+  private var viewState: DetailState {
+    viewModel.state
+  }
+  
+  private var favState: MyMangaState {
+    mangaViewModel.state
   }
   
   var body: some View {
     VStack(alignment: .leading) {
       
       ScrollView(showsIndicators: false) {
-        switch onEnum(of: viewModel.detailManga) {
-        case .loading, .empty:
+        switch true {
+        case viewState.isLoading:
           ShimmerDetailView()
-        case .success(let result):
-          if let data = result.data {
+        default:
+          if let data = viewState.manga {
             WebImage(url: URL(string: data.getCoverImage()))
               .resizable()
               .indicator(.activity)
@@ -38,6 +42,9 @@ struct DetailPageView: View {
               .frame(height: 200)
               .cornerRadius(10)
               .padding(.horizontal, 24)
+              .onAppear {
+                mangaViewModel.onTriggerEvent(event: MyMangaEvent.CheckFavorite(mangaId: data.id))
+              }
             
             VStack(alignment: .leading) {
               Text(data.getTitle())
@@ -84,54 +91,49 @@ struct DetailPageView: View {
               
             }.padding(.horizontal, 30)
           }
-        default:
-          EmptyView()
         }
       }.padding(.top, 30)
       
     }
     .navigationTitle("Detail")
     .navigationBarItems(trailing: Button(action: {
-      if case let .success(result) = onEnum(of: viewModel.detailManga),
-         let data = result.data {
-        isFavorite ? mangaViewModel.deleteMyManga(mangaId: data.id ?? "") : mangaViewModel.addMyManga(manga: data)
+      if let data = viewState.manga {
+        favState.isFavorite ? mangaViewModel.onTriggerEvent(event: MyMangaEvent.DeleteFavorite(mangaId: data.id))
+        : mangaViewModel.onTriggerEvent(event: MyMangaEvent.AddFavorite(manga: data))
         isShowDialog.toggle()
       }
     }) {
-      Image(systemName: isFavorite ? "heart.fill" : "heart")
+      Image(systemName: favState.isFavorite ? "heart.fill" : "heart")
         .resizable()
         .foregroundColor(.red)
         .frame(width: 22, height: 20)
     })
     .onAppear {
-      viewModel.getDetailManga(mangaId: mangaId)
-      mangaViewModel.checkFavorite(mangaId: mangaId)
+      viewModel.onTriggerEvent(event: DetailEvent.GetManga(id: mangaId))
     }
-    
-    
-      .customDialog(isShowing: $isShowDialog) {
-        VStack(alignment: .center) {
-          Image(systemName: "heart.fill")
-            .resizable()
-            .foregroundColor(.red)
-            .frame(width: 33, height: 30)
-            .padding(.bottom, 15)
-          
-          Text(isFavorite ? "Added to Favorite" : "Removed from Favorite")
-            .foregroundColor(.black)
-            .font(.custom(.mbold, size: 17))
-            .padding(.bottom, 10)
-            .padding(.horizontal, 5)
-            .multilineTextAlignment(.center)
-          
-        }.frame(width: 154, height: 154)
-          .onAppear {
-            if isShowDialog {
-              DispatchQueue.main.asyncAfter(deadline: .now() + 1.6) {
-                isShowDialog.toggle()
-              }
+    .customDialog(isShowing: $isShowDialog) {
+      VStack(alignment: .center) {
+        Image(systemName: "heart.fill")
+          .resizable()
+          .foregroundColor(.red)
+          .frame(width: 33, height: 30)
+          .padding(.bottom, 15)
+        
+        Text(favState.isFavorite ? "Added to Favorite" : "Removed from Favorite")
+          .foregroundColor(.black)
+          .font(.custom(.mbold, size: 17))
+          .padding(.bottom, 10)
+          .padding(.horizontal, 5)
+          .multilineTextAlignment(.center)
+        
+      }.frame(width: 154, height: 154)
+        .onAppear {
+          if isShowDialog {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.6) {
+              isShowDialog.toggle()
             }
           }
-      }
+        }
+    }
   }
 }

@@ -12,11 +12,14 @@ import SDWebImageSwiftUI
 import KMMViewModelSwiftUI
 
 struct MyMangaPageView: View {
-  
-  @StateViewModel var viewModel = MyMangaViewModel()
-  @State var isSlide = true
-  
   let navigator: MyMangaRouter
+  @StateViewModel var viewModel: MyMangaViewModel
+  
+  @State private var isSlide = true
+  
+  private var viewState: MyMangaState {
+    viewModel.state
+  }
   
   var body: some View {
     ScrollView(showsIndicators: false) {
@@ -29,14 +32,20 @@ struct MyMangaPageView: View {
           isSlide = toggle
         }.padding(.bottom, 15)
         
-        if case let .success(result) = onEnum(of: viewModel.myManga),
-            let items = result.data?.compactMap({ $0 as? Manga }) {
+        if viewState.isEmpty {
+          Text("Still Empty Here!")
+            .foregroundColor(.black)
+            .font(.custom(.sedgwickave, size: 60))
+            .multilineTextAlignment(.center)
+            .padding(.top, 50)
+            .padding(.horizontal, 20)
           
+        } else {
           if isSlide {
             MangaCarouselView(
               itemWidth: 240,
               itemHeight: 361,
-              views: getMangaItemView(items: items)
+              views: getMangaItemView(items: viewState.mangas)
             ).frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight / 2)
               .padding(.top, 50)
             
@@ -45,21 +54,14 @@ struct MyMangaPageView: View {
               GridItem(.adaptive(minimum: 120), spacing: 25, alignment: .center)
             ], alignment: .leading, spacing: 10) {
               
-              ForEach(items, id: \.self) { manga in
+              ForEach(viewState.mangas, id: \.self) { manga in
                 MangaGridItem(manga: manga, navigator: navigator)
               }
-            }.padding(.horizontal, 30)
-              .padding(.top, 20)
-              .padding(.bottom, 200)
+            }
+            .padding(.horizontal, 30)
+            .padding(.top, 20)
+            .padding(.bottom, 200)
           }
-          
-        } else if case .empty = onEnum(of: viewModel.myManga) {
-          Text("Still Empty Here!")
-            .foregroundColor(.black)
-            .font(.custom(.sedgwickave, size: 60))
-            .multilineTextAlignment(.center)
-            .padding(.top, 50)
-            .padding(.horizontal, 20)
         }
         
         Spacer()
@@ -67,7 +69,7 @@ struct MyMangaPageView: View {
     }
     .navigationBarHidden(true)
     .onAppear {
-      viewModel.getMyManga()
+      viewModel.onTriggerEvent(event: MyMangaEvent.GetMyMangas())
     }
     .frame(width: UIScreen.screenWidth, alignment: .center)
   }

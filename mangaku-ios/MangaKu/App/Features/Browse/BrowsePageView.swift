@@ -12,11 +12,15 @@ import KMMViewModelSwiftUI
 
 struct BrowsePageView: View {
 
-  @StateViewModel var viewModel = BrowseViewModel()
-  @State var isLoaded = false
+  @StateViewModel private var viewModel = BrowseViewModel()
+  @State private var isLoaded = false
   let navigator: BrowseRouter
 
-  let genres: [Genre] = [
+  private var viewState: BrowseState {
+    viewModel.state
+  }
+  
+  private let genres: [Genre] = [
     Genre(name: "Shonen", image: "imgShonen", query: "shonen", font: .sedgwickave),
     Genre(name: "Seinen", image: "imgSeinen", query: "seinen", font: .mashanzheng),
     Genre(name: "Shojo", image: "imgShojo", query: "shojo", font: .sedgwickave)
@@ -42,7 +46,7 @@ struct BrowsePageView: View {
           .padding(.leading, 17)
           .padding(.top, 30)
 
-        if case .loading = onEnum(of: viewModel.trendingManga) {
+        if viewState.isLoading {
           VStack {
             ForEach(0..<10) { _ in
               ShimmerBrowseView()
@@ -52,10 +56,9 @@ struct BrowsePageView: View {
           .padding(.trailing, 30)
           .padding(.bottom, 100)
 
-        } else if case let .success(result) = onEnum(of: viewModel.trendingManga),
-                  let items = result.data?.compactMap({ $0 as? Manga }) {
+        } else {
           VStack {
-            ForEach(items, id: \.id) { manga in
+            ForEach(viewState.mangas, id: \.id) { manga in
               NavigationLink(destination: navigator.routeToDetail(mangaId: manga.id)) {
                 MangaRow(manga: manga)
               }.buttonStyle(PlainButtonStyle())
@@ -78,7 +81,7 @@ struct BrowsePageView: View {
     )
     .onAppear {
       if !isLoaded {
-        viewModel.getTrendingManga()
+        viewModel.onTriggerEvent(event: BrowseEvent.GetMangas())
         isLoaded = true
       }
     }

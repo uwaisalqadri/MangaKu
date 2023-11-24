@@ -42,8 +42,6 @@
 		91BC27AF28BB391800AD291A /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BC278D28BB391800AD291A /* Error.swift */; };
 		91BC27B028BB391800AD291A /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BC278E28BB391800AD291A /* String.swift */; };
 		91BC27B128BB391800AD291A /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BC278F28BB391800AD291A /* View.swift */; };
-		91BC27B228BB391800AD291A /* FavState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BC279028BB391800AD291A /* FavState.swift */; };
-		91BC27B328BB391800AD291A /* ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BC279128BB391800AD291A /* ViewState.swift */; };
 		91BC27B828BB391E00AD291A /* AppAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BC27B528BB391E00AD291A /* AppAssembler.swift */; };
 		91BC27B928BB391E00AD291A /* FeatureAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BC27B728BB391E00AD291A /* FeatureAssembler.swift */; };
 		91C0FC4C2998687700F01C43 /* dev.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 91C0FC492998687700F01C43 /* dev.yaml */; };
@@ -88,8 +86,6 @@
 		91BC278D28BB391800AD291A /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		91BC278E28BB391800AD291A /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		91BC278F28BB391800AD291A /* View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
-		91BC279028BB391800AD291A /* FavState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavState.swift; sourceTree = "<group>"; };
-		91BC279128BB391800AD291A /* ViewState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewState.swift; sourceTree = "<group>"; };
 		91BC27B528BB391E00AD291A /* AppAssembler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppAssembler.swift; sourceTree = "<group>"; };
 		91BC27B728BB391E00AD291A /* FeatureAssembler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeatureAssembler.swift; sourceTree = "<group>"; };
 		91C0FC492998687700F01C43 /* dev.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = dev.yaml; path = ../../../../../shared/src/commonMain/resources/dev.yaml; sourceTree = "<group>"; };
@@ -175,7 +171,6 @@
 				91BC275E28BB391800AD291A /* Features */,
 				91BC278328BB391800AD291A /* Main */,
 				91BC278728BB391800AD291A /* Resources */,
-				91BC278B28BB391800AD291A /* Utils */,
 			);
 			name = App;
 			path = MangaKu/App;
@@ -329,15 +324,6 @@
 				91BC278828BB391800AD291A /* Assets.xcassets */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		91BC278B28BB391800AD291A /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				91BC279028BB391800AD291A /* FavState.swift */,
-				91BC279128BB391800AD291A /* ViewState.swift */,
-			);
-			path = Utils;
 			sourceTree = "<group>";
 		};
 		91BC278C28BB391800AD291A /* Extension */ = {
@@ -530,7 +516,6 @@
 				91BC27B128BB391800AD291A /* View.swift in Sources */,
 				91BC279428BB391800AD291A /* BrowseRouter.swift in Sources */,
 				91BC279928BB391800AD291A /* DetailRouter.swift in Sources */,
-				91BC27B328BB391800AD291A /* ViewState.swift in Sources */,
 				91BC279728BB391800AD291A /* DetailPageView.swift in Sources */,
 				91BC27A928BB391800AD291A /* Koin.swift in Sources */,
 				91BC27A128BB391800AD291A /* ShimmerModifier.swift in Sources */,
@@ -538,7 +523,6 @@
 				91595DA528BB3F89009BBC89 /* Font.swift in Sources */,
 				91BC279C28BB391800AD291A /* MyMangaRouter.swift in Sources */,
 				91BC279A28BB391800AD291A /* MyMangaPageView.swift in Sources */,
-				91BC27B228BB391800AD291A /* FavState.swift in Sources */,
 				91BC27AF28BB391800AD291A /* Error.swift in Sources */,
 				91BC27B928BB391E00AD291A /* FeatureAssembler.swift in Sources */,
 				91BC27B828BB391E00AD291A /* AppAssembler.swift in Sources */,

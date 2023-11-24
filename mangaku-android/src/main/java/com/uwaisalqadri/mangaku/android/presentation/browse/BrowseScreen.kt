@@ -6,18 +6,13 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
-import com.uwaisalqadri.mangaku.android.R
 import com.uwaisalqadri.mangaku.android.presentation.browse.composables.Genres
 import com.uwaisalqadri.mangaku.android.presentation.browse.composables.MangaTrending
 import com.uwaisalqadri.mangaku.android.presentation.destinations.DetailScreenDestination
@@ -25,10 +20,9 @@ import com.uwaisalqadri.mangaku.android.presentation.destinations.SearchScreenDe
 import com.uwaisalqadri.mangaku.android.presentation.theme.MangaTypography
 import com.uwaisalqadri.mangaku.android.presentation.theme.composables.ShimmerBrowseItem
 import com.uwaisalqadri.mangaku.android.presentation.theme.composables.TopBar
-import com.uwaisalqadri.mangaku.android.utils.getValue
-import com.uwaisalqadri.mangaku.android.utils.isLoading
-import com.uwaisalqadri.mangaku.presentation.BrowseViewModel
+import com.uwaisalqadri.mangaku.presentation.browse.BrowseViewModel
 import org.koin.androidx.compose.koinViewModel
+import com.uwaisalqadri.mangaku.android.R
 
 @Destination
 @Composable
@@ -36,15 +30,7 @@ fun BrowseScreen(
     navigator: DestinationsNavigator,
 ) {
     val viewModel: BrowseViewModel = koinViewModel()
-    val listMangaState by viewModel.trendingManga.collectAsState()
-    var isLoaded by rememberSaveable { mutableStateOf(false) }
-
-    LaunchedEffect(Unit) {
-        if (!isLoaded) {
-            viewModel.getTrendingManga()
-            isLoaded = true
-        }
-    }
+    val viewState by viewModel.state.collectAsState()
 
     LazyColumn(
         modifier = Modifier
@@ -96,14 +82,14 @@ fun BrowseScreen(
         }
 
         item {
-            if (listMangaState.isLoading()) {
+            if (viewState.isLoading) {
                 repeat(10) {
                     ShimmerBrowseItem()
                 }
             }
 
             MangaTrending(
-                trendingManga = getValue(listMangaState).orEmpty(),
+                trendingManga = viewState.mangas,
                 modifier = Modifier
                     .fillMaxWidth()
                     .fillMaxHeight()
