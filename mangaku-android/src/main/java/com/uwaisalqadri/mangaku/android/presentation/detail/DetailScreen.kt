@@ -21,17 +21,16 @@ import com.google.accompanist.coil.rememberCoilPainter
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.uwaisalqadri.mangaku.android.presentation.detail.composables.FavoriteDialog
-import com.uwaisalqadri.mangaku.presentation.MyMangaViewModel
+import com.uwaisalqadri.mangaku.presentation.mymanga.MyMangaViewModel
 import com.uwaisalqadri.mangaku.android.presentation.theme.MangaTypography
 import com.uwaisalqadri.mangaku.android.presentation.theme.composables.BackButton
 import com.uwaisalqadri.mangaku.android.presentation.theme.composables.ShimmerDetail
 import com.uwaisalqadri.mangaku.android.presentation.theme.composables.TopBar
-import com.uwaisalqadri.mangaku.android.utils.getValue
-import com.uwaisalqadri.mangaku.android.utils.isLoading
 import com.uwaisalqadri.mangaku.domain.model.Manga
-import com.uwaisalqadri.mangaku.presentation.DetailViewModel
+import com.uwaisalqadri.mangaku.presentation.detail.DetailEvent
+import com.uwaisalqadri.mangaku.presentation.detail.DetailViewModel
+import com.uwaisalqadri.mangaku.presentation.mymanga.MyMangaEvent
 import com.uwaisalqadri.mangaku.utils.*
-import org.koin.androidx.compose.getViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Destination
@@ -43,15 +42,13 @@ fun DetailScreen(
     val viewModel: DetailViewModel = koinViewModel()
     val mangaViewModel: MyMangaViewModel = koinViewModel()
 
-    val detailMangaState by viewModel.detailManga.collectAsState()
-    val favState by mangaViewModel.favState.collectAsState()
+    val viewState by viewModel.state.collectAsState()
+    val favState by mangaViewModel.state.collectAsState()
 
-    val (isFavorite, setFavorite) = remember { mutableStateOf(false) }
     val (isShowDialog, setShowDialog) = remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
-        viewModel.getDetailManga(mangaId)
-        mangaViewModel.checkFavorite(mangaId)
+        viewModel.onTriggerEvent(DetailEvent.GetManga(mangaId))
     }
 
     LazyColumn(
@@ -62,7 +59,7 @@ fun DetailScreen(
     ) {
         item {
             FavoriteDialog(
-                message = if (isFavorite) "Added to Favorite" else "Removed from Favorite",
+                message = if (favState.isFavorite) "Added to Favorite" else "Removed from Favorite",
                 isShowDialog = isShowDialog,
                 setShowDialog = setShowDialog,
                 modifier = Modifier.size(134.dp)
@@ -84,16 +81,16 @@ fun DetailScreen(
                     elevation = ButtonDefaults.elevation(0.dp, 0.dp),
                     onClick = {
                         setShowDialog(true)
-                        if (!detailMangaState.isLoading()) {
-                            getValue(detailMangaState)?.let {
-                                if (isFavorite) mangaViewModel.deleteMyManga(it.id)
-                                else mangaViewModel.addMyManga(it)
+                        if (!viewState.isLoading) {
+                            viewState.manga?.let {
+                                if (favState.isFavorite) mangaViewModel.onTriggerEvent(MyMangaEvent.DeleteFavorite(it.id))
+                                else mangaViewModel.onTriggerEvent(MyMangaEvent.AddFavorite(it))
                             }
                         }
                     }
                 ) {
                     Icon(
-                        imageVector = if (isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
+                        imageVector = if (favState.isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
                         contentDescription = null,
                         tint = Color.Red,
                         modifier = Modifier.size(25.dp),
@@ -110,17 +107,12 @@ fun DetailScreen(
         }
 
         item {
-            if (detailMangaState.isLoading()) {
+            if (viewState.isLoading) {
                 ShimmerDetail()
             } else {
-                when {
-                    favState.favMangaFound -> setFavorite(true)
-                    favState.addFavorite -> setFavorite(true)
-                    favState.removeFavorite -> setFavorite(false)
-                    else -> setFavorite(false)
-                }
+                mangaViewModel.onTriggerEvent(MyMangaEvent.CheckFavorite(mangaId))
 
-                getValue(detailMangaState)?.let {
+                viewState.manga?.let {
                     MangaDetail(manga = it)
                 }
 

@@ -12,7 +12,6 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -25,8 +24,8 @@ import com.uwaisalqadri.mangaku.android.presentation.search.composables.Staggere
 import com.uwaisalqadri.mangaku.android.presentation.theme.composables.BackButton
 import com.uwaisalqadri.mangaku.android.presentation.theme.composables.ShimmerSearchItem
 import com.uwaisalqadri.mangaku.android.presentation.theme.composables.TopBar
-import com.uwaisalqadri.mangaku.android.utils.getValue
-import com.uwaisalqadri.mangaku.android.utils.isLoading
+import com.uwaisalqadri.mangaku.presentation.search.SearchEvent
+import com.uwaisalqadri.mangaku.presentation.search.SearchViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Destination
@@ -34,9 +33,11 @@ import org.koin.androidx.compose.koinViewModel
 fun SearchScreen(
     navigator: DestinationsNavigator
 ) {
-    val queryHandler: SearchQueryHandler = koinViewModel()
-    val searchMangaState by queryHandler.searchViewModel.searchManga.collectAsState()
-    var query by queryHandler.query
+    val viewModel: SearchViewModel = koinViewModel()
+    val state by viewModel.state.collectAsState()
+    val event: (SearchEvent) -> Unit = viewModel::onTriggerEvent
+
+    val searchQuery by viewModel.searchQuery.collectAsState()
 
     BackHandler {
         navigator.popBackStack()
@@ -62,11 +63,15 @@ fun SearchScreen(
 
         item {
             SearchField(
-                query = query,
+                query = searchQuery,
                 placeholder = "Search All Manga..",
-                onQueryChanged = queryHandler::onQueryChanged,
-                onExecuteSearch = { queryHandler.searchViewModel.getSearchManga(query) },
-                onEraseQuery = { query = "" },
+                onQueryChanged = {
+                    event(SearchEvent.GetMangas(it))
+                },
+                onExecuteSearch = {
+                    event(SearchEvent.GetMangas(searchQuery))
+                },
+                onEraseQuery = { event(SearchEvent.Empty)  },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 20.dp, vertical = 20.dp)
@@ -75,13 +80,13 @@ fun SearchScreen(
 
         item {
             StaggeredVerticalGrid(maxColumnWidth = 150.dp) {
-                if (searchMangaState.isLoading()) {
+                if (state.isLoading) {
                     repeat(10) {
                         ShimmerSearchItem()
                     }
                 }
 
-                getValue(searchMangaState)?.forEach { manga ->
+                state.mangas.forEach { manga ->
                     SearchCard(manga = manga) {
                         navigator.navigate(DetailScreenDestination(mangaId = it))
                     }

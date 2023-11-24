@@ -11,14 +11,18 @@ import Shared
 import KMMViewModelSwiftUI
 
 struct SearchPageView: View {
-  
-  @StateViewModel var viewModel = SearchViewModel()
-  @State var searchQuery: String = ""
   let navigator: SearchRouter
+  
+  @StateViewModel var viewModel: SearchViewModel
+  @State var searchQuery: String = ""
+  
+  private var viewState: SearchState {
+    viewModel.state
+  }
   
   var body: some View {
     VStack {
-      if case .empty = onEnum(of: viewModel.searchManga) {
+      if viewState.isEmpty {
         Text("Result Not Found, Search Something Else :)")
           .foregroundColor(.black)
           .font(.custom(.sedgwickave, size: 60))
@@ -30,14 +34,13 @@ struct SearchPageView: View {
             GridItem(.adaptive(minimum: 90), spacing: 25, alignment: .center)
           ], alignment: .leading, spacing: 10) {
             
-            if case .loading = onEnum(of: viewModel.searchManga) {
+            if viewState.isLoading {
               ForEach(0..<12) { _ in
                 ShimmerSearchView()
               }
               
-            } else if case .success(let result) = onEnum(of: viewModel.searchManga),
-                      let items = result.data?.compactMap({ $0 as? Manga }) {
-              ForEach(items, id: \.id) { manga in
+            } else {
+              ForEach(viewState.mangas, id: \.id) { manga in
                 NavigationLink(destination: navigator.routeToDetail(mangaId: manga.id)) {
                   SearchRow(manga: manga)
                 }.buttonStyle(PlainButtonStyle())
@@ -52,16 +55,17 @@ struct SearchPageView: View {
           
         }
       }
-    }.navigationTitle("Search")
-      .searchable(text: $searchQuery, placement: .navigationBarDrawer(displayMode: .always))
-      .autocapitalization(.none)
-      .disableAutocorrection(true)
+    }
+    .navigationTitle("Search")
+    .searchable(text: $searchQuery, placement: .navigationBarDrawer(displayMode: .always))
+    .autocapitalization(.none)
+    .disableAutocorrection(true)
     // MARK: disable this for the meantime, it's laggy as hell
     // .onChange(of: searchQuery) { query in
     //   viewModel.fetchSearchManga(query: query.isEmpty ? "naruto" : query)
     // }
-      .onSubmit(of: .search) {
-        viewModel.getSearchManga(query: searchQuery.isEmpty ? "naruto" : searchQuery)
-      }
+    .onSubmit(of: .search) {
+      viewModel.onTriggerEvent(event: SearchEvent.GetMangas(query: searchQuery.isEmpty ? "naruto" : searchQuery))
+    }
   }
 }

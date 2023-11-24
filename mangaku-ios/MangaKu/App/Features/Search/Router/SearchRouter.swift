@@ -17,7 +17,7 @@ struct SearchRouter {
   }
 
   @MainActor func routeToSearch() -> some View {
-    SearchPageView(viewModel: assembler.resolve(), navigator: self)
+    SearchPageView(navigator: self, viewModel: assembler.resolve())
   }
 
   @MainActor func routeToDetail(mangaId: String) -> some View {
