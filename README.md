@@ -7,7 +7,7 @@
 
 ## <a name="introduction"></a> 🤖 Introduction
 
-MangaKu App Powered by Kotlin Multiplatform Mobile, Jetpack Compose, and SwiftUI
+MangaKu App Powered by Kotlin Multiplatform, Jetpack Compose, SwiftUI and MVI Pattern!
 
 **Module**
 
@@ -22,7 +22,7 @@ MangaKu App Powered by Kotlin Multiplatform Mobile, Jetpack Compose, and SwiftUI
 - [Installation](#installation)
 - [Screenshot](#screenshot)
 - [Libraries](#libraries)
-- [Domain to Presentation](#domain-to-presentation)
+- [Presentation State-Event](#presentation-state-event)
 - [Expect and Actual](#expect-actual)
 - [Project Structure](#project-structure)
 
@@ -39,13 +39,11 @@ A few things you can do with MangaKu:
 
 ## <a name="installation"></a> 🚗 Installation
 
-- Follow the [KMM Guide by Jetbrains](https://kotlinlang.org/docs/kmm-overview.html) for getting started building a project with KMM.
-- Install Kotlin Multiplatform Mobile plugin in Android Studio
+- Follow the [KMP Guide by Jetbrains](https://kotlinlang.org/docs/kmm-overview.html) for getting started building a project with KMP.
+- Install Kotlin Multiplatform plugin in Android Studio
 - Clone or download the repo
 - Rebuild Project
-- To run in iOS, Open Xcode and `pod install` inside `mangaku-ios` folder to install shared module and ios dependencies
-
-<!-- **Development Keys**: The `apiKey` in [`utils/Constants.kt`](https://code.nbs.dev/nbs-mobile/kmm-movie-db/-/blob/main/core/src/commonMain/kotlin/com/uwaisalqadri/moviecatalogue/utils/Constants.kt) are generated from [TMDB](https://www.themoviedb.org/), generate your own in [themoviedb.org/settings/api](https://www.themoviedb.org/settings/api). -->
+- To run in iOS, Open Xcode from the `mangaku-ios` folder
 
 ## <a name="screenshot"></a> 📸 Screenshot
 
@@ -75,7 +73,7 @@ A few things you can do with MangaKu:
 * [Compose Destinations](https://github.com/raamcosta/compose-destinations)
 * Some Kotlinx & Jetpack Components
 
-## <a name="presentation-state-event"></a> 💨 Presentation Event-State
+## <a name="presentation-state-event"></a> 💨 Presentation State-Event
 I'm using [KMMViewModel](https://github.com/rickclephas/KMM-ViewModel) library to share ViewModel that will be consumed by both Android and iOS with State and Event on each ViewModel (following the MVI Pattern)
 
 ![image](https://github.com/uwaisalqadri/MangaKu/assets/55146646/7f7cf567-3d26-41b0-a910-1511376da379)
@@ -183,7 +181,7 @@ Button(
 ```
 
 ## <a name="expect-actual"></a> 🚀 Expect and Actual
-in KMM, there is a negative case when there's no support to share code for some feature in both ios and android, and it's expensive to write separately in each module
+in KMP, there is a negative case when there's no support to share code for some feature in both ios and android, and it's expensive to write separately in each module
 
 so the solution is ✨`expect` and `actual`✨, we can write `expect` inside `commonMain` and write "actual" implementation with `actual` inside `androidMain` and `iosMain`
 and then each module will use `expect`
@@ -191,7 +189,7 @@ and then each module will use `expect`
 example:
 
 [**`commonMain/utils/DateFormatter.kt`**](https://github.com/uwaisalqadri/MangaKu/blob/master/core/src/commonMain/kotlin/com/uwaisalqadri/mangaku/utils/DateFormatter.kt)
-```
+```kotlin
 expect fun formatDate(dateString: String, format: String): String
 ```
 
@@ -227,7 +225,7 @@ actual fun formatDate(dateString: String, format: String): String {
 }
 
 ```
-yes, we can use `Foundation` same as what we use in Xcode
+we definitely can use `Foundation` the same way we use it in Xcode
 
 ## <a name="buy-me-coffee"></a> ☕️ Buy Me a Coffee
 If you like this project please support me by <a href="https://www.buymeacoffee.com/uwaisalqadri" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-blue.png" alt="Buy Me A Coffee" height=32></a> ;-)

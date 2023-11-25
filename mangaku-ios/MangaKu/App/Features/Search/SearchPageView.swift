@@ -60,10 +60,9 @@ struct SearchPageView: View {
     .searchable(text: $searchQuery, placement: .navigationBarDrawer(displayMode: .always))
     .autocapitalization(.none)
     .disableAutocorrection(true)
-    // MARK: disable this for the meantime, it's laggy as hell
-    // .onChange(of: searchQuery) { query in
-    //   viewModel.fetchSearchManga(query: query.isEmpty ? "naruto" : query)
-    // }
+    .onChange(of: searchQuery) { query in
+      viewModel.onTriggerEvent(event: SearchEvent.GetMangas(query: query))
+    }
     .onSubmit(of: .search) {
       viewModel.onTriggerEvent(event: SearchEvent.GetMangas(query: searchQuery.isEmpty ? "naruto" : searchQuery))
     }

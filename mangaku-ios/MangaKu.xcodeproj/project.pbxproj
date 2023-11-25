@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		55A427C9007ADC553BC0CCCC /* Pods_MangaKu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B75B52E580EF442B5757A52 /* Pods_MangaKu.framework */; };
 		91595DA528BB3F89009BBC89 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91595DA428BB3F89009BBC89 /* Font.swift */; };
 		91595DAB28BB41AC009BBC89 /* sedgwickavedisplay_regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 91595DA628BB41AC009BBC89 /* sedgwickavedisplay_regular.ttf */; };
 		91595DAC28BB41AC009BBC89 /* mashanzheng_regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 91595DA728BB41AC009BBC89 /* mashanzheng_regular.ttf */; };
@@ -46,12 +45,10 @@
 		91BC27B928BB391E00AD291A /* FeatureAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BC27B728BB391E00AD291A /* FeatureAssembler.swift */; };
 		91C0FC4C2998687700F01C43 /* dev.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 91C0FC492998687700F01C43 /* dev.yaml */; };
 		91C0FC4D2998687700F01C43 /* release.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 91C0FC4A2998687700F01C43 /* release.yaml */; };
+		CE38FDAA2B123C09002F3B3E /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = CE38FDA92B123C09002F3B3E /* SDWebImageSwiftUI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4839C530F4B8443E7E89E04E /* Pods-MangaKu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MangaKu.release.xcconfig"; path = "Target Support Files/Pods-MangaKu/Pods-MangaKu.release.xcconfig"; sourceTree = "<group>"; };
-		52D35B8D26ECF6F5007B1D81 /* ACarousel */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ACarousel; sourceTree = "<group>"; };
-		5B75B52E580EF442B5757A52 /* Pods_MangaKu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MangaKu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF7B242A565900829871 /* MangaKu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MangaKu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		912BBF8B29475C990090627B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = MangaKu/App/Resources/Plist/Info.plist; sourceTree = SOURCE_ROOT; };
 		91595DA428BB3F89009BBC89 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
@@ -90,7 +87,6 @@
 		91BC27B728BB391E00AD291A /* FeatureAssembler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeatureAssembler.swift; sourceTree = "<group>"; };
 		91C0FC492998687700F01C43 /* dev.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = dev.yaml; path = ../../../../../shared/src/commonMain/resources/dev.yaml; sourceTree = "<group>"; };
 		91C0FC4A2998687700F01C43 /* release.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = release.yaml; path = ../../../../../shared/src/commonMain/resources/release.yaml; sourceTree = "<group>"; };
-		AD078875A366E2BADC83D139 /* Pods-MangaKu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MangaKu.debug.xcconfig"; path = "Target Support Files/Pods-MangaKu/Pods-MangaKu.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,41 +94,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE38FDAA2B123C09002F3B3E /* SDWebImageSwiftUI in Frameworks */,
 				91851BFE297A30A900806695 /* KMMViewModelCore in Frameworks */,
 				91851C00297A30A900806695 /* KMMViewModelSwiftUI in Frameworks */,
-				55A427C9007ADC553BC0CCCC /* Pods_MangaKu.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		08AFFB27B32CEE89929A2E6F /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				52D35B8D26ECF6F5007B1D81 /* ACarousel */,
-				5B75B52E580EF442B5757A52 /* Pods_MangaKu.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		290BBA7AB323247F47803A96 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				AD078875A366E2BADC83D139 /* Pods-MangaKu.debug.xcconfig */,
-				4839C530F4B8443E7E89E04E /* Pods-MangaKu.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		7555FF72242A565900829871 = {
 			isa = PBXGroup;
 			children = (
 				91BC27B428BB391E00AD291A /* Dependency */,
 				91BC275D28BB391800AD291A /* App */,
 				7555FF7C242A565900829871 /* Products */,
-				290BBA7AB323247F47803A96 /* Pods */,
-				08AFFB27B32CEE89929A2E6F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -342,18 +318,10 @@
 			isa = PBXGroup;
 			children = (
 				91BC27B528BB391E00AD291A /* AppAssembler.swift */,
-				91BC27B628BB391E00AD291A /* Features */,
+				91BC27B728BB391E00AD291A /* FeatureAssembler.swift */,
 			);
 			name = Dependency;
 			path = MangaKu/Dependency;
-			sourceTree = "<group>";
-		};
-		91BC27B628BB391E00AD291A /* Features */ = {
-			isa = PBXGroup;
-			children = (
-				91BC27B728BB391E00AD291A /* FeatureAssembler.swift */,
-			);
-			path = Features;
 			sourceTree = "<group>";
 		};
 		91C0FC472998682E00F01C43 /* Yaml */ = {
@@ -372,12 +340,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7555FFA5242A565B00829871 /* Build configuration list for PBXNativeTarget "MangaKu" */;
 			buildPhases = (
-				4BFBD54C0763AAF927EA4FBD /* [CP] Check Pods Manifest.lock */,
 				CE9B42442AFEF08D000BC7EE /* Kotlin Multiplatform */,
 				7555FF77242A565900829871 /* Sources */,
 				7555FF79242A565900829871 /* Resources */,
 				3C26FE6BA0859E52A35A7815 /* Frameworks */,
-				FC456C3F9035906C406E9C71 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -387,6 +353,7 @@
 			packageProductDependencies = (
 				91851BFD297A30A900806695 /* KMMViewModelCore */,
 				91851BFF297A30A900806695 /* KMMViewModelSwiftUI */,
+				CE38FDA92B123C09002F3B3E /* SDWebImageSwiftUI */,
 			);
 			productName = iosApp;
 			productReference = 7555FF7B242A565900829871 /* MangaKu.app */;
@@ -419,6 +386,7 @@
 			mainGroup = 7555FF72242A565900829871;
 			packageReferences = (
 				91851BFC297A30A900806695 /* XCRemoteSwiftPackageReference "KMM-ViewModel" */,
+				CE38FDA82B123C09002F3B3E /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 			);
 			productRefGroup = 7555FF7C242A565900829871 /* Products */;
 			projectDirPath = "";
@@ -448,28 +416,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		4BFBD54C0763AAF927EA4FBD /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-MangaKu-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		CE9B42442AFEF08D000BC7EE /* Kotlin Multiplatform */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -487,23 +433,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "cd \"$SRCROOT/..\"\n./gradlew :shared:embedAndSignAppleFrameworkForXcode\n";
-		};
-		FC456C3F9035906C406E9C71 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MangaKu/Pods-MangaKu-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MangaKu/Pods-MangaKu-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MangaKu/Pods-MangaKu-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -664,7 +593,6 @@
 		};
 		7555FFA6242A565B00829871 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AD078875A366E2BADC83D139 /* Pods-MangaKu.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -672,10 +600,6 @@
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/KMPNativeCoroutinesAsync\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/KMPNativeCoroutinesCore\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/SDWebImage\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/SDWebImageSwiftUI\"",
 					"$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/MangaKu/App/Resources/Plist/Info.plist";
@@ -685,28 +609,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-framework",
-					"\"ImageIO\"",
-					"-framework",
-					"\"KMPNativeCoroutinesAsync\"",
-					"-framework",
-					"\"KMPNativeCoroutinesCore\"",
-					"-framework",
-					"\"SDWebImage\"",
-					"-framework",
-					"\"SDWebImageSwiftUI\"",
-					"-weak_framework",
-					"\"Combine\"",
-					"-weak_framework",
-					"\"SwiftUI\"",
-					"$(inherited)",
-					"-framework",
-					"shared\n$(inherited)",
-					"-framework",
-					"shared\n",
-				);
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.uwaisalqadri.mangaku;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -716,7 +619,6 @@
 		};
 		7555FFA7242A565B00829871 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4839C530F4B8443E7E89E04E /* Pods-MangaKu.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -724,10 +626,6 @@
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/KMPNativeCoroutinesAsync\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/KMPNativeCoroutinesCore\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/SDWebImage\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/SDWebImageSwiftUI\"",
 					"$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/MangaKu/App/Resources/Plist/Info.plist";
@@ -737,28 +635,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-framework",
-					"\"ImageIO\"",
-					"-framework",
-					"\"KMPNativeCoroutinesAsync\"",
-					"-framework",
-					"\"KMPNativeCoroutinesCore\"",
-					"-framework",
-					"\"SDWebImage\"",
-					"-framework",
-					"\"SDWebImageSwiftUI\"",
-					"-weak_framework",
-					"\"Combine\"",
-					"-weak_framework",
-					"\"SwiftUI\"",
-					"$(inherited)",
-					"-framework",
-					"shared\n$(inherited)",
-					"-framework",
-					"shared\n",
-				);
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.uwaisalqadri.mangaku;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -798,6 +675,14 @@
 				kind = branch;
 			};
 		};
+		CE38FDA82B123C09002F3B3E /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -810,6 +695,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 91851BFC297A30A900806695 /* XCRemoteSwiftPackageReference "KMM-ViewModel" */;
 			productName = KMMViewModelSwiftUI;
+		};
+		CE38FDA92B123C09002F3B3E /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE38FDA82B123C09002F3B3E /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
