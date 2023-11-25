@@ -14,7 +14,6 @@ MangaKu App Powered by Kotlin Multiplatform Mobile, Jetpack Compose, and SwiftUI
 * **`shared`**: data and domain layer
 * **`mangaku-ios`**: ios presentation layer
 * **`mangaku-android`**: android presentation layer
-* **`buildSrc`**: `mangaku-android` and `shared` dependencies
 
 ## Table of Contents
 
@@ -60,6 +59,7 @@ A few things you can do with MangaKu:
 * [Ktor](https://github.com/ktorio/ktor)
 * [Realm-Kotlin](https://github.com/realm/realm-kotlin)
 * [KMPNativeCoroutines](https://github.com/rickclephas/KMP-NativeCoroutines)
+* [KMMViewModel](https://github.com/rickclephas/KMM-ViewModel)
 * [Koin](https://github.com/InsertKoinIO/koin)
 * [Kermit](https://github.com/touchlab/Kermit)
 
@@ -75,66 +75,112 @@ A few things you can do with MangaKu:
 * [Compose Destinations](https://github.com/raamcosta/compose-destinations)
 * Some Kotlinx & Jetpack Components
 
-## <a name="domain-to-presentation"></a> 💨 Domain to Presentation
-In Android, Because both `shared` and `mangaku-android` written in Kotlin, we can simply collect flow :
-```kotlin
-private fun getTrendingManga() = viewModelScope.launch {
-  _trendingManga.value = Result.loading()
-  browseUseCase.getManga()
-   .catch { cause: Throwable ->
-     _trendingManga.value = Result.failed(cause)
-   }
-   .collect { result ->
-     if (result.isNotEmpty())
-     _trendingManga.value = Result.success(result)
-   }
- }
+## <a name="presentation-state-event"></a> 💨 Presentation Event-State
+I'm using [KMMViewModel](https://github.com/rickclephas/KMM-ViewModel) library to share ViewModel that will be consumed by both Android and iOS with State and Event on each ViewModel (following the MVI Pattern)
 
+![image](https://github.com/uwaisalqadri/MangaKu/assets/55146646/7f7cf567-3d26-41b0-a910-1511376da379)
+
+State and Event
+```kotlin
+data class MyMangaState(
+    val mangas: List<Manga> = listOf(),
+    val isFavorite: Boolean = false,
+    val isLoading: Boolean = false,
+    val isEmpty: Boolean = false,
+    val errorMessage: String = ""
+)
+
+sealed class MyMangaEvent {
+    data object GetMyMangas: MyMangaEvent()
+    data class CheckFavorite(val mangaId: String): MyMangaEvent()
+    data class AddFavorite(val manga: Manga): MyMangaEvent()
+    data class DeleteFavorite(val mangaId: String): MyMangaEvent()
+    data object Empty: MyMangaEvent()
+}
+```
+Reducing State and Event
+
+**MyMangaViewModel.kt**
+```kotlin
+fun onTriggerEvent(event: MyMangaEvent) {
+   when (event) {
+      is MyMangaEvent.GetMyMangas -> {
+         getMyManga()
+      }
+     is MyMangaEvent.Empty -> {
+         _state.value = MyMangaState(isEmpty = true)
+      }
+     is MyMangaEvent.CheckFavorite -> {
+         checkFavorite(event.mangaId)
+      }
+     is MyMangaEvent.AddFavorite -> {
+         addMyManga(event.manga)
+     }
+     is MyMangaEvent.DeleteFavorite -> {
+         deleteMyManga(event.mangaId)
+     }
+  }        
+}
+
+ private fun checkFavorite(mangaId: String) = viewModelScope.coroutineScope.launch {
+    myMangaUseCase.getMyMangaById(mangaId).collect { result ->
+       _state.value = _state.value.copy(isFavorite = result.map { it.id }.contains(mangaId))
+    }
+}
+
+private fun getMyManga() = viewModelScope.coroutineScope.launch {
+    _state.value = _state.value.copy(isLoading = true)
+
+     myMangaUseCase.getMyManga().catch { cause: Throwable ->
+        _state.value = _state.value.copy(errorMessage = cause.message.orEmpty())
+     }.collect {
+        if (it.isEmpty()) _state.value = MyMangaState(isEmpty = true)
+        else _state.value = MyMangaState(mangas = it)
+     }
+}
 ```
 
-But in iOS, we have to deal with swift, here i'm using `createPublisher()` from `KMPNativeCoroutines` to collect flow as Publisher in `Combine` :
+Compose UI based on State that triggered from Event
 
-```swift
-func fetchTrendingManga() {
-  trendingManga = .loading
-  createPublisher(for: browseUseCase.getTrendingMangaNative())
-   .receive(on: DispatchQueue.main)
-   .sink { completion in
-     switch completion {
-       case .finished: ()
-       case .failure(let error):
-         self.trendingManga = .error(error: error)
-       }
-    } receiveValue: { value in
-        self.trendingManga = .success(data: value)
-    }.store(in: &cancellables)
+**DetailScreen.kt**
+```kotlin
+Button(
+   elevation = ButtonDefaults.elevation(0.dp, 0.dp),
+   onClick = {
+       setShowDialog(true)
+       if (!viewState.isLoading) {
+           viewState.manga?.let {
+              if (favState.isFavorite) mangaViewModel.onTriggerEvent(MyMangaEvent.DeleteFavorite(it.id))
+                else mangaViewModel.onTriggerEvent(MyMangaEvent.AddFavorite(it))
+            }
+         }
+    }
+) {
+   Icon(
+     imageVector = if (favState.isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
+     contentDescription = null,
+     tint = Color.Red,
+     modifier = Modifier.size(25.dp),
+  )
 }
 
 ```
 
-or even better, you can use `asyncFunction` / `asyncResult` / `asyncStream` function to collect coroutine flow as new swift's concurrency features, ~~checkout branch **feat/experimenting-swift-new concurrency** to see the example~~
-
-**combining two powerful concurrency feature from both native framework, how cool is that !?**
-
+**DetailPageView.swift**
 ```swift
-func fetchTrendingManga() {
-    Task {
-      trendingManga = .loading
-      do {
-        let nativeFlow = try await asyncFunction(for: browseUseCase.getTrendingMangaNative())
-        let stream = asyncStream(for: nativeFlow)
-        for try await data in stream {
-          trendingManga = .success(data: data)
-        }
-      } catch {
-        trendingManga = .error(error: error)
-      }
-    }
-  }
-
+.navigationBarItems(trailing: Button(action: {
+   if let data = viewState.manga {
+     favState.isFavorite ? mangaViewModel.onTriggerEvent(event: MyMangaEvent.DeleteFavorite(mangaId: data.id))
+     : mangaViewModel.onTriggerEvent(event: MyMangaEvent.AddFavorite(manga: data))
+    isShowDialog.toggle()
+   }
+}) {
+  Image(systemName: favState.isFavorite ? "heart.fill" : "heart")
+    .resizable()
+    .foregroundColor(.red)
+    .frame(width: 22, height: 20)
+})
 ```
-
-learn more: https://github.com/rickclephas/KMP-NativeCoroutines
 
 ## <a name="expect-actual"></a> 🚀 Expect and Actual
 in KMM, there is a negative case when there's no support to share code for some feature in both ios and android, and it's expensive to write separately in each module
