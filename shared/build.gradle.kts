@@ -71,10 +71,14 @@ kotlin {
 }
 
 android {
-    namespace = "com.uwaisalqadri.mangaku.android"
-    compileSdk = 34
+    val applicationId: String by project
+    val compileSdkVersion: String by project
+    val minSdkVersion: String by project
+
+    namespace = applicationId
+    compileSdk = compileSdkVersion.toInt()
     defaultConfig {
-        minSdk = 30
+        minSdk = minSdkVersion.toInt()
     }
 
     compileOptions {

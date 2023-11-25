@@ -8,13 +8,18 @@ plugins {
 }
 
 android {
-    namespace = "com.uwaisalqadri.mangaku.android"
-    compileSdk = 34
+    val applicationId: String by project
+    val compileSdkVersion: String by project
+    val minSdkVersion: String by project
+    val targetSdkVersion: String by project
+
+    namespace = applicationId
+    compileSdk = compileSdkVersion.toInt()
 
     defaultConfig {
-        applicationId = "com.uwaisalqadri.mangaku.android"
-        minSdk = 30
-        targetSdk = 34
+        this.applicationId = applicationId
+        minSdk = minSdkVersion.toInt()
+        targetSdk = targetSdkVersion.toInt()
 
         versionCode = 1
         versionName = "1.0"
