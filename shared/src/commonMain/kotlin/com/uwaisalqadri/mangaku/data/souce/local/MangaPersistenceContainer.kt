@@ -33,4 +33,8 @@ class MangaPersistenceContainer(private val db: Realm): MangaPersistence {
             delete(queries)
         }
     }
+
+    override fun close() {
+        db.close()
+    }
 }

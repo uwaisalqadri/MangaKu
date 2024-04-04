@@ -47,4 +47,8 @@ class MangaDataStore(
         mangaPersistence.deleteManga(mangaId)
     }
 
+    override fun closePersistence() {
+        mangaPersistence.close()
+    }
+
 }

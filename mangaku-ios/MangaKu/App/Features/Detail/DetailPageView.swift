@@ -14,9 +14,12 @@ import KMMViewModelSwiftUI
 struct DetailPageView: View {
   @StateViewModel var viewModel: DetailViewModel
   @StateViewModel var mangaViewModel: MyMangaViewModel
-  
   @State private var isShowDialog = false
+  
   let mangaId: String
+  
+  private let appWillTerminate = NotificationCenter.default
+    .publisher(for: UIApplication.willTerminateNotification)
   
   private var viewState: DetailState {
     viewModel.state
@@ -110,6 +113,9 @@ struct DetailPageView: View {
     })
     .onAppear {
       viewModel.onTriggerEvent(event: DetailEvent.GetManga(id: mangaId))
+    }
+    .onReceive(appWillTerminate) { _ in
+      mangaViewModel.closePersistence()
     }
     .customDialog(isShowing: $isShowDialog) {
       VStack(alignment: .center) {

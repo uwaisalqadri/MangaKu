@@ -31,4 +31,8 @@ class MyMangaInteractor(private val repository: MangaRepository): MyMangaUseCase
     override fun deleteManga(mangaId: String) {
         repository.deleteMangaFavorite(mangaId = mangaId)
     }
+
+    override fun closePersistence() {
+        repository.closePersistence()
+    }
 }

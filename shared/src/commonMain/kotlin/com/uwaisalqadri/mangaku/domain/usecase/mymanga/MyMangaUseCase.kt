@@ -11,4 +11,5 @@ interface MyMangaUseCase {
     suspend fun getMyMangaById(mangaId: String): Flow<List<Manga>>
     fun addManga(manga: Manga)
     fun deleteManga(mangaId: String)
+    fun closePersistence()
 }

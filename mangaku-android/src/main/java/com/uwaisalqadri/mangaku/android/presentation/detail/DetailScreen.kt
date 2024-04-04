@@ -17,6 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.Lifecycle
 import com.google.accompanist.coil.rememberCoilPainter
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -24,6 +25,7 @@ import com.uwaisalqadri.mangaku.android.presentation.detail.composables.Favorite
 import com.uwaisalqadri.mangaku.presentation.mymanga.MyMangaViewModel
 import com.uwaisalqadri.mangaku.android.presentation.theme.MangaTypography
 import com.uwaisalqadri.mangaku.android.presentation.theme.composables.BackButton
+import com.uwaisalqadri.mangaku.android.presentation.theme.composables.ComposableLifecycle
 import com.uwaisalqadri.mangaku.android.presentation.theme.composables.ShimmerDetail
 import com.uwaisalqadri.mangaku.android.presentation.theme.composables.TopBar
 import com.uwaisalqadri.mangaku.domain.model.Manga
@@ -49,6 +51,12 @@ fun DetailScreen(
 
     LaunchedEffect(Unit) {
         viewModel.onTriggerEvent(DetailEvent.GetManga(mangaId))
+    }
+
+    ComposableLifecycle { _, event ->
+        if (event == Lifecycle.Event.ON_DESTROY) {
+            mangaViewModel.closePersistence()
+        }
     }
 
     LazyColumn(

@@ -8,4 +8,5 @@ interface MangaPersistence {
     fun addManga(manga: MangaObject)
     fun deleteManga(mangaId: String)
     fun clearAllManga()
+    fun close()
 }

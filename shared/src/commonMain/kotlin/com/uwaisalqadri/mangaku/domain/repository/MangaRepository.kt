@@ -15,4 +15,5 @@ interface MangaRepository {
     suspend fun getFavoriteMangaById(mangaId: String): List<MangaObject>
     fun addMangaFavorite(manga: MangaObject)
     fun deleteMangaFavorite(mangaId: String)
+    fun closePersistence()
 }

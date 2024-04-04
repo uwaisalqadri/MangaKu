@@ -14,8 +14,10 @@ import KMMViewModelSwiftUI
 struct MyMangaPageView: View {
   let navigator: MyMangaRouter
   @StateViewModel var viewModel: MyMangaViewModel
-  
   @State private var isSlide = true
+  
+  private let appWillTerminate = NotificationCenter.default
+    .publisher(for: UIApplication.willTerminateNotification)
   
   private var viewState: MyMangaState {
     viewModel.state
@@ -70,6 +72,9 @@ struct MyMangaPageView: View {
     .navigationBarHidden(true)
     .onAppear {
       viewModel.onTriggerEvent(event: MyMangaEvent.GetMyMangas())
+    }
+    .onReceive(appWillTerminate) { _ in
+      viewModel.closePersistence()
     }
     .frame(width: UIScreen.screenWidth, alignment: .center)
   }

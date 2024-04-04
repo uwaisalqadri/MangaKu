@@ -25,6 +25,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.Lifecycle
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.uwaisalqadri.mangaku.android.presentation.destinations.DetailScreenDestination
@@ -33,6 +34,7 @@ import com.uwaisalqadri.mangaku.android.presentation.mymanga.composables.LayoutS
 import com.uwaisalqadri.mangaku.android.presentation.mymanga.composables.MyMangaGridItem
 import com.uwaisalqadri.mangaku.android.presentation.search.composables.StaggeredVerticalGrid
 import com.uwaisalqadri.mangaku.android.presentation.theme.MangaTypography
+import com.uwaisalqadri.mangaku.android.presentation.theme.composables.ComposableLifecycle
 import com.uwaisalqadri.mangaku.presentation.mymanga.MyMangaEvent
 import com.uwaisalqadri.mangaku.presentation.mymanga.MyMangaViewModel
 import org.koin.androidx.compose.koinViewModel
@@ -48,6 +50,12 @@ fun MyMangaScreen(
 
     LaunchedEffect(Unit) {
         viewModel.onTriggerEvent(MyMangaEvent.GetMyMangas)
+    }
+
+    ComposableLifecycle { _, event ->
+        if (event == Lifecycle.Event.ON_DESTROY) {
+            viewModel.closePersistence()
+        }
     }
 
     LazyColumn(

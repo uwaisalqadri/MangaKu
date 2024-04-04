@@ -77,4 +77,8 @@ open class MyMangaViewModel: KMMViewModel(), KoinComponent {
             else _state.value = MyMangaState(mangas = it)
         }
     }
+
+    fun closePersistence() {
+        myMangaUseCase.closePersistence()
+    }
 }
