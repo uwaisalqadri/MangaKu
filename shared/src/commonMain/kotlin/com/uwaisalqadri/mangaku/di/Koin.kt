@@ -15,7 +15,9 @@ import com.uwaisalqadri.mangaku.utils.resourceReaderModule
 import org.koin.core.Koin
 import org.koin.core.KoinApplication
 import org.koin.core.context.startKoin
+import org.koin.core.qualifier.named
 import org.koin.dsl.KoinAppDeclaration
+import org.koin.mp.KoinPlatformTools
 
 fun initKoin(appDeclaration: KoinAppDeclaration = {}): KoinApplication {
     return startKoin {
@@ -54,3 +56,21 @@ val Koin.addMangaUseCase: AddMangaUseCase
 
 val Koin.deleteMangaUseCase: DeleteMangaUseCase
     get() = get()
+
+// Koin utilities for injection (jvm, iosarm64, iossimulatorarm64, iosx64)
+
+inline fun <reified T : Any> injectLazy(): Lazy<T> {
+    return lazy { KoinPlatformTools.defaultContext().get().get(T::class) }
+}
+
+inline fun <reified T : Any> injectLazy(key: String): Lazy<T> {
+    return lazy { KoinPlatformTools.defaultContext().get().get(T::class, named(key)) }
+}
+
+inline fun <reified T : Any> inject(): T {
+    return KoinPlatformTools.defaultContext().get().get(T::class)
+}
+
+inline fun <reified T : Any> inject(key: String): T {
+    return KoinPlatformTools.defaultContext().get().get(T::class, named(key))
+}
