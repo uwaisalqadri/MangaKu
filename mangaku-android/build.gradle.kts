@@ -1,10 +1,15 @@
-@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     id("com.android.application")
     kotlin("android")
     kotlin("kapt")
     id("kotlin-parcelize")
+    id("kotlinx-serialization")
     id("com.google.devtools.ksp") version libs.versions.ksp.get()
+    alias(libs.plugins.kotlin.compose)
+}
+
+kotlin {
+    jvmToolchain(17)
 }
 
 android {
@@ -27,6 +32,12 @@ android {
         vectorDrawables.useSupportLibrary = true
     }
 
+    buildFeatures {
+        compose = true
+        viewBinding = true
+        buildConfig = true
+    }
+
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false
@@ -37,36 +48,17 @@ android {
         }
     }
 
-    buildFeatures {
-        compose = true
-        viewBinding = true
-        buildConfig = true
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.get()
-    }
-
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11.toString()
-
-        freeCompilerArgs += listOf(
-            "-P",
-            "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=true"
-        )
-    }
-
-    packagingOptions {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+    testOptions {
+        managedDevices {
+            devices {
+                create<com.android.build.api.dsl.ManagedVirtualDevice>("pixel5api32") {
+                    device = "Pixel 5"
+                    apiLevel = 32
+                    systemImageSource = "google"
+                }
+            }
         }
     }
-
 
     applicationVariants.all {
         kotlin.sourceSets {
@@ -80,25 +72,29 @@ android {
 dependencies {
 
     implementation(project(":shared"))
+    implementation(libs.androidx.lifecycle.compose)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.activity.compose)
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.compose.foundation)
+    implementation(libs.androidx.compose.foundation.layout)
+    implementation(libs.androidx.compose.material)
+    implementation(libs.androidx.compose.runtime)
+    implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.compose.ui.tooling)
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.material.icon)
+    implementation(libs.androidx.compose.material3.adaptive)
+    implementation(libs.androidx.compose.material3.adaptive.layout)
+    implementation(libs.androidx.compose.material3.adaptive.navigation)
+    implementation(libs.androidx.compose.material3.adaptive.navigation.suite)
+
     implementation(libs.android.material)
-    implementation(libs.android.app.compat)
-    implementation(libs.constraint.layout)
-    implementation(libs.fragment.navigation)
-    implementation(libs.android.navigation)
     implementation(libs.kotlinx.livedata)
 
-    implementation(libs.compose.ui)
-    implementation(libs.compose.material)
-    implementation(libs.compose.tooling)
-    implementation(libs.compose.foundation)
-    implementation(libs.compose.foundation.layout)
-    implementation(libs.compose.graphics)
-    implementation(libs.compose.activity)
-    implementation(libs.compose.material.icon)
-    implementation(libs.compose.util)
     implementation(libs.compose.lottie)
     implementation(libs.compose.shimmer)
-    implementation(libs.compose.livedata)
 
     implementation(libs.koin.android)
     implementation(libs.koin.compose)
@@ -107,6 +103,5 @@ dependencies {
     implementation(libs.accompanist.pager)
 
     implementation(libs.compose.destinations)
-    implementation(libs.compose.destinations.animation)
     ksp(libs.compose.destinations.ksp)
 }

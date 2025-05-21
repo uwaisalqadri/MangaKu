@@ -1,8 +1,6 @@
-package com.uwaisalqadri.mangaku.data.souce.local.entity
+package com.uwaisalqadri.mangaku.data.source.local.entity
 
-import io.realm.kotlin.types.RealmObject
-
-class AttributesObject: RealmObject {
+class AttributesObject {
     var ageRating: String = ""
     var ageRatingGuide: String = ""
     var averageRating: Double = 0.0

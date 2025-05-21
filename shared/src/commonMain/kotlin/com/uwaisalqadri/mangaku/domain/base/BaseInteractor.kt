@@ -1,13 +1,13 @@
 package com.uwaisalqadri.mangaku.domain.base
 
-import com.uwaisalqadri.mangaku.data.souce.remote.response.ApiException
+import com.uwaisalqadri.mangaku.data.source.remote.response.ApiException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlin.coroutines.CoroutineContext
 
-fun <T>execute(
+fun <T>executing(
     context: CoroutineContext = Dispatchers.Default,
     block: suspend () -> T
 ): Flow<T> {

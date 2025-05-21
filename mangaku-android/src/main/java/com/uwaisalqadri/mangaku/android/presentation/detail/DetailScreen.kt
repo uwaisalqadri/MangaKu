@@ -2,40 +2,59 @@ package com.uwaisalqadri.mangaku.android.presentation.detail
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Card
+import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Star
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.Lifecycle
 import com.google.accompanist.coil.rememberCoilPainter
 import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.annotation.RootGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.uwaisalqadri.mangaku.android.presentation.detail.composables.FavoriteDialog
-import com.uwaisalqadri.mangaku.presentation.mymanga.MyMangaViewModel
 import com.uwaisalqadri.mangaku.android.presentation.theme.MangaTypography
 import com.uwaisalqadri.mangaku.android.presentation.theme.composables.BackButton
-import com.uwaisalqadri.mangaku.android.presentation.theme.composables.ComposableLifecycle
 import com.uwaisalqadri.mangaku.android.presentation.theme.composables.ShimmerDetail
 import com.uwaisalqadri.mangaku.android.presentation.theme.composables.TopBar
 import com.uwaisalqadri.mangaku.domain.model.Manga
 import com.uwaisalqadri.mangaku.presentation.detail.DetailEvent
 import com.uwaisalqadri.mangaku.presentation.detail.DetailViewModel
 import com.uwaisalqadri.mangaku.presentation.mymanga.MyMangaEvent
-import com.uwaisalqadri.mangaku.utils.*
+import com.uwaisalqadri.mangaku.presentation.mymanga.MyMangaViewModel
+import com.uwaisalqadri.mangaku.utils.DateFormatter
+import com.uwaisalqadri.mangaku.utils.formatDate
+import com.uwaisalqadri.mangaku.utils.getCoverImage
+import com.uwaisalqadri.mangaku.utils.getTitle
 import org.koin.androidx.compose.koinViewModel
 
-@Destination
+@Destination<RootGraph>
 @Composable
 fun DetailScreen(
     navigator: DestinationsNavigator,
@@ -50,13 +69,7 @@ fun DetailScreen(
     val (isShowDialog, setShowDialog) = remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
-        viewModel.onTriggerEvent(DetailEvent.GetManga(mangaId))
-    }
-
-    ComposableLifecycle { _, event ->
-        if (event == Lifecycle.Event.ON_DESTROY) {
-            mangaViewModel.closePersistence()
-        }
+        viewModel.send(DetailEvent.GetManga(mangaId))
     }
 
     LazyColumn(
@@ -91,8 +104,8 @@ fun DetailScreen(
                         setShowDialog(true)
                         if (!viewState.isLoading) {
                             viewState.manga?.let {
-                                if (favState.isFavorite) mangaViewModel.onTriggerEvent(MyMangaEvent.DeleteFavorite(it.id))
-                                else mangaViewModel.onTriggerEvent(MyMangaEvent.AddFavorite(it))
+                                if (favState.isFavorite) mangaViewModel.send(MyMangaEvent.DeleteFavorite(it.id))
+                                else mangaViewModel.send(MyMangaEvent.AddFavorite(it))
                             }
                         }
                     }
@@ -118,7 +131,7 @@ fun DetailScreen(
             if (viewState.isLoading) {
                 ShimmerDetail()
             } else {
-                mangaViewModel.onTriggerEvent(MyMangaEvent.CheckFavorite(mangaId))
+                mangaViewModel.send(MyMangaEvent.CheckFavorite(mangaId))
 
                 viewState.manga?.let {
                     MangaDetail(manga = it)

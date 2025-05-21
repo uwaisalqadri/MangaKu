@@ -1,10 +1,8 @@
 package com.uwaisalqadri.mangaku.di.feature
 
-import com.uwaisalqadri.mangaku.data.souce.remote.MangaApi
-import com.uwaisalqadri.mangaku.data.souce.remote.response.ApiException
-import com.uwaisalqadri.mangaku.utils.Configs
+import com.uwaisalqadri.mangaku.data.source.remote.MangaApi
+import com.uwaisalqadri.mangaku.data.source.remote.response.ApiException
 import com.uwaisalqadri.mangaku.utils.YamlResourceReader
-import com.uwaisalqadri.mangaku.utils.getStage
 import io.ktor.client.*
 import io.ktor.client.engine.*
 import io.ktor.client.plugins.*

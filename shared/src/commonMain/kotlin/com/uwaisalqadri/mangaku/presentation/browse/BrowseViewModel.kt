@@ -1,30 +1,27 @@
 package com.uwaisalqadri.mangaku.presentation.browse
 
-import com.rickclephas.kmm.viewmodel.KMMViewModel
-import com.rickclephas.kmm.viewmodel.coroutineScope
-import com.rickclephas.kmm.viewmodel.stateIn
-import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
+import com.rickclephas.kmp.observableviewmodel.ViewModel
+import com.rickclephas.kmp.observableviewmodel.launch
+import com.rickclephas.kmp.observableviewmodel.stateIn
 import com.uwaisalqadri.mangaku.domain.usecase.browse.BrowseUseCase
-import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
+import com.uwaisalqadri.mangaku.domain.usecase.common.execute
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.catch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-open class BrowseViewModel: KMMViewModel(), KoinComponent {
+open class BrowseViewModel: ViewModel(), KoinComponent {
 
     private val browseUseCase: BrowseUseCase by inject()
-    private val _state: MutableStateFlow<BrowseState> = MutableStateFlow(BrowseState())
 
-    @NativeCoroutinesState
+    private val _state: MutableStateFlow<BrowseState> = MutableStateFlow(BrowseState())
     val state: StateFlow<BrowseState> = _state
-        .asStateFlow()
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), BrowseState())
 
-    init {
-        onTriggerEvent(BrowseEvent.GetMangas)
-    }
-
-    fun onTriggerEvent(event: BrowseEvent) {
+    fun send(event: BrowseEvent) {
         when (event) {
             is BrowseEvent.GetMangas -> {
                 getTrendingManga()
@@ -32,10 +29,10 @@ open class BrowseViewModel: KMMViewModel(), KoinComponent {
         }
     }
 
-    private fun getTrendingManga() = viewModelScope.coroutineScope.launch {
+    private fun getTrendingManga() = viewModelScope.launch {
         _state.value = _state.value.copy(isLoading = true)
 
-        browseUseCase.getTrendingManga().catch { cause: Throwable ->
+        browseUseCase.execute().catch { cause: Throwable ->
             _state.value = _state.value.copy(errorMessage = cause.message.orEmpty())
         }.collect {
             if (it.isEmpty()) _state.value = BrowseState(isEmpty = true)

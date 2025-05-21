@@ -1,20 +1,22 @@
 package com.uwaisalqadri.mangaku.android.presentation
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.ramcosta.composedestinations.DestinationsNavHost
 import com.ramcosta.composedestinations.annotation.Destination
-import com.ramcosta.composedestinations.annotation.RootNavGraph
+import com.ramcosta.composedestinations.annotation.RootGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import com.ramcosta.composedestinations.generated.NavGraphs
 import com.uwaisalqadri.mangaku.android.presentation.browse.BrowseScreen
 import com.uwaisalqadri.mangaku.android.presentation.mymanga.MyMangaScreen
 import com.uwaisalqadri.mangaku.android.presentation.theme.MangaTheme
@@ -35,9 +37,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
-@RootNavGraph(start = true)
-@Destination
+@Destination<RootGraph>(start = true)
 @Composable
 fun MainScreen(
     navigator: DestinationsNavigator
@@ -64,8 +64,12 @@ fun MainScreen(
                 }
             )
         }
-    ) {
-        NavHost(navController, startDestination = BottomBarDestination.BROWSE.route) {
+    ) { padding ->
+        NavHost(
+            navController = navController,
+            startDestination = BottomBarDestination.BROWSE.route,
+            modifier = Modifier.padding(padding)
+        ) {
             composable(route = BottomBarDestination.BROWSE.route) {
                 BrowseScreen(navigator)
             }

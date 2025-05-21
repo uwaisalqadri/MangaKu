@@ -1,8 +1,6 @@
-package com.uwaisalqadri.mangaku.data.souce.local.entity
+package com.uwaisalqadri.mangaku.data.source.local.entity
 
-import io.realm.kotlin.types.RealmObject
-
-class CoverImageObject: RealmObject {
+class CoverImageObject {
     var large: String = ""
     var medium: String = ""
     var original: String = ""

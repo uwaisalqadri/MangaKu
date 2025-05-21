@@ -1,25 +1,28 @@
-@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.android.library)
     alias(libs.plugins.ksp)
-    alias(libs.plugins.realm)
     alias(libs.plugins.kmp.nativecoroutines)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.sqlDelight)
     alias(libs.plugins.skie)
 }
 
-@OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
-kotlin {
-    targetHierarchy.default()
+android {
+    val applicationId: String by project
+    val compileSdkVersion: String by project
+    val minSdkVersion: String by project
 
-    androidTarget {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = JavaVersion.VERSION_11.toString()
-            }
-        }
+    namespace = applicationId
+    compileSdk = compileSdkVersion.toInt()
+    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
+    defaultConfig {
+        minSdk = minSdkVersion.toInt()
     }
+}
+
+kotlin {
+    jvmToolchain(17)
 
     listOf(
         iosX64(),
@@ -31,14 +34,10 @@ kotlin {
         }
     }
 
-    sourceSets {
-        all {
-            languageSettings.optIn("kotlinx.cinterop.ExperimentalForeignApi")
-            languageSettings.optIn("kotlin.experimental.ExperimentalObjCName")
-        }
+    androidTarget()
 
+    sourceSets {
         commonMain.dependencies {
-            implementation(libs.realm)
             implementation(libs.koin.core)
             implementation(libs.multiplatform.settings)
 
@@ -47,12 +46,15 @@ kotlin {
             implementation(libs.ktor.content.negotiation)
             implementation(libs.ktor.logging)
 
+            implementation(libs.sqldelight.runtime)
+            implementation(libs.sqldelight.coroutines.extensions)
+
             implementation(libs.kotlinx.serialization)
             implementation(libs.kotlinx.coroutine)
             implementation(libs.kotlinx.datetime)
 
             api(libs.kermit.logger)
-            api(libs.kmm.viewmodel)
+            api(libs.kmp.viewModel)
             implementation(libs.kotlin.yaml)
             implementation(kotlin("stdlib-common"))
         }
@@ -61,28 +63,33 @@ kotlin {
             implementation(libs.ktor.okhttp)
             implementation(libs.ktor.android)
             implementation(libs.koin.android)
+            implementation(libs.sqldelight.android.driver)
         }
 
         iosMain.dependencies {
             implementation(libs.ktor.darwin)
             implementation(libs.ktor.ios)
+            implementation(libs.sqldelight.native.driver)
         }
     }
 }
 
-android {
-    val applicationId: String by project
-    val compileSdkVersion: String by project
-    val minSdkVersion: String by project
-
-    namespace = applicationId
-    compileSdk = compileSdkVersion.toInt()
-    defaultConfig {
-        minSdk = minSdkVersion.toInt()
+sqldelight {
+    databases {
+        create("MangakuDB") {
+            generateAsync = true
+            packageName.set("com.uwaisalqadri.mangaku.db")
+        }
     }
+}
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+kotlin.sourceSets.all {
+    languageSettings.optIn("kotlinx.cinterop.ExperimentalForeignApi")
+    languageSettings.optIn("kotlin.experimental.ExperimentalObjCName")
+}
+
+skie {
+    features {
+        enableSwiftUIObservingPreview = true
     }
 }

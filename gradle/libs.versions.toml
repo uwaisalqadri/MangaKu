@@ -1,64 +1,86 @@
 [versions]
-kotlin = "1.9.20"
-material = "1.10.0"
-appCompat = "1.6.1"
-constraint = "2.1.4"
-navFragment = "2.7.5"
-navUi = "2.7.5"
-livedata = "2.6.2"
+kotlin = "2.1.0"
+ksp = "2.1.0-1.0.29"
+
+androidxActivity = "1.10.1"
+androidxComposeBom = "2025.05.01"
+material3-adaptive = "1.1.0"
+material3-adaptive-navigation-suite = "1.3.2"
+uiToolingPreview = "1.7.7"
+wearCompose = "1.4.0"
+androidxLifecycle = "2.9.0"
+androidxLifecycleKMP = "2.8.4"
+compose = "2.0.0"
+materialIcon = "1.7.8"
+
+material = "1.12.0"
+appCompat = "1.7.0"
+constraint = "2.2.1"
+navFragment = "2.9.0"
+navUi = "2.9.0"
+livedata = "2.9.0"
 multiplatformSettings = "0.8.1"
-compose = "1.5.4"
-activityCompose = "1.8.0"
-composeDestinations = "1.5.1-beta"
+composeDestinations = "2.2.0"
 coilAccompanist = "0.15.0"
 pagerAccompanist = "0.15.0"
 kermit = "1.1.3"
-koin = "3.2.0"
-coroutine = "1.7.3"
-serialization = "1.5.1"
+koin = "4.0.4"
+coroutine = "1.10.1"
+serialization = "1.8.1"
 dateTime = "0.4.0"
-ktor = "2.2.1"
-realm = "1.12.0"
+ktor = "3.1.2"
 lottie = "5.2.0"
 shimmer = "1.0.2"
-agp = "8.1.2"
-skie = "0.5.3"
-ksp = "1.9.20-1.0.13"
-kmmViewModel = "1.0.0-ALPHA-15"
+agp = "8.6.1"
+skie = "0.10.0"
+kmpViewModel = "1.0.0-BETA-9"
 kmpNativeCoroutines = "1.0.0-ALPHA-20"
 yamlkt = "0.12.0"
+sqlDelight = "2.1.0"
+androidGradlePlugin = "8.9.3"
+gradleVersionsPlugin = "0.51.0"
 
 [libraries]
 kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization" }
 kotlinx-coroutine = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutine" }
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "dateTime" }
 kotlinx-livedata = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "livedata" }
+
 android-material = { module = "com.google.android.material:material", version.ref = "material" }
-android-app-compat = { module = "androidx.appcompat:appcompat", version.ref = "appCompat" }
-constraint-layout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraint" }
-fragment-navigation = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navFragment" }
-android-navigation = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navUi" }
-compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
-compose-material = { module = "androidx.compose.material:material", version.ref = "compose" }
-compose-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
-compose-graphics = { module = "androidx.compose.ui:ui-graphics", version.ref = "compose" }
-compose-util = { module = "androidx.compose.ui:ui-util", version.ref = "compose" }
-compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose" }
-compose-foundation-layout = { module = "androidx.compose.foundation:foundation-layout", version.ref = "compose" }
-compose-material-icon = { module = "androidx.compose.material:material-icons-extended", version.ref = "compose" }
-compose-livedata = { module = "androidx.compose.runtime:runtime-livedata", version.ref = "compose" }
-compose-activity = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
+
+androidx-lifecycle-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidxLifecycle" }
+androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidxLifecycle" }
+androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "androidxLifecycle" }
+
+androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidxActivity" }
+androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "androidxComposeBom" }
+androidx-compose-foundation = { group = "androidx.compose.foundation", name = "foundation" }
+androidx-compose-foundation-layout = { group = "androidx.compose.foundation", name = "foundation-layout" }
+androidx-compose-material = { group = "androidx.compose.material", name = "material" }
+androidx-compose-runtime = { group = "androidx.compose.runtime", name = "runtime" }
+androidx-compose-ui = { group = "androidx.compose.ui", name = "ui" }
+androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+androidx-compose-material-icon = { module = "androidx.compose.material:material-icons-extended", version.ref = "materialIcon" }
+androidx-compose-material3 =  { group = "androidx.compose.material3", name = "material3" }
+androidx-compose-material3-adaptive = { module = "androidx.compose.material3.adaptive:adaptive", version.ref = "material3-adaptive" }
+androidx-compose-material3-adaptive-layout = { module = "androidx.compose.material3.adaptive:adaptive-layout", version.ref = "material3-adaptive" }
+androidx-compose-material3-adaptive-navigation = { module = "androidx.compose.material3.adaptive:adaptive-navigation", version.ref = "material3-adaptive" }
+androidx-compose-material3-adaptive-navigation-suite = { module = "androidx.compose.material3:material3-adaptive-navigation-suite", version.ref = "material3-adaptive-navigation-suite" }
+
 compose-lottie = { module = "com.airbnb.android:lottie-compose", version.ref = "lottie" }
 compose-shimmer = { module = "com.valentinilk.shimmer:compose-shimmer", version.ref = "shimmer" }
+
 accompanist-coil = { module = "com.google.accompanist:accompanist-coil", version.ref = "coilAccompanist" }
 accompanist-pager = { module = "com.google.accompanist:accompanist-pager", version.ref = "pagerAccompanist" }
+
 compose-destinations = { module = "io.github.raamcosta.compose-destinations:core", version.ref = "composeDestinations" }
-compose-destinations-animation = { module = "io.github.raamcosta.compose-destinations:animations-core", version.ref = "composeDestinations" }
 compose-destinations-ksp = { module = "io.github.raamcosta.compose-destinations:ksp", version.ref = "composeDestinations" }
+
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koin-test = { module = "io.insert-koin:koin-test", version.ref = "koin" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 koin-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin" }
+
 ktor-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-json-serialization = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 ktor-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
@@ -67,19 +89,28 @@ ktor-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
 ktor-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
 ktor-android = { module = "io.ktor:ktor-client-android", version.ref = "ktor" }
 ktor-ios = { module = "io.ktor:ktor-client-ios", version.ref = "ktor" }
-realm = { module = "io.realm.kotlin:library-base", version.ref = "realm" }
+
 kermit-logger = { module = "co.touchlab:kermit", version.ref = "kermit" }
 multiplatform-settings = { module = "com.russhwolf:multiplatform-settings", version.ref = "multiplatformSettings" }
-kmm-viewmodel = { module = "com.rickclephas.kmm:kmm-viewmodel-core", version.ref = "kmmViewModel" }
+kmp-viewModel = { module = "com.rickclephas.kmp:kmp-observableviewmodel-core", version.ref = "kmpViewModel" }
 kotlin-yaml = { module = "net.mamoe.yamlkt:yamlkt", version.ref = "yamlkt" }
 
+sqldelight-runtime = { module = "app.cash.sqldelight:runtime", version.ref = "sqlDelight" }
+sqldelight-coroutines-extensions = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqlDelight" }
+sqldelight-android-driver = { module = "app.cash.sqldelight:android-driver", version.ref = "sqlDelight" }
+sqldelight-native-driver = { module = "app.cash.sqldelight:native-driver", version.ref = "sqlDelight" }
+sqldelight-sqlite-driver = { module = "app.cash.sqldelight:sqlite-driver", version.ref = "sqlDelight" }
+sqldelight-web-driver = { module = "app.cash.sqldelight:web-worker-driver", version.ref = "sqlDelight" }
+
 [plugins]
+gradleVersionsPlugin = { id = "com.github.ben-manes.versions", version.ref  = "gradleVersionsPlugin" }
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
-realm = { id = "io.realm.kotlin", version.ref = "realm" }
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "compose" }
 kmp_nativecoroutines = { id = "com.rickclephas.kmp.nativecoroutines", version.ref = "kmpNativeCoroutines" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+sqlDelight = { id = "app.cash.sqldelight", version.ref = "sqlDelight" }
 skie = { id = "co.touchlab.skie", version.ref = "skie" }

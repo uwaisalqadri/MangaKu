@@ -16,8 +16,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.annotation.RootGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
-import com.uwaisalqadri.mangaku.android.presentation.destinations.DetailScreenDestination
+import com.ramcosta.composedestinations.generated.destinations.DetailScreenDestination
 import com.uwaisalqadri.mangaku.android.presentation.search.composables.SearchCard
 import com.uwaisalqadri.mangaku.android.presentation.search.composables.SearchField
 import com.uwaisalqadri.mangaku.android.presentation.search.composables.StaggeredVerticalGrid
@@ -28,14 +29,14 @@ import com.uwaisalqadri.mangaku.presentation.search.SearchEvent
 import com.uwaisalqadri.mangaku.presentation.search.SearchViewModel
 import org.koin.androidx.compose.koinViewModel
 
-@Destination
+@Destination<RootGraph>
 @Composable
 fun SearchScreen(
     navigator: DestinationsNavigator
 ) {
     val viewModel: SearchViewModel = koinViewModel()
     val state by viewModel.state.collectAsState()
-    val event: (SearchEvent) -> Unit = viewModel::onTriggerEvent
+    val event: (SearchEvent) -> Unit = viewModel::send
 
     val searchQuery by viewModel.searchQuery.collectAsState()
 

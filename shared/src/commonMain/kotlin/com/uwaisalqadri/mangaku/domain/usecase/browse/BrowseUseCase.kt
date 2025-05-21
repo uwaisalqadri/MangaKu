@@ -1,10 +1,18 @@
 package com.uwaisalqadri.mangaku.domain.usecase.browse
 
+import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
+import com.uwaisalqadri.mangaku.domain.base.executing
+import com.uwaisalqadri.mangaku.domain.mapper.map
 import com.uwaisalqadri.mangaku.domain.model.Manga
+import com.uwaisalqadri.mangaku.domain.repository.MangaRepository
+import com.uwaisalqadri.mangaku.domain.usecase.common.UseCase
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.StateFlow
 
-interface BrowseUseCase {
-    suspend fun getManga(): Flow<List<Manga>>
-    suspend fun getTrendingManga(): Flow<List<Manga>>
+class BrowseUseCase(private val repository: MangaRepository): UseCase<Unit, List<Manga>> {
+    @NativeCoroutines
+    override fun execute(parameter: Unit): Flow<List<Manga>> {
+        return executing {
+            repository.getManga().map()
+        }
+    }
 }

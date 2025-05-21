@@ -1,4 +1,4 @@
-package com.uwaisalqadri.mangaku.data.souce.remote.response
+package com.uwaisalqadri.mangaku.data.source.remote.response
 
 import com.uwaisalqadri.mangaku.domain.base.ApiError
 import kotlinx.serialization.SerialName

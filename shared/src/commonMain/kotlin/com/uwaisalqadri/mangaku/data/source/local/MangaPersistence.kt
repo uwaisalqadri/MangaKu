@@ -1,6 +1,6 @@
-package com.uwaisalqadri.mangaku.data.souce.local
+package com.uwaisalqadri.mangaku.data.source.local
 
-import com.uwaisalqadri.mangaku.data.souce.local.entity.MangaObject
+import com.uwaisalqadri.mangaku.data.source.local.entity.MangaObject
 
 interface MangaPersistence {
     fun getAllManga(): List<MangaObject>

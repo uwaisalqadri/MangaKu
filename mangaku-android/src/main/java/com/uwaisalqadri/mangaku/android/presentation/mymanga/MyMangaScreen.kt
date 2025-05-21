@@ -27,8 +27,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.Lifecycle
 import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.annotation.RootGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
-import com.uwaisalqadri.mangaku.android.presentation.destinations.DetailScreenDestination
+import com.ramcosta.composedestinations.generated.destinations.DetailScreenDestination
 import com.uwaisalqadri.mangaku.android.presentation.mymanga.composables.HorizontalPagerWithTransition
 import com.uwaisalqadri.mangaku.android.presentation.mymanga.composables.LayoutSwitch
 import com.uwaisalqadri.mangaku.android.presentation.mymanga.composables.MyMangaGridItem
@@ -39,7 +40,7 @@ import com.uwaisalqadri.mangaku.presentation.mymanga.MyMangaEvent
 import com.uwaisalqadri.mangaku.presentation.mymanga.MyMangaViewModel
 import org.koin.androidx.compose.koinViewModel
 
-@Destination
+@Destination<RootGraph>
 @Composable
 fun MyMangaScreen(
     navigator: DestinationsNavigator
@@ -49,12 +50,12 @@ fun MyMangaScreen(
     var isPage by rememberSaveable { mutableStateOf(true) }
 
     LaunchedEffect(Unit) {
-        viewModel.onTriggerEvent(MyMangaEvent.GetMyMangas)
+        viewModel.send(MyMangaEvent.GetMyMangas)
     }
 
     ComposableLifecycle { _, event ->
-        if (event == Lifecycle.Event.ON_DESTROY) {
-            viewModel.closePersistence()
+        if (event == Lifecycle.Event.ON_CREATE) {
+            viewModel.send(MyMangaEvent.GetMyMangas)
         }
     }
 

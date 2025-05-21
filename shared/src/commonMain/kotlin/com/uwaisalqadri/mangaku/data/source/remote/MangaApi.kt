@@ -1,7 +1,7 @@
-package com.uwaisalqadri.mangaku.data.souce.remote
+package com.uwaisalqadri.mangaku.data.source.remote
 
-import com.uwaisalqadri.mangaku.data.souce.remote.response.MangaDetailResponse
-import com.uwaisalqadri.mangaku.data.souce.remote.response.MangaResponse
+import com.uwaisalqadri.mangaku.data.source.remote.response.MangaDetailResponse
+import com.uwaisalqadri.mangaku.data.source.remote.response.MangaResponse
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.request.*

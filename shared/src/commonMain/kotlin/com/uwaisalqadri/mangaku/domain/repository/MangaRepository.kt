@@ -1,9 +1,7 @@
 package com.uwaisalqadri.mangaku.domain.repository
 
-import com.uwaisalqadri.mangaku.data.souce.local.entity.MangaObject
-import com.uwaisalqadri.mangaku.data.souce.remote.response.MangaDetailResponse
-import com.uwaisalqadri.mangaku.data.souce.remote.response.MangaItem
-import com.uwaisalqadri.mangaku.data.souce.remote.response.MangaResponse
+import com.uwaisalqadri.mangaku.data.source.local.entity.MangaObject
+import com.uwaisalqadri.mangaku.data.source.remote.response.MangaItem
 
 interface MangaRepository {
     suspend fun getManga(): List<MangaItem>

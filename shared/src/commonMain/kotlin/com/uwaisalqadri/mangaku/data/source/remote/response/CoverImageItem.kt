@@ -1,4 +1,4 @@
-package com.uwaisalqadri.mangaku.data.souce.remote.response
+package com.uwaisalqadri.mangaku.data.source.remote.response
 
 import kotlinx.serialization.Serializable
 

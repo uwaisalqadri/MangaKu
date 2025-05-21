@@ -1,6 +1,6 @@
 package com.uwaisalqadri.mangaku.domain.mapper
 
-import com.uwaisalqadri.mangaku.data.souce.local.entity.*
+import com.uwaisalqadri.mangaku.data.source.local.entity.*
 import com.uwaisalqadri.mangaku.domain.model.*
 
 fun List<MangaObject>.map(): List<Manga> {

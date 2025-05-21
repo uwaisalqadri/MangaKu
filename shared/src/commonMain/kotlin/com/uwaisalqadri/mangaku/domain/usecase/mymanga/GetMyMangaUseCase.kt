@@ -1,4 +1,4 @@
-package com.uwaisalqadri.mangaku.domain.usecase.search
+package com.uwaisalqadri.mangaku.domain.usecase.mymanga
 
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
 import com.uwaisalqadri.mangaku.domain.mapper.map
@@ -8,11 +8,11 @@ import com.uwaisalqadri.mangaku.domain.usecase.common.UseCase
 import com.uwaisalqadri.mangaku.domain.base.executing
 import kotlinx.coroutines.flow.Flow
 
-class SearchUseCase(private val repository: MangaRepository) : UseCase<String, List<Manga>> {
+class GetMyMangaUseCase(private val repository: MangaRepository) : UseCase<Unit, List<Manga>> {
     @NativeCoroutines
-    override fun execute(parameter: String): Flow<List<Manga>> {
+    override fun execute(parameter: Unit): Flow<List<Manga>> {
         return executing {
-            repository.getSearchManga(parameter).map()
+            repository.getFavoriteManga().map()
         }
     }
 }

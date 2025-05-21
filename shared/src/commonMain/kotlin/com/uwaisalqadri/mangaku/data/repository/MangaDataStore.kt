@@ -1,9 +1,9 @@
 package com.uwaisalqadri.mangaku.data.repository
 
-import com.uwaisalqadri.mangaku.data.souce.local.MangaPersistence
-import com.uwaisalqadri.mangaku.data.souce.local.entity.MangaObject
-import com.uwaisalqadri.mangaku.data.souce.remote.MangaApiClient
-import com.uwaisalqadri.mangaku.data.souce.remote.response.MangaItem
+import com.uwaisalqadri.mangaku.data.source.local.MangaPersistence
+import com.uwaisalqadri.mangaku.data.source.local.entity.MangaObject
+import com.uwaisalqadri.mangaku.data.source.remote.MangaApiClient
+import com.uwaisalqadri.mangaku.data.source.remote.response.MangaItem
 import com.uwaisalqadri.mangaku.domain.repository.MangaRepository
 
 class MangaDataStore(

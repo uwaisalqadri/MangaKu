@@ -1,16 +1,16 @@
-package com.uwaisalqadri.mangaku.domain.usecase.detail
+package com.uwaisalqadri.mangaku.domain.usecase.mymanga
 
 import com.uwaisalqadri.mangaku.domain.base.executing
-import com.uwaisalqadri.mangaku.domain.mapper.map
 import com.uwaisalqadri.mangaku.domain.model.Manga
 import com.uwaisalqadri.mangaku.domain.repository.MangaRepository
 import com.uwaisalqadri.mangaku.domain.usecase.common.UseCase
+import com.uwaisalqadri.mangaku.domain.mapper.map
 import kotlinx.coroutines.flow.Flow
 
-class DetailUseCase(private val repository: MangaRepository): UseCase<String, Manga?> {
-    override fun execute(parameter: String): Flow<Manga?> {
+class AddMangaUseCase(private val repository: MangaRepository) : UseCase<Manga, Unit> {
+    override fun execute(parameter: Manga): Flow<Unit> {
         return executing {
-            repository.getDetailManga(parameter)?.map()
+            repository.addMangaFavorite(parameter.map())
         }
     }
 }
