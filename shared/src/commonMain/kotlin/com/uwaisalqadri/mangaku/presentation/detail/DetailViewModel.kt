@@ -9,17 +9,18 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.update
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-open class DetailViewModel: ViewModel(), KoinComponent {
+open class DetailViewModel(
+    private val detailUseCase: DetailUseCase
+) : ViewModel(), KoinComponent {
 
-    private val detailUseCase: DetailUseCase by inject()
     val mangaId = MutableStateFlow("")
 
-    private val _state: MutableStateFlow<DetailState> = MutableStateFlow(DetailState())
-    val state: StateFlow<DetailState> = _state
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), DetailState())
+    private val _state = MutableStateFlow(DetailState())
+    val state: StateFlow<DetailState> = _state.asStateFlow()
 
     fun send(event: DetailEvent) {
         when (event) {
@@ -28,16 +29,21 @@ open class DetailViewModel: ViewModel(), KoinComponent {
             }
         }
     }
-    
+
     private fun getDetailManga(mangaId: String) = viewModelScope.launch {
-        _state.value = _state.value.copy(isLoading = true)
+        _state.update { it.copy(isLoading = true) }
 
-        detailUseCase.execute(mangaId).catch { cause: Throwable ->
-            _state.value = _state.value.copy(errorMessage = cause.message.orEmpty())
-        }.collect {
-            _state.value = DetailState(manga = it)
-        }
+        detailUseCase.execute(mangaId)
+            .catch { cause ->
+                _state.update {
+                    it.copy(
+                        isLoading = false,
+                        errorMessage = cause.message.orEmpty()
+                    )
+                }
+            }
+            .collect { result ->
+                _state.update { DetailState(manga = result) }
+            }
     }
-
 }
-

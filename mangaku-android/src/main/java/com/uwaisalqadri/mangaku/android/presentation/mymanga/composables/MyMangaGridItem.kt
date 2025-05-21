@@ -96,14 +96,3 @@ fun MyMangaGridItem(
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-

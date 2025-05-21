@@ -21,22 +21,21 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.Lifecycle
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootGraph
-import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.ramcosta.composedestinations.generated.destinations.DetailScreenDestination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.uwaisalqadri.mangaku.android.presentation.mymanga.composables.HorizontalPagerWithTransition
 import com.uwaisalqadri.mangaku.android.presentation.mymanga.composables.LayoutSwitch
 import com.uwaisalqadri.mangaku.android.presentation.mymanga.composables.MyMangaGridItem
 import com.uwaisalqadri.mangaku.android.presentation.search.composables.StaggeredVerticalGrid
 import com.uwaisalqadri.mangaku.android.presentation.theme.MangaTypography
-import com.uwaisalqadri.mangaku.android.presentation.theme.composables.ComposableLifecycle
+import com.uwaisalqadri.mangaku.domain.model.Manga
 import com.uwaisalqadri.mangaku.presentation.mymanga.MyMangaEvent
+import com.uwaisalqadri.mangaku.presentation.mymanga.MyMangaState
 import com.uwaisalqadri.mangaku.presentation.mymanga.MyMangaViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -47,37 +46,20 @@ fun MyMangaScreen(
 ) {
     val viewModel: MyMangaViewModel = koinViewModel()
     val viewState by viewModel.state.collectAsState()
-    var isPage by rememberSaveable { mutableStateOf(true) }
+
+    var isPageLayout by rememberSaveable { mutableStateOf(true) }
 
     LaunchedEffect(Unit) {
         viewModel.send(MyMangaEvent.GetMyMangas)
     }
 
-    ComposableLifecycle { _, event ->
-        if (event == Lifecycle.Event.ON_CREATE) {
-            viewModel.send(MyMangaEvent.GetMyMangas)
-        }
-    }
-
     LazyColumn(
         modifier = Modifier
             .fillMaxHeight()
-            .background(color = MaterialTheme.colors.primary)
+            .background(MaterialTheme.colors.primary)
     ) {
         item {
-            Row(
-                horizontalArrangement = Arrangement.Center,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 20.dp)
-            ) {
-                Text(
-                    text = "My Manga",
-                    style = MangaTypography.h1,
-                    fontSize = 25.sp,
-                    color = MaterialTheme.colors.secondary
-                )
-            }
+            TitleBar()
         }
 
         item {
@@ -87,53 +69,84 @@ fun MyMangaScreen(
                     .height(60.dp)
                     .padding(top = 20.dp, start = 20.dp, end = 20.dp)
             ) {
-                isPage = it
+                isPageLayout = it
             }
         }
 
         item {
-            Box {
-                if (viewState.isEmpty || viewState.isLoading) {
-                    Text(
-                        text = "Still Empty Here!",
-                        style = MangaTypography.overline,
-                        fontSize = 60.sp,
-                        color = MaterialTheme.colors.secondary,
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(horizontal = 40.dp)
-                    )
+            MangaContent(
+                viewState = viewState,
+                isPageLayout = isPageLayout,
+                onItemClick = { manga ->
+                    navigator.navigate(DetailScreenDestination(mangaId = manga.id))
                 }
+            )
+        }
+    }
+}
 
-                if (isPage) {
-                    HorizontalPagerWithTransition(
-                        manga = viewState.mangas,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(500.dp)
-                    )
-                } else {
-                    StaggeredVerticalGrid(
-                        maxColumnWidth = 200.dp,
-                        modifier = Modifier
-                            .padding(horizontal = 20.dp, vertical = 30.dp)
-                    ) {
-                        viewState.mangas.forEach {
-                            MyMangaGridItem(manga = it) { manga ->
-                                navigator.navigate(DetailScreenDestination(mangaId = manga.id))
-                            }
+@Composable
+private fun TitleBar() {
+    Row(
+        horizontalArrangement = Arrangement.Center,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 20.dp)
+    ) {
+        Text(
+            text = "My Manga",
+            style = MangaTypography.h1,
+            fontSize = 25.sp,
+            color = MaterialTheme.colors.secondary
+        )
+    }
+}
+
+@Composable
+private fun MangaContent(
+    viewState: MyMangaState,
+    isPageLayout: Boolean,
+    onItemClick: (Manga) -> Unit
+) {
+    Box(modifier = Modifier.fillMaxWidth()) {
+        when {
+            viewState.isLoading || viewState.isEmpty -> {
+                Text(
+                    text = "Still Empty Here!",
+                    style = MangaTypography.overline,
+                    fontSize = 60.sp,
+                    color = MaterialTheme.colors.secondary,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(horizontal = 40.dp)
+                )
+            }
+
+            isPageLayout -> {
+                HorizontalPagerWithTransition(
+                    manga = viewState.mangas,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(500.dp)
+                )
+            }
+
+            else -> {
+                StaggeredVerticalGrid(
+                    maxColumnWidth = 200.dp,
+                    modifier = Modifier
+                        .padding(horizontal = 20.dp, vertical = 30.dp)
+                ) {
+                    viewState.mangas.forEach { manga ->
+                        MyMangaGridItem(manga = manga) {
+                            onItemClick(manga)
                         }
                     }
-
-                    Spacer(
-                        modifier = Modifier
-                            .background(color = Color.Transparent)
-                            .height(200.dp)
-                    )
                 }
+
+                Spacer(modifier = Modifier.height(200.dp))
             }
         }
     }
-
 }

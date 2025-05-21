@@ -47,9 +47,9 @@ fun AttributesItem.map(): Attributes {
 fun TitlesItem.map(): Titles {
     return Titles(
         en = en ?: "",
-        en_jp = en_jp ?: "",
-        en_us = en_us ?: "",
-        ja_jp = ja_jp ?: ""
+        enJp = en_jp ?: "",
+        enUs = en_us ?: "",
+        jaJp = ja_jp ?: ""
     )
 }
 

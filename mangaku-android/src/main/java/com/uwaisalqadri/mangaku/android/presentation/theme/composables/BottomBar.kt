@@ -53,8 +53,7 @@ fun MangakuBottomBar(
             contentColor = MaterialTheme.colors.secondary,
             elevation = 10.dp
         ) {
-            BottomBarDestination.values().forEach { item ->
-
+            BottomBarDestination.entries.forEach { item ->
                 BottomNavigationItem(
                     icon = { Icon(painterResource(id = item.icon), contentDescription = item.title) },
                     selectedContentColor = MaterialTheme.colors.secondary,

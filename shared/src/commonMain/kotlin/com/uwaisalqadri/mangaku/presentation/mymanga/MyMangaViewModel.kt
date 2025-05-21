@@ -1,9 +1,7 @@
 package com.uwaisalqadri.mangaku.presentation.mymanga
 
-import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
 import com.rickclephas.kmp.observableviewmodel.ViewModel
 import com.rickclephas.kmp.observableviewmodel.launch
-import com.rickclephas.kmp.observableviewmodel.stateIn
 import com.uwaisalqadri.mangaku.domain.model.Manga
 import com.uwaisalqadri.mangaku.domain.usecase.common.execute
 import com.uwaisalqadri.mangaku.domain.usecase.mymanga.AddMangaUseCase
@@ -11,38 +9,40 @@ import com.uwaisalqadri.mangaku.domain.usecase.mymanga.DeleteMangaUseCase
 import com.uwaisalqadri.mangaku.domain.usecase.mymanga.GetMyMangaByIdUseCase
 import com.uwaisalqadri.mangaku.domain.usecase.mymanga.GetMyMangaUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.update
 import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
 
-open class MyMangaViewModel: ViewModel(), KoinComponent {
-
-    private val getUseCase: GetMyMangaUseCase by inject()
-    private val getByIdUseCase: GetMyMangaByIdUseCase by inject()
-    private val addUseCase: AddMangaUseCase by inject()
-    private val deleteUseCase: DeleteMangaUseCase by inject()
+open class MyMangaViewModel(
+    private val getUseCase: GetMyMangaUseCase,
+    private val getByIdUseCase: GetMyMangaByIdUseCase,
+    private val addUseCase: AddMangaUseCase,
+    private val deleteUseCase: DeleteMangaUseCase
+) : ViewModel(), KoinComponent {
 
     private val _state = MutableStateFlow(MyMangaState())
     val state: StateFlow<MyMangaState> = _state.asStateFlow()
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), MyMangaState())
 
     fun send(event: MyMangaEvent) {
         when (event) {
+            MyMangaEvent.Empty -> {
+                _state.update { MyMangaState(isEmpty = true) }
+            }
+
             is MyMangaEvent.GetMyMangas -> {
                 getMyManga()
             }
-            is MyMangaEvent.Empty -> {
-                _state.value = MyMangaState(isEmpty = true)
-            }
+
             is MyMangaEvent.CheckFavorite -> {
                 checkFavorite(event.mangaId)
             }
+
             is MyMangaEvent.AddFavorite -> {
                 addMyManga(event.manga)
             }
+
             is MyMangaEvent.DeleteFavorite -> {
                 deleteMyManga(event.mangaId)
             }
@@ -61,18 +61,26 @@ open class MyMangaViewModel: ViewModel(), KoinComponent {
 
     private fun checkFavorite(mangaId: String) = viewModelScope.launch {
         getByIdUseCase.execute(mangaId).collect { result ->
-            _state.value = _state.value.copy(isFavorite = result.map { it.id }.contains(mangaId))
+            val isFavorite = result.any { it.id == mangaId }
+            _state.update { it.copy(isFavorite = isFavorite) }
         }
     }
 
     private fun getMyManga() = viewModelScope.launch {
-        _state.value = _state.value.copy(isLoading = true)
+        _state.update { it.copy(isLoading = true) }
 
-        getUseCase.execute().catch { cause: Throwable ->
-            _state.value = _state.value.copy(errorMessage = cause.message.orEmpty())
-        }.collect {
-            if (it.isEmpty()) _state.value = MyMangaState(isEmpty = true)
-            else _state.value = MyMangaState(mangas = it)
-        }
+        getUseCase.execute()
+            .catch { cause ->
+                _state.update { it.copy(errorMessage = cause.message.orEmpty(), isLoading = false) }
+            }
+            .collect { result ->
+                _state.update {
+                    if (result.isEmpty()) {
+                        MyMangaState(isEmpty = true)
+                    } else {
+                        MyMangaState(mangas = result)
+                    }
+                }
+            }
     }
 }

@@ -84,18 +84,18 @@ fun Attributes.map(): AttributesObject {
 fun TitlesObject.map(): Titles {
     return Titles(
         en = en,
-        en_jp = en_jp,
-        en_us = en_us,
-        ja_jp = ja_jp
+        enJp = en_jp,
+        enUs = en_us,
+        jaJp = ja_jp
     )
 }
 
 fun Titles.map(): TitlesObject {
     return TitlesObject().apply {
         en = this@map.en
-        en_jp = this@map.en_jp
-        en_us = this@map.en_us
-        ja_jp = this@map.ja_jp
+        en_jp = this@map.enJp
+        en_us = this@map.enUs
+        ja_jp = this@map.jaJp
     }
 }
 

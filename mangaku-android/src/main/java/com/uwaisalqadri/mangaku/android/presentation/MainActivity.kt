@@ -24,16 +24,13 @@ import com.uwaisalqadri.mangaku.android.presentation.theme.composables.BottomBar
 import com.uwaisalqadri.mangaku.android.presentation.theme.composables.MangakuBottomBar
 
 class MainActivity : ComponentActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContent {
             MangaTheme {
                 DestinationsNavHost(navGraph = NavGraphs.root)
             }
         }
-
     }
 }
 

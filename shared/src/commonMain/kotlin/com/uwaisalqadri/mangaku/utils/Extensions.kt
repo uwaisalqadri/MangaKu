@@ -8,22 +8,33 @@ import kotlinx.datetime.toLocalDate
 import kotlinx.datetime.toLocalDateTime
 import kotlin.math.roundToInt
 
-fun Double.toFiveStars(): Int {
-    return roundToInt() / 2 / 10 - 1
-}
+fun emptyString(): String = ""
 
-fun Manga.getTitle(): String {
-    return attributes?.canonicalTitle ?: attributes?.titles?.ja_jp ?:
-    attributes?.titles?.en_jp ?: attributes?.titles?.en_us ?: attributes?.titles?.en ?: ""
-}
+fun Double.toFiveStars(): Int =
+    (this / 2 / 10 - 1).roundToInt()
+
+fun Manga.getTitle(): String =
+    attributes?.canonicalTitle
+        ?: attributes?.titles?.jaJp
+        ?: attributes?.titles?.enJp
+        ?: attributes?.titles?.enUs
+        ?: attributes?.titles?.en
+        ?: emptyString()
 
 fun Manga.getPosterImage(): String {
-    val posterImage = attributes?.posterImage
-    return posterImage?.original ?: posterImage?.large ?: posterImage?.medium ?: ""
+    val poster = attributes?.posterImage
+    return poster?.original
+        ?: poster?.large
+        ?: poster?.medium
+        ?: emptyString()
 }
 
 fun Manga.getCoverImage(): String {
-    val coverImage = attributes?.coverImage
-    val posterImage = attributes?.posterImage
-    return coverImage?.original ?: coverImage?.large ?: coverImage?.medium ?: posterImage?.original ?: ""
+    val cover = attributes?.coverImage
+    val poster = attributes?.posterImage
+    return cover?.original
+        ?: cover?.large
+        ?: cover?.medium
+        ?: poster?.original
+        ?: emptyString()
 }

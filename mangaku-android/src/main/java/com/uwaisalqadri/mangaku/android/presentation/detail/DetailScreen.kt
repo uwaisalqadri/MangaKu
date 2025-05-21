@@ -28,6 +28,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -66,58 +67,44 @@ fun DetailScreen(
     val viewState by viewModel.state.collectAsState()
     val favState by mangaViewModel.state.collectAsState()
 
-    val (isShowDialog, setShowDialog) = remember { mutableStateOf(false) }
+    var isShowDialog by remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
         viewModel.send(DetailEvent.GetManga(mangaId))
+        mangaViewModel.send(MyMangaEvent.CheckFavorite(mangaId))
     }
 
     LazyColumn(
         horizontalAlignment = Alignment.Start,
         modifier = Modifier
-            .background(color = MaterialTheme.colors.primary)
+            .background(MaterialTheme.colors.primary)
             .fillMaxSize()
     ) {
         item {
             FavoriteDialog(
                 message = if (favState.isFavorite) "Added to Favorite" else "Removed from Favorite",
                 isShowDialog = isShowDialog,
-                setShowDialog = setShowDialog,
+                setShowDialog = { isShowDialog = it },
                 modifier = Modifier.size(134.dp)
             )
         }
 
         item {
-            Row(
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = 12.dp, top = 25.dp, end = 25.dp)
-            ) {
-                BackButton {
-                    navigator.popBackStack()
-                }
-
-                Button(
-                    elevation = ButtonDefaults.elevation(0.dp, 0.dp),
-                    onClick = {
-                        setShowDialog(true)
-                        if (!viewState.isLoading) {
-                            viewState.manga?.let {
-                                if (favState.isFavorite) mangaViewModel.send(MyMangaEvent.DeleteFavorite(it.id))
-                                else mangaViewModel.send(MyMangaEvent.AddFavorite(it))
-                            }
+            HeaderRow(
+                isFavorite = favState.isFavorite,
+                isLoading = viewState.isLoading,
+                onBack = { navigator.popBackStack() },
+                onToggleFavorite = {
+                    viewState.manga?.let {
+                        isShowDialog = true
+                        if (favState.isFavorite) {
+                            mangaViewModel.send(MyMangaEvent.DeleteFavorite(it.id))
+                        } else {
+                            mangaViewModel.send(MyMangaEvent.AddFavorite(it))
                         }
                     }
-                ) {
-                    Icon(
-                        imageVector = if (favState.isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
-                        contentDescription = null,
-                        tint = Color.Red,
-                        modifier = Modifier.size(25.dp),
-                    )
                 }
-            }
+            )
         }
 
         item {
@@ -131,36 +118,51 @@ fun DetailScreen(
             if (viewState.isLoading) {
                 ShimmerDetail()
             } else {
-                mangaViewModel.send(MyMangaEvent.CheckFavorite(mangaId))
-
                 viewState.manga?.let {
                     MangaDetail(manga = it)
+                    Spacer(modifier = Modifier.height(200.dp))
                 }
-
-                Spacer(modifier = Modifier.height(200.dp))
             }
         }
     }
 }
 
 @Composable
-fun MangaDetail(
-    manga: Manga
+private fun HeaderRow(
+    isFavorite: Boolean,
+    isLoading: Boolean,
+    onBack: () -> Unit,
+    onToggleFavorite: () -> Unit
 ) {
-    Card(
-        shape = RoundedCornerShape(9.dp),
-        elevation = 0.dp,
+    Row(
+        horizontalArrangement = Arrangement.SpaceBetween,
         modifier = Modifier
             .fillMaxWidth()
-            .padding(start = 25.dp, end = 25.dp, top = 30.dp, bottom = 16.dp)
-            .height(200.dp)
+            .padding(start = 12.dp, top = 25.dp, end = 25.dp)
     ) {
-        Image(
-            painter = rememberCoilPainter(request = manga.getCoverImage()),
-            contentDescription = "cover image",
-            contentScale = ContentScale.Crop
-        )
+        BackButton { onBack() }
+
+        Button(
+            elevation = ButtonDefaults.elevation(0.dp),
+            onClick = {
+                if (!isLoading) onToggleFavorite()
+            }
+        ) {
+            Icon(
+                imageVector = if (isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
+                contentDescription = null,
+                tint = Color.Red,
+                modifier = Modifier.size(25.dp)
+            )
+        }
     }
+}
+
+@Composable
+fun MangaDetail(manga: Manga) {
+    val attributes = manga.attributes
+
+    CoverImageCard(imageUrl = manga.getCoverImage())
 
     Text(
         text = manga.getTitle(),
@@ -173,16 +175,58 @@ fun MangaDetail(
     )
 
     Text(
-        text = manga.attributes?.slug ?: "",
+        text = attributes?.slug.orEmpty(),
         color = MaterialTheme.colors.secondary,
         style = MangaTypography.h3,
         fontSize = 15.sp,
         modifier = Modifier
-            .padding(start = 30.dp, end = 30.dp, bottom = 10.dp)
+            .padding(horizontal = 30.dp, vertical = 5.dp)
     )
 
+    MangaStats(
+        date = attributes?.startDate.orEmpty(),
+        rating = attributes?.averageRating ?: 0.0
+    )
+
+    Text(
+        text = "Description",
+        color = MaterialTheme.colors.secondary,
+        style = MangaTypography.h2,
+        fontSize = 21.sp,
+        modifier = Modifier.padding(horizontal = 30.dp, vertical = 10.dp)
+    )
+
+    Text(
+        text = attributes?.synopsis.orEmpty(),
+        color = MaterialTheme.colors.secondary,
+        style = MangaTypography.h3,
+        fontSize = 15.sp,
+        modifier = Modifier.padding(horizontal = 30.dp, vertical = 5.dp)
+    )
+}
+
+@Composable
+private fun CoverImageCard(imageUrl: String) {
+    Card(
+        shape = RoundedCornerShape(9.dp),
+        elevation = 0.dp,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 25.dp, end = 25.dp, top = 30.dp, bottom = 16.dp)
+            .height(200.dp)
+    ) {
+        Image(
+            painter = rememberCoilPainter(request = imageUrl),
+            contentDescription = "cover image",
+            contentScale = ContentScale.Crop
+        )
+    }
+}
+
+@Composable
+private fun MangaStats(date: String, rating: Double) {
     Row(
-        horizontalArrangement = Arrangement.End,
+        horizontalArrangement = Arrangement.Start,
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.padding(horizontal = 30.dp, vertical = 5.dp)
     ) {
@@ -191,7 +235,7 @@ fun MangaDetail(
             shape = RoundedCornerShape(5.dp)
         ) {
             Text(
-                text = formatDate(manga.attributes?.startDate ?: "", DateFormatter.CASUAL_DATE_FORMAT),
+                text = formatDate(date, DateFormatter.CASUAL_DATE_FORMAT),
                 color = Color.White,
                 style = MangaTypography.h1,
                 fontSize = 13.sp,
@@ -213,35 +257,11 @@ fun MangaDetail(
             )
 
             Text(
-                text = (manga.attributes?.averageRating ?: 0.0).toString(),
+                text = rating.toString(),
                 color = MaterialTheme.colors.secondary,
                 style = MangaTypography.h2,
                 fontSize = 13.sp
             )
         }
     }
-
-    Text(
-        text = "Description",
-        color = MaterialTheme.colors.secondary,
-        style = MangaTypography.h2,
-        fontSize = 21.sp,
-        modifier = Modifier.padding(
-            start = 30.dp,
-            end = 30.dp,
-            top = 50.dp
-        )
-    )
-
-    Text(
-        text = manga.attributes?.synopsis ?: "",
-        color = MaterialTheme.colors.secondary,
-        style = MangaTypography.h3,
-        fontSize = 15.sp,
-        modifier = Modifier.padding(
-            top = 15.dp,
-            start = 30.dp,
-            end = 30.dp
-        )
-    )
 }
