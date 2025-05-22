@@ -15,7 +15,7 @@ import org.koin.core.component.inject
 
 open class DetailViewModel(
     private val detailUseCase: DetailUseCase
-) : ViewModel(), KoinComponent {
+) : ViewModel() {
 
     val mangaId = MutableStateFlow("")
 

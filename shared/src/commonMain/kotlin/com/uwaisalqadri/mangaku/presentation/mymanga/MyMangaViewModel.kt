@@ -3,7 +3,7 @@ package com.uwaisalqadri.mangaku.presentation.mymanga
 import com.rickclephas.kmp.observableviewmodel.ViewModel
 import com.rickclephas.kmp.observableviewmodel.launch
 import com.uwaisalqadri.mangaku.domain.model.Manga
-import com.uwaisalqadri.mangaku.domain.usecase.common.execute
+import com.uwaisalqadri.mangaku.domain.base.execute
 import com.uwaisalqadri.mangaku.domain.usecase.mymanga.AddMangaUseCase
 import com.uwaisalqadri.mangaku.domain.usecase.mymanga.DeleteMangaUseCase
 import com.uwaisalqadri.mangaku.domain.usecase.mymanga.GetMyMangaByIdUseCase
@@ -20,7 +20,7 @@ open class MyMangaViewModel(
     private val getByIdUseCase: GetMyMangaByIdUseCase,
     private val addUseCase: AddMangaUseCase,
     private val deleteUseCase: DeleteMangaUseCase
-) : ViewModel(), KoinComponent {
+) : ViewModel() {
 
     private val _state = MutableStateFlow(MyMangaState())
     val state: StateFlow<MyMangaState> = _state.asStateFlow()

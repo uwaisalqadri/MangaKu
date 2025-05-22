@@ -3,7 +3,7 @@ package com.uwaisalqadri.mangaku.data.source.remote.response
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class PosterImageItem(
+data class CoverImageResponse(
     val large: String? = "",
     val medium: String? = "",
     val original: String? = "",

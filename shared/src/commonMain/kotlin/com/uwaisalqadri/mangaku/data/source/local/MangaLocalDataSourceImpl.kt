@@ -2,7 +2,7 @@ package com.uwaisalqadri.mangaku.data.source.local
 
 import com.uwaisalqadri.mangaku.data.source.local.entity.MangaObject
 
-class MangaPersistenceContainer(): MangaPersistence {
+class MangaLocalDataSourceImpl(): MangaLocalDataSource {
 
     override fun getAllManga(): List<MangaObject> {
         return emptyList()

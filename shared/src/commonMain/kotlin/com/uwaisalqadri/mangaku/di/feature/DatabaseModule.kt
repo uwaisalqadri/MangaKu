@@ -1,11 +1,11 @@
 package com.uwaisalqadri.mangaku.di.feature
 
-import com.uwaisalqadri.mangaku.data.source.local.MangaPersistenceContainer
+import com.uwaisalqadri.mangaku.data.source.local.MangaLocalDataSourceImpl
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
 val databaseModule = module {
-    singleOf(::MangaPersistenceContainer)
+    singleOf(::MangaLocalDataSourceImpl)
 //    single { createRealmDatabase() }
 }
 

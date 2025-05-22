@@ -3,11 +3,11 @@ package com.uwaisalqadri.mangaku.domain.mapper
 import com.uwaisalqadri.mangaku.data.source.remote.response.*
 import com.uwaisalqadri.mangaku.domain.model.*
 
-fun List<MangaItem>.map(): List<Manga> {
+fun List<MangaItemResponse>.map(): List<Manga> {
     return map { it.map() }
 }
 
-fun MangaItem.map(): Manga {
+fun MangaItemResponse.map(): Manga {
     return Manga(
         attributes = attributes?.map(),
         id = id,
@@ -15,7 +15,7 @@ fun MangaItem.map(): Manga {
     )
 }
 
-fun AttributesItem.map(): Attributes {
+fun AttributesResponse.map(): Attributes {
     return Attributes(
         ageRating = ageRating.orEmpty(),
         ageRatingGuide = ageRatingGuide.orEmpty(),
@@ -44,7 +44,7 @@ fun AttributesItem.map(): Attributes {
     )
 }
 
-fun TitlesItem.map(): Titles {
+fun TitlesResponse.map(): Titles {
     return Titles(
         en = en ?: "",
         enJp = en_jp ?: "",
@@ -54,7 +54,7 @@ fun TitlesItem.map(): Titles {
 }
 
 
-fun PosterImageItem.map(): PosterImage {
+fun PosterImageResponse.map(): PosterImage {
     return PosterImage(
         large = large.orEmpty(),
         medium = medium.orEmpty(),
@@ -65,7 +65,7 @@ fun PosterImageItem.map(): PosterImage {
 }
 
 
-fun CoverImageItem.map(): CoverImage {
+fun CoverImageResponse.map(): CoverImage {
     return CoverImage(
         large = large,
         medium = medium,

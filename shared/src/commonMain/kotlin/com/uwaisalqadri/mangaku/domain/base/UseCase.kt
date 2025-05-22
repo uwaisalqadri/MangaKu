@@ -1,4 +1,4 @@
-package com.uwaisalqadri.mangaku.domain.usecase.common
+package com.uwaisalqadri.mangaku.domain.base
 
 import kotlinx.coroutines.flow.Flow
 

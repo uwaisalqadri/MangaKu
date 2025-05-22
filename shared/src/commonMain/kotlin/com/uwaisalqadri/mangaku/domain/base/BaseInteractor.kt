@@ -1,6 +1,7 @@
 package com.uwaisalqadri.mangaku.domain.base
 
-import com.uwaisalqadri.mangaku.data.source.remote.response.ApiException
+import com.uwaisalqadri.mangaku.data.source.remote.response.ApiExceptionResponse
+import com.uwaisalqadri.mangaku.domain.model.ApiError
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -15,10 +16,9 @@ fun <T>executing(
         try {
             val out = block.invoke()
             emit(out)
-        } catch (e: ApiException) {
+        } catch (e: ApiExceptionResponse) {
             throw ApiError(e.errorTitle, e.errorMessage)
-        }
-        catch (e: Throwable) {
+        } catch (e: Throwable) {
             throw e
         }
     }.flowOn(context)

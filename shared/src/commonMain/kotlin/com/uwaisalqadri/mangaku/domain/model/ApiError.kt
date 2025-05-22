@@ -1,4 +1,4 @@
-package com.uwaisalqadri.mangaku.domain.base
+package com.uwaisalqadri.mangaku.domain.model
 
 data class ApiError(
     val errorTitle: String,

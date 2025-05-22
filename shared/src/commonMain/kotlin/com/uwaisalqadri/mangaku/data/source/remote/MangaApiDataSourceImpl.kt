@@ -6,7 +6,7 @@ import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.request.*
 
-class MangaApi(private val apiClient: HttpClient): MangaApiClient {
+class MangaApiDataSourceImpl(private val apiClient: HttpClient): MangaApiDataSource {
 
     override suspend fun fetchManga(): MangaResponse {
         return apiClient.get("api/edge/manga").body()

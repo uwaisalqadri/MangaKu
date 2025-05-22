@@ -1,7 +1,7 @@
 package com.uwaisalqadri.mangaku.di.feature
 
-import com.uwaisalqadri.mangaku.data.source.remote.MangaApi
-import com.uwaisalqadri.mangaku.data.source.remote.response.ApiException
+import com.uwaisalqadri.mangaku.data.source.remote.MangaApiDataSourceImpl
+import com.uwaisalqadri.mangaku.data.source.remote.response.ApiExceptionResponse
 import com.uwaisalqadri.mangaku.utils.YamlResourceReader
 import io.ktor.client.*
 import io.ktor.client.engine.*
@@ -19,7 +19,7 @@ import org.koin.dsl.module
 val apiModule = module {
     single { createJson() }
     single { createKtorClient(get(), get(), get()) }
-    singleOf(::MangaApi)
+    singleOf(::MangaApiDataSourceImpl)
     singleOf(::YamlResourceReader)
 }
 
@@ -60,14 +60,14 @@ fun createKtorClient(httpClientEngine: HttpClientEngine, resourceReader: YamlRes
                 is ServerResponseException -> {
                     val serverResponseResponse = exception.response
                     val serverResponseExceptionText = serverResponseResponse.bodyAsText()
-                    val apiException = json.decodeFromString(ApiException.serializer(), serverResponseExceptionText)
-                    throw apiException
+                    val apiExceptionResponse = json.decodeFromString(ApiExceptionResponse.serializer(), serverResponseExceptionText)
+                    throw apiExceptionResponse
                 }
                 is ClientRequestException -> {
                     val exceptionResponse = exception.response
                     val exceptionResponseText = exceptionResponse.bodyAsText()
-                    val apiException = json.decodeFromString(ApiException.serializer(), exceptionResponseText)
-                    throw apiException
+                    val apiExceptionResponse = json.decodeFromString(ApiExceptionResponse.serializer(), exceptionResponseText)
+                    throw apiExceptionResponse
                 }
                 else -> {
                     return@handleResponseExceptionWithRequest

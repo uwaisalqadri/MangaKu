@@ -12,7 +12,7 @@ import org.koin.core.component.KoinComponent
 
 open class SearchViewModel(
     private val searchUseCase: SearchUseCase
-) : ViewModel(), KoinComponent {
+) : ViewModel() {
 
     val searchQuery = MutableStateFlow("")
 
