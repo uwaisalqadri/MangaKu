@@ -1,4 +1,4 @@
-package com.uwaisalqadri.mangaku.domain.mapper
+package com.uwaisalqadri.mangaku.data.mapper
 
 import com.uwaisalqadri.mangaku.data.source.remote.response.*
 import com.uwaisalqadri.mangaku.domain.model.*
@@ -7,11 +7,11 @@ fun List<MangaItemResponse>.map(): List<Manga> {
     return map { it.map() }
 }
 
-fun MangaItemResponse.map(): Manga {
+fun MangaItemResponse?.map(): Manga {
     return Manga(
-        attributes = attributes?.map(),
-        id = id,
-        type = type
+        attributes = this?.attributes?.map(),
+        id = this?.id.orEmpty(),
+        type = this?.type.orEmpty()
     )
 }
 

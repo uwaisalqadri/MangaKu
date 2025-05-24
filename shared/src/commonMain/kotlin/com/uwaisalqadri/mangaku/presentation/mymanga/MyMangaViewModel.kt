@@ -1,5 +1,6 @@
 package com.uwaisalqadri.mangaku.presentation.mymanga
 
+import co.touchlab.kermit.Logger
 import com.rickclephas.kmp.observableviewmodel.ViewModel
 import com.rickclephas.kmp.observableviewmodel.launch
 import com.uwaisalqadri.mangaku.domain.model.Manga
@@ -27,8 +28,8 @@ open class MyMangaViewModel(
 
     fun send(event: MyMangaEvent) {
         when (event) {
-            MyMangaEvent.Empty -> {
-                _state.update { MyMangaState(isEmpty = true) }
+            is MyMangaEvent.Empty -> {
+                _state.update { it.copy(isEmpty = true) }
             }
 
             is MyMangaEvent.GetMyMangas -> {
@@ -62,6 +63,7 @@ open class MyMangaViewModel(
     private fun checkFavorite(mangaId: String) = viewModelScope.launch {
         getByIdUseCase.execute(mangaId).collect { result ->
             val isFavorite = result.any { it.id == mangaId }
+            Logger.d { "checkFavorite(mangaId: $mangaId): $isFavorite || $result" }
             _state.update { it.copy(isFavorite = isFavorite) }
         }
     }
@@ -76,9 +78,12 @@ open class MyMangaViewModel(
             .collect { result ->
                 _state.update {
                     if (result.isEmpty()) {
-                        MyMangaState(isEmpty = true)
+                        it.copy(isEmpty = true)
                     } else {
-                        MyMangaState(mangas = result)
+                        it.copy(
+                            mangas = result,
+                            isEmpty = false
+                        )
                     }
                 }
             }

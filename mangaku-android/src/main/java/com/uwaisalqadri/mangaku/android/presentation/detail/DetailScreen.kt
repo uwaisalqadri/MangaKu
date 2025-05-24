@@ -82,7 +82,7 @@ fun DetailScreen(
     ) {
         item {
             FavoriteDialog(
-                message = if (favState.isFavorite) "Added to Favorite" else "Removed from Favorite",
+                message = if (favState.isFavorite) "Removed from Favorite" else "Added to Favorite",
                 isShowDialog = isShowDialog,
                 setShowDialog = { isShowDialog = it },
                 modifier = Modifier.size(134.dp)
@@ -96,12 +96,12 @@ fun DetailScreen(
                 onBack = { navigator.popBackStack() },
                 onToggleFavorite = {
                     viewState.manga?.let {
-                        isShowDialog = true
                         if (favState.isFavorite) {
                             mangaViewModel.send(MyMangaEvent.DeleteFavorite(it.id))
                         } else {
                             mangaViewModel.send(MyMangaEvent.AddFavorite(it))
                         }
+                        isShowDialog = true
                     }
                 }
             )

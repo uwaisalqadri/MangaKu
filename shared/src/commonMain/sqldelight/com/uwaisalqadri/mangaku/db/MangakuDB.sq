@@ -1,0 +1,77 @@
+CREATE TABLE MangaEntity (
+    id TEXT NOT NULL PRIMARY KEY,
+    type TEXT NOT NULL,
+    ageRating TEXT,
+    ageRatingGuide TEXT,
+    averageRating REAL,
+    canonicalTitle TEXT,
+    chapterCount INTEGER,
+    description TEXT,
+    endDate TEXT,
+    favoritesCount INTEGER,
+    mangaType TEXT,
+    nextRelease TEXT,
+    popularityRank TEXT,
+    ratingRank INTEGER,
+    serialization TEXT,
+    slug TEXT,
+    startDate TEXT,
+    status TEXT,
+    subtype TEXT,
+    synopsis TEXT,
+    tba TEXT,
+    userCount INTEGER,
+    volumeCount INTEGER
+);
+
+CREATE TABLE CoverImageEntity (
+    mangaId TEXT NOT NULL REFERENCES MangaEntity(id),
+    large TEXT,
+    medium TEXT,
+    original TEXT,
+    small TEXT,
+    tiny TEXT,
+    PRIMARY KEY(mangaId)
+);
+
+CREATE TABLE PosterImageEntity (
+    mangaId TEXT NOT NULL REFERENCES MangaEntity(id),
+    large TEXT,
+    medium TEXT,
+    original TEXT,
+    small TEXT,
+    tiny TEXT,
+    PRIMARY KEY(mangaId)
+);
+
+CREATE TABLE TitlesEntity (
+    mangaId TEXT NOT NULL REFERENCES MangaEntity(id),
+    en TEXT,
+    en_jp TEXT,
+    en_us TEXT,
+    ja_jp TEXT,
+    PRIMARY KEY(mangaId)
+);
+
+getAllManga: SELECT * FROM MangaEntity;
+
+addManga:
+INSERT INTO MangaEntity (
+    id, type, ageRating, ageRatingGuide, averageRating, canonicalTitle,
+    chapterCount, description, endDate, favoritesCount, mangaType,
+    nextRelease, popularityRank, ratingRank, serialization, slug,
+    startDate, status, subtype, synopsis, tba, userCount, volumeCount
+) VALUES (
+    ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+);
+
+deleteMangaById:
+DELETE FROM MangaEntity
+WHERE id = ?;
+
+deleteAllManga:
+DELETE FROM MangaEntity;
+
+getMangaById:
+SELECT * FROM MangaEntity
+WHERE id = ?;

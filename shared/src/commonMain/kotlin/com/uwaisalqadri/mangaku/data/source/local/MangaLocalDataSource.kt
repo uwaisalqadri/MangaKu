@@ -1,12 +1,11 @@
 package com.uwaisalqadri.mangaku.data.source.local
 
-import com.uwaisalqadri.mangaku.data.source.local.entity.MangaObject
+import com.uwaisalqadri.mangaku.db.MangaEntity
 
 interface MangaLocalDataSource {
-    fun getAllManga(): List<MangaObject>
-    fun getMangaById(mangaId: String): List<MangaObject>
-    fun addManga(manga: MangaObject)
-    fun deleteManga(mangaId: String)
-    fun clearAllManga()
-    fun close()
+    fun getAllManga(): List<MangaEntity>
+    fun getMangaById(mangaId: String): List<MangaEntity>
+    suspend fun addManga(manga: MangaEntity)
+    suspend fun deleteManga(mangaId: String)
+    suspend fun clearAllManga()
 }

@@ -38,7 +38,6 @@ fun SearchScreen(
 ) {
     val viewModel: SearchViewModel = koinViewModel()
     val state by viewModel.state.collectAsState()
-    val query by viewModel.searchQuery.collectAsState()
 
     BackHandler { navigator.popBackStack() }
 
@@ -59,10 +58,10 @@ fun SearchScreen(
 
         item {
             SearchField(
-                query = query,
+                query = state.searchQuery,
                 placeholder = "Search All Manga..",
                 onQueryChanged = { viewModel.send(SearchEvent.GetMangas(it)) },
-                onExecuteSearch = { viewModel.send(SearchEvent.GetMangas(query)) },
+                onExecuteSearch = { viewModel.send(SearchEvent.GetMangas(state.searchQuery)) },
                 onEraseQuery = { viewModel.send(SearchEvent.Empty) },
                 modifier = Modifier
                     .fillMaxWidth()

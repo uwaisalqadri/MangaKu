@@ -14,21 +14,18 @@ open class SearchViewModel(
     private val searchUseCase: SearchUseCase
 ) : ViewModel() {
 
-    val searchQuery = MutableStateFlow("")
-
     private val _state = MutableStateFlow(SearchState())
     val state: StateFlow<SearchState> = _state.asStateFlow()
 
     fun send(event: SearchEvent) {
         when (event) {
             is SearchEvent.GetMangas -> {
-                searchQuery.value = event.query
+                _state.update { it.copy(searchQuery = event.query) }
                 getSearchManga(event.query)
             }
 
-            SearchEvent.Empty -> {
-                searchQuery.value = ""
-                _state.value = SearchState(isEmpty = true)
+            is SearchEvent.Empty -> {
+                _state.update { it.copy(isEmpty = true, searchQuery = "") }
             }
         }
     }
