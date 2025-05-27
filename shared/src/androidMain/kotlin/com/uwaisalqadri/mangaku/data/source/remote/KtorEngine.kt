@@ -1,4 +1,4 @@
-package com.uwaisalqadri.mangaku.utils
+package com.uwaisalqadri.mangaku.data.source.remote
 
 import io.ktor.client.engine.android.*
 import org.koin.dsl.module

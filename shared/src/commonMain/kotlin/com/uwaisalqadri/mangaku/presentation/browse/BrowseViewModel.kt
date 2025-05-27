@@ -3,13 +3,12 @@ package com.uwaisalqadri.mangaku.presentation.browse
 import com.rickclephas.kmp.observableviewmodel.ViewModel
 import com.rickclephas.kmp.observableviewmodel.launch
 import com.uwaisalqadri.mangaku.domain.usecase.browse.BrowseUseCase
-import com.uwaisalqadri.mangaku.domain.base.execute
+import com.uwaisalqadri.mangaku.domain.execute
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.update
-import org.koin.core.component.KoinComponent
 
 open class BrowseViewModel(
     private val browseUseCase: BrowseUseCase

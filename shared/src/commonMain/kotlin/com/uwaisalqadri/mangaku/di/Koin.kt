@@ -1,8 +1,7 @@
 package com.uwaisalqadri.mangaku.di
 
-import com.uwaisalqadri.mangaku.di.feature.apiModule
-import com.uwaisalqadri.mangaku.di.feature.databaseModule
-import com.uwaisalqadri.mangaku.di.feature.mangaModule
+import com.uwaisalqadri.mangaku.data.source.local.dbDriverModule
+import com.uwaisalqadri.mangaku.data.source.remote.ktorEngineModule
 import com.uwaisalqadri.mangaku.domain.usecase.browse.BrowseUseCase
 import com.uwaisalqadri.mangaku.domain.usecase.detail.DetailUseCase
 import com.uwaisalqadri.mangaku.domain.usecase.mymanga.AddMangaUseCase
@@ -10,7 +9,6 @@ import com.uwaisalqadri.mangaku.domain.usecase.mymanga.DeleteMangaUseCase
 import com.uwaisalqadri.mangaku.domain.usecase.mymanga.GetMyMangaByIdUseCase
 import com.uwaisalqadri.mangaku.domain.usecase.mymanga.GetMyMangaUseCase
 import com.uwaisalqadri.mangaku.domain.usecase.search.SearchUseCase
-import com.uwaisalqadri.mangaku.utils.ktorEngineModule
 import com.uwaisalqadri.mangaku.utils.resourceReaderModule
 import org.koin.core.Koin
 import org.koin.core.KoinApplication
@@ -23,11 +21,11 @@ fun initKoin(appDeclaration: KoinAppDeclaration = {}): KoinApplication {
     return startKoin {
         appDeclaration()
         modules(
-            apiModule,
             ktorEngineModule(),
             resourceReaderModule(),
-            databaseModule,
-            mangaModule
+            dbDriverModule(),
+            dataModule,
+            domainModule
         )
     }
 }

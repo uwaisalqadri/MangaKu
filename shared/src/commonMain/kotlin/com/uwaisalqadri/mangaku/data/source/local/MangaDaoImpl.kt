@@ -3,11 +3,11 @@ package com.uwaisalqadri.mangaku.data.source.local
 import com.uwaisalqadri.mangaku.db.MangaEntity
 import com.uwaisalqadri.mangaku.db.MangakuDB
 
-class MangaLocalDataSourceImpl(
+class MangaDaoImpl(
    private val db: MangakuDB
-): MangaLocalDataSource {
+): MangaDao, Dao() {
 
-    private val queries by lazy { db.mangakuDBQueries }
+    override val queries by lazy { db.mangakuDBQueries }
 
     override fun getAllManga(): List<MangaEntity> {
         return queries.getAllManga().executeAsList()

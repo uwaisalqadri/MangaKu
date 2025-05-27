@@ -1,4 +1,4 @@
-package com.uwaisalqadri.mangaku.utils
+package com.uwaisalqadri.mangaku.data.source.remote
 
 import org.koin.core.module.Module
 

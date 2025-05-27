@@ -4,7 +4,7 @@ import co.touchlab.kermit.Logger
 import com.rickclephas.kmp.observableviewmodel.ViewModel
 import com.rickclephas.kmp.observableviewmodel.launch
 import com.uwaisalqadri.mangaku.domain.model.Manga
-import com.uwaisalqadri.mangaku.domain.base.execute
+import com.uwaisalqadri.mangaku.domain.execute
 import com.uwaisalqadri.mangaku.domain.usecase.mymanga.AddMangaUseCase
 import com.uwaisalqadri.mangaku.domain.usecase.mymanga.DeleteMangaUseCase
 import com.uwaisalqadri.mangaku.domain.usecase.mymanga.GetMyMangaByIdUseCase
@@ -14,7 +14,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.update
-import org.koin.core.component.KoinComponent
 
 open class MyMangaViewModel(
     private val getUseCase: GetMyMangaUseCase,
