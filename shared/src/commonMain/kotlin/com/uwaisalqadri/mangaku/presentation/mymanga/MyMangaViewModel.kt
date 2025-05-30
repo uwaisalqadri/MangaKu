@@ -1,8 +1,10 @@
 package com.uwaisalqadri.mangaku.presentation.mymanga
 
 import co.touchlab.kermit.Logger
+import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
 import com.rickclephas.kmp.observableviewmodel.ViewModel
 import com.rickclephas.kmp.observableviewmodel.launch
+import com.uwaisalqadri.mangaku.di.inject
 import com.uwaisalqadri.mangaku.domain.model.Manga
 import com.uwaisalqadri.mangaku.domain.execute
 import com.uwaisalqadri.mangaku.domain.usecase.mymanga.AddMangaUseCase
@@ -15,15 +17,16 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.update
 
-open class MyMangaViewModel(
-    private val getUseCase: GetMyMangaUseCase,
-    private val getByIdUseCase: GetMyMangaByIdUseCase,
-    private val addUseCase: AddMangaUseCase,
-    private val deleteUseCase: DeleteMangaUseCase
-) : ViewModel() {
+open class MyMangaViewModel: ViewModel() {
+
+    private val getUseCase: GetMyMangaUseCase = inject()
+    private val getByIdUseCase: GetMyMangaByIdUseCase = inject()
+    private val addUseCase: AddMangaUseCase = inject()
+    private val deleteUseCase: DeleteMangaUseCase = inject()
 
     private val _state = MutableStateFlow(MyMangaState())
-    val state: StateFlow<MyMangaState> = _state.asStateFlow()
+    @NativeCoroutinesState
+    val state = _state.asStateFlow()
 
     fun send(event: MyMangaEvent) {
         when (event) {

@@ -16,7 +16,7 @@ struct MyMangaRouter {
   }
 
   @MainActor func routeToMyManga() -> some View {
-    MyMangaPageView(navigator: self, viewModel: assembler.resolve())
+    MyMangaPageView(navigator: self)
   }
 
   @MainActor func routeToDetail(mangaId: String) -> some View {

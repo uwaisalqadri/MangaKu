@@ -9,15 +9,12 @@
 import SwiftUI
 import Shared
 import SDWebImageSwiftUI
-import KMMViewModelSwiftUI
+import KMPObservableViewModelSwiftUI
 
 struct MyMangaPageView: View {
   let navigator: MyMangaRouter
-  @StateViewModel var viewModel: MyMangaViewModel
+  @StateViewModel var viewModel = MyMangaViewModel()
   @State private var isSlide = true
-  
-  private let appWillTerminate = NotificationCenter.default
-    .publisher(for: UIApplication.willTerminateNotification)
   
   private var viewState: MyMangaState {
     viewModel.state
@@ -71,10 +68,7 @@ struct MyMangaPageView: View {
     }
     .navigationBarHidden(true)
     .onAppear {
-      viewModel.onTriggerEvent(event: MyMangaEvent.GetMyMangas())
-    }
-    .onReceive(appWillTerminate) { _ in
-      viewModel.closePersistence()
+      viewModel.send(event: MyMangaEvent.GetMyMangas())
     }
     .frame(width: UIScreen.screenWidth, alignment: .center)
   }

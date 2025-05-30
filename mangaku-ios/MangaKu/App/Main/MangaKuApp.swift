@@ -27,9 +27,9 @@ struct MangaKuApp: App {
 }
 
 func setupEnvirontment() {
-  #if DEBUG
-    ConfigsKt.stageIos = .dev
-  #else
-    ConfigsKt.stageIos = .release_
-  #endif
+//  #if DEBUG
+//    ConfigsKt.stageIos = .dev
+//  #else
+//    ConfigsKt.stageIos = .release_
+//  #endif
 }

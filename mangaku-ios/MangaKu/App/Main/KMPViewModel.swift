@@ -7,6 +7,6 @@
 //
 
 import Shared
-import KMMViewModelCore
+import KMPObservableViewModelCore
 
-extension Kmm_viewmodel_coreKMMViewModel: KMMViewModel { }
+extension Kmp_observableviewmodel_coreViewModel: ViewModel { }

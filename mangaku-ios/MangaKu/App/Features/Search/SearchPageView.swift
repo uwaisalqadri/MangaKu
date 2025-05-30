@@ -8,12 +8,12 @@
 
 import SwiftUI
 import Shared
-import KMMViewModelSwiftUI
+import KMPObservableViewModelSwiftUI
 
 struct SearchPageView: View {
   let navigator: SearchRouter
   
-  @StateViewModel var viewModel: SearchViewModel
+  @StateViewModel var viewModel = SearchViewModel()
   @State var searchQuery: String = ""
   
   private var viewState: SearchState {
@@ -61,10 +61,10 @@ struct SearchPageView: View {
     .autocapitalization(.none)
     .disableAutocorrection(true)
     .onChange(of: searchQuery) { query in
-      viewModel.onTriggerEvent(event: SearchEvent.GetMangas(query: query))
+      viewModel.send(event: SearchEvent.GetMangas(query: query))
     }
     .onSubmit(of: .search) {
-      viewModel.onTriggerEvent(event: SearchEvent.GetMangas(query: searchQuery.isEmpty ? "naruto" : searchQuery))
+      viewModel.send(event: SearchEvent.GetMangas(query: searchQuery.isEmpty ? "naruto" : searchQuery))
     }
   }
 }

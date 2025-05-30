@@ -33,7 +33,7 @@ lottie = "5.2.0"
 shimmer = "1.0.2"
 agp = "8.6.1"
 skie = "0.10.0"
-kmpViewModel = "1.0.0-BETA-9"
+kmpViewModel = "1.0.0-BETA-11"
 kmpNativeCoroutines = "1.0.0-ALPHA-20"
 yamlkt = "0.12.0"
 sqlDelight = "2.1.0"
@@ -110,7 +110,7 @@ kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "compose" }
-kmp_nativecoroutines = { id = "com.rickclephas.kmp.nativecoroutines", version.ref = "kmpNativeCoroutines" }
+kmp-nativecoroutines = { id = "com.rickclephas.kmp.nativecoroutines", version.ref = "kmpNativeCoroutines" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 sqlDelight = { id = "app.cash.sqldelight", version.ref = "sqlDelight" }
 skie = { id = "co.touchlab.skie", version.ref = "skie" }

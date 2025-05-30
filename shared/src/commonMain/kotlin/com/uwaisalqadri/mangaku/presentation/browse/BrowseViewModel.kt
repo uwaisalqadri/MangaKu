@@ -1,7 +1,9 @@
 package com.uwaisalqadri.mangaku.presentation.browse
 
+import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
 import com.rickclephas.kmp.observableviewmodel.ViewModel
 import com.rickclephas.kmp.observableviewmodel.launch
+import com.uwaisalqadri.mangaku.di.inject
 import com.uwaisalqadri.mangaku.domain.usecase.browse.BrowseUseCase
 import com.uwaisalqadri.mangaku.domain.execute
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -10,12 +12,13 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.update
 
-open class BrowseViewModel(
-    private val browseUseCase: BrowseUseCase
-) : ViewModel() {
+open class BrowseViewModel : ViewModel() {
+
+    private val browseUseCase: BrowseUseCase = inject()
 
     private val _state = MutableStateFlow(BrowseState())
-    val state: StateFlow<BrowseState> = _state.asStateFlow()
+    @NativeCoroutinesState
+    val state = _state.asStateFlow()
 
     fun send(event: BrowseEvent) {
         when (event) {
@@ -38,9 +41,9 @@ open class BrowseViewModel(
             .collect { result ->
                 _state.update {
                     if (result.isEmpty()) {
-                        BrowseState(isEmpty = true)
+                        it.copy(isEmpty = true)
                     } else {
-                        BrowseState(mangas = result)
+                        it.copy(mangas = result)
                     }
                 }
             }

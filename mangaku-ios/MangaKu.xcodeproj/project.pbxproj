@@ -3,10 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 53;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		86A9CC3E2DE9638D000F65EF /* KMPObservableViewModelCore in Frameworks */ = {isa = PBXBuildFile; productRef = 86A9CC3D2DE9638D000F65EF /* KMPObservableViewModelCore */; };
+		86A9CC402DE9638D000F65EF /* KMPObservableViewModelSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 86A9CC3F2DE9638D000F65EF /* KMPObservableViewModelSwiftUI */; };
 		91595DA528BB3F89009BBC89 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91595DA428BB3F89009BBC89 /* Font.swift */; };
 		91595DAB28BB41AC009BBC89 /* sedgwickavedisplay_regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 91595DA628BB41AC009BBC89 /* sedgwickavedisplay_regular.ttf */; };
 		91595DAC28BB41AC009BBC89 /* mashanzheng_regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 91595DA728BB41AC009BBC89 /* mashanzheng_regular.ttf */; };
@@ -14,9 +16,7 @@
 		91595DAE28BB41AC009BBC89 /* montserrat_semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 91595DA928BB41AC009BBC89 /* montserrat_semibold.ttf */; };
 		91595DAF28BB41AC009BBC89 /* montserrat_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 91595DAA28BB41AC009BBC89 /* montserrat_medium.ttf */; };
 		91595DB128BB766B009BBC89 /* UIScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91595DB028BB766B009BBC89 /* UIScreen.swift */; };
-		91851BFE297A30A900806695 /* KMMViewModelCore in Frameworks */ = {isa = PBXBuildFile; productRef = 91851BFD297A30A900806695 /* KMMViewModelCore */; };
-		91851C00297A30A900806695 /* KMMViewModelSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 91851BFF297A30A900806695 /* KMMViewModelSwiftUI */; };
-		91851C02297A30BD00806695 /* KMMViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91851C01297A30BD00806695 /* KMMViewModel.swift */; };
+		91851C02297A30BD00806695 /* KMPViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91851C01297A30BD00806695 /* KMPViewModel.swift */; };
 		91BC279228BB391800AD291A /* BrowsePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BC276028BB391800AD291A /* BrowsePageView.swift */; };
 		91BC279428BB391800AD291A /* BrowseRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BC276328BB391800AD291A /* BrowseRouter.swift */; };
 		91BC279528BB391800AD291A /* GenreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BC276528BB391800AD291A /* GenreView.swift */; };
@@ -58,7 +58,7 @@
 		91595DA928BB41AC009BBC89 /* montserrat_semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = montserrat_semibold.ttf; sourceTree = "<group>"; };
 		91595DAA28BB41AC009BBC89 /* montserrat_medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = montserrat_medium.ttf; sourceTree = "<group>"; };
 		91595DB028BB766B009BBC89 /* UIScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScreen.swift; sourceTree = "<group>"; };
-		91851C01297A30BD00806695 /* KMMViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMMViewModel.swift; sourceTree = "<group>"; };
+		91851C01297A30BD00806695 /* KMPViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMPViewModel.swift; sourceTree = "<group>"; };
 		91BC276028BB391800AD291A /* BrowsePageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowsePageView.swift; sourceTree = "<group>"; };
 		91BC276328BB391800AD291A /* BrowseRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseRouter.swift; sourceTree = "<group>"; };
 		91BC276528BB391800AD291A /* GenreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenreView.swift; sourceTree = "<group>"; };
@@ -94,9 +94,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86A9CC402DE9638D000F65EF /* KMPObservableViewModelSwiftUI in Frameworks */,
+				86A9CC3E2DE9638D000F65EF /* KMPObservableViewModelCore in Frameworks */,
 				CE38FDAA2B123C09002F3B3E /* SDWebImageSwiftUI in Frameworks */,
-				91851BFE297A30A900806695 /* KMMViewModelCore in Frameworks */,
-				91851C00297A30A900806695 /* KMMViewModelSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,7 +286,7 @@
 				91BC278428BB391800AD291A /* Koin.swift */,
 				91BC278528BB391800AD291A /* MangaKuApp.swift */,
 				91BC278628BB391800AD291A /* TabNavigationView.swift */,
-				91851C01297A30BD00806695 /* KMMViewModel.swift */,
+				91851C01297A30BD00806695 /* KMPViewModel.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -351,9 +351,9 @@
 			);
 			name = MangaKu;
 			packageProductDependencies = (
-				91851BFD297A30A900806695 /* KMMViewModelCore */,
-				91851BFF297A30A900806695 /* KMMViewModelSwiftUI */,
 				CE38FDA92B123C09002F3B3E /* SDWebImageSwiftUI */,
+				86A9CC3D2DE9638D000F65EF /* KMPObservableViewModelCore */,
+				86A9CC3F2DE9638D000F65EF /* KMPObservableViewModelSwiftUI */,
 			);
 			productName = iosApp;
 			productReference = 7555FF7B242A565900829871 /* MangaKu.app */;
@@ -385,8 +385,8 @@
 			);
 			mainGroup = 7555FF72242A565900829871;
 			packageReferences = (
-				91851BFC297A30A900806695 /* XCRemoteSwiftPackageReference "KMM-ViewModel" */,
 				CE38FDA82B123C09002F3B3E /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+				86A9CC3C2DE9638D000F65EF /* XCRemoteSwiftPackageReference "KMP-ObservableViewModel" */,
 			);
 			productRefGroup = 7555FF7C242A565900829871 /* Products */;
 			projectDirPath = "";
@@ -467,7 +467,7 @@
 				91BC27A428BB391800AD291A /* Shimmers.swift in Sources */,
 				91BC27A828BB391800AD291A /* SearchRow.swift in Sources */,
 				91BC27AA28BB391800AD291A /* MangaKuApp.swift in Sources */,
-				91851C02297A30BD00806695 /* KMMViewModel.swift in Sources */,
+				91851C02297A30BD00806695 /* KMPViewModel.swift in Sources */,
 				91BC279228BB391800AD291A /* BrowsePageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -595,8 +595,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5S8HRB386G;
+				DEVELOPMENT_TEAM = SM8JGRFPQU;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -612,6 +613,7 @@
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.uwaisalqadri.mangaku;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -621,8 +623,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5S8HRB386G;
+				DEVELOPMENT_TEAM = SM8JGRFPQU;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -638,6 +641,7 @@
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.uwaisalqadri.mangaku;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -667,12 +671,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		91851BFC297A30A900806695 /* XCRemoteSwiftPackageReference "KMM-ViewModel" */ = {
+		86A9CC3C2DE9638D000F65EF /* XCRemoteSwiftPackageReference "KMP-ObservableViewModel" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/rickclephas/KMM-ViewModel.git";
+			repositoryURL = "https://github.com/rickclephas/KMP-ObservableViewModel.git";
 			requirement = {
-				branch = master;
-				kind = branch;
+				kind = exactVersion;
+				version = "1.0.0-BETA-11";
 			};
 		};
 		CE38FDA82B123C09002F3B3E /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
@@ -686,15 +690,15 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		91851BFD297A30A900806695 /* KMMViewModelCore */ = {
+		86A9CC3D2DE9638D000F65EF /* KMPObservableViewModelCore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 91851BFC297A30A900806695 /* XCRemoteSwiftPackageReference "KMM-ViewModel" */;
-			productName = KMMViewModelCore;
+			package = 86A9CC3C2DE9638D000F65EF /* XCRemoteSwiftPackageReference "KMP-ObservableViewModel" */;
+			productName = KMPObservableViewModelCore;
 		};
-		91851BFF297A30A900806695 /* KMMViewModelSwiftUI */ = {
+		86A9CC3F2DE9638D000F65EF /* KMPObservableViewModelSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 91851BFC297A30A900806695 /* XCRemoteSwiftPackageReference "KMM-ViewModel" */;
-			productName = KMMViewModelSwiftUI;
+			package = 86A9CC3C2DE9638D000F65EF /* XCRemoteSwiftPackageReference "KMP-ObservableViewModel" */;
+			productName = KMPObservableViewModelSwiftUI;
 		};
 		CE38FDA92B123C09002F3B3E /* SDWebImageSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -9,17 +9,14 @@
 import SwiftUI
 import SDWebImageSwiftUI
 import Shared
-import KMMViewModelSwiftUI
+import KMPObservableViewModelSwiftUI
 
 struct DetailPageView: View {
-  @StateViewModel var viewModel: DetailViewModel
-  @StateViewModel var mangaViewModel: MyMangaViewModel
+  @StateViewModel var viewModel = DetailViewModel()
+  @StateViewModel var mangaViewModel = MyMangaViewModel()
   @State private var isShowDialog = false
   
   let mangaId: String
-  
-  private let appWillTerminate = NotificationCenter.default
-    .publisher(for: UIApplication.willTerminateNotification)
   
   private var viewState: DetailState {
     viewModel.state
@@ -46,7 +43,7 @@ struct DetailPageView: View {
               .cornerRadius(10)
               .padding(.horizontal, 24)
               .onAppear {
-                mangaViewModel.onTriggerEvent(event: MyMangaEvent.CheckFavorite(mangaId: data.id))
+                mangaViewModel.send(event: MyMangaEvent.CheckFavorite(mangaId: data.id))
               }
             
             VStack(alignment: .leading) {
@@ -101,8 +98,8 @@ struct DetailPageView: View {
     .navigationTitle("Detail")
     .navigationBarItems(trailing: Button(action: {
       if let data = viewState.manga {
-        favState.isFavorite ? mangaViewModel.onTriggerEvent(event: MyMangaEvent.DeleteFavorite(mangaId: data.id))
-        : mangaViewModel.onTriggerEvent(event: MyMangaEvent.AddFavorite(manga: data))
+        favState.isFavorite ? mangaViewModel.send(event: MyMangaEvent.DeleteFavorite(mangaId: data.id))
+        : mangaViewModel.send(event: MyMangaEvent.AddFavorite(manga: data))
         isShowDialog.toggle()
       }
     }) {
@@ -112,10 +109,7 @@ struct DetailPageView: View {
         .frame(width: 22, height: 20)
     })
     .onAppear {
-      viewModel.onTriggerEvent(event: DetailEvent.GetManga(id: mangaId))
-    }
-    .onReceive(appWillTerminate) { _ in
-      mangaViewModel.closePersistence()
+      viewModel.send(event: DetailEvent.GetManga(id: mangaId))
     }
     .customDialog(isShowing: $isShowDialog) {
       VStack(alignment: .center) {

@@ -10,10 +10,6 @@ import Foundation
 import Shared
 
 protocol FeatureAssembler {
-  @MainActor func resolve() -> MyMangaViewModel
-  @MainActor func resolve() -> SearchViewModel
-  @MainActor func resolve() -> DetailViewModel
-
   func resolve() -> BrowseRouter
   func resolve() -> MyMangaRouter
   func resolve() -> SearchRouter
@@ -21,18 +17,6 @@ protocol FeatureAssembler {
 }
 
 extension FeatureAssembler where Self: Assembler {
-
-  @MainActor func resolve() -> MyMangaViewModel {
-    return MyMangaViewModel()
-  }
-
-  @MainActor func resolve() -> SearchViewModel {
-    return SearchViewModel()
-  }
-
-  @MainActor func resolve() -> DetailViewModel {
-    return DetailViewModel()
-  }
 
   func resolve() -> BrowseRouter {
     return BrowseRouter(asssembler: self)

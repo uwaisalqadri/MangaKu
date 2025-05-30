@@ -25,8 +25,11 @@ extension KoinApplication {
   private static let keyPaths: [PartialKeyPath<Koin>] = [
     \.browseUseCase,
     \.searchUseCase,
-    \.myMangaUseCase,
-    \.detailUseCase
+    \.detailUseCase,
+    \.getMyMangaUseCase,
+    \.getMyMangaByIdUseCase,
+    \.addMangaUseCase,
+    \.deleteMangaUseCase
   ]
 
   static func inject<T>() -> T {

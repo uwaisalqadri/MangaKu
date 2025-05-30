@@ -10,13 +10,13 @@ import org.koin.core.logger.Level
 /**
  * Created by Uwais Alqadri on July 23, 2021
  */
-class MangaKuApp: Application() {
+class MainApp: Application() {
 
 	override fun onCreate() {
 		super.onCreate()
 		initKoin {
 			androidLogger(if (BuildConfig.DEBUG) Level.ERROR else Level.NONE)
-			androidContext(this@MangaKuApp)
+			androidContext(this@MainApp)
 			modules(featureModule)
 		}
 	}

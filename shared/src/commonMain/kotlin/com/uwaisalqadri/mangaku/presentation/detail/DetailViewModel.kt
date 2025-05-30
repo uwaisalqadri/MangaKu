@@ -1,8 +1,10 @@
 package com.uwaisalqadri.mangaku.presentation.detail
 
+import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
 import com.rickclephas.kmp.observableviewmodel.ViewModel
 import com.rickclephas.kmp.observableviewmodel.launch
 import com.rickclephas.kmp.observableviewmodel.stateIn
+import com.uwaisalqadri.mangaku.di.inject
 import com.uwaisalqadri.mangaku.domain.usecase.detail.DetailUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -13,14 +15,14 @@ import kotlinx.coroutines.flow.update
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-open class DetailViewModel(
-    private val detailUseCase: DetailUseCase
-) : ViewModel() {
+open class DetailViewModel: ViewModel() {
 
+    private val detailUseCase: DetailUseCase = inject()
     val mangaId = MutableStateFlow("")
 
     private val _state = MutableStateFlow(DetailState())
-    val state: StateFlow<DetailState> = _state.asStateFlow()
+    @NativeCoroutinesState
+    val state = _state.asStateFlow()
 
     fun send(event: DetailEvent) {
         when (event) {

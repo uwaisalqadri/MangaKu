@@ -1,7 +1,9 @@
 package com.uwaisalqadri.mangaku.presentation.search
 
+import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
 import com.rickclephas.kmp.observableviewmodel.ViewModel
 import com.rickclephas.kmp.observableviewmodel.launch
+import com.uwaisalqadri.mangaku.di.inject
 import com.uwaisalqadri.mangaku.domain.usecase.search.SearchUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -10,12 +12,13 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.update
 import org.koin.core.component.KoinComponent
 
-open class SearchViewModel(
-    private val searchUseCase: SearchUseCase
-) : ViewModel() {
+open class SearchViewModel: ViewModel() {
+
+    private val searchUseCase: SearchUseCase = inject()
 
     private val _state = MutableStateFlow(SearchState())
-    val state: StateFlow<SearchState> = _state.asStateFlow()
+    @NativeCoroutinesState
+    val state = _state.asStateFlow()
 
     fun send(event: SearchEvent) {
         when (event) {
