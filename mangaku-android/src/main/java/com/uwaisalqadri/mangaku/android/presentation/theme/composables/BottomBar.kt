@@ -13,9 +13,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.uwaisalqadri.mangaku.android.R
 import com.ramcosta.composedestinations.generated.destinations.BrowseScreenDestination
 import com.ramcosta.composedestinations.generated.destinations.MyMangaScreenDestination
+import com.uwaisalqadri.mangaku.android.presentation.theme.R
 
 enum class BottomBarDestination(
     var route: String,
@@ -24,13 +24,13 @@ enum class BottomBarDestination(
 ) {
     BROWSE(
         route = BrowseScreenDestination.route,
-        icon = R.drawable.ic_browse_active,
+        icon = R.Drawable.BrowseActiveIcon,
         title = "Browse"
     ),
 
     MY_MANGA(
         route = MyMangaScreenDestination.route,
-        icon = R.drawable.ic_mymanga_active,
+        icon = R.Drawable.MangaActiveIcon,
         title = "MyManga"
     )
 }

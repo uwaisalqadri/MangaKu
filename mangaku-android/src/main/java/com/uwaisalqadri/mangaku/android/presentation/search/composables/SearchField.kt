@@ -23,9 +23,9 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.uwaisalqadri.mangaku.android.R
 import com.uwaisalqadri.mangaku.android.presentation.theme.MangaTypography
 import com.uwaisalqadri.mangaku.android.presentation.theme.Montserrat
+import com.uwaisalqadri.mangaku.android.presentation.theme.R
 
 @Composable
 fun SearchField(
@@ -67,7 +67,7 @@ fun SearchField(
         ) {
 
             Icon(
-                painter = painterResource(id = R.drawable.ic_search),
+                painter = painterResource(id = R.Drawable.SearchIcon),
                 contentDescription = null,
                 tint = MaterialTheme.colors.secondary,
                 modifier = Modifier
@@ -111,7 +111,7 @@ fun SearchField(
 
             if (query != "") {
                 Icon(
-                    painter = painterResource(id = R.drawable.ic_cancel),
+                    painter = painterResource(id = R.Drawable.CancelIcon),
                     contentDescription = null,
                     tint = MaterialTheme.colors.secondary,
                     modifier = Modifier

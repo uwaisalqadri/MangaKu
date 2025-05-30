@@ -17,10 +17,10 @@ import com.ramcosta.composedestinations.annotation.RootGraph
 import com.ramcosta.composedestinations.generated.destinations.DetailScreenDestination
 import com.ramcosta.composedestinations.generated.destinations.SearchScreenDestination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
-import com.uwaisalqadri.mangaku.android.R
 import com.uwaisalqadri.mangaku.android.presentation.browse.composables.Genres
 import com.uwaisalqadri.mangaku.android.presentation.browse.composables.MangaTrending
 import com.uwaisalqadri.mangaku.android.presentation.theme.MangaTypography
+import com.uwaisalqadri.mangaku.android.presentation.theme.R
 import com.uwaisalqadri.mangaku.android.presentation.theme.composables.ShimmerBrowseItem
 import com.uwaisalqadri.mangaku.android.presentation.theme.composables.TopBar
 import com.uwaisalqadri.mangaku.presentation.browse.BrowseEvent
@@ -47,7 +47,7 @@ fun BrowseScreen(
         item {
             TopBar(
                 name = "Browse",
-                icon = R.drawable.ic_search
+                icon = R.Drawable.SearchIcon
             ) {
                 navigator.navigate(SearchScreenDestination())
             }
