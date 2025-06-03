@@ -1,7 +1,7 @@
 package com.uwaisalqadri.mangaku.di
 
-import com.uwaisalqadri.mangaku.data.source.local.dbDriverModule
-import com.uwaisalqadri.mangaku.data.source.remote.ktorEngineModule
+import com.uwaisalqadri.mangaku.data.source.db.dbDriverModule
+import com.uwaisalqadri.mangaku.data.source.api.ktorEngineModule
 import com.uwaisalqadri.mangaku.domain.usecase.browse.BrowseUseCase
 import com.uwaisalqadri.mangaku.domain.usecase.detail.DetailUseCase
 import com.uwaisalqadri.mangaku.domain.usecase.mymanga.AddMangaUseCase

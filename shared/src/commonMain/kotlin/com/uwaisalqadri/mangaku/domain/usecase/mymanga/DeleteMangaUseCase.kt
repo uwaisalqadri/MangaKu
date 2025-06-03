@@ -1,14 +1,16 @@
 package com.uwaisalqadri.mangaku.domain.usecase.mymanga
 
-import com.uwaisalqadri.mangaku.domain.executing
+import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
+import com.uwaisalqadri.mangaku.domain.utils.executing
 import com.uwaisalqadri.mangaku.domain.repository.MangaRepository
-import com.uwaisalqadri.mangaku.domain.UseCase
+import com.uwaisalqadri.mangaku.domain.utils.UseCase
 import kotlinx.coroutines.flow.Flow
 
 class DeleteMangaUseCase(private val repository: MangaRepository) : UseCase<String, Unit> {
-    override fun execute(parameter: String): Flow<Unit> {
+    @NativeCoroutines
+    override fun execute(request: String): Flow<Unit> {
         return executing {
-            repository.deleteMangaFavorite(parameter)
+            repository.deleteMangaFavorite(request)
         }
     }
 }
