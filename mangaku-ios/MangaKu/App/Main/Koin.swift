@@ -47,7 +47,7 @@ extension KoinApplication {
 }
 
 @propertyWrapper
-struct LazyKoin<T> {
+struct Inject<T> {
   lazy var wrappedValue: T = { KoinApplication.shared.inject() }()
 
   init() { }
