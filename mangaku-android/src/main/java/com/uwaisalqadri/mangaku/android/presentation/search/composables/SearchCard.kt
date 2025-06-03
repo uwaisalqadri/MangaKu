@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.coil.rememberCoilPainter
-import com.uwaisalqadri.mangaku.domain.model.Manga
+import com.uwaisalqadri.mangaku.domain.base.model.Manga
 import com.uwaisalqadri.mangaku.utils.getPosterImage
 
 @Composable

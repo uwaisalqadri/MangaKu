@@ -23,8 +23,6 @@ import com.uwaisalqadri.mangaku.android.presentation.theme.MangaTypography
 import com.uwaisalqadri.mangaku.android.presentation.theme.R
 import com.uwaisalqadri.mangaku.android.presentation.theme.composables.ShimmerBrowseItem
 import com.uwaisalqadri.mangaku.android.presentation.theme.composables.TopBar
-import com.uwaisalqadri.mangaku.presentation.browse.BrowseEvent
-import com.uwaisalqadri.mangaku.presentation.browse.BrowseViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Destination<RootGraph>
@@ -36,7 +34,7 @@ fun BrowseScreen(
     val viewState by viewModel.state.collectAsState()
 
     LaunchedEffect(Unit) {
-        viewModel.send(BrowseEvent.GetMangas)
+        viewModel.send(BrowseAction.GetMangas)
     }
 
     LazyColumn(
@@ -78,7 +76,7 @@ fun BrowseScreen(
                     }
                 }
 
-                viewState.isEmpty -> {
+                viewState.items.isEmpty() -> {
                     Text(
                         text = "No trending manga found.",
                         modifier = Modifier.padding(16.dp),
@@ -88,7 +86,7 @@ fun BrowseScreen(
 
                 else -> {
                     MangaTrending(
-                        trendingManga = viewState.mangas,
+                        trendingManga = viewState.items,
                         modifier = Modifier
                             .fillMaxWidth()
                             .fillMaxHeight()

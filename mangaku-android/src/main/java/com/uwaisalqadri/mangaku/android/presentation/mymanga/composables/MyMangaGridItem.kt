@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.google.accompanist.coil.rememberCoilPainter
 import com.uwaisalqadri.mangaku.android.presentation.theme.MangaTypography
-import com.uwaisalqadri.mangaku.domain.model.Manga
+import com.uwaisalqadri.mangaku.domain.base.model.Manga
 import com.uwaisalqadri.mangaku.utils.getPosterImage
 import com.uwaisalqadri.mangaku.utils.getTitle
 

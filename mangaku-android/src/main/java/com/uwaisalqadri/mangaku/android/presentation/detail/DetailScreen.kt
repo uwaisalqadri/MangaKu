@@ -44,11 +44,9 @@ import com.uwaisalqadri.mangaku.android.presentation.theme.MangaTypography
 import com.uwaisalqadri.mangaku.android.presentation.theme.composables.BackButton
 import com.uwaisalqadri.mangaku.android.presentation.theme.composables.ShimmerDetail
 import com.uwaisalqadri.mangaku.android.presentation.theme.composables.TopBar
-import com.uwaisalqadri.mangaku.domain.model.Manga
-import com.uwaisalqadri.mangaku.presentation.detail.DetailEvent
-import com.uwaisalqadri.mangaku.presentation.detail.DetailViewModel
-import com.uwaisalqadri.mangaku.presentation.mymanga.MyMangaEvent
-import com.uwaisalqadri.mangaku.presentation.mymanga.MyMangaViewModel
+import com.uwaisalqadri.mangaku.domain.base.model.Manga
+import com.uwaisalqadri.mangaku.android.presentation.mymanga.MyMangaAction
+import com.uwaisalqadri.mangaku.android.presentation.mymanga.MyMangaViewModel
 import com.uwaisalqadri.mangaku.utils.DateFormatter
 import com.uwaisalqadri.mangaku.utils.formatDate
 import com.uwaisalqadri.mangaku.utils.getCoverImage
@@ -70,8 +68,8 @@ fun DetailScreen(
     var isShowDialog by remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
-        viewModel.send(DetailEvent.GetManga(mangaId))
-        mangaViewModel.send(MyMangaEvent.CheckFavorite(mangaId))
+        viewModel.send(DetailAction.GetManga(mangaId))
+        mangaViewModel.send(MyMangaAction.CheckFavorite(mangaId))
     }
 
     LazyColumn(
@@ -97,9 +95,9 @@ fun DetailScreen(
                 onToggleFavorite = {
                     viewState.manga?.let {
                         if (favState.isFavorite) {
-                            mangaViewModel.send(MyMangaEvent.DeleteFavorite(it.id))
+                            mangaViewModel.send(MyMangaAction.DeleteFavorite(it.id))
                         } else {
-                            mangaViewModel.send(MyMangaEvent.AddFavorite(it))
+                            mangaViewModel.send(MyMangaAction.AddFavorite(it))
                         }
                         isShowDialog = true
                     }

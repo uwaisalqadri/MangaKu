@@ -1,11 +1,8 @@
 package com.uwaisalqadri.mangaku.data.mapper
 
-import com.uwaisalqadri.mangaku.db.MangaEntity
-import com.uwaisalqadri.mangaku.domain.model.Attributes
-import com.uwaisalqadri.mangaku.domain.model.CoverImage
-import com.uwaisalqadri.mangaku.domain.model.Manga
-import com.uwaisalqadri.mangaku.domain.model.PosterImage
-import com.uwaisalqadri.mangaku.domain.model.Titles
+import com.uwaisalqadri.mangaku.data.source.db.entity.MangaEntity
+import com.uwaisalqadri.mangaku.domain.base.model.Attributes
+import com.uwaisalqadri.mangaku.domain.base.model.Manga
 import com.uwaisalqadri.mangaku.utils.emptyString
 
 fun List<MangaEntity>.map(): List<Manga> {

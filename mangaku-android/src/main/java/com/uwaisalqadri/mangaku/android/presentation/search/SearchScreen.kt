@@ -26,9 +26,7 @@ import com.uwaisalqadri.mangaku.android.presentation.theme.MangaTypography
 import com.uwaisalqadri.mangaku.android.presentation.theme.composables.BackButton
 import com.uwaisalqadri.mangaku.android.presentation.theme.composables.ShimmerSearchItem
 import com.uwaisalqadri.mangaku.android.presentation.theme.composables.TopBar
-import com.uwaisalqadri.mangaku.domain.model.Manga
-import com.uwaisalqadri.mangaku.presentation.search.SearchEvent
-import com.uwaisalqadri.mangaku.presentation.search.SearchViewModel
+import com.uwaisalqadri.mangaku.domain.base.model.Manga
 import org.koin.androidx.compose.koinViewModel
 
 @Destination<RootGraph>
@@ -60,9 +58,9 @@ fun SearchScreen(
             SearchField(
                 query = state.searchQuery,
                 placeholder = "Search All Manga..",
-                onQueryChanged = { viewModel.send(SearchEvent.GetMangas(it)) },
-                onExecuteSearch = { viewModel.send(SearchEvent.GetMangas(state.searchQuery)) },
-                onEraseQuery = { viewModel.send(SearchEvent.Empty) },
+                onQueryChanged = { viewModel.send(SearchAction.GetMangas(it)) },
+                onExecuteSearch = { viewModel.send(SearchAction.GetMangas(state.searchQuery)) },
+                onEraseQuery = { viewModel.send(SearchAction.Empty) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 20.dp, vertical = 20.dp)
@@ -72,7 +70,7 @@ fun SearchScreen(
         item {
             SearchResults(
                 isLoading = state.isLoading,
-                mangas = state.mangas,
+                mangas = state.items,
                 onMangaClick = { navigator.navigate(DetailScreenDestination(mangaId = it)) }
             )
         }

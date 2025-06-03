@@ -1,7 +1,7 @@
 package com.uwaisalqadri.mangaku.data.mapper
 
-import com.uwaisalqadri.mangaku.data.source.remote.response.*
-import com.uwaisalqadri.mangaku.domain.model.*
+import com.uwaisalqadri.mangaku.data.source.api.response.*
+import com.uwaisalqadri.mangaku.domain.base.model.*
 
 fun List<MangaItemResponse>.map(): List<Manga> {
     return map { it.map() }

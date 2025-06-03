@@ -33,10 +33,7 @@ import com.uwaisalqadri.mangaku.android.presentation.mymanga.composables.LayoutS
 import com.uwaisalqadri.mangaku.android.presentation.mymanga.composables.MyMangaGridItem
 import com.uwaisalqadri.mangaku.android.presentation.search.composables.StaggeredVerticalGrid
 import com.uwaisalqadri.mangaku.android.presentation.theme.MangaTypography
-import com.uwaisalqadri.mangaku.domain.model.Manga
-import com.uwaisalqadri.mangaku.presentation.mymanga.MyMangaEvent
-import com.uwaisalqadri.mangaku.presentation.mymanga.MyMangaState
-import com.uwaisalqadri.mangaku.presentation.mymanga.MyMangaViewModel
+import com.uwaisalqadri.mangaku.domain.base.model.Manga
 import org.koin.androidx.compose.koinViewModel
 
 @Destination<RootGraph>
@@ -50,7 +47,7 @@ fun MyMangaScreen(
     var isPageLayout by rememberSaveable { mutableStateOf(true) }
 
     LaunchedEffect(Unit) {
-        viewModel.send(MyMangaEvent.GetMyMangas)
+        viewModel.send(MyMangaAction.GetMyMangas)
     }
 
     LazyColumn(
@@ -110,7 +107,7 @@ private fun MangaContent(
 ) {
     Box(modifier = Modifier.fillMaxWidth()) {
         when {
-            viewState.isLoading || viewState.isEmpty -> {
+            viewState.isLoading || viewState.items.isEmpty() -> {
                 Text(
                     text = "Still Empty Here!",
                     style = MangaTypography.overline,
@@ -125,7 +122,7 @@ private fun MangaContent(
 
             isPageLayout -> {
                 HorizontalPagerWithTransition(
-                    manga = viewState.mangas,
+                    manga = viewState.items,
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(500.dp)
@@ -138,7 +135,7 @@ private fun MangaContent(
                     modifier = Modifier
                         .padding(horizontal = 20.dp, vertical = 30.dp)
                 ) {
-                    viewState.mangas.forEach { manga ->
+                    viewState.items.forEach { manga ->
                         MyMangaGridItem(manga = manga) {
                             onItemClick(manga)
                         }

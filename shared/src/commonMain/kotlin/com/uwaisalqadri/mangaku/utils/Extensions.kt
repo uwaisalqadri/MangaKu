@@ -1,7 +1,7 @@
 package com.uwaisalqadri.mangaku.utils
 
-import com.uwaisalqadri.mangaku.domain.model.Manga
-import com.uwaisalqadri.mangaku.domain.model.Titles
+import com.uwaisalqadri.mangaku.domain.base.model.Manga
+import com.uwaisalqadri.mangaku.domain.base.model.Titles
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toInstant
 import kotlinx.datetime.toLocalDate

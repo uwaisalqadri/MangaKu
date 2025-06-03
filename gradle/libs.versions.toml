@@ -34,11 +34,13 @@ shimmer = "1.0.2"
 agp = "8.6.1"
 skie = "0.10.0"
 kmpViewModel = "1.0.0-BETA-11"
-kmpNativeCoroutines = "1.0.0-ALPHA-20"
+kmpNativeCoroutines = "1.0.0-ALPHA-38"
 yamlkt = "0.12.0"
 sqlDelight = "2.1.0"
+room = "2.7.1"
 androidGradlePlugin = "8.9.3"
 gradleVersionsPlugin = "0.51.0"
+sqlite = "2.5.1"
 
 [libraries]
 kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization" }
@@ -102,6 +104,13 @@ sqldelight-native-driver = { module = "app.cash.sqldelight:native-driver", versi
 sqldelight-sqlite-driver = { module = "app.cash.sqldelight:sqlite-driver", version.ref = "sqlDelight" }
 sqldelight-web-driver = { module = "app.cash.sqldelight:web-worker-driver", version.ref = "sqlDelight" }
 
+androidx-sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sqlite" }
+androidx-sqlite = { module = "androidx.sqlite:sqlite", version.ref = "sqlite" }
+androidx-sqlite-framework = { module = "androidx.sqlite:sqlite-framework", version.ref = "sqlite" }
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
+androidx-room-ksp = { module = "androidx.room:room-compiler", version.ref = "room" }
+
 [plugins]
 gradleVersionsPlugin = { id = "com.github.ben-manes.versions", version.ref  = "gradleVersionsPlugin" }
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -114,3 +123,4 @@ kmp-nativecoroutines = { id = "com.rickclephas.kmp.nativecoroutines", version.re
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 sqlDelight = { id = "app.cash.sqldelight", version.ref = "sqlDelight" }
 skie = { id = "co.touchlab.skie", version.ref = "skie" }
+room = { id = "androidx.room", version.ref = "room" }

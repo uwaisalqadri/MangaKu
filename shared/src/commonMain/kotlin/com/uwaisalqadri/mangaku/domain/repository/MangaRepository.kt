@@ -1,6 +1,6 @@
 package com.uwaisalqadri.mangaku.domain.repository
 
-import com.uwaisalqadri.mangaku.domain.model.Manga
+import com.uwaisalqadri.mangaku.domain.base.model.Manga
 
 interface MangaRepository {
     suspend fun getManga(): List<Manga>

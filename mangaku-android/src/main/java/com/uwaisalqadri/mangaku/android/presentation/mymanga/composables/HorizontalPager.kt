@@ -24,7 +24,7 @@ import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.calculateCurrentOffsetForPage
 import com.uwaisalqadri.mangaku.android.presentation.browse.composables.StarRate
 import com.uwaisalqadri.mangaku.android.presentation.theme.MangaTypography
-import com.uwaisalqadri.mangaku.domain.model.Manga
+import com.uwaisalqadri.mangaku.domain.base.model.Manga
 import com.uwaisalqadri.mangaku.utils.getPosterImage
 import com.uwaisalqadri.mangaku.utils.getTitle
 import kotlin.math.absoluteValue

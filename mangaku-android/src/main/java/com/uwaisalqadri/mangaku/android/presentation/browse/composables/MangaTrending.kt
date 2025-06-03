@@ -8,7 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.uwaisalqadri.mangaku.domain.model.Manga
+import com.uwaisalqadri.mangaku.domain.base.model.Manga
 
 @Composable
 fun MangaTrending(

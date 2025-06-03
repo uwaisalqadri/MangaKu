@@ -4,8 +4,9 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.kmp.nativecoroutines)
     alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.sqlDelight)
+//    alias(libs.plugins.sqlDelight)
     alias(libs.plugins.skie)
+    alias(libs.plugins.room)
 }
 
 android {
@@ -55,6 +56,10 @@ kotlin {
 
             api(libs.kermit.logger)
             api(libs.kmp.viewModel)
+            api(libs.androidx.room.runtime)
+            api(libs.androidx.sqlite.bundled)
+            api(libs.androidx.sqlite.framework)
+            api(libs.androidx.sqlite)
             implementation(libs.kotlin.yaml)
             implementation(kotlin("stdlib-common"))
         }
@@ -74,18 +79,17 @@ kotlin {
     }
 }
 
-sqldelight {
-    databases {
-        create("MangakuDB") {
-            generateAsync = true
-            packageName.set("com.uwaisalqadri.mangaku.db")
-        }
-    }
+dependencies {
+    ksp(libs.androidx.room.ksp)
 }
 
 kotlin.sourceSets.all {
     languageSettings.optIn("kotlinx.cinterop.ExperimentalForeignApi")
     languageSettings.optIn("kotlin.experimental.ExperimentalObjCName")
+}
+
+room {
+    schemaDirectory("$projectDir/schemas")
 }
 
 skie {

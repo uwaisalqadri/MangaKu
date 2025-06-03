@@ -1,12 +1,12 @@
 package com.uwaisalqadri.mangaku.data.repository
 
 import com.uwaisalqadri.mangaku.data.mapper.map
-import com.uwaisalqadri.mangaku.data.source.local.MangaDao
-import com.uwaisalqadri.mangaku.data.source.remote.MangaApi
-import com.uwaisalqadri.mangaku.data.source.remote.NetworkService
-import com.uwaisalqadri.mangaku.data.source.remote.response.MangaDetailResponse
-import com.uwaisalqadri.mangaku.data.source.remote.response.MangaResponse
-import com.uwaisalqadri.mangaku.domain.model.Manga
+import com.uwaisalqadri.mangaku.data.source.db.MangaDao
+import com.uwaisalqadri.mangaku.data.source.api.KitsuApi
+import com.uwaisalqadri.mangaku.data.source.api.NetworkService
+import com.uwaisalqadri.mangaku.data.source.api.response.MangaDetailResponse
+import com.uwaisalqadri.mangaku.data.source.api.response.MangaResponse
+import com.uwaisalqadri.mangaku.domain.base.model.Manga
 import com.uwaisalqadri.mangaku.domain.repository.MangaRepository
 
 class MangaRepositoryImpl(
@@ -15,22 +15,22 @@ class MangaRepositoryImpl(
 ): MangaRepository {
 
     override suspend fun getManga(): List<Manga> {
-        val response: MangaResponse = network.connect(MangaApi.GetList)
+        val response: MangaResponse = network.connect(KitsuApi.GetList)
         return response.data.map()
     }
 
     override suspend fun getTrendingManga(): List<Manga> {
-        val response: MangaResponse = network.connect(MangaApi.Trending)
+        val response: MangaResponse = network.connect(KitsuApi.Trending)
         return response.data.map()
     }
 
     override suspend fun getSearchManga(query: String): List<Manga> {
-        val response: MangaResponse = network.connect(MangaApi.Search(query))
+        val response: MangaResponse = network.connect(KitsuApi.Search(query))
         return response.data.map()
     }
 
     override suspend fun getDetailManga(mangaId: String): Manga {
-        val response: MangaDetailResponse = network.connect(MangaApi.Detail(mangaId))
+        val response: MangaDetailResponse = network.connect(KitsuApi.Detail(mangaId))
         return response.data.map()
     }
 
@@ -43,6 +43,7 @@ class MangaRepositoryImpl(
     }
 
     override suspend fun addMangaFavorite(manga: Manga) {
+        println("ADD MANGA $manga")
         database.addManga(manga.map())
     }
 
