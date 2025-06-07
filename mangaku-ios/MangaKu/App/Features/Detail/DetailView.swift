@@ -46,12 +46,12 @@ struct DetailView: View {
                 .font(.custom(.mbold, size: 25))
                 .padding(.top, 15)
               
-              Text(data.attributes?.slug ?? "")
+              Text(data.slug)
                 .foregroundColor(.black)
                 .font(.custom(.mmedium, size: 15))
               
               HStack {
-                Text(DateFormatterKt.formatDate(dateString: data.attributes?.startDate ?? "", format: Shared.DateFormatter().CASUAL_DATE_FORMAT))
+                Text(DateFormatterKt.formatDate(dateString: data.startDate, format: Shared.DateFormatter().CASUAL_DATE_FORMAT))
                   .foregroundColor(.white)
                   .font(.custom(.mbold, size: 13))
                   .padding(10)
@@ -63,7 +63,7 @@ struct DetailView: View {
                     .foregroundColor(.yellow)
                     .frame(width: 15, height: 15)
                   
-                  Text(String(data.attributes?.averageRating ?? 0.0).removeCharacters(from: "0"))
+                  Text(String(data.averageRating).removeCharacters(from: "0"))
                     .foregroundColor(.black)
                     .font(.custom(.msemibold, size: 14))
                   
@@ -76,7 +76,7 @@ struct DetailView: View {
                 .font(.custom(.mbold, size: 21))
                 .padding(.top, 50)
               
-              Text(data.attributes?.synopsis ?? "")
+              Text(data.synopsis)
                 .foregroundColor(.black)
                 .font(.custom(.mmedium, size: 15))
                 .padding(.top, 15)

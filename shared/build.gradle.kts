@@ -1,10 +1,9 @@
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.android.library)
     alias(libs.plugins.ksp)
-    alias(libs.plugins.kmp.nativecoroutines)
     alias(libs.plugins.kotlin.serialization)
-//    alias(libs.plugins.sqlDelight)
     alias(libs.plugins.skie)
     alias(libs.plugins.room)
 }
@@ -55,11 +54,17 @@ kotlin {
             implementation(libs.kotlinx.datetime)
 
             api(libs.kermit.logger)
+
+            api(libs.skie.annotations)
+
             api(libs.kmp.viewModel)
+
             api(libs.androidx.room.runtime)
+
             api(libs.androidx.sqlite.bundled)
             api(libs.androidx.sqlite.framework)
             api(libs.androidx.sqlite)
+
             implementation(libs.kotlin.yaml)
             implementation(kotlin("stdlib-common"))
         }
@@ -80,7 +85,10 @@ kotlin {
 }
 
 dependencies {
-    ksp(libs.androidx.room.ksp)
+    add("kspAndroid", libs.androidx.room.ksp)
+    add("kspIosSimulatorArm64", libs.androidx.room.ksp)
+    add("kspIosX64", libs.androidx.room.ksp)
+    add("kspIosArm64", libs.androidx.room.ksp)
 }
 
 kotlin.sourceSets.all {
@@ -88,12 +96,13 @@ kotlin.sourceSets.all {
     languageSettings.optIn("kotlin.experimental.ExperimentalObjCName")
 }
 
-room {
-    schemaDirectory("$projectDir/schemas")
-}
-
 skie {
+    isEnabled.set(true)
     features {
         enableSwiftUIObservingPreview = true
     }
+}
+
+room {
+    schemaDirectory("$projectDir/schemas")
 }

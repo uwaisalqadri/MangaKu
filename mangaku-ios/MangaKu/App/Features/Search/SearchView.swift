@@ -19,7 +19,7 @@ struct SearchView: View {
   
   var body: some View {
     VStack {
-      if viewModel.state.isEmpty {
+      if viewModel.state.items.isEmpty {
         Text("Result Not Found, Search Something Else :)")
           .foregroundColor(.black)
           .font(.custom(.sedgwickave, size: 60))
@@ -30,27 +30,21 @@ struct SearchView: View {
           LazyVGrid(columns: [
             GridItem(.adaptive(minimum: 90), spacing: 25, alignment: .center)
           ], alignment: .leading, spacing: 10) {
-            
             if viewModel.state.isLoading {
               ForEach(0..<12) { _ in
                 ShimmerSearchView()
               }
-              
+            } else {
+              ForEach(viewModel.state.items, id: \.id) { manga in
+                NavigationLink(destination: DetailView(mangaId: manga.id)) {
+                  SearchRow(manga: manga)
+                }.buttonStyle(PlainButtonStyle())
+              }
             }
-//            else {
-//              ForEach(viewModel.state.mangas, id: \.id) { manga in
-//                NavigationLink(destination: navigator.routeToDetail(mangaId: manga.id)) {
-//                  SearchRow(manga: manga)
-//                }.buttonStyle(PlainButtonStyle())
-//              }
-//              
-//            }
-            
           }.padding(.horizontal, 30)
             .padding(.top, 20)
           
           Spacer(minLength: 250)
-          
         }
       }
     }

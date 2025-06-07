@@ -9,7 +9,6 @@
 import Foundation
 import SwiftUI
 import Shared
-import KMPNativeCoroutinesAsync
 
 @MainActor
 final class DetailViewModel: ObservableObject {
@@ -37,14 +36,8 @@ extension DetailViewModel {
     state.isLoading = true
     defer { state.isLoading = false }
     
-    do {
-      for try await data in asyncSequence(for: detailUseCase.execute(request: mangaId)) {
-        if let data = data as? Manga {
-          state.manga = data
-        }
-      }
-    } catch {
-      state.errorMessage = error.localizedDescription
+    for try await data in detailUseCase.execute(request: mangaId) {
+      state.manga = data
     }
   }
 }

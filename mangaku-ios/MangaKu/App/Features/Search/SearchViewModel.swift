@@ -9,7 +9,6 @@
 import Foundation
 import SwiftUI
 import Shared
-import KMPNativeCoroutinesAsync
 
 @MainActor
 final class SearchViewModel: ObservableObject {
@@ -25,8 +24,6 @@ final class SearchViewModel: ObservableObject {
   
   func send(action: Action) {
     switch action {
-    case .empty:
-      state.mangas = []
     case let .getManga(query):
       Task { await getSearchManga(query: query) }
     }
@@ -39,15 +36,10 @@ extension SearchViewModel {
     state.isLoading = true
     defer { state.isLoading = false }
     
-    do {
-      for try await result in asyncSequence(for: searchUseCase.execute(request: query)) {
-        if let result = result as? [Manga] {
-          state.mangas = result
-          state.isEmpty = result.isEmpty
-        }
+    for try await result in searchUseCase.execute(request: query) {
+      if let result = result as? [Manga] {
+        state.items = result
       }
-    } catch {
-      state.errorMessage = error.localizedDescription
     }
   }
 }

@@ -9,7 +9,6 @@
 import Foundation
 import SwiftUI
 import Shared
-import KMPNativeCoroutinesAsync
 
 @MainActor
 final class MyMangaViewModel: ObservableObject {
@@ -44,42 +43,43 @@ final class MyMangaViewModel: ObservableObject {
 }
 
 extension MyMangaViewModel {
+  @MainActor
   func addMyManga(_ manga: Manga) async {
-    try? await asyncSequence(for: addUseCase.execute(request: manga.id))
-    await checkFavorite(manga.id)
-  }
-  
-  func deleteMyManga(_ mangaId: String) async {
-    try? await asyncSequence(for: deleteUseCase.execute(request: mangaId))
-    await checkFavorite(mangaId)
-  }
-  
-  func checkFavorite(_ mangaId: String) async {
-    do {
-      for try await result in asyncSequence(for: getByIdUseCase.execute(request: mangaId)) {
-        if let result = result as? [Manga] {
-          let isFavorite = result.contains { $0.id == mangaId }
-          print("checkFavorite(mangaId: \(mangaId)): \(isFavorite) || \(result)")
-          state.isFavorite = isFavorite
-        }
+    for try await result in addUseCase.execute(request: manga) {
+      if let result = result as? KotlinUnit {
+        await checkFavorite(manga.id)
       }
-    } catch {
-      print("Failed to check favorite: \(error)")
     }
   }
   
+  @MainActor
+  func deleteMyManga(_ mangaId: String) async {
+    for try await result in deleteUseCase.execute(request: mangaId) {
+      if let result = result as? KotlinUnit {
+          await checkFavorite(mangaId)
+      }
+    }
+  }
+  
+  @MainActor
+  func checkFavorite(_ mangaId: String) async {
+    for try await result in getByIdUseCase.execute(request: mangaId) {
+      if let result = result as? [Manga] {
+        let isFavorite = result.contains { $0.id == mangaId }
+        state.isFavorite = isFavorite
+      }
+    }
+  }
+  
+  @MainActor
   func getMyMangas() async {
     state.isLoading = true
     defer { state.isLoading = false }
     
-    do {
-      for try await result in asyncSequence(for: getUseCase.execute()) {
-        if let result = result as? [Manga], !result.isEmpty {
-          state.items = result
-        }
+    for try await result in getUseCase.execute() {
+      if let result = result as? [Manga], !result.isEmpty {
+        state.items = result
       }
-    } catch {
-      state.errorMessage = error.localizedDescription
     }
   }
 }

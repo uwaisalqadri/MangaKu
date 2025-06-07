@@ -17,6 +17,7 @@ import org.koin.core.qualifier.named
 import org.koin.dsl.KoinAppDeclaration
 import org.koin.mp.KoinPlatformTools
 
+// Initializes Koin with optional application-specific declarations
 fun initKoin(appDeclaration: KoinAppDeclaration = {}): KoinApplication {
     return startKoin {
         appDeclaration()
@@ -30,45 +31,39 @@ fun initKoin(appDeclaration: KoinAppDeclaration = {}): KoinApplication {
     }
 }
 
-// Koin utilities for iOS injection
 
-fun KoinApplication.Companion.start(): KoinApplication = initKoin {}
+fun KoinApplication.Companion.start(): KoinApplication = initKoin()
 
-val Koin.browseUseCase: BrowseUseCase
-    get() = get()
 
-val Koin.searchUseCase: SearchUseCase
-    get() = get()
+val Koin.browseUseCase get() = get<BrowseUseCase>()
+val Koin.searchUseCase get() = get<SearchUseCase>()
+val Koin.detailUseCase get() = get<DetailUseCase>()
+val Koin.getMyMangaUseCase get() = get<GetMyMangaUseCase>()
+val Koin.getMyMangaByIdUseCase get() = get<GetMyMangaByIdUseCase>()
+val Koin.addMangaUseCase get() = get<AddMangaUseCase>()
+val Koin.deleteMangaUseCase get() = get<DeleteMangaUseCase>()
 
-val Koin.detailUseCase: DetailUseCase
-    get() = get()
 
-val Koin.getMyMangaUseCase: GetMyMangaUseCase
-    get() = get()
+/**
+ * Lazily injects a dependency of type [T]
+ */
+inline fun <reified T : Any> injectLazy(): Lazy<T> =
+    lazy { KoinPlatformTools.defaultContext().get().get<T>() }
 
-val Koin.getMyMangaByIdUseCase: GetMyMangaByIdUseCase
-    get() = get()
+/**
+ * Lazily injects a dependency of type [T] with a named qualifier
+ */
+inline fun <reified T : Any> injectLazy(key: String): Lazy<T> =
+    lazy { KoinPlatformTools.defaultContext().get().get<T>(named(key)) }
 
-val Koin.addMangaUseCase: AddMangaUseCase
-    get() = get()
+/**
+ * Directly injects a dependency of type [T]
+ */
+inline fun <reified T : Any> inject(): T =
+    KoinPlatformTools.defaultContext().get().get<T>()
 
-val Koin.deleteMangaUseCase: DeleteMangaUseCase
-    get() = get()
-
-// Koin utilities for injection (jvm, iosarm64, iossimulatorarm64, iosx64)
-
-inline fun <reified T : Any> injectLazy(): Lazy<T> {
-    return lazy { KoinPlatformTools.defaultContext().get().get(T::class) }
-}
-
-inline fun <reified T : Any> injectLazy(key: String): Lazy<T> {
-    return lazy { KoinPlatformTools.defaultContext().get().get(T::class, named(key)) }
-}
-
-inline fun <reified T : Any> inject(): T {
-    return KoinPlatformTools.defaultContext().get().get(T::class)
-}
-
-inline fun <reified T : Any> inject(key: String): T {
-    return KoinPlatformTools.defaultContext().get().get(T::class, named(key))
-}
+/**
+ * Directly injects a dependency of type [T] with a named qualifier
+ */
+inline fun <reified T : Any> inject(key: String): T =
+    KoinPlatformTools.defaultContext().get().get<T>(named(key))

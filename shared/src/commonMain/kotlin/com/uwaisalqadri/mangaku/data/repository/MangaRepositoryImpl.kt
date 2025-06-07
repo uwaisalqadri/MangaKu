@@ -43,7 +43,6 @@ class MangaRepositoryImpl(
     }
 
     override suspend fun addMangaFavorite(manga: Manga) {
-        println("ADD MANGA $manga")
         database.addManga(manga.map())
     }
 

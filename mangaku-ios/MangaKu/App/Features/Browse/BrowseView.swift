@@ -22,14 +22,14 @@ struct BrowseView: View {
   init() {
     _viewModel = StateObject(wrappedValue: BrowseViewModel())
   }
-
+  
   var body: some View {
     ScrollView(.vertical, showsIndicators: false) {
       VStack(alignment: .leading) {
         Text("Genre")
           .font(.custom(.msemibold, size: 15))
           .padding(.horizontal, 17)
-
+        
         ScrollView(.horizontal, showsIndicators: false) {
           HStack {
             ForEach(genres, id: \.id) { genre in
@@ -37,12 +37,12 @@ struct BrowseView: View {
             }
           }.padding(.leading, 13)
         }
-
+        
         Text("Trending Now")
           .font(.custom(.msemibold, size: 15))
           .padding(.leading, 17)
           .padding(.top, 30)
- 
+        
         if viewModel.state.isLoading {
           VStack {
             ForEach(0..<10) { _ in
@@ -52,7 +52,7 @@ struct BrowseView: View {
           .padding(.leading, 17)
           .padding(.trailing, 30)
           .padding(.bottom, 100)
-
+          
         } else {
           VStack {
             ForEach(viewModel.state.items, id: \.id) { manga in
@@ -68,14 +68,14 @@ struct BrowseView: View {
       }.padding(.top, 30)
     }
     .navigationBarTitle("Browse")
-//    .navigationBarItems(
-//      trailing: NavigationLink(destination: navigator.routeToSearch()) {
-//        Image(systemName: "magnifyingglass")
-//          .resizable()
-//          .foregroundColor(.black)
-//          .frame(width: 20, height: 20)
-//      }
-//    )
+    .navigationBarItems(
+      trailing: NavigationLink(destination: SearchView()) {
+        Image(systemName: "magnifyingglass")
+          .resizable()
+          .foregroundColor(.black)
+          .frame(width: 20, height: 20)
+      }
+    )
     .onAppear {
       viewModel.send(action: .getMangas)
     }

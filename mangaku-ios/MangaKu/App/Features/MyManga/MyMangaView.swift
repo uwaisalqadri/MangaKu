@@ -109,7 +109,7 @@ struct MyMangaContentView: View {
           .lineLimit(2)
           .padding(.bottom, 12)
         
-        Text("Volume \(manga.attributes?.volumeCount ?? 0)")
+        Text("Volume \(manga.volumeCount)")
           .foregroundColor(.white)
           .font(.custom(.mbold, size: 17))
           .padding(.bottom, 5)

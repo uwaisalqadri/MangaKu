@@ -9,7 +9,6 @@
 import Foundation
 import SwiftUI
 import Shared
-import KMPNativeCoroutinesAsync
 
 @MainActor
 final class BrowseViewModel: ObservableObject {
@@ -37,14 +36,10 @@ extension BrowseViewModel {
     state.isLoading = true
     defer { state.isLoading = false }
     
-    do {
-      for try await data in asyncSequence(for: browseUseCase.execute()) {
-        if let items = data as? [Manga], !items.isEmpty {
-          state.items = items
-        }
+    for await data in browseUseCase.execute() {
+      if let data = data as? [Manga] {
+        state.items = data
       }
-    } catch {
-      state.errorMessage = error.localizedDescription
     }
   }
 }

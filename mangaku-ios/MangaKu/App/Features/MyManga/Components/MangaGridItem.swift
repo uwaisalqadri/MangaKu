@@ -36,7 +36,7 @@ struct MangaGridItem: View {
               .padding(.top, 20)
               .padding(.horizontal, 5)
 
-            Text("Volume \(manga.attributes?.volumeCount ?? 0)")
+            Text("Volume \(manga.volumeCount)")
               .foregroundColor(.init(.darkGray))
               .font(.custom(.msemibold, size: 10))
               .padding(.horizontal, 5)

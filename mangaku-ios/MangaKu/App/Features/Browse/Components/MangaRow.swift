@@ -31,11 +31,11 @@ struct MangaRow: View {
           .padding(.top, 5)
 
         HStack {
-          Text(DateFormatterKt.formatDate(dateString: manga.attributes?.startDate ?? "", format: Shared.DateFormatter().CASUAL_DATE_FORMAT))
+          Text(DateFormatterKt.formatDate(dateString: manga.startDate, format: Shared.DateFormatter().CASUAL_DATE_FORMAT))
             .font(.custom(.mbold, size: 12))
             .foregroundColor(.secondary)
 
-          Text("Ch.\(manga.attributes?.chapterCount ?? 0)")
+          Text("Ch.\(manga.chapterCount)")
             .font(.custom(.mbold, size: 15))
         }.padding(.top, 5)
 
@@ -70,7 +70,7 @@ struct StarsView: View {
           .frame(width: 15, height: 15)
           .foregroundColor(.yellow)
           .onAppear {
-            averageRating = manga.attributes?.averageRating ?? 0.0
+            averageRating = manga.averageRating
           }
       }
     }
