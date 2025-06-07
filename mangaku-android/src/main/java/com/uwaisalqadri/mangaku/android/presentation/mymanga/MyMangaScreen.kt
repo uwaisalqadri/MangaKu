@@ -28,10 +28,10 @@ import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootGraph
 import com.ramcosta.composedestinations.generated.destinations.DetailScreenDestination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
-import com.uwaisalqadri.mangaku.android.presentation.mymanga.composables.HorizontalPagerWithTransition
-import com.uwaisalqadri.mangaku.android.presentation.mymanga.composables.LayoutSwitch
-import com.uwaisalqadri.mangaku.android.presentation.mymanga.composables.MyMangaGridItem
-import com.uwaisalqadri.mangaku.android.presentation.search.composables.StaggeredVerticalGrid
+import com.uwaisalqadri.mangaku.android.presentation.mymanga.components.HorizontalPagerWithTransition
+import com.uwaisalqadri.mangaku.android.presentation.mymanga.components.LayoutSwitch
+import com.uwaisalqadri.mangaku.android.presentation.mymanga.components.MyMangaGridItem
+import com.uwaisalqadri.mangaku.android.presentation.search.components.StaggeredVerticalGrid
 import com.uwaisalqadri.mangaku.android.presentation.theme.MangaTypography
 import com.uwaisalqadri.mangaku.domain.base.model.Manga
 import org.koin.androidx.compose.koinViewModel

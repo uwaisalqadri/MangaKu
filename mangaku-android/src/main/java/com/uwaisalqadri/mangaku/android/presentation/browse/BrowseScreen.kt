@@ -17,8 +17,8 @@ import com.ramcosta.composedestinations.annotation.RootGraph
 import com.ramcosta.composedestinations.generated.destinations.DetailScreenDestination
 import com.ramcosta.composedestinations.generated.destinations.SearchScreenDestination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
-import com.uwaisalqadri.mangaku.android.presentation.browse.composables.Genres
-import com.uwaisalqadri.mangaku.android.presentation.browse.composables.MangaTrending
+import com.uwaisalqadri.mangaku.android.presentation.browse.components.Genres
+import com.uwaisalqadri.mangaku.android.presentation.browse.components.MangaTrending
 import com.uwaisalqadri.mangaku.android.presentation.theme.MangaTypography
 import com.uwaisalqadri.mangaku.android.presentation.theme.R
 import com.uwaisalqadri.mangaku.android.presentation.theme.composables.ShimmerBrowseItem

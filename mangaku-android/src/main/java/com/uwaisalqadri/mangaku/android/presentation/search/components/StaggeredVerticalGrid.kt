@@ -1,4 +1,4 @@
-package com.uwaisalqadri.mangaku.android.presentation.search.composables
+package com.uwaisalqadri.mangaku.android.presentation.search.components
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier

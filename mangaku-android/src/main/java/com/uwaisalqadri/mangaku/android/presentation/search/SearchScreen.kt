@@ -19,9 +19,9 @@ import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootGraph
 import com.ramcosta.composedestinations.generated.destinations.DetailScreenDestination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
-import com.uwaisalqadri.mangaku.android.presentation.search.composables.SearchCard
-import com.uwaisalqadri.mangaku.android.presentation.search.composables.SearchField
-import com.uwaisalqadri.mangaku.android.presentation.search.composables.StaggeredVerticalGrid
+import com.uwaisalqadri.mangaku.android.presentation.search.components.SearchCard
+import com.uwaisalqadri.mangaku.android.presentation.search.components.SearchField
+import com.uwaisalqadri.mangaku.android.presentation.search.components.StaggeredVerticalGrid
 import com.uwaisalqadri.mangaku.android.presentation.theme.MangaTypography
 import com.uwaisalqadri.mangaku.android.presentation.theme.composables.BackButton
 import com.uwaisalqadri.mangaku.android.presentation.theme.composables.ShimmerSearchItem

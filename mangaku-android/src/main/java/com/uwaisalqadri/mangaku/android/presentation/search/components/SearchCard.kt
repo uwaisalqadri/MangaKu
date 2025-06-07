@@ -1,4 +1,4 @@
-package com.uwaisalqadri.mangaku.android.presentation.search.composables
+package com.uwaisalqadri.mangaku.android.presentation.search.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable

@@ -1,4 +1,4 @@
-package com.uwaisalqadri.mangaku.android.presentation.detail.composables
+package com.uwaisalqadri.mangaku.android.presentation.detail.components
 
 import android.os.Handler
 import android.os.Looper

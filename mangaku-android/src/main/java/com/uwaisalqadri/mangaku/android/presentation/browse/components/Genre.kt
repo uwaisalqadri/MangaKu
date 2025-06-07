@@ -1,4 +1,4 @@
-package com.uwaisalqadri.mangaku.android.presentation.browse.composables
+package com.uwaisalqadri.mangaku.android.presentation.browse.components
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
