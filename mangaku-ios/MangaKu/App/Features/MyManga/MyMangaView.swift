@@ -76,7 +76,7 @@ struct MyMangaView: View {
     
     items.forEach { manga in
       anyViews.append(AnyView(
-        WebImage(url: URL(string: manga.getPosterImage()))
+        WebImage(url: URL(string: manga.posterImage.url))
           .resizable()
           .indicator(.activity)
           .cornerRadius(12)
@@ -102,7 +102,7 @@ struct MyMangaContentView: View {
       
       VStack(alignment: .leading) {
         
-        Text(manga.getTitle())
+        Text(manga.title)
           .foregroundColor(.white)
           .font(.custom(.sedgwickave, size: 35))
           .multilineTextAlignment(.leading)

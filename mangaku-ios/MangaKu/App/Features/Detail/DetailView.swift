@@ -29,7 +29,7 @@ struct DetailView: View {
           ShimmerDetailView()
         default:
           if let data = viewModel.state.manga {
-            WebImage(url: URL(string: data.getCoverImage()))
+            WebImage(url: URL(string: data.coverImage.url))
               .resizable()
               .indicator(.activity)
               .clipped()
@@ -41,7 +41,7 @@ struct DetailView: View {
               }
             
             VStack(alignment: .leading) {
-              Text(data.getTitle())
+              Text(data.title)
                 .foregroundColor(.black)
                 .font(.custom(.mbold, size: 25))
                 .padding(.top, 15)
@@ -51,7 +51,7 @@ struct DetailView: View {
                 .font(.custom(.mmedium, size: 15))
               
               HStack {
-                Text(DateFormatterKt.formatDate(dateString: data.startDate, format: Shared.DateFormatter().CASUAL_DATE_FORMAT))
+                Text(DisplayDate(raw: data.startDate).string() ?? "-")
                   .foregroundColor(.white)
                   .font(.custom(.mbold, size: 13))
                   .padding(10)

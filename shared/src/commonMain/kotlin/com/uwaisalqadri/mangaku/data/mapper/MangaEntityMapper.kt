@@ -1,6 +1,7 @@
 package com.uwaisalqadri.mangaku.data.mapper
 
 import com.uwaisalqadri.mangaku.data.source.db.entity.MangaEntity
+import com.uwaisalqadri.mangaku.domain.base.model.Image
 import com.uwaisalqadri.mangaku.domain.base.model.Manga
 import com.uwaisalqadri.mangaku.utils.emptyString
 
@@ -32,7 +33,8 @@ fun Manga.map(): MangaEntity {
         synopsis = synopsis,
         tba = tba,
         userCount = userCount.toLong(),
-        volumeCount = volumeCount.toLong()
+        volumeCount = volumeCount.toLong(),
+        image = posterImage.original
     )
 }
 
@@ -60,6 +62,8 @@ fun MangaEntity.map(): Manga {
         tba = tba.orEmpty(),
         userCount = userCount?.toInt() ?: 0,
         volumeCount = volumeCount?.toInt() ?: 0,
-        mangaType = emptyString()
+        mangaType = emptyString(),
+        coverImage = Image(original = image.orEmpty()),
+        posterImage = Image(original = image.orEmpty())
     )
 }

@@ -15,7 +15,7 @@ struct SearchRow: View {
   let manga: Manga
 
   var body: some View {
-    WebImage(url: URL(string: manga.getPosterImage()))
+    WebImage(url: URL(string: manga.posterImage.url))
       .resizable()
       .indicator(.activity)
       .frame(height: 140)

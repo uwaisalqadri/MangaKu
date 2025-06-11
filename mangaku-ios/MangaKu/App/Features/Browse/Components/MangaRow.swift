@@ -16,7 +16,7 @@ struct MangaRow: View {
 
   var body: some View {
     HStack {
-      WebImage(url: URL(string: manga.getPosterImage()))
+      WebImage(url: URL(string: manga.posterImage.url))
         .resizable()
         .indicator(.activity)
         .frame(width: 124, height: 200)
@@ -25,13 +25,13 @@ struct MangaRow: View {
       VStack(alignment: .leading) {
         StarsView(manga: manga)
 
-        Text(manga.getTitle())
+        Text(manga.title)
           .font(.custom(.mbold, size: 18))
           .lineLimit(2)
           .padding(.top, 5)
 
         HStack {
-          Text(DateFormatterKt.formatDate(dateString: manga.startDate, format: Shared.DateFormatter().CASUAL_DATE_FORMAT))
+          Text(DisplayDate(raw: manga.startDate).string() ?? "-")
             .font(.custom(.mbold, size: 12))
             .foregroundColor(.secondary)
 

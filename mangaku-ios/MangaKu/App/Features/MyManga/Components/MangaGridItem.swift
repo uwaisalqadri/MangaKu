@@ -16,7 +16,7 @@ struct MangaGridItem: View {
 
   var body: some View {
     ZStack(alignment: .topLeading) {
-      WebImage(url: URL(string: manga.getPosterImage()))
+      WebImage(url: URL(string: manga.posterImage.url))
         .resizable()
         .indicator(.activity)
         .clipped()
@@ -30,7 +30,7 @@ struct MangaGridItem: View {
           Spacer()
 
           VStack(alignment: .leading) {
-            Text(manga.getTitle())
+            Text(manga.title)
               .lineLimit(2)
               .font(.custom(.mbold, size: 17))
               .padding(.top, 20)

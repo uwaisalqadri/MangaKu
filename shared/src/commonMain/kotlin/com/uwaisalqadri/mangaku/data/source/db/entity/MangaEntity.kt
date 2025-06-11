@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey
 data class MangaEntity(
     @PrimaryKey val id: String,
     val type: String,
+    val image: String?,
     val ageRating: String?,
     val ageRatingGuide: String?,
     val averageRating: Double?,
